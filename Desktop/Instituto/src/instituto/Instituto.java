@@ -16,7 +16,7 @@ public class Instituto {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("Pito2");
+        System.out.println("Hola ");
     }
     
 }
