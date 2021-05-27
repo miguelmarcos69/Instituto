@@ -4,13 +4,16 @@
  * and open the template in the editor.
  */
 package Grafico;
+import ClasesBase.*;
 
 /**
  *
  * @author alumno
  */
 public class InicioSesion extends javax.swing.JFrame {
-
+private Instituto i;
+SistemaGestion sistema;
+    
     /**
      * Creates new form InicioSesionç
      */
@@ -89,6 +92,11 @@ public class InicioSesion extends javax.swing.JFrame {
         ButtonEntrar.setBackground(new java.awt.Color(0, 0, 0));
         ButtonEntrar.setForeground(new java.awt.Color(255, 255, 255));
         ButtonEntrar.setText("Entrar");
+        ButtonEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonEntrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -150,6 +158,16 @@ public class InicioSesion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEntrarActionPerformed
+        // TODO add your handling code here:
+        i= sistema.cargarCuenta(jTNombreInstituto.getText(),jTUsuario.getText(),jPConstrasena.getText());
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_ButtonEntrarActionPerformed
 
     /**
      * @param args the command line arguments
