@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package instituto;
+package ClasesBase;
+
 
 import java.util.ArrayList;
 
@@ -17,11 +18,7 @@ public class Ciclo {
     private int curso;
     private String nombre;
     private String nombre_instituto;
-    private String tutor;
-
- 
-
-    
+    private String tutor;    
     
     
     //metodo constructor
@@ -31,10 +28,7 @@ public class Ciclo {
         this.nombre = nombre;
         this.nombre_instituto = nombre_instituto;
         this.tutor = tutor;
-    }
-    
-            
-    
+    }           
     
     //metodos getters
        public ArrayList<Asignatura> getAsignaturas() {
