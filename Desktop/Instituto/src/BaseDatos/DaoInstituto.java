@@ -26,32 +26,29 @@ public class DaoInstituto {
 
     public Instituto cargarNombre(String nombreInstituto, String nombre, String contra) {
         System.out.println("Dao");
-        System.out.println(nombreInstituto);
-        System.out.println(nombre);
-        System.out.println(contra);
+
         Instituto i = null;
         try {
             ResultSet rs = ConexionBD.instancia().getStatement().executeQuery(
                     //"select * from instituto"
-                    "SELECT instituto.clave,instituto.nombre,instituto.direccion,instituto.tlfn,usuario.clave,usuario.nombre, contra, tipo,nombreInsti "
-                    + "from instituto,usuario where usuario.nombre = '" + nombre + "'and usuario.contra= '" + contra + "' "
-                    + "and instituto.nombre ='" + nombreInstituto + "'"
+                    "select tipo from usuario where nombre= 'miguel'"
             );
-            System.out.println(rs.getString(9));
+//            System.out.println(rs.getString(1));
             if (rs.next()) {
                 //i = new Instituto(rs.getString(2), rs.getString(3),rs.getString(4));
-                if (rs.getString(9).equals("adm")) {
+                if (rs.getString(1).equals("adm")) {
                     System.out.println("Es un administrador");
 
                 }
-                if (rs.getString(8).equals("alu")) {
+                if (rs.getString(1).equals("alu")) {
                     System.out.println("Es un Alumno");
 
                 }
-                if (rs.getString(8).equals("pro")) {
+                if (rs.getString(1).equals("pro")) {
                     System.out.println("Es un profesor");
 
                 }
+                System.out.println("******************");
             }
 
         } catch (SQLException e) {

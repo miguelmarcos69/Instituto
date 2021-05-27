@@ -5,6 +5,7 @@
  */
 package Grafico;
 
+import BaseDatos.ConexionBD;
 import ClasesBase.*;
 
 /**
@@ -168,8 +169,8 @@ public class InicioSesion extends javax.swing.JFrame {
         String nombreInsti = jTNombreInstituto.getText();
         String nombre = jTUsuario.getText();
         String contra = jPConstrasena.getText();
-        System.out.println(nombre);
-        i = sistema.cargarCuenta(nombreInsti, nombre, contra);
+        ConexionBD.crearConexion();
+        i = sistema.cargarNombre(nombreInsti, nombre, contra);
 
 
     }//GEN-LAST:event_ButtonEntrarActionPerformed

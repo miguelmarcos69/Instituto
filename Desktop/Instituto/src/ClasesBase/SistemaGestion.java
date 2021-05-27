@@ -19,7 +19,7 @@ public class SistemaGestion {
         ConexionBD.crearConexion();
     }
 
-    public Instituto cargarCuenta(String nombreInstituto, String nombre, String contra) {
+    public Instituto cargarNombre(String nombreInstituto, String nombre, String contra) {
         return DaoInstituto.instancia().cargarNombre(nombreInstituto, nombre, contra);
     }
 
