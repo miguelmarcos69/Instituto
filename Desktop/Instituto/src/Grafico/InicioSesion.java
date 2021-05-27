@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Grafico;
+
 import ClasesBase.*;
 
 /**
@@ -11,14 +12,16 @@ import ClasesBase.*;
  * @author alumno
  */
 public class InicioSesion extends javax.swing.JFrame {
-private Instituto i;
-SistemaGestion sistema;
-    
+
+    private Instituto i;
+    SistemaGestion sistema;
+
     /**
      * Creates new form InicioSesionç
      */
     public InicioSesion() {
         initComponents();
+        sistema = new SistemaGestion();
     }
 
     /**
@@ -161,12 +164,14 @@ SistemaGestion sistema;
 
     private void ButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEntrarActionPerformed
         // TODO add your handling code here:
-        i= sistema.cargarCuenta(jTNombreInstituto.getText(),jTUsuario.getText(),jPConstrasena.getText());
-        
-        
-        
-        
-        
+        System.out.println("boton iniciar");
+        String nombreInsti = jTNombreInstituto.getText();
+        String nombre = jTUsuario.getText();
+        String contra = jPConstrasena.getText();
+        System.out.println(nombre);
+        i = sistema.cargarCuenta(nombreInsti, nombre, contra);
+
+
     }//GEN-LAST:event_ButtonEntrarActionPerformed
 
     /**

@@ -5,9 +5,8 @@ package ClasesBase;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import instituto.Usuarios.Usuario;
+import Usuarios.Usuario;
 import java.util.ArrayList;
-
 
 /**
  *
@@ -18,18 +17,29 @@ public class Instituto {
     /**
      * @param args the command line arguments
      */
-
     //atributos de la clase
-    private ArrayList <Usuario> Usuarios; 
-    private ArrayList <Ciclo> ciclos; 
+    private ArrayList<Usuario> Usuarios;
+    private ArrayList<Ciclo> ciclos;
     private String nombre;
     private String direccion;
-    private long telefono;
+    //private long telefono;
+    private String telefono; // para el manejo de datos se usa String
 
-    
-    
-    
-    
+    public Instituto(ArrayList<Usuario> Usuarios, ArrayList<Ciclo> ciclos, String nombre, String direccion, String telefono) {
+        this.Usuarios = Usuarios;
+        this.ciclos = ciclos;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+    }
+
+    public Instituto(String nombre, String direccion, String telefono) {
+
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+    }
+
     //metodos getters
     public ArrayList<Ciclo> getCiclos() {
         return ciclos;
@@ -43,16 +53,8 @@ public class Instituto {
         return direccion;
     }
 
-    public long getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 }

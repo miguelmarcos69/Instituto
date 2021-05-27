@@ -24,10 +24,10 @@ public class ConexionBD {
 
     private ConexionBD() {
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inmobiliariabd", "root", "");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/instituto", "root", "");
             stmt = conn.createStatement();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error de conexión con base de datos de inmobiliaria",
+            JOptionPane.showMessageDialog(null, "Error de conexión con base de datos de instituto",
                     "Error", JOptionPane.ERROR_MESSAGE);
             System.out.println("Error");
         }

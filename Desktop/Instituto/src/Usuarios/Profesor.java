@@ -1,4 +1,4 @@
-package instituto.Usuarios;
+package Usuarios;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -6,7 +6,7 @@ package instituto.Usuarios;
  * and open the template in the editor.
  */
 
-import instituto.Usuarios.Usuario;
+import Usuarios.Usuario;
 import java.util.Date;
 
 /**

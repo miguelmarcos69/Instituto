@@ -25,34 +25,32 @@ public class DaoInstituto {
     }
 
     public Instituto cargarNombre(String nombreInstituto, String nombre, String contra) {
-
+        System.out.println("Dao");
+        System.out.println(nombreInstituto);
+        System.out.println(nombre);
+        System.out.println(contra);
+        Instituto i = null;
         try {
             ResultSet rs = ConexionBD.instancia().getStatement().executeQuery(
-                    "select idInmobiliaria, nombre, direcion from inmobiliaria  where nombre='" + nombre + "'"
+                    //"select * from instituto"
+                    "SELECT instituto.clave,instituto.nombre,instituto.direccion,instituto.tlfn,usuario.clave,usuario.nombre, contra, tipo,nombreInsti "
+                    + "from instituto,usuario where usuario.nombre = '" + nombre + "'and usuario.contra= '" + contra + "' "
+                    + "and instituto.nombre ='" + nombreInstituto + "'"
             );
+            System.out.println(rs.getString(9));
             if (rs.next()) {
-                id = rs.getInt(1);
-                i = new Inmobiliaria(rs.getInt(1), nombre, rs.getString(3));
-//                System.out.println(rs.getInt(1));// id de inmobiliaria
-//                System.out.println(rs.getString(2));
-//                System.out.println(rs.getString(3));
-                ResultSet rsi = ConexionBD.instancia().getStatement().executeQuery(
-                        "select  metros, habitaciones, banos, planta "
-                        + "from inmobiliaria,vivienda,piso where inmobiliaria.nombre='" + nombre + "'"
-                        + "and vivienda.idInmobiliaria=inmobiliaria.idInmobiliaria and vivienda.clave=piso.clave"
-                );
+                //i = new Instituto(rs.getString(2), rs.getString(3),rs.getString(4));
+                if (rs.getString(9).equals("adm")) {
+                    System.out.println("Es un administrador");
 
-                while (rsi.next()) {
-                    i.anadirPiso(new Piso(rsi.getInt(1), rsi.getInt(2), rsi.getInt(3), rsi.getInt(4)));
                 }
+                if (rs.getString(8).equals("alu")) {
+                    System.out.println("Es un Alumno");
 
-                rsi = ConexionBD.instancia().getStatement().executeQuery(
-                        " select metros, habitaciones, banos, metrosSolalr, numPlantas "
-                        + "from inmobiliaria,vivienda,casa where inmobiliaria.nombre='" + nombre + "'"
-                        + "and vivienda.idInmobiliaria=inmobiliaria.idInmobiliaria and vivienda.clave=casa.clave"
-                );
-                while (rsi.next()) {
-                    i.anadirCasa(new Casa(rsi.getInt(1), rsi.getInt(2), rsi.getInt(3), rsi.getInt(4), rsi.getInt(4)));
+                }
+                if (rs.getString(8).equals("pro")) {
+                    System.out.println("Es un profesor");
+
                 }
             }
 
