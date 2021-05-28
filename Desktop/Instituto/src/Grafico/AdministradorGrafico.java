@@ -6,7 +6,7 @@
  */
 package Grafico;
 
-import Usuarios.Usuario;
+import Usuarios.*;
 import java.awt.Color;
 
 import javax.swing.table.DefaultTableModel;
@@ -19,15 +19,27 @@ public class AdministradorGrafico extends javax.swing.JFrame {
 
     //Crear un usuario Admin
     Usuario usuario;
-    
-    
+    Administrador admin;
+    InicioSesion i;
+
     /**
      * Creates new form Administrador
+     *
+     * @param parent
+     * @param modal
+     * @param ad
+     * @param i
      */
-    public AdministradorGrafico() {
+    public AdministradorGrafico(java.awt.Frame parent, boolean modal, Administrador ad, InicioSesion i) {
         initComponents();
         this.setBackground(Color.black);
         this.setForeground(Color.white);
+        this.admin = ad;
+        this.i = i;
+    }
+
+    private AdministradorGrafico() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -218,18 +230,11 @@ public class AdministradorGrafico extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-     public void mostrar(){
+    public void mostrar() {
         this.nombre.setText(usuario.getNombre());
-      
+
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

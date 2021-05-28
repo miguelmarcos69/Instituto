@@ -5,8 +5,11 @@
  */
 package Grafico;
 
-import BaseDatos.ConexionBD;
+import BaseDatos.*;
 import ClasesBase.*;
+import Usuarios.*;
+import Grafico.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -165,12 +168,25 @@ public class InicioSesion extends javax.swing.JFrame {
 
     private void ButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEntrarActionPerformed
         // TODO add your handling code here:
-        System.out.println("boton iniciar");
         String nombreInsti = jTNombreInstituto.getText();
         String nombre = jTUsuario.getText();
         String contra = jPConstrasena.getText();
         ConexionBD.crearConexion();
-        i = sistema.cargarNombre(nombreInsti, nombre, contra);
+        Usuario u;
+
+        u = DaoInstituto.instancia().cargarNombre(nombreInsti, nombre, contra);
+        if (u == null) {
+            JOptionPane.showMessageDialog(rootPane, "El usuario no existe", "Inicio", JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (u instanceof Administrador) {
+                Administrador ad = (Administrador) u;
+                AdministradorGrafico adm = new AdministradorGrafico(null, true, ad, this);
+                 this.setVisible(false);
+                   // adm.mostrar();
+                    adm.setVisible(true);
+            }
+
+        }
 
 
     }//GEN-LAST:event_ButtonEntrarActionPerformed
@@ -223,4 +239,7 @@ public class InicioSesion extends javax.swing.JFrame {
     private javax.swing.JTextField jTNombreInstituto;
     private javax.swing.JTextField jTUsuario;
     // End of variables declaration//GEN-END:variables
+
+   
+
 }

@@ -12,27 +12,23 @@ import java.util.Date;
  * @author alumno
  */
 public abstract class Usuario {
+
     //atributos de la clase
     private String nombre;
     private String DNI;
-    private Date fecha_nacimiento;
+    private int fecha_nacimiento;
     private int edad;
     private String contrasenna;
 
-    
-    
-    
     //metodo constructor
-    public Usuario(String nombre, String DNI, Date fecha_nacimiento, int edad, String contrasenna) {
+    public Usuario(String nombre, String contrasenna, String DNI, int fecha_nacimiento, int edad) {
         this.nombre = nombre;
+        this.contrasenna = contrasenna;
         this.DNI = DNI;
         this.fecha_nacimiento = fecha_nacimiento;
         this.edad = edad;
-        this.contrasenna = contrasenna;
     }
-    
-    
-    
+
     //metodos getters
     public String getNombre() {
         return nombre;
@@ -42,7 +38,7 @@ public abstract class Usuario {
         return DNI;
     }
 
-    public Date getFecha_nacimiento() {
+    public int getFecha_nacimiento() {
         return fecha_nacimiento;
     }
 
@@ -53,9 +49,5 @@ public abstract class Usuario {
     public String getContrasenna() {
         return contrasenna;
     }
-     
-    
-    
-    
-    
+
 }

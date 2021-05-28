@@ -8,6 +8,9 @@ package BaseDatos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import ClasesBase.*;
+import Usuarios.Administrador;
+import Usuarios.Usuario;
+import java.util.Date;
 
 /**
  *
@@ -24,14 +27,14 @@ public class DaoInstituto {
         return instancia;
     }
 
-    public Instituto cargarNombre(String nombreInstituto, String nombre, String contra) {
+    public Usuarios.Usuario cargarNombre(String nombreInstituto, String nombre, String contra) {
         System.out.println("Dao");
 
-        Instituto i = null;
+        Usuario u = null;
         try {
             ResultSet rs = ConexionBD.instancia().getStatement().executeQuery(
                     //"select * from instituto"
-                    "select tipo from usuario where nombre= 'miguel'"
+                    "select tipo,nombre, contra, DNI, fechaNac, edad,nombreInsti from usuario where nombre= '" + nombre + "'"
             );
 //            System.out.println(rs.getString(1));
             if (rs.next()) {
@@ -39,14 +42,13 @@ public class DaoInstituto {
                 if (rs.getString(1).equals("adm")) {
                     System.out.println("Es un administrador");
 
-                }
-                if (rs.getString(1).equals("alu")) {
+                    Administrador a = new Administrador(String.valueOf(rs.getString(2)), String.valueOf(rs.getString(3)), String.valueOf(rs.getString(4)), rs.getInt(5), rs.getInt(6), String.valueOf(rs.getString(1)), String.valueOf(rs.getString(7)));
+                    u = a;
+                } else if (rs.getString(1).equals("usu")) {
                     System.out.println("Es un Alumno");
 
-                }
-                if (rs.getString(1).equals("pro")) {
+                } else if (rs.getString(1).equals("pro")) {
                     System.out.println("Es un profesor");
-
                 }
                 System.out.println("******************");
             }
@@ -55,7 +57,7 @@ public class DaoInstituto {
             e.printStackTrace();
         }
 
-        return i;
+        return u;
     }
 
 }

@@ -19,8 +19,8 @@ public class SistemaGestion {
         ConexionBD.crearConexion();
     }
 
-    public Instituto cargarNombre(String nombreInstituto, String nombre, String contra) {
-        return DaoInstituto.instancia().cargarNombre(nombreInstituto, nombre, contra);
-    }
+//    public Instituto cargarNombre(String nombreInstituto, String nombre, String contra) {
+//        return DaoInstituto.instancia().cargarNombre(nombreInstituto, nombre, contra);
+//    }
 
 }
