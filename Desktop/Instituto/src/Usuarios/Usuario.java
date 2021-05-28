@@ -18,7 +18,7 @@ public abstract class Usuario {
     private String DNI;
     private int fecha_nacimiento;
     private int edad;
-    private String contrasenna;
+    String contrasenna;
 
     //metodo constructor
     public Usuario(String nombre, String contrasenna, String DNI, int fecha_nacimiento, int edad) {
@@ -47,6 +47,10 @@ public abstract class Usuario {
     }
 
     public String getContrasenna() {
+        return contrasenna;
+    }
+
+    public String getContra() {
         return contrasenna;
     }
 

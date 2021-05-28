@@ -31,4 +31,8 @@ public class Administrador extends Usuario {
         return tipo;
     }
 
+    public String getContra() {
+        return contrasenna;
+    }
+
 }

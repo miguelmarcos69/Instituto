@@ -42,6 +42,10 @@ public class AdministradorGrafico extends javax.swing.JFrame {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public void mostrar(String nom) {
+        this.nombre.setText(nom);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -122,6 +126,11 @@ public class AdministradorGrafico extends javax.swing.JFrame {
         jButtonSalir.setBackground(new java.awt.Color(0, 0, 0));
         jButtonSalir.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSalir.setText("Salir");
+        jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalirActionPerformed(evt);
+            }
+        });
 
         jToggleButton1.setBackground(new java.awt.Color(0, 0, 0));
         jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
@@ -227,14 +236,15 @@ public class AdministradorGrafico extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
+    private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+
+    }//GEN-LAST:event_jButtonSalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public void mostrar() {
-        this.nombre.setText(usuario.getNombre());
-
-    }
-
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

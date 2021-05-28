@@ -9,8 +9,7 @@
  */
 
         
-        
-use instituto;
+/*use instituto;*/
 CREATE TABLE `instituto`
 (
     `clave`     int auto_increment PRIMARY KEY,

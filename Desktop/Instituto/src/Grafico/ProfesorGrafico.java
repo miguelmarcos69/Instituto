@@ -12,24 +12,24 @@ import java.awt.Color;
  *
  * @author alumno
  */
-public class AlumnoGrafico extends javax.swing.JFrame {
+public class ProfesorGrafico extends javax.swing.JFrame {
 
     Usuario usuario;
-    Alumno alumno;
+    Profesor prof;
     InicioSesion i;
 
     /**
      * Creates new form Alumno
      */
-    public AlumnoGrafico(java.awt.Frame parent, boolean modal, Alumno al, InicioSesion i) {
+    public ProfesorGrafico(java.awt.Frame parent, boolean modal, Profesor prof, InicioSesion i) {
         initComponents();
         this.setBackground(Color.black);
         this.setForeground(Color.white);
-        this.alumno = al;
+        this.prof = prof;
         this.i = i;
     }
 
-    private AlumnoGrafico() {
+    private ProfesorGrafico() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -103,7 +103,7 @@ public class AlumnoGrafico extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AlumnoGrafico().setVisible(true);
+                new ProfesorGrafico().setVisible(true);
             }
         });
     }

@@ -95,6 +95,11 @@ public class InicioSesion extends javax.swing.JFrame {
         ButtonCancelar.setBackground(new java.awt.Color(0, 0, 0));
         ButtonCancelar.setForeground(new java.awt.Color(255, 255, 255));
         ButtonCancelar.setText("Cancelar");
+        ButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCancelarActionPerformed(evt);
+            }
+        });
 
         ButtonEntrar.setBackground(new java.awt.Color(0, 0, 0));
         ButtonEntrar.setForeground(new java.awt.Color(255, 255, 255));
@@ -176,20 +181,59 @@ public class InicioSesion extends javax.swing.JFrame {
 
         u = DaoInstituto.instancia().cargarNombre(nombreInsti, nombre, contra);
         if (u == null) {
-            JOptionPane.showMessageDialog(rootPane, "El usuario no existe", "Inicio", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Has introducido mal los parámetros", "Inicio", JOptionPane.WARNING_MESSAGE);
         } else {
             if (u instanceof Administrador) {
-                Administrador ad = (Administrador) u;
-                AdministradorGrafico adm = new AdministradorGrafico(null, true, ad, this);
-                 this.setVisible(false);
-                   // adm.mostrar();
+                if (u.getContra().equals(contra)) {
+                    Administrador ad = (Administrador) u;
+                    AdministradorGrafico adm = new AdministradorGrafico(null, true, ad, this);
+                    this.setVisible(false);
+                    adm.mostrar(nombre);
                     adm.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
+
+                }
+
+            }
+            if (u instanceof Profesor) {
+                if (u.getContra().equals(contra)) {
+                    Profesor pro = (Profesor) u;
+                    ProfesorGrafico pr = new ProfesorGrafico(null, true, pro, this);
+                    this.setVisible(false);
+                    //pr.mostrar();
+                    pr.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
+
+                }
+
+            }
+            if (u instanceof Alumno) {
+                if (u.getContra().equals(contra)) {
+                    Alumno alu = (Alumno) u;
+                    AlumnoGrafico alG = new AlumnoGrafico(null, true, alu, this);
+                    this.setVisible(false);
+                    // adm.mostrar();
+                    alG.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
+
+                }
+
             }
 
         }
 
 
     }//GEN-LAST:event_ButtonEntrarActionPerformed
+
+    private void ButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCancelarActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+
+
+    }//GEN-LAST:event_ButtonCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,7 +283,5 @@ public class InicioSesion extends javax.swing.JFrame {
     private javax.swing.JTextField jTNombreInstituto;
     private javax.swing.JTextField jTUsuario;
     // End of variables declaration//GEN-END:variables
-
-   
 
 }
