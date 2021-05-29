@@ -59,8 +59,10 @@ public class ProfesorGrafico extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Bienvenido ");
 
+        jNombre.setBackground(new java.awt.Color(255, 255, 255));
         jNombre.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         jNombre.setText("Nombre");
 
@@ -89,12 +91,19 @@ public class ProfesorGrafico extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("¿Qué quieres hacer?");
 
+        jModificarNotas.setBackground(new java.awt.Color(0, 0, 0));
+        jModificarNotas.setForeground(new java.awt.Color(255, 255, 255));
         jModificarNotas.setText("modifar notas");
 
+        jTablon.setBackground(new java.awt.Color(0, 0, 0));
         jTablon.setText("Añadir al tablon");
 
+        jCalendario.setBackground(new java.awt.Color(0, 0, 0));
+        jCalendario.setForeground(new java.awt.Color(255, 255, 255));
         jCalendario.setText("calendairo");
 
+        jSalir.setBackground(new java.awt.Color(0, 0, 0));
+        jSalir.setForeground(new java.awt.Color(255, 255, 255));
         jSalir.setText("Salir");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

@@ -56,9 +56,11 @@ public class AlumnoGrafico extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         jLabel1.setText("Bienvenido");
 
+        jnombre.setBackground(new java.awt.Color(255, 255, 255));
         jnombre.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jnombre.setText("nombre");
 
@@ -83,10 +85,16 @@ public class AlumnoGrafico extends javax.swing.JFrame {
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
+        jNotas.setBackground(new java.awt.Color(0, 0, 0));
+        jNotas.setForeground(new java.awt.Color(255, 255, 255));
         jNotas.setText("Ver notas");
 
+        jtablon.setBackground(new java.awt.Color(0, 0, 0));
+        jtablon.setForeground(new java.awt.Color(255, 255, 255));
         jtablon.setText(" tablón");
 
+        jSalir.setBackground(new java.awt.Color(0, 0, 0));
+        jSalir.setForeground(new java.awt.Color(255, 255, 255));
         jSalir.setText("salir");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
