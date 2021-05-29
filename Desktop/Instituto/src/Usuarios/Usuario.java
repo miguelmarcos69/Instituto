@@ -26,6 +26,7 @@ public abstract class Usuario {
         this.contrasenna = contrasenna;
         this.DNI = DNI;
         this.fecha_nacimiento = fecha_nacimiento;
+        //El atributo edad no deberia de exixtir ya que es algo variable lo podriamos hacer con un metodo que coja el año en el que estamos y le reste la fechad e nacimiento
         this.edad = edad;
     }
 

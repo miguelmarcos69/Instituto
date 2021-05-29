@@ -5,7 +5,7 @@
  */
 package ClasesBase;
 
-import BaseDatos.ConexionBD;
+import BaseDatos.ConexionDefault;
 import BaseDatos.DaoInstituto;
 import ClasesBase.*;
 
@@ -16,7 +16,7 @@ import ClasesBase.*;
 public class SistemaGestion {
 
     public SistemaGestion() {
-        ConexionBD.crearConexion();
+        ConexionDefault.crearConexion();
     }
 
 //    public Instituto cargarNombre(String nombreInstituto, String nombre, String contra) {

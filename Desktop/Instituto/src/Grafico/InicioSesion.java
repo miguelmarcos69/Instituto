@@ -176,7 +176,7 @@ public class InicioSesion extends javax.swing.JFrame {
         String nombreInsti = jTNombreInstituto.getText();
         String nombre = jTUsuario.getText();
         String contra = jPConstrasena.getText();
-        ConexionBD.crearConexion();
+        ConexionDefault.crearConexion();
         Usuario u;
 
         u = DaoInstituto.instancia().cargarNombre(nombreInsti, nombre, contra);

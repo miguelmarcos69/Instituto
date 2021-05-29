@@ -11,6 +11,8 @@ import ClasesBase.*;
 import Usuarios.Administrador;
 import Usuarios.*;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,14 +29,28 @@ public class DaoInstituto {
         return instancia;
     }
 
+    public void annadirAlumno(Alumno a, String nombreInsituto) {
+
+        try {
+
+            ConexionDefault.crearConexion();
+            ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('" + a.getNombre() + "','" + a.getContrasenna() + "','" + a.getDNI() + "'," + a.getFecha_nacimiento()
+                    + "," + a.getEdad() + ",'alumno' , ' " + nombreInsituto + "')");
+            //ConexionBD.instancia().getStatement().execute("INSERT INTO usuario VALUES ('" + a.getNombre() + "','" + a.getContrasenna() +"','"+a.getDNI() + "'," + a.getFecha_nacimiento() 
+            //        + "," +a.getEdad() + ",'alumno' , ' " + nombreInsituto + "'");
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoInstituto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public Usuarios.Usuario cargarNombre(String nombreInstituto, String nombre, String contra) {
         System.out.println("Dao");
 
         Usuario u = null;
         try {
-            ResultSet rs = ConexionBD.instancia().getStatement().executeQuery(
+            ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery(
                     //"select * from instituto"
-                    "select tipo,nombre, contra, DNI, fechaNac, edad,nombreInsti from usuario where nombre= '" + nombre + "' and nombreInsti='"+nombreInstituto+"'"
+                    "select tipo,nombre, contra, DNI, fechaNac, edad,nombreInsti from usuario where nombre= '" + nombre + "' and nombreInsti='" + nombreInstituto + "'"
             );
 //            System.out.println(rs.getString(1));
             if (rs.next()) {
