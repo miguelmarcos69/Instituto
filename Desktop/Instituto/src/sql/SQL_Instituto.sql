@@ -34,3 +34,4 @@ CREATE TABLE `usuario`
 );
 insert into instituto.usuario(nombre, contra, DNI, fechaNac, edad, tipo, nombreInsti)
 values ('juan', 'juan', '123456789F', '19990917',' 21','adm','camino');
+values ('dani', 'dani', '123456789D', '11111111',' 11','adm','camino');

@@ -64,7 +64,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(104, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(102, 102, 102))
         );
@@ -128,11 +128,11 @@ public class InicioSesion extends javax.swing.JFrame {
                     .addComponent(jPConstrasena))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
-                .addComponent(ButtonCancelar)
-                .addGap(94, 94, 94)
+                .addGap(110, 110, 110)
                 .addComponent(ButtonEntrar)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addGap(58, 58, 58)
+                .addComponent(ButtonCancelar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
