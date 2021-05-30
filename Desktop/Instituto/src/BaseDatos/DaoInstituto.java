@@ -35,7 +35,7 @@ public class DaoInstituto {
 
             ConexionDefault.crearConexion();
             ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('" + a.getNombre() + "','" + a.getContrasenna() + "','" + a.getDNI() + "'," + a.getFecha_nacimiento()
-                    + "," + a.getEdad() + ",'alumno' , ' " + nombreInsituto + "')");
+                    + "," + a.getEdad() + ",'alu' , ' " + nombreInsituto + "')");
             //ConexionBD.instancia().getStatement().execute("INSERT INTO usuario VALUES ('" + a.getNombre() + "','" + a.getContrasenna() +"','"+a.getDNI() + "'," + a.getFecha_nacimiento() 
             //        + "," +a.getEdad() + ",'alumno' , ' " + nombreInsituto + "'");
         } catch (SQLException ex) {
@@ -43,7 +43,21 @@ public class DaoInstituto {
         }
     }
 
-    public Usuarios.Usuario cargarNombre(String nombreInstituto, String nombre, String contra) {
+    public void annadirProfesor(Profesor a, String nombreInsituto) {
+
+        try {
+
+            ConexionDefault.crearConexion();
+            ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('" + a.getNombre() + "','" + a.getContrasenna() + "','" + a.getDNI() + "'," + a.getFecha_nacimiento()
+                    + "," + a.getEdad() + ",'pro' , ' " + nombreInsituto + "')");
+            //ConexionBD.instancia().getStatement().execute("INSERT INTO usuario VALUES ('" + a.getNombre() + "','" + a.getContrasenna() +"','"+a.getDNI() + "'," + a.getFecha_nacimiento() 
+            //        + "," +a.getEdad() + ",'alumno' , ' " + nombreInsituto + "'");
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoInstituto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Usuarios.Usuario cargarNombre(String nombreInstituto, String nombre) {
         System.out.println("Dao");
 
         Usuario u = null;
@@ -58,16 +72,13 @@ public class DaoInstituto {
                 if (rs.getString(1).equals("adm")) {
                     System.out.println("Es un administrador");
 
-                    Administrador a = new Administrador(String.valueOf(rs.getString(2)), String.valueOf(rs.getString(3)), String.valueOf(rs.getString(4)), rs.getInt(5), rs.getInt(6), String.valueOf(rs.getString(1)), String.valueOf(rs.getString(7)));
-                    u = a;
+                    u = new Administrador(String.valueOf(rs.getString(2)), String.valueOf(rs.getString(3)), String.valueOf(rs.getString(4)), rs.getInt(5), rs.getInt(6), String.valueOf(rs.getString(1)), String.valueOf(rs.getString(7)));
                 } else if (rs.getString(1).equals("alu")) {
                     System.out.println("Es un Alumno");
-                    Alumno al = new Alumno(String.valueOf(rs.getString(2)), String.valueOf(rs.getString(3)), String.valueOf(rs.getString(4)), rs.getInt(5), rs.getInt(6));
-                    u = al;
+                    u = new Alumno(String.valueOf(rs.getString(2)), String.valueOf(rs.getString(3)), String.valueOf(rs.getString(4)), rs.getInt(5), rs.getInt(6));
                 } else if (rs.getString(1).equals("pro")) {
                     System.out.println("Es un profesor");
-                    Profesor p = new Profesor(String.valueOf(rs.getString(2)), String.valueOf(rs.getString(3)), String.valueOf(rs.getString(4)), rs.getInt(5), rs.getInt(6));
-                    u = p;
+                    u = new Profesor(String.valueOf(rs.getString(2)), String.valueOf(rs.getString(3)), String.valueOf(rs.getString(4)), rs.getInt(5), rs.getInt(6));
                 }
                 System.out.println("******************");
             }

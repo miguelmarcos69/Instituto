@@ -14,21 +14,9 @@ import java.util.Date;
  */
 public class Administrador extends Usuario {
 
-    String nombreInsti;
-    String tipo;
-
     public Administrador(String nombre, String contrasenna, String DNI, int fecha_nacimiento, int edad, String tipo, String nombreInsti) {
         super(nombre, contrasenna, DNI, fecha_nacimiento, edad);
-        this.tipo = tipo;
-        this.nombreInsti = nombreInsti;
-    }
 
-    public String getNombreInsti() {
-        return nombreInsti;
-    }
-
-    public String getTipo() {
-        return tipo;
     }
 
     public String getContra() {

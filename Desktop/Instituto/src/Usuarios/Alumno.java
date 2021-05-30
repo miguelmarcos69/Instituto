@@ -18,9 +18,6 @@ public class Alumno extends Usuario {
         super(nombre, contrasenna, DNI, fecha_nacimiento, edad);
     }
 
-    public String getContrasenna() {
-        return contrasenna;
-    }
     
     
 

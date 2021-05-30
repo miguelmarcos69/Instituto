@@ -64,7 +64,7 @@ public class InicioSesion extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(104, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(102, 102, 102))
         );
@@ -128,11 +128,11 @@ public class InicioSesion extends javax.swing.JFrame {
                     .addComponent(jPConstrasena))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(110, 110, 110)
-                .addComponent(ButtonEntrar)
-                .addGap(58, 58, 58)
+                .addGap(92, 92, 92)
                 .addComponent(ButtonCancelar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(94, 94, 94)
+                .addComponent(ButtonEntrar)
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,10 +179,40 @@ public class InicioSesion extends javax.swing.JFrame {
         ConexionDefault.crearConexion();
         Usuario u;
 
-        u = DaoInstituto.instancia().cargarNombre(nombreInsti, nombre, contra);
+        u = DaoInstituto.instancia().cargarNombre(nombreInsti, nombre);
         if (u == null) {
             JOptionPane.showMessageDialog(rootPane, "Has introducido mal los parámetros", "Inicio", JOptionPane.WARNING_MESSAGE);
         } else {
+            if (u.getContra().equals(contra)) {
+                if (u instanceof Administrador) {
+
+                    Administrador ad = (Administrador) u;
+                    AdministradorGrafico adm = new AdministradorGrafico(null, true, ad, this);
+                    this.setVisible(false);
+                    adm.mostrar(nombre);
+                    adm.setVisible(true);
+                } else if (u instanceof Profesor) {
+                    Profesor pro = (Profesor) u;
+                    ProfesorGrafico pr = new ProfesorGrafico(null, true, pro, this);
+                    this.setVisible(false);
+                    //pr.mostrar();
+                    pr.setVisible(true);
+                } else {
+
+                    Alumno alu = (Alumno) u;
+                    AlumnoGrafico alG = new AlumnoGrafico(null, true, alu, this);
+                    this.setVisible(false);
+                    // adm.mostrar();
+                    alG.setVisible(true);
+                }
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
+
+            }
+
+        }
+        //modificar el control de la contrasena
+        /*
             if (u instanceof Administrador) {
                 if (u.getContra().equals(contra)) {
                     Administrador ad = (Administrador) u;
@@ -224,6 +254,7 @@ public class InicioSesion extends javax.swing.JFrame {
             }
 
         }
+         */
 
 
     }//GEN-LAST:event_ButtonEntrarActionPerformed
