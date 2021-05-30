@@ -38,12 +38,19 @@ public abstract class Usuario {
     public String getDNI() {
         return DNI;
     }
-
-    public int getFecha_nacimiento() {
-        return fecha_nacimiento;
+     public String getFecha_nacimiento() {
+        return String.valueOf(fecha_nacimiento);
     }
 
-    public int getEdad() {
+    public int getFecha_nacimientoNumerico() {
+        return fecha_nacimiento;
+    }
+       public String getEdad() {
+        return String.valueOf(edad);
+    }
+    
+
+    public int getEdadNumerico() {
         return edad;
     }
 

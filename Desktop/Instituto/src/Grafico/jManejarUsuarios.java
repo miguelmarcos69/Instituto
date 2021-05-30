@@ -4,16 +4,27 @@
  * and open the template in the editor.
  */
 package Grafico;
+import ClasesBase.Ciclo;
+import ClasesBase.Instituto;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author MR.Pitiilin
  */
 public class jManejarUsuarios extends javax.swing.JDialog {
+    Instituto i;
+    Ciclo c;
 
-    /**
-     * Creates new form jManejarUsuarios
-     */
+    //tablas
+    String cabeceraTodos[]={"Nombre","edad","fecha nacimiento","tipo"};
+    String cabeceraAlumnos[]={"Nombre","edad","fecha nacimiento"};
+    String cabeceraProfesores[]={"Nombre","edad","fecha nacimiento"};
+    
+     DefaultTableModel tabla;
+    
+    
+    
     public jManejarUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -33,11 +44,11 @@ public class jManejarUsuarios extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jButtonAlumnos = new javax.swing.JRadioButton();
+        jButtonProfesores = new javax.swing.JRadioButton();
+        jButtonTodos = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaUsuarios = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -72,23 +83,28 @@ public class jManejarUsuarios extends javax.swing.JDialog {
 
         jPanel3.setBackground(new java.awt.Color(204, 103, 255));
 
-        jRadioButton3.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        jRadioButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton3.setText("Alumnos");
+        jButtonAlumnos.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(jButtonAlumnos);
+        jButtonAlumnos.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
+        jButtonAlumnos.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonAlumnos.setText("Alumnos");
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        jRadioButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton2.setText("Profesores");
+        jButtonProfesores.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(jButtonProfesores);
+        jButtonProfesores.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
+        jButtonProfesores.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonProfesores.setText("Profesores");
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        jRadioButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jRadioButton1.setText("Todos");
+        jButtonTodos.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(jButtonTodos);
+        jButtonTodos.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
+        jButtonTodos.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonTodos.setText("Todos");
+        jButtonTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTodosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -96,11 +112,11 @@ public class jManejarUsuarios extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jRadioButton1)
+                .addComponent(jButtonTodos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(jRadioButton2)
+                .addComponent(jButtonProfesores)
                 .addGap(36, 36, 36)
-                .addComponent(jRadioButton3)
+                .addComponent(jButtonAlumnos)
                 .addGap(18, 18, 18))
         );
         jPanel3Layout.setVerticalGroup(
@@ -108,15 +124,15 @@ public class jManejarUsuarios extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton1))
+                    .addComponent(jButtonAlumnos)
+                    .addComponent(jButtonProfesores)
+                    .addComponent(jButtonTodos))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jTable1.setBackground(new java.awt.Color(0, 0, 0));
-        jTable1.setForeground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaUsuarios.setBackground(new java.awt.Color(0, 0, 0));
+        tablaUsuarios.setForeground(new java.awt.Color(255, 255, 255));
+        tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -127,8 +143,8 @@ public class jManejarUsuarios extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.setSelectionBackground(new java.awt.Color(204, 103, 255));
-        jScrollPane1.setViewportView(jTable1);
+        tablaUsuarios.setSelectionBackground(new java.awt.Color(204, 103, 255));
+        jScrollPane1.setViewportView(tablaUsuarios);
 
         jButton1.setBackground(new java.awt.Color(0, 0, 0));
         jButton1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
@@ -207,6 +223,15 @@ public class jManejarUsuarios extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTodosActionPerformed
+        // TODO add your handling code here:
+        
+        tabla = new DefaultTableModel(i.getUsuarios(c),cabeceraTodos);
+        tablaUsuarios.setModel(tabla);
+        
+        
+    }//GEN-LAST:event_jButtonTodosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -255,14 +280,14 @@ public class jManejarUsuarios extends javax.swing.JDialog {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JRadioButton jButtonAlumnos;
+    private javax.swing.JRadioButton jButtonProfesores;
+    private javax.swing.JRadioButton jButtonTodos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaUsuarios;
     // End of variables declaration//GEN-END:variables
 }
