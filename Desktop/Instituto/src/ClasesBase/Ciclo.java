@@ -5,7 +5,7 @@
  */
 package ClasesBase;
 
-
+import Usuarios.Profesor;
 import java.util.ArrayList;
 
 /**
@@ -13,42 +13,25 @@ import java.util.ArrayList;
  * @author alumno
  */
 public class Ciclo {
+
     //atributos de la clase
-    private ArrayList <Asignatura> Asignaturas;
-    private int curso;
+    private ArrayList<Asignatura> Asignaturas;
     private String nombre;
-    private String nombre_instituto;
-    private String tutor;    
-    
-    
+
     //metodo constructor
     public Ciclo(ArrayList<Asignatura> Asignaturas, int curso, String nombre, String nombre_instituto) {
         this.Asignaturas = Asignaturas;
-        this.curso = curso;
         this.nombre = nombre;
-        this.nombre_instituto = nombre_instituto;
-        this.tutor = tutor;
-    }           
-    
-    //metodos getters
-       public ArrayList<Asignatura> getAsignaturas() {
-        return Asignaturas;
     }
 
-    public int getCurso() {
-        return curso;
+    //metodos getters
+    public ArrayList<Asignatura> getAsignaturas() {
+        return Asignaturas;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public String getNombre_instituto() {
-        return nombre_instituto;
-    }
 
-    public String getTutor() {
-        return tutor;
-    }
-    
 }

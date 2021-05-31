@@ -19,7 +19,7 @@ public class Instituto {
      * @param args the command line arguments
      */
     //atributos de la clase
-    private ArrayList<Usuario> Usuarios;
+    private ArrayList<Usuario> usuarios;
     private ArrayList<Ciclo> ciclos;
     private String nombre;
     private String direccion;
@@ -27,7 +27,7 @@ public class Instituto {
     private String telefono; // para el manejo de datos se usa String
 
     public Instituto(ArrayList<Usuario> Usuarios, ArrayList<Ciclo> ciclos, String nombre, String direccion, String telefono) {
-        this.Usuarios = Usuarios;
+        this.usuarios = Usuarios;
         this.ciclos = ciclos;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -59,9 +59,9 @@ public class Instituto {
     }
 
     public String[][] getUsuarios(Ciclo c) {
-        String[][] arrayUsuarios = new String[Usuarios.size()][4];
-        for (int i = 0; i < Usuarios.size(); i++) {
-            Usuario u = Usuarios.get(i);
+        String[][] arrayUsuarios = new String[usuarios.size()][4];
+        for (int i = 0; i < usuarios.size(); i++) {
+            Usuario u = usuarios.get(i);
             if (u instanceof Profesor) {
                 arrayUsuarios[i][0] = "Profesor";
 
