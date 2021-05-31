@@ -6,6 +6,7 @@ package Usuarios;
  * and open the template in the editor.
  */
 import ClasesBase.Asignatura;
+import ClasesBase.Ciclo;
 import Usuarios.Usuario;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,11 +18,12 @@ import java.util.Date;
 public class Alumno extends Usuario {
     //Atributos
     
-    private ArrayList <Asignatura> asignaturasCursadas;
+    //private ArrayList <Asignatura> asignaturasCursadas;
+    private Ciclo ciclo;
 
-    public Alumno(String nombre, String contrasenna, String DNI, int fecha_nacimiento, int edad) {
+    public Alumno(String nombre, String contrasenna, String DNI, int fecha_nacimiento, int edad, Ciclo ciclo) {
         super(nombre, contrasenna, DNI, fecha_nacimiento, edad);
-        asignaturasCursadas = new ArrayList();
+        //asignaturasCursadas = new ArrayList();
     }
     
     
