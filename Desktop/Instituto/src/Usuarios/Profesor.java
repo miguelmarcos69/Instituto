@@ -5,7 +5,7 @@ package Usuarios;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import ClasesBase.Asignatura;
+import ClasesBase.Modulo;
 import Usuarios.Usuario;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +16,7 @@ import java.util.Date;
  */
 public class Profesor extends Usuario {
 
-    private ArrayList <Asignatura> asignaturasDadas;
+    private ArrayList <Modulo> asignaturasDadas;
     
     public Profesor(String nombre, String contrasenna, String DNI, int fecha_nacimiento, int edad) {
         super(nombre, contrasenna, DNI, fecha_nacimiento, edad);

@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  *
  * @author alumno
  */
-public class Asignatura {
+public class Modulo {
    //atributos de la clase
     private String nombre;
     private String codigo_aula;
@@ -20,7 +20,7 @@ public class Asignatura {
 
     
     //metodo constuctor
-    public Asignatura(String nombre, String codigo_aula, int horas_semana, String nombre_ciclo) {
+    public Modulo(String nombre, String codigo_aula, int horas_semana, String nombre_ciclo) {
         this.nombre = nombre;
         this.codigo_aula = codigo_aula;
         this.horas_semana = horas_semana;

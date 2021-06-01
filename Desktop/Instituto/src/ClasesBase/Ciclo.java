@@ -15,17 +15,18 @@ import java.util.ArrayList;
 public class Ciclo {
 
     //atributos de la clase
-    private ArrayList<Asignatura> Asignaturas;
+    private ArrayList<Modulo> Asignaturas;
     private String nombre;
+    private int plazas;
 
     //metodo constructor
-    public Ciclo(ArrayList<Asignatura> Asignaturas, int curso, String nombre, String nombre_instituto) {
+    public Ciclo(ArrayList<Modulo> Asignaturas, int curso, String nombre, String nombre_instituto) {
         this.Asignaturas = Asignaturas;
         this.nombre = nombre;
     }
 
     //metodos getters
-    public ArrayList<Asignatura> getAsignaturas() {
+    public ArrayList<Modulo> getAsignaturas() {
         return Asignaturas;
     }
 

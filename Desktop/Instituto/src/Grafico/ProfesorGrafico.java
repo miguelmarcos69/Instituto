@@ -93,7 +93,7 @@ public class ProfesorGrafico extends javax.swing.JFrame {
 
         jModificarNotas.setBackground(new java.awt.Color(0, 0, 0));
         jModificarNotas.setForeground(new java.awt.Color(255, 255, 255));
-        jModificarNotas.setText("modifar notas");
+        jModificarNotas.setText("Modifar notas");
 
         jTablon.setBackground(new java.awt.Color(0, 0, 0));
         jTablon.setText("Añadir al tablon");
