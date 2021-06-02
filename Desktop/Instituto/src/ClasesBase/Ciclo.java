@@ -20,10 +20,13 @@ public class Ciclo {
     private int plazas;
 
     //metodo constructor
-    public Ciclo(ArrayList<Modulo> Asignaturas, int curso, String nombre, String nombre_instituto) {
+
+    public Ciclo(ArrayList<Modulo> Asignaturas, String nombre, int plazas) {
         this.Asignaturas = Asignaturas;
         this.nombre = nombre;
+        this.plazas = plazas;
     }
+  
 
     //metodos getters
     public ArrayList<Modulo> getAsignaturas() {

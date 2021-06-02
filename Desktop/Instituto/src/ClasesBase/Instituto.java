@@ -5,6 +5,7 @@ package ClasesBase;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import Usuarios.Alumno;
 import Usuarios.Profesor;
 import Usuarios.Usuario;
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class Instituto {
         return telefono;
     }
 
-    public String[][] getUsuarios(Ciclo c) {
+    public String[][] mostrarUsuarios() {
         String[][] arrayUsuarios = new String[usuarios.size()][4];
         for (int i = 0; i < usuarios.size(); i++) {
             Usuario u = usuarios.get(i);
@@ -78,4 +79,24 @@ public class Instituto {
 
     }
 
+    //crear usuario
+        public void crearUsuario(Alumno u) {
+
+        //boolean para ver si existe 
+        boolean existe = false;
+
+        for (int i = 0; i < usuarios.size(); i++) {
+
+            // u es el usuario  que estamos pidiendo
+            if (usuarios.get(i).equals(u)) {
+                existe = true;
+            }
+        }
+        if (existe == false) {
+            usuarios.add(u);
+        }
+
+    }
+    
+    
 }

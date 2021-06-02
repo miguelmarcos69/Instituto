@@ -6,6 +6,10 @@
 package Grafico;
 import ClasesBase.Ciclo;
 import ClasesBase.Instituto;
+import ClasesBase.Modulo;
+import Usuarios.Alumno;
+import Usuarios.Usuario;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,6 +19,9 @@ import javax.swing.table.DefaultTableModel;
 public class jManejarUsuarios extends javax.swing.JDialog {
     Instituto i;
     Ciclo c;
+    Alumno u;
+    Modulo m;
+    
 
     //tablas
     String cabeceraTodos[]={"Nombre","edad","fecha nacimiento","tipo"};
@@ -28,6 +35,17 @@ public class jManejarUsuarios extends javax.swing.JDialog {
     public jManejarUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        
+        i = new Instituto("camino","plaza","777777");
+        ArrayList<Modulo> modulos = new ArrayList();
+        m = new Modulo("programacion","1Daw",3,"DAW1");
+        modulos.add(m);
+        c = new Ciclo(modulos,"DAW1",76);
+        i.crearUsuario(u);
+        u = new Alumno("daniel","contra","71177171",675352992,21,c);
+    
+       
     }
 
     /**
@@ -226,7 +244,7 @@ public class jManejarUsuarios extends javax.swing.JDialog {
     private void jButtonTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTodosActionPerformed
         // TODO add your handling code here:
         
-        tabla = new DefaultTableModel(i.getUsuarios(c),cabeceraTodos);
+        tabla = new DefaultTableModel(i.mostrarUsuarios(),cabeceraTodos);
         tablaUsuarios.setModel(tabla);
         
         
