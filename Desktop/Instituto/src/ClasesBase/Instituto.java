@@ -60,7 +60,7 @@ public class Instituto {
     }
 
     public String[][] mostrarUsuarios() {
-        String[][] arrayUsuarios = new String[usuarios.size()][4];
+        String[][] arrayUsuarios = new String[usuarios.size()][6];
         for (int i = 0; i < usuarios.size(); i++) {
             Usuario u = usuarios.get(i);
             if (u instanceof Profesor) {
@@ -70,33 +70,14 @@ public class Instituto {
                 arrayUsuarios[i][0] = "Alumno";
             }
             arrayUsuarios[i][1] = u.getNombre();
-            arrayUsuarios[i][2] = u.getEdad();
-            arrayUsuarios[i][3] = u.getFecha_nacimiento();
-            
-            
+            arrayUsuarios[i][2] = u.getContra();
+            arrayUsuarios[i][3] = u.getDNI();
+            arrayUsuarios[i][4] = u.getEdad();
+            arrayUsuarios[i][5] = u.getFecha_nacimiento();
+
         }
         return arrayUsuarios;
 
     }
 
-    //crear usuario
-        public void crearUsuario(Alumno u) {
-
-        //boolean para ver si existe 
-        boolean existe = false;
-
-        for (int i = 0; i < usuarios.size(); i++) {
-
-            // u es el usuario  que estamos pidiendo
-            if (usuarios.get(i).equals(u)) {
-                existe = true;
-            }
-        }
-        if (existe == false) {
-            usuarios.add(u);
-        }
-
-    }
-    
-    
 }

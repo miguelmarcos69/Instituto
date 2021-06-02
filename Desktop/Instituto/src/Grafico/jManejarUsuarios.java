@@ -42,9 +42,10 @@ public class jManejarUsuarios extends javax.swing.JDialog {
         m = new Modulo("programacion","1Daw",3,"DAW1");
         modulos.add(m);
         c = new Ciclo(modulos,"DAW1",76);
-        i.crearUsuario(u);
+        ArrayList<Alumno> usuarios = new ArrayList();
         u = new Alumno("daniel","contra","71177171",675352992,21,c);
-    
+        usuarios.add(u);
+        
        
     }
 
