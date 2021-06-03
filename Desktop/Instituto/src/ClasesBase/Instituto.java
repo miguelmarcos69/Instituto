@@ -58,10 +58,11 @@ public class Instituto {
     public String getTelefono() {
         return telefono;
     }
-    
+    /*
     public String[][] getAlumnosAsignatura (String nombreAsignatura){
     
-        String [][] alumnos = new String [1][usuarios.size()];
+        String [][] alumnos = new String [usuarios.size()][1];
+        int contador=0;
         
         for (int i = 0;i<usuarios.size();i++) {
             
@@ -69,13 +70,14 @@ public class Instituto {
                 Alumno a = (Alumno) usuarios.get(i);
                 if (a.tieneModulo(nombreAsignatura)){
                 
-                    alumnos[1][i] = a.getNombre();
+                    alumnos[contador++][0] = a.getNombre();
                 }
             }
         }
         
         return alumnos;
     }
+*/
 
     public String[][] mostrarUsuarios() {
         String[][] arrayUsuarios = new String[usuarios.size()][6];
