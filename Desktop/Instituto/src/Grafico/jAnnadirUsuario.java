@@ -3,6 +3,7 @@ package Grafico;
 
 import ClasesBase.Ciclo;
 import ClasesBase.Instituto;
+import Usuarios.Alumno;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -72,6 +73,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             JOptionPane.showMessageDialog (getContentPane (), "Las contraseñas no coinciden");
             jPasswordFieldContra.setText("");
             jPasswordFieldRepetirContra.setText("");
+            contrasennaValida = false;
         }
     }
     
@@ -763,7 +765,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     
     //RADIO VER LOS CICLOS  DE PRIMER AÑO EN LA TABLA
     private void jRadioButtonVerA1AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerA1AActionPerformed
-        // TODO add your handling code here:
+        
         int an = 1;
         try{
             tabla = new DefaultTableModel(i.getCicloTot(an),cabecera);
@@ -775,8 +777,9 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jRadioButtonVerA1AActionPerformed
 
+    //RADIO VER LOS CICLOS DE SEGUNDO AÑO EN LA TABLA
     private void jRadioButtonVerA2AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerA2AActionPerformed
-        // TODO add your handling code here:
+        
         int an = 2;
         try{
             tabla = new DefaultTableModel(i.getCicloTot(an),cabecera);
@@ -789,10 +792,30 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_jRadioButtonVerA2AActionPerformed
 
     private void jButtonInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscribirActionPerformed
-        // TODO add your handling code here:
+        Alumno annadir = null;
+        try {
+            if(jTableVerCicloA.getSelectedRow()!=-1){
+                String nombreC = jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 0).toString();
+                int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
+                ContrasennaValida();
+                if (contrasennaValida == true){
+                    annadir = new Alumno(getNombre(), getDNI(), getFechaNacimiento(), getContrasenna(), i.getCicloNombre(nombreC, annoC) );
+                }
+            } else{
+                JOptionPane.showMessageDialog (getContentPane (), "Debe seleccionar una fila de la tabla",
+                "Error",JOptionPane.ERROR_MESSAGE);
+            } 
+            
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog (getContentPane (), "Las contraseñas no coinciden",
+            "Error",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonInscribirActionPerformed
 
 
+    
+    
     //METODO MAIN
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
