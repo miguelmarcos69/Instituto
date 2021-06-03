@@ -63,5 +63,25 @@ public class Ciclo {
         
         return resultado;
     }
+    
+    //Obtener arraylist para mostrar en tabla(todos los modulos)
+    public String[] toArrayString(){
+        String [] elemento = new String [2];
+        elemento [0] = getNombre();
+        elemento [1] = getAnno()+"";
+        
+        return elemento;
+    }
+    
+    //Obtener rraylist para mostrar en tabla(todos en funcion del año)
+    public String[] toArrayString(int annoCic){
+        String [] elemento = new String [2];
+        if(getAnno()==annoCic){
+            elemento [0] = getNombre();
+            elemento [1] = getAnno()+"";
+        }
+        
+        return elemento;
+    }
 
 }
