@@ -127,7 +127,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel15 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jButtonAceptar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanelAlumno = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -442,7 +442,12 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
         jLabel15.setText("Asignaturas añadidas:");
 
-        jButton2.setText("Aceptar");
+        jButtonAceptar.setText("Aceptar");
+        jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAceptarActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Cancelar");
 
@@ -461,7 +466,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(jPanelMostrarAsigLayout.createSequentialGroup()
                         .addGap(70, 70, 70)
-                        .addComponent(jButton2)
+                        .addComponent(jButtonAceptar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3)))
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -481,7 +486,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(jPanelMostrarAsigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(jButtonAceptar)
                     .addComponent(jButton3)))
         );
 
@@ -737,7 +742,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     private void jRadioButtonVerTodosAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerTodosAActionPerformed
         // TODO add your handling code here:
         try{
-                //tabla = new DefaultTableModel(i.getCiclos(),cabecera);
+                tabla = new DefaultTableModel(i.getCiclos(),cabecera);
                 jTable1.setModel(tabla);
             
         } catch (Exception e){
@@ -745,6 +750,10 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             "Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jRadioButtonVerTodosAActionPerformed
+
+    private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAceptarActionPerformed
 
 
     //METODO MAIN
@@ -792,8 +801,8 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroupVerAnno;
     private javax.swing.ButtonGroup buttonGroupVerAsignaturas;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonAceptar;
     private javax.swing.JButton jButtonBuscarAsig;
     private javax.swing.JButton jButtonConsultarCicloA;
     private javax.swing.JButton jButtonConsultarCicloP;
