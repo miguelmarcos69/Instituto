@@ -131,7 +131,6 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jButton3 = new javax.swing.JButton();
         jPanelAlumno = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jButtonConsultarCicloA = new javax.swing.JButton();
         jRadioButtonVerTodosA = new javax.swing.JRadioButton();
         jRadioButtonVerA1A = new javax.swing.JRadioButton();
         jRadioButtonVerA2A = new javax.swing.JRadioButton();
@@ -547,8 +546,6 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
         jLabel9.setText("¿Qué ciclos desa ver?");
 
-        jButtonConsultarCicloA.setText("CONSULTAR");
-
         buttonGroupVerAnno.add(jRadioButtonVerTodosA);
         jRadioButtonVerTodosA.setText("Todos");
         jRadioButtonVerTodosA.addActionListener(new java.awt.event.ActionListener() {
@@ -567,6 +564,11 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
         buttonGroupVerAnno.add(jRadioButtonVerA2A);
         jRadioButtonVerA2A.setText("Sólo segundo año");
+        jRadioButtonVerA2A.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonVerA2AActionPerformed(evt);
+            }
+        });
 
         jTableVerCicloA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -597,6 +599,11 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jLabel10.setText("Seleccione en la tabla el curso al que se va ha inscribir");
 
         jButtonInscribir.setText("INSCRIBIR");
+        jButtonInscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInscribirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -633,20 +640,15 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             .addGroup(jPanelAlumnoLayout.createSequentialGroup()
                 .addGroup(jPanelAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelAlumnoLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanelAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
                             .addGroup(jPanelAlumnoLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanelAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addGroup(jPanelAlumnoLayout.createSequentialGroup()
-                                        .addComponent(jRadioButtonVerTodosA)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(jRadioButtonVerA1A)
-                                        .addGap(31, 31, 31)
-                                        .addComponent(jRadioButtonVerA2A))))
-                            .addGroup(jPanelAlumnoLayout.createSequentialGroup()
-                                .addGap(139, 139, 139)
-                                .addComponent(jButtonConsultarCicloA)))
+                                .addComponent(jRadioButtonVerTodosA)
+                                .addGap(28, 28, 28)
+                                .addComponent(jRadioButtonVerA1A)
+                                .addGap(31, 31, 31)
+                                .addComponent(jRadioButtonVerA2A)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -661,9 +663,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                     .addComponent(jRadioButtonVerTodosA)
                     .addComponent(jRadioButtonVerA1A)
                     .addComponent(jRadioButtonVerA2A))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonConsultarCicloA)
-                .addGap(6, 6, 6)
+                .addGap(38, 38, 38)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -749,7 +749,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
         try{
             tabla = new DefaultTableModel(i.getCicloTot(),cabecera);
-            jTable1.setModel(tabla);
+            jTableVerCicloA.setModel(tabla);
             
         } catch (Exception e){
             JOptionPane.showMessageDialog (getContentPane (), "No hay ciclos",
@@ -767,13 +767,30 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         int an = 1;
         try{
             tabla = new DefaultTableModel(i.getCicloTot(an),cabecera);
-            jTable1.setModel(tabla);
+            jTableVerCicloA.setModel(tabla);
             
         } catch (Exception e){
             JOptionPane.showMessageDialog (getContentPane (), "No hay ciclos",
             "Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jRadioButtonVerA1AActionPerformed
+
+    private void jRadioButtonVerA2AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerA2AActionPerformed
+        // TODO add your handling code here:
+        int an = 2;
+        try{
+            tabla = new DefaultTableModel(i.getCicloTot(an),cabecera);
+            jTableVerCicloA.setModel(tabla);
+            
+        } catch (Exception e){
+            JOptionPane.showMessageDialog (getContentPane (), "No hay ciclos",
+            "Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jRadioButtonVerA2AActionPerformed
+
+    private void jButtonInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscribirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonInscribirActionPerformed
 
 
     //METODO MAIN
@@ -824,7 +841,6 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonAceptar;
     private javax.swing.JButton jButtonBuscarAsig;
-    private javax.swing.JButton jButtonConsultarCicloA;
     private javax.swing.JButton jButtonConsultarCicloP;
     private javax.swing.JButton jButtonInscribir;
     private javax.swing.JLabel jLabel1;
