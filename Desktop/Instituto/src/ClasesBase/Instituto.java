@@ -124,5 +124,20 @@ public class Instituto {
 
         return arrayCiclos;
     }
+    
+    public Ciclo getCicloNombre (String nombre,int ano){
+    
+        Ciclo buscado = null;
+        
+        for (int i=0;i<ciclos.size();i++){
+        
+            if (ciclos.get(i).getNombre().equals(nombre) && ciclos.get(i).getAnno()==ano){
+            
+                buscado = ciclos.get(i);
+            }
+        }
+        
+        return buscado;
+    }
 
 }
