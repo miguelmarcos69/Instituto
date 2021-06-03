@@ -56,7 +56,7 @@ public class Alumno extends Usuario {
     public void annadirNotas(Nota n) {
         notas.add(n);
     }
-    
+
     public String toString() {
         return nombre;
     }
