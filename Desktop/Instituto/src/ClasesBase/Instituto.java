@@ -58,7 +58,7 @@ public class Instituto {
     public String getTelefono() {
         return telefono;
     }
-    /*
+    
     public String[][] getAlumnosAsignatura (String nombreAsignatura){
     
         String [][] alumnos = new String [usuarios.size()][1];
@@ -77,7 +77,7 @@ public class Instituto {
         
         return alumnos;
     }
-*/
+
 
     public String[][] mostrarUsuarios() {
         String[][] arrayUsuarios = new String[usuarios.size()][6];
