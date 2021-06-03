@@ -8,7 +8,11 @@ package Grafico;
 import Usuarios.*;
 import java.awt.Color;
 import ClasesBase.*;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
+import javax.swing.JPanel;
 
 /**
  *
@@ -27,6 +31,21 @@ public class ProfesorGrafico extends javax.swing.JFrame {
         this.setBackground(Color.black);
         this.setForeground(Color.white);
     }
+    
+      class jPanelGardient extends JPanel{
+        protected void paintComponent(Graphics g){
+            Graphics2D g2d = (Graphics2D) g;
+            int width = getWidth();
+            int height = getHeight();
+            
+            Color color1 = new Color(221, 0, 255);
+             Color color2 = new Color(255, 162, 0);
+             GradientPaint gp = new GradientPaint (0,0,color1,180,height,color2);
+             g2d.setPaint(gp);
+            g2d.fillRect(0, 0, width, height);
+        }
+    }
+    
     Alumno a;
 
     private ProfesorGrafico() {
@@ -66,7 +85,7 @@ public class ProfesorGrafico extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new jPanelGardient();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jNombre = new javax.swing.JLabel();
@@ -78,8 +97,6 @@ public class ProfesorGrafico extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 103, 255));
-
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
@@ -88,6 +105,7 @@ public class ProfesorGrafico extends javax.swing.JFrame {
 
         jNombre.setBackground(new java.awt.Color(255, 255, 255));
         jNombre.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
+        jNombre.setForeground(new java.awt.Color(255, 255, 255));
         jNombre.setText("Nombre");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -95,7 +113,7 @@ public class ProfesorGrafico extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(47, 47, 47)
                 .addComponent(jNombre)
@@ -125,6 +143,7 @@ public class ProfesorGrafico extends javax.swing.JFrame {
         });
 
         jTablon.setBackground(new java.awt.Color(0, 0, 0));
+        jTablon.setForeground(new java.awt.Color(255, 255, 255));
         jTablon.setText("Añadir al tablon");
 
         jCalendario.setBackground(new java.awt.Color(0, 0, 0));
@@ -148,18 +167,19 @@ public class ProfesorGrafico extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(199, 199, 199)
-                        .addComponent(jSalir))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(139, 139, 139)
                         .addComponent(jLabel2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(jModificarNotas)
-                        .addGap(38, 38, 38)
+                        .addGap(40, 40, 40)
                         .addComponent(jCalendario)
-                        .addGap(36, 36, 36)
+                        .addGap(34, 34, 34)
                         .addComponent(jTablon)))
+                .addGap(0, 34, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(191, 191, 191)
+                .addComponent(jSalir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -168,14 +188,14 @@ public class ProfesorGrafico extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(44, 44, 44)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jModificarNotas)
                     .addComponent(jCalendario)
                     .addComponent(jTablon))
-                .addGap(50, 50, 50)
+                .addGap(55, 55, 55)
                 .addComponent(jSalir)
-                .addGap(63, 63, 63))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
