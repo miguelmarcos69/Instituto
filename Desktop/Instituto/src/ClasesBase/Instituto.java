@@ -58,6 +58,24 @@ public class Instituto {
     public String getTelefono() {
         return telefono;
     }
+    
+    public String[][] getAlumnosAsignatura (String nombreAsignatura){
+    
+        String [][] alumnos = new String [1][usuarios.size()];
+        
+        for (int i = 0;i<usuarios.size();i++) {
+            
+            if (usuarios.get(i) instanceof Alumno){
+                Alumno a = (Alumno) usuarios.get(i);
+                if (a.tieneModulo(nombreAsignatura)){
+                
+                    alumnos[1][i] = a.getNombre();
+                }
+            }
+        }
+        
+        return alumnos;
+    }
 
     public String[][] mostrarUsuarios() {
         String[][] arrayUsuarios = new String[usuarios.size()][6];

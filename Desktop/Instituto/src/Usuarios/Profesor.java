@@ -57,6 +57,7 @@ public class Profesor extends Usuario {
         }
         return arrayAlumnos;
     }
+    
 
     public String[][] getEn() {
         String[][] arrayAlumnos = new String[alu.size()][1];
@@ -69,5 +70,7 @@ public class Profesor extends Usuario {
         }
         return arrayAlumnos;
     }
+
+    
 
 }

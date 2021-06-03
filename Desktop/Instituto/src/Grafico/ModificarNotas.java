@@ -5,6 +5,7 @@
  */
 package Grafico;
 
+import ClasesBase.Instituto;
 import ClasesBase.Modulo;
 import Usuarios.Alumno;
 import Usuarios.Profesor;
@@ -18,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class ModificarNotas extends javax.swing.JFrame {
 
     Profesor prof;
+    Instituto i;
     DefaultTableModel tabla;
     String cabecera[] = {"Nombre"};
 
@@ -33,6 +35,7 @@ public class ModificarNotas extends javax.swing.JFrame {
         System.out.println("Alumnos: " + prof.getAlu());
         System.out.println("Modulos: " + prof.getAsignaturasDadas());
         System.out.println("ciclos: " + prof.getCi().toString());
+        this.i=new Instituto();
     }
 
     private void llenar() {
@@ -123,8 +126,8 @@ public class ModificarNotas extends javax.swing.JFrame {
 
         String itemSeleccionado = modulos.getSelectedItem().toString();//Recogemos el item seleccionado en el desplegable de ordenar
         System.out.println(itemSeleccionado);
-        switch (itemSeleccionado) {
-            case "Programacion":
+        /*switch (itemSeleccionado) {
+            case prof.getAsignaturasDadas().get(1).getNombre():
                 tabla = new DefaultTableModel(prof.getPro(), cabecera);
                 tablaAlumnos.setModel(tabla);
                 break;
@@ -132,7 +135,10 @@ public class ModificarNotas extends javax.swing.JFrame {
                 tabla = new DefaultTableModel(prof.getEn(), cabecera);
                 tablaAlumnos.setModel(tabla);
                 break;
-        }
+        }*/
+
+        tabla = new DefaultTableModel(i.getAlumnosAsignatura(itemSeleccionado), cabecera);
+        tablaAlumnos.setModel(tabla);
 
 
     }//GEN-LAST:event_modulosActionPerformed

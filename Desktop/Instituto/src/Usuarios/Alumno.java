@@ -82,5 +82,12 @@ public class Alumno extends Usuario {
     public String getContrasenna() {
         return contrasenna;
     }
+    
+    public boolean tieneModulo (String nombreAsignatura){
+    
+        boolean resultado = ciclo.existeModulo(nombre);
+        
+        return resultado;
+    }
 
 }

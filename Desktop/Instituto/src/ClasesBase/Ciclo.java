@@ -43,5 +43,20 @@ public class Ciclo {
     public String toString() {
         return nombre;
     }
+    
+    public boolean existeModulo (String nombre){
+    
+        boolean resultado = false;
+        
+        for (int i = 0;i< Asignaturas.size();i++){
+        
+            if (Asignaturas.get(i).getNombre().equals(nombre)){
+            
+                resultado=true;
+            }
+        }
+        
+        return resultado;
+    }
 
 }
