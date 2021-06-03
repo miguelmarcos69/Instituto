@@ -799,7 +799,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
                 ContrasennaValida();
                 if (contrasennaValida == true){
-                   //  annadir = new Alumno(getNombre(), getDNI(), getFechaNacimiento(), getContrasenna(), i.getCicloNombre(nombreC, annoC) );
+                    annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC) );
                 }
             } else{
                 JOptionPane.showMessageDialog (getContentPane (), "Debe seleccionar una fila de la tabla",

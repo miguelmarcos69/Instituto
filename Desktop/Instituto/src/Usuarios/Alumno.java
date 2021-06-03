@@ -23,15 +23,15 @@ public class Alumno extends Usuario {
     private Ciclo ciclo;
     private ArrayList<Nota> notas;
 
-    public Alumno(String nombre, String contrasenna, String DNI, int fecha_nacimiento, int edad, Ciclo ciclo) {
-        super(nombre, contrasenna, DNI, fecha_nacimiento, edad);
+    public Alumno(String nombre, String contrasenna, String DNI, Date fecha_nacimiento, Ciclo ciclo) {
+        super(nombre, contrasenna, DNI, fecha_nacimiento);
         this.ciclo = ciclo;
         notas = new ArrayList();
     }
 
     //constructor se utuliza al iniciar sesion
-    public Alumno(String nombre, String contrasenna, String DNI, int fecha_nacimiento, int edad) {
-        super(nombre, contrasenna, DNI, fecha_nacimiento, edad);
+    public Alumno(String nombre, String contrasenna, String DNI, Date fecha_nacimiento) {
+        super(nombre, contrasenna, DNI, fecha_nacimiento);
     }
 
     //Metodos get

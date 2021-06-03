@@ -14,8 +14,8 @@ import java.util.Date;
  */
 public class Administrador extends Usuario {
 
-    public Administrador(String nombre, String contrasenna, String DNI, int fecha_nacimiento, int edad, String tipo, String nombreInsti) {
-        super(nombre, contrasenna, DNI, fecha_nacimiento, edad);
+    public Administrador(String nombre, String contrasenna, String DNI, Date fecha_nacimiento, String tipo, String nombreInsti) {
+        super(nombre, contrasenna, DNI, fecha_nacimiento);
 
     }
 
