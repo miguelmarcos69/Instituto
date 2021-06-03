@@ -5,11 +5,14 @@
  */
 package Grafico;
 
+import ClasesBase.Ciclo;
 import ClasesBase.Instituto;
 import ClasesBase.Modulo;
 import Usuarios.Alumno;
 import Usuarios.Profesor;
+import Usuarios.Usuario;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,14 +34,43 @@ public class ModificarNotas extends javax.swing.JFrame {
         this.prof = prof;
         this.setBackground(Color.black);
         this.setForeground(Color.white);
+
+        ArrayList<Usuario> al = new ArrayList<>();
+        ArrayList<Ciclo> c = new ArrayList<>();
+        ArrayList<Modulo> mod = new ArrayList();
+        ArrayList<Modulo> mod2 = new ArrayList();
+
+        Ciclo primero = new Ciclo(mod, "DAW", 2, 1);
+        Ciclo segundo = new Ciclo(mod2, "DAW", 2, 2);
+       
+
+        Modulo programacion = new Modulo("Programacion", "12", 2, primero.getNombre());
+        Modulo entornos = new Modulo("entornos", "12", 2, primero.getNombre());
+        Modulo fol = new Modulo("fol", "12", 2, primero.getNombre());
+        mod.add(programacion);
+        mod.add(entornos);
+        mod2.add(fol);
+        
+        c.add(primero);
+        c.add(segundo);
+
+        Alumno lola = new Alumno("Lola", "lola", "1254", 2, 3, primero);
+        Alumno miguel = new Alumno("miguel", "miguel", "1254", 2, 3, segundo);
+        Alumno pepe = new Alumno("pepe", "pepe", "1254", 2, 3, primero);
+        Alumno juan = new Alumno("juan", "juan", "1254", 2, 3, segundo);
+
+        al.add(lola);
+        al.add(miguel);
+        al.add(pepe);
+        al.add(juan);
+
+        this.i = new Instituto(al, c, "camino", "la que sea", "69633245");
+
         llenar();
-        System.out.println("Alumnos: " + prof.getAlu());
-        System.out.println("Modulos: " + prof.getAsignaturasDadas());
-        System.out.println("ciclos: " + prof.getCi().toString());
-        this.i=new Instituto();
     }
 
     private void llenar() {
+
         for (Modulo m : prof.getAsignaturasDadas()) {
             modulos.addItem(m.toString());
 

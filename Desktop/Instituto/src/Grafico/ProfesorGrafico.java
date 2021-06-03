@@ -36,8 +36,8 @@ public class ProfesorGrafico extends javax.swing.JFrame {
         ArrayList<Modulo> mod = new ArrayList();
         ArrayList<Modulo> mod2 = new ArrayList();
 
-        Ciclo primero = new Ciclo(mod, "PrimeroDAW", 2);
-        Ciclo segundo = new Ciclo(mod2, "SegundoDAW", 2);
+        Ciclo primero = new Ciclo(mod, "DAW", 2,1);
+        Ciclo segundo = new Ciclo(mod2, "DAW", 2,2);
         c.add(primero);
         c.add(segundo);
 

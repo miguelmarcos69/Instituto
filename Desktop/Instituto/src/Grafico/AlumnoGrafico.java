@@ -30,7 +30,7 @@ public class AlumnoGrafico extends javax.swing.JFrame {
     }
 
     private AlumnoGrafico() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        initComponents();
     }
 
     /**
