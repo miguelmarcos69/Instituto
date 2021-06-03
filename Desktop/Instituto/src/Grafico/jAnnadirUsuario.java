@@ -559,6 +559,11 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
         buttonGroupVerAnno.add(jRadioButtonVerA1A);
         jRadioButtonVerA1A.setText("Sólo primer año");
+        jRadioButtonVerA1A.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonVerA1AActionPerformed(evt);
+            }
+        });
 
         buttonGroupVerAnno.add(jRadioButtonVerA2A);
         jRadioButtonVerA2A.setText("Sólo segundo año");
@@ -739,11 +744,12 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelAlumno.setVisible(true);
     }//GEN-LAST:event_jRadioButtonAlumnoActionPerformed
 
+    //RADIO VER TODOS LOS CICLOS EN LA TABLA
     private void jRadioButtonVerTodosAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerTodosAActionPerformed
-        // TODO add your handling code here:
+
         try{
-                tabla = new DefaultTableModel(i.getCiclos(),cabecera);
-                jTable1.setModel(tabla);
+            tabla = new DefaultTableModel(i.getCicloTot(),cabecera);
+            jTable1.setModel(tabla);
             
         } catch (Exception e){
             JOptionPane.showMessageDialog (getContentPane (), "No hay ciclos",
@@ -754,6 +760,20 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAceptarActionPerformed
+    
+    //RADIO VER LOS CICLOS  DE PRIMER AÑO EN LA TABLA
+    private void jRadioButtonVerA1AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerA1AActionPerformed
+        // TODO add your handling code here:
+        int an = 1;
+        try{
+            tabla = new DefaultTableModel(i.getCicloTot(an),cabecera);
+            jTable1.setModel(tabla);
+            
+        } catch (Exception e){
+            JOptionPane.showMessageDialog (getContentPane (), "No hay ciclos",
+            "Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jRadioButtonVerA1AActionPerformed
 
 
     //METODO MAIN

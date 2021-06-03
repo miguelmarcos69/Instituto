@@ -43,9 +43,10 @@ public class Instituto {
     }
 
     //metodos getters
+    /*
     public ArrayList<Ciclo> getCiclos() {
         return ciclos;
-    }
+    }*/
 
     public String getNombre() {
         return nombre;
@@ -99,7 +100,7 @@ public class Instituto {
     }
     
     //Arralist para obtner todos los ciclos
-    public String[][] getCiclo() {
+    public String[][] getCicloTot() {
 
         String[][] arrayCiclos = new String[ciclos.size()][10];
         for (int i = 0; i < ciclos.size(); i++) {
@@ -112,7 +113,7 @@ public class Instituto {
     }
     
     //Lo mismo pero filtrando por año
-    public String[][] getCiclo(int annoCic) {
+    public String[][] getCicloTot(int annoCic) {
 
         String[][] arrayCiclos = new String[ciclos.size()][10];
         for (int i = 0; i < ciclos.size(); i++) {
@@ -123,8 +124,5 @@ public class Instituto {
 
         return arrayCiclos;
     }
-    
-    
-    
 
 }
