@@ -42,7 +42,6 @@ public class ModificarNotas extends javax.swing.JFrame {
 
         Ciclo primero = new Ciclo(mod, "DAW", 2, 1);
         Ciclo segundo = new Ciclo(mod2, "DAW", 2, 2);
-       
 
         Modulo programacion = new Modulo("Programacion", "12", 2, primero.getNombre());
         Modulo entornos = new Modulo("entornos", "12", 2, primero.getNombre());
@@ -50,12 +49,12 @@ public class ModificarNotas extends javax.swing.JFrame {
         mod.add(programacion);
         mod.add(entornos);
         mod2.add(fol);
-        
+
         c.add(primero);
         c.add(segundo);
 
         Alumno lola = new Alumno("Lola", "lola", "1254", 2, 3, primero);
-        Alumno miguel = new Alumno("miguel", "miguel", "1254", 2, 3, segundo);
+        Alumno miguel = new Alumno("miguel", "miguel", "1254", 2, 3, primero);
         Alumno pepe = new Alumno("pepe", "pepe", "1254", 2, 3, primero);
         Alumno juan = new Alumno("juan", "juan", "1254", 2, 3, segundo);
 
@@ -92,22 +91,17 @@ public class ModificarNotas extends javax.swing.JFrame {
     private void initComponents() {
 
         modulos = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaAlumnos = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        modificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         modulos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modulosActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
             }
         });
 
@@ -122,32 +116,63 @@ public class ModificarNotas extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaAlumnos);
 
+        jTextField1.setText(" ");
+        jTextField1.setToolTipText("");
+
+        modificar.setText("Modificar nota");
+        modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(modificar)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                .addGap(38, 38, 38))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(modificar))
+                .addContainerGap(47, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(modulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(modulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(126, 126, 126)
-                        .addComponent(jButton1)))
-                .addContainerGap(233, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(modulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(111, 111, 111)
-                .addComponent(jButton1)
-                .addContainerGap(172, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(modulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(208, Short.MAX_VALUE))
         );
 
         pack();
@@ -158,17 +183,6 @@ public class ModificarNotas extends javax.swing.JFrame {
 
         String itemSeleccionado = modulos.getSelectedItem().toString();//Recogemos el item seleccionado en el desplegable de ordenar
         System.out.println(itemSeleccionado);
-        /*switch (itemSeleccionado) {
-            case prof.getAsignaturasDadas().get(1).getNombre():
-                tabla = new DefaultTableModel(prof.getPro(), cabecera);
-                tablaAlumnos.setModel(tabla);
-                break;
-            case "entornos":
-                tabla = new DefaultTableModel(prof.getEn(), cabecera);
-                tablaAlumnos.setModel(tabla);
-                break;
-        }*/
-
         tabla = new DefaultTableModel(i.getAlumnosAsignatura(itemSeleccionado), cabecera);
         tablaAlumnos.setModel(tabla);
 
@@ -176,11 +190,15 @@ public class ModificarNotas extends javax.swing.JFrame {
     }//GEN-LAST:event_modulosActionPerformed
 
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
         // TODO add your handling code here:
-        System.out.println("Asignaturas " + prof.getAsignaturasDadas());
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_modificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,8 +236,10 @@ public class ModificarNotas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton modificar;
     private javax.swing.JComboBox<Object> modulos;
     private javax.swing.JTable tablaAlumnos;
     // End of variables declaration//GEN-END:variables

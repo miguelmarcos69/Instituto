@@ -5,6 +5,8 @@
  */
 package Usuarios;
 
+import ClasesBase.Nota;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -19,6 +21,7 @@ public abstract class Usuario {
     private int fecha_nacimiento;
     private int edad;
     String contrasenna;
+    
 
     //metodo constructor
     public Usuario(String nombre, String contrasenna, String DNI, int fecha_nacimiento, int edad) {
