@@ -18,18 +18,18 @@ public class Profesor extends Usuario {
 
     private ArrayList<Modulo> asignaturasDadas;
     private ArrayList<Ciclo> ci;
-    private ArrayList<Alumno> alu;
+    //private ArrayList<Alumno> alu;
 
     public Profesor(String nombre, String contrasenna, String DNI, Date fecha_nacimiento) {
         super(nombre, contrasenna, DNI, fecha_nacimiento);
         asignaturasDadas = new ArrayList();
     }
 
-    public Profesor(String nombre, String contrasenna, String DNI, Date fecha_nacimiento, ArrayList<Modulo> mod, ArrayList<Ciclo> ciclo, ArrayList<Alumno> alumno) {
+    public Profesor(String nombre, String contrasenna, String DNI, Date fecha_nacimiento, ArrayList<Modulo> mod, ArrayList<Ciclo> ciclo){// ArrayList<Alumno> alumno) {
         super(nombre, contrasenna, DNI, fecha_nacimiento);
         asignaturasDadas = mod;
         ci = ciclo;
-        alu = alumno;
+      
     }
 
     public ArrayList<Ciclo> getCi() {
@@ -39,7 +39,7 @@ public class Profesor extends Usuario {
     public ArrayList<Modulo> getAsignaturasDadas() {
         return asignaturasDadas;
     }
-
+/*
     public ArrayList<Alumno> getAlu() {
         return alu;
     }
@@ -71,6 +71,6 @@ public class Profesor extends Usuario {
         return arrayAlumnos;
     }
 
-    
+    */
 
 }

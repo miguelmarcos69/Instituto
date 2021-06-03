@@ -8,12 +8,14 @@ import ClasesBase.Ciclo;
 import ClasesBase.Instituto;
 import ClasesBase.Modulo;
 import Usuarios.Alumno;
+import Usuarios.Profesor;
 import Usuarios.Usuario;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,12 +28,13 @@ public class jManejarUsuarios extends javax.swing.JDialog {
     Ciclo c;
     Alumno u;
     Modulo m;
+    Profesor p;
     
 
     //tablas
-    String cabeceraTodos[]={"Nombre","edad","fecha nacimiento","tipo"};
-    String cabeceraAlumnos[]={"Nombre","edad","fecha nacimiento"};
-    String cabeceraProfesores[]={"Nombre","edad","fecha nacimiento"};
+    String cabeceraTodos[]={"tipo","Nombre","Dni","fecha nacimiento"};
+    String cabeceraAlumnos[]={"Nombre","dni","fecha nacimiento"};
+    String cabeceraProfesores[]={"Nombre","dni","fecha nacimiento"};
     
      DefaultTableModel tabla;
     
@@ -41,16 +44,22 @@ public class jManejarUsuarios extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
-        /*
-        i = new Instituto("camino","plaza","777777");
+        
+       
         ArrayList<Modulo> modulos = new ArrayList();
         m = new Modulo("programacion","1Daw",3,"DAW1");
         modulos.add(m);
-        c = new Ciclo(modulos,"DAW1",76);
-        ArrayList<Alumno> usuarios = new ArrayList();
-        u = new Alumno("daniel","contra","71177171",675352992,21,c);
+        ArrayList<Ciclo> ciclos = new ArrayList();
+        c = new Ciclo(modulos,"DAW1",1,76);
+          ciclos.add(c);
+         ArrayList<Alumno> alumnos = new ArrayList();  
+        ArrayList<Usuario> usuarios = new ArrayList();
+        u = new Alumno("daniel","contra","71177171E",new Date(),c);
         usuarios.add(u);
-        */
+        alumnos.add(u);
+        
+        p = new Profesor("gero","estilton","101010F",new Date(), modulos,ciclos);
+        i = new Instituto(usuarios,ciclos,"camino","plaza","777777");
        
     }
     
@@ -249,6 +258,9 @@ public class jManejarUsuarios extends javax.swing.JDialog {
         
         tabla = new DefaultTableModel(i.mostrarUsuarios(),cabeceraTodos);
         tablaUsuarios.setModel(tabla);
+        
+     
+        
         
         
     }//GEN-LAST:event_jButtonTodosActionPerformed
