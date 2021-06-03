@@ -98,6 +98,31 @@ public class Instituto {
 
     }
     
+    //Arralist para obtner todos los ciclos
+    public String[][] getCiclo() {
+
+        String[][] arrayCiclos = new String[ciclos.size()][10];
+        for (int i = 0; i < ciclos.size(); i++) {
+            
+            Ciclo c = (Ciclo) ciclos.get(i);
+            arrayCiclos[i] = c.toArrayString();
+            }
+
+        return arrayCiclos;
+    }
+    
+    //Lo mismo pero filtrando por año
+    public String[][] getCiclo(int annoCic) {
+
+        String[][] arrayCiclos = new String[ciclos.size()][10];
+        for (int i = 0; i < ciclos.size(); i++) {
+            
+            Ciclo c = (Ciclo) ciclos.get(i);
+            arrayCiclos[i] = c.toArrayString(annoCic);
+            }
+
+        return arrayCiclos;
+    }
     
     
     
