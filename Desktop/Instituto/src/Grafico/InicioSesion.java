@@ -193,7 +193,8 @@ public class InicioSesion extends javax.swing.JFrame {
                     adm.setVisible(true);
                 } else if (u instanceof Profesor) {
                     Profesor pro = (Profesor) u;
-                    ProfesorGrafico pr = new ProfesorGrafico(null, true, pro, this);
+                    //añadir instituto;
+                    ProfesorGrafico pr = new ProfesorGrafico(null, true, pro);
                     this.setVisible(false);
                     //pr.mostrar();
                     pr.setVisible(true);

@@ -12,13 +12,13 @@ import java.util.logging.Logger;
  * @author alumno
  */
 public class Modulo {
-   //atributos de la clase
+    //atributos de la clase
+
     private String nombre;
     private String codigo_aula;
     private int horas_semana;
     private String nombre_ciclo;
 
-    
     //metodo constuctor
     public Modulo(String nombre, String codigo_aula, int horas_semana, String nombre_ciclo) {
         this.nombre = nombre;
@@ -26,11 +26,7 @@ public class Modulo {
         this.horas_semana = horas_semana;
         this.nombre_ciclo = nombre_ciclo;
     }
-    
-    
-    
-    
-    
+
     //metodos getters
     public String getNombre() {
         return nombre;
@@ -47,9 +43,9 @@ public class Modulo {
     public String getNombre_ciclo() {
         return nombre_ciclo;
     }
-    
-    
-    
-    
-    
+
+    public String toString() {
+        return nombre;
+    }
+
 }

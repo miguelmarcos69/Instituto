@@ -90,43 +90,36 @@ public class DaoInstituto {
 
         return u;
     }
+
     //cargar usuarios para mostrarlos por las tablas
-    public ArrayList cargarUsuarios(){
-        
+    public ArrayList cargarUsuarios() {
+
         ArrayList<Usuario> usuarios = new ArrayList<>();
-        
-        
-         try {
+
+        try {
             ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("SELECT nombre,contra,fechaNac FROM usuario where tipo ='alu';");
-            while (rs.next()){
-                    usuarios.add(new Alumno (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getInt(5), rs.getInt(6), rs.getInt(8), rs.getString(9)));
+            while (rs.next()) {
+               // usuarios.add(new Alumno(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getInt(5), rs.getInt(6), rs.getInt(8), rs.getString(9)));
             }
 
             rs = ConexionDefault.instancia().getStatement().executeQuery("SELECT * FROM vehiculos, furgonetas WHERE vehiculos.id = furgonetas.id_veh;");
 
-            while (rs.next()){
-                    usuarios.add(new Profesor (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getInt(5), rs.getInt(6), rs.getDouble(8), rs.getString(9)));
+            while (rs.next()) {
+              //  usuarios.add(new Profesor(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getInt(5), rs.getInt(6), rs.getDouble(8), rs.getString(9)));
             }
-            
-             rs = ConexionDefault.instancia().getStatement().executeQuery("SELECT nombre,contra,fechaNac,edad FROM usuario where tipo ='alu';");
-            while (rs.next()){
-                    usuarios.add(new Administrador (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getInt(5), rs.getInt(6), rs.getInt(8), rs.getString(9)));
+
+            rs = ConexionDefault.instancia().getStatement().executeQuery("SELECT nombre,contra,fechaNac,edad FROM usuario where tipo ='alu';");
+            while (rs.next()) {
+              //  usuarios.add(new Administrador(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getInt(5), rs.getInt(6), rs.getInt(8), rs.getString(9)));
             }
-            
-        } catch (SQLException exc){
+
+        } catch (SQLException exc) {
             System.out.println("Excepción SQL " + exc.getMessage());
-        } catch (Exception exc){
+        } catch (Exception exc) {
             System.out.println("Excepción " + exc.getMessage());
         }
-        
+
         return usuarios;
     }
-        
-    }
-    
-    
-    
-    
-    
 
 }

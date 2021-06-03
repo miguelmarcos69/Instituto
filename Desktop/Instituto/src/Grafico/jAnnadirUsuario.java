@@ -737,7 +737,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     private void jRadioButtonVerTodosAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerTodosAActionPerformed
         // TODO add your handling code here:
         try{
-                tabla = new DefaultTableModel(i.getCiclos(),cabecera);
+                //tabla = new DefaultTableModel(i.getCiclos(),cabecera);
                 jTable1.setModel(tabla);
             
         } catch (Exception e){
