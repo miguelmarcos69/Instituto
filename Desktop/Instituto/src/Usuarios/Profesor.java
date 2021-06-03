@@ -20,13 +20,13 @@ public class Profesor extends Usuario {
     private ArrayList<Ciclo> ci;
     private ArrayList<Alumno> alu;
 
-    public Profesor(String nombre, String contrasenna, String DNI, int fecha_nacimiento, int edad) {
-        super(nombre, contrasenna, DNI, fecha_nacimiento, edad);
+    public Profesor(String nombre, String contrasenna, String DNI, Date fecha_nacimiento) {
+        super(nombre, contrasenna, DNI, fecha_nacimiento);
         asignaturasDadas = new ArrayList();
     }
 
-    public Profesor(String nombre, String contrasenna, String DNI, int fecha_nacimiento, int edad, ArrayList<Modulo> mod, ArrayList<Ciclo> ciclo, ArrayList<Alumno> alumno) {
-        super(nombre, contrasenna, DNI, fecha_nacimiento, edad);
+    public Profesor(String nombre, String contrasenna, String DNI, Date fecha_nacimiento, ArrayList<Modulo> mod, ArrayList<Ciclo> ciclo, ArrayList<Alumno> alumno) {
+        super(nombre, contrasenna, DNI, fecha_nacimiento);
         asignaturasDadas = mod;
         ci = ciclo;
         alu = alumno;

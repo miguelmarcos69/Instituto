@@ -18,13 +18,13 @@ public abstract class Usuario {
     //atributos de la clase
     String nombre;
     private String DNI;
-    private int fecha_nacimiento;
+    private Date fecha_nacimiento;
     private int edad;
     String contrasenna;
     
 
     //metodo constructor
-    public Usuario(String nombre, String contrasenna, String DNI, int fecha_nacimiento, int edad) {
+    public Usuario(String nombre, String contrasenna, String DNI, Date fecha_nacimiento) {
         this.nombre = nombre;
         this.contrasenna = contrasenna;
         this.DNI = DNI;
@@ -46,7 +46,7 @@ public abstract class Usuario {
         return String.valueOf(fecha_nacimiento);
     }
 
-    public int getFecha_nacimientoNumerico() {
+    public Date getFecha_nacimientoNumerico() {
         return fecha_nacimiento;
     }
 
