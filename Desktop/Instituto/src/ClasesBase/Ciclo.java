@@ -21,9 +21,8 @@ public class Ciclo {
     private int anno;
 
     //metodo constructor
-    public Ciclo(ArrayList<Modulo> Asignaturas, String nombre, int anno, int plazas) {
-        this.Asignaturas = Asignaturas;
-        System.out.println("Modulos "+ Asignaturas);
+    public Ciclo(ArrayList<Modulo> Asignatura, String nombre, int anno, int plazas) {
+        this.Asignaturas = Asignatura;
         this.nombre = nombre;
         this.anno = anno;
         this.plazas = plazas;
@@ -39,48 +38,59 @@ public class Ciclo {
         return Asignaturas;
     }
 
-    public int getAnno(){
+    public int getAnno() {
         return anno;
     }
+
     public String getNombre() {
         return nombre;
     }
+
     public String toString() {
         return nombre;
     }
+
     
-    public boolean existeModulo (String nombre){
-    
-        boolean resultado = false;
-        
-        for (int i = 0;i< Asignaturas.size();i++){
-        
-            if (Asignaturas.get(i).getNombre().equals(nombre)){
+    public void recorrerArray(){
+        for (Modulo Asignatura : Asignaturas) {
+            System.out.println(Asignatura);
             
-                resultado=true;
+        }
+    }
+
+
+    public boolean existeModulo(String nombre) {
+        boolean resultado = false;
+
+        for (int i = 0; i < Asignaturas.size(); i++) {
+
+            if (Asignaturas.get(i).getNombre().equals(nombre)) {
+               // System.out.println(Asignaturas.get(i).getNombre());
+
+                resultado = true;
             }
         }
-        
+
         return resultado;
     }
-    
+
     //Obtener arraylist para mostrar en tabla(todos los modulos)
-    public String[] toArrayString(){
-        String [] elemento = new String [2];
-        elemento [0] = getNombre();
-        elemento [1] = getAnno()+"";
-        
+    public String[] toArrayString() {
+        String[] elemento = new String[2];
+        elemento[0] = getNombre();
+        elemento[1] = getAnno() + "";
+
         return elemento;
     }
-    
+
     //Obtener rraylist para mostrar en tabla(todos en funcion del año)
-    public String[] toArrayString(int annoCic){
-        String [] elemento = new String [2];
-        if(getAnno()==annoCic){
-            elemento [0] = getNombre();
-            elemento [1] = getAnno()+"";
+    public String[] toArrayString(int annoCic) {
+        String[] elemento = new String[2];
+        if (getAnno() == annoCic) {
+            elemento[0] = getNombre();
+            elemento[1] = getAnno() + "";
         }
-        
+
         return elemento;
     }
 

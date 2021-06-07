@@ -156,6 +156,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Alumnos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAlumnosActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="jButtonProfesores">
               <Properties>
@@ -173,6 +176,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Profesores"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonProfesoresActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="jButtonTodos">
               <Properties>

@@ -73,13 +73,13 @@ public class DaoInstituto {
                 if (rs.getString(1).equals("adm")) {
                     System.out.println("Es un administrador");
 
-                    u = new Administrador(String.valueOf(rs.getString(2)), String.valueOf(rs.getString(3)), String.valueOf(rs.getString(4)), rs.getInt(5), rs.getInt(6), String.valueOf(rs.getString(1)), String.valueOf(rs.getString(7)));
+                  //  u = new Administrador(String.valueOf(rs.getString(2)), String.valueOf(rs.getString(3)), String.valueOf(rs.getString(4)), rs.getInt(5), rs.getInt(6), String.valueOf(rs.getString(1)), String.valueOf(rs.getString(7)));
                 } else if (rs.getString(1).equals("alu")) {
                     System.out.println("Es un Alumno");
-                    u = new Alumno(String.valueOf(rs.getString(2)), String.valueOf(rs.getString(3)), String.valueOf(rs.getString(4)), rs.getInt(5), rs.getInt(6));
+                    //u = new Alumno(String.valueOf(rs.getString(2)), String.valueOf(rs.getString(3)), String.valueOf(rs.getString(4)), rs.getInt(5), rs.getInt(6));
                 } else if (rs.getString(1).equals("pro")) {
                     System.out.println("Es un profesor");
-                    u = new Profesor(String.valueOf(rs.getString(2)), String.valueOf(rs.getString(3)), String.valueOf(rs.getString(4)), rs.getInt(5), rs.getInt(6));
+                   // u = new Profesor(String.valueOf(rs.getString(2)), String.valueOf(rs.getString(3)), String.valueOf(rs.getString(4)), rs.getInt(5), rs.getInt(6));
                 }
                 System.out.println("******************");
             }

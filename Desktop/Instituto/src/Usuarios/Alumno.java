@@ -29,6 +29,14 @@ public class Alumno extends Usuario {
         notas = new ArrayList();
     }
 
+    public Alumno(String nombre, String contrasenna, String DNI,
+            Date fecha_nacimiento, Ciclo ciclo, ArrayList<Nota> not) {
+        super(nombre, contrasenna, DNI, fecha_nacimiento);
+        //this.notas = not;
+        this.ciclo = ciclo;
+       // System.out.println(notas.toString());
+    }
+
     //constructor se utuliza al iniciar sesion
     public Alumno(String nombre, String contrasenna, String DNI, Date fecha_nacimiento) {
         super(nombre, contrasenna, DNI, fecha_nacimiento);
@@ -53,10 +61,33 @@ public class Alumno extends Usuario {
         return retorno;
     }
 
+    public String[][] getNotas(String nom) {
+        System.out.println("Nombre Alumno:  " + nom);
+        String[][] retorno = new String[notas.size()][2];
+        for (int i = 0; i < notas.size(); i++) {
+            Nota n = (Nota) notas.get(i);
+            if (n.getAlumno().getNombre().equals(nom)) {
+                System.out.println("s");
+                retorno[i][1] = String.valueOf(n.getNota());
+
+            }
+        }
+        return retorno;
+    }
+
+    public boolean tieneModulo(String nombreAsignatura) {
+
+        boolean resultado = ciclo.existeModulo(nombreAsignatura);
+
+        return resultado;
+    }
+
     public void annadirNotas(Nota n) {
         notas.add(n);
+
     }
-    
+
+    @Override
     public String toString() {
         return nombre;
     }
@@ -65,19 +96,14 @@ public class Alumno extends Usuario {
         return notas;
     }
 
+    @Override
     public String getNombre() {
         return nombre;
     }
 
+    @Override
     public String getContrasenna() {
         return contrasenna;
-    }
-
-    public boolean tieneModulo(String nombreAsignatura) {
-
-        boolean resultado = ciclo.existeModulo(nombreAsignatura);
-
-        return resultado;
     }
 
 }
