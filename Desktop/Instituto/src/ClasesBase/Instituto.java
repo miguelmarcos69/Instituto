@@ -122,36 +122,35 @@ public class Instituto {
 
     }
     
-    
-     public String[][] getAlumnos() {
-     
-        String [][] arrayAlumnos = new String[usuarios.size()][7];
-        for (int i = 0, j=0;i<usuarios.size();i++){
-            Usuario u = usuarios.get(i);
-            if (u instanceof Alumno){
-                Alumno a = (Alumno)u;
-             arrayAlumnos [j][0] = 
-              arrayAlumnos [j][1] =
-            arrayAlumnos [j][2] = 
-             arrayAlumnos [j][3] = 
-                arrayAlumnos [j][4] = 
-              arrayAlumnos [j][5] = 
-          arrayAlumnos [j][6] = 
-                j++;
-            }
-        }
-        return ;
-    }
-    
-    
-    
+//    
+//     public String[][] getAlumnos() {
+//     
+//        String [][] arrayAlumnos = new String[usuarios.size()][7];
+//        for (int i = 0, j=0;i<usuarios.size();i++){
+//            Usuario u = usuarios.get(i);
+//            if (u instanceof Alumno){
+//                Alumno a = (Alumno)u;
+//             arrayAlumnos [j][0] = 
+//              arrayAlumnos [j][1] =
+//            arrayAlumnos [j][2] = 
+//             arrayAlumnos [j][3] = 
+//                arrayAlumnos [j][4] = 
+//              arrayAlumnos [j][5] = 
+//          arrayAlumnos [j][6] = 
+//                j++;
+//            }
+//        }
+//        return ;
+//    }
+//    
     
     
     
     
     
     
-
+    
+    
     //Arralist para obtner todos los ciclos
     public String[][] getCicloTot() {
 
