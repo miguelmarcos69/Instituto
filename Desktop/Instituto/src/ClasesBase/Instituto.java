@@ -47,7 +47,6 @@ public class Instituto {
     public ArrayList<Ciclo> getCiclos() {
         return ciclos;
     }*/
-
     public String getNombre() {
         return nombre;
     }
@@ -59,26 +58,25 @@ public class Instituto {
     public String getTelefono() {
         return telefono;
     }
-    
-    public String[][] getAlumnosAsignatura (String nombreAsignatura){
-    
-        String [][] alumnos = new String [usuarios.size()][1];
-        int contador=0;
-        
-        for (int i = 0;i<usuarios.size();i++) {
-            
-            if (usuarios.get(i) instanceof Alumno){
+
+    public String[][] getAlumnosAsignatura(String nombreAsignatura) {
+
+        String[][] alumnos = new String[usuarios.size()][1];
+        int contador = 0;
+
+        for (int i = 0; i < usuarios.size(); i++) {
+
+            if (usuarios.get(i) instanceof Alumno) {
                 Alumno a = (Alumno) usuarios.get(i);
-                if (a.tieneModulo(nombreAsignatura)){
-                
+                if (a.tieneModulo(nombreAsignatura)) {
+
                     alumnos[contador++][0] = a.getNombre();
                 }
             }
         }
-        
+
         return alumnos;
     }
-
 
     public String[][] mostrarUsuarios() {
         String[][] arrayUsuarios = new String[usuarios.size()][6];
@@ -98,74 +96,77 @@ public class Instituto {
         return arrayUsuarios;
 
     }
-    
-    
-     public String[][] getAlumnos() {
-     
-        String [][] arrayAlumnos = new String[usuarios.size()][7];
-        for (int i = 0, j=0;i<usuarios.size();i++){
+
+    public String[][] mostrarAlumnos() {
+        String[][] arrayAlumnos = new String[usuarios.size()][7];
+        for (int i = 0, j = 0; i < usuarios.size(); i++) {
             Usuario u = usuarios.get(i);
-            if (u instanceof Alumno){
-                Alumno a = (Alumno)u;
-             arrayAlumnos [j][0] = 
-              arrayAlumnos [j][1] =
-            arrayAlumnos [j][2] = 
-             arrayAlumnos [j][3] = 
-                arrayAlumnos [j][4] = 
-              arrayAlumnos [j][5] = 
-          arrayAlumnos [j][6] = 
+            if (u instanceof Alumno) {
+                Alumno a = (Alumno) u;
+                arrayAlumnos[j][0] = u.getNombre();
+                arrayAlumnos[j][1] = u.getDNI();
+                arrayAlumnos[j][2] = u.getFecha_nacimiento();
+
                 j++;
             }
         }
-        return ;
+        return arrayAlumnos;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+    public String[][] mostrarProfesores() {
+        String[][] arrayProfesores = new String[usuarios.size()][7];
+        for (int i = 0, j = 0; i < usuarios.size(); i++) {
+            Usuario u = usuarios.get(i);
+            if (u instanceof Profesor) {
+                Profesor f = (Profesor) u;
+                arrayProfesores[j][0] = u.getNombre();
+                arrayProfesores[j][1] = u.getDNI();
+                arrayProfesores[j][2] = u.getFecha_nacimiento();
+
+                j++;
+            }
+        }
+        return arrayProfesores;
+    }
+
     //Arralist para obtner todos los ciclos
     public String[][] getCicloTot() {
 
         String[][] arrayCiclos = new String[ciclos.size()][10];
         for (int i = 0; i < ciclos.size(); i++) {
-            
+
             Ciclo c = (Ciclo) ciclos.get(i);
             arrayCiclos[i] = c.toArrayString();
-            }
+        }
 
         return arrayCiclos;
     }
-    
+
     //Lo mismo pero filtrando por año
     public String[][] getCicloTot(int annoCic) {
 
         String[][] arrayCiclos = new String[ciclos.size()][10];
         for (int i = 0; i < ciclos.size(); i++) {
-            
+
             Ciclo c = (Ciclo) ciclos.get(i);
             arrayCiclos[i] = c.toArrayString(annoCic);
-            }
+        }
 
         return arrayCiclos;
     }
-    
-    public Ciclo getCicloNombre (String nombre,int ano){
-    
+
+    public Ciclo getCicloNombre(String nombre, int ano) {
+
         Ciclo buscado = null;
-        
-        for (int i=0;i<ciclos.size();i++){
-        
-            if (ciclos.get(i).getNombre().equals(nombre) && ciclos.get(i).getAnno()==ano){
-            
+
+        for (int i = 0; i < ciclos.size(); i++) {
+
+            if (ciclos.get(i).getNombre().equals(nombre) && ciclos.get(i).getAnno() == ano) {
+
                 buscado = ciclos.get(i);
             }
         }
-        
+
         return buscado;
     }
 

@@ -44,21 +44,27 @@ public class jManejarUsuarios extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
-        
-       
+         ArrayList<Profesor> profesores = new ArrayList();
+         ArrayList<Alumno> alumnos = new ArrayList();
+         ArrayList<Ciclo> ciclos = new ArrayList();
         ArrayList<Modulo> modulos = new ArrayList();
+        ArrayList<Usuario> usuarios = new ArrayList();
+        
         m = new Modulo("programacion","1Daw",3,"DAW1");
         modulos.add(m);
-        ArrayList<Ciclo> ciclos = new ArrayList();
+      
         c = new Ciclo(modulos,"DAW1",1,76);
-          ciclos.add(c);
-         ArrayList<Alumno> alumnos = new ArrayList();  
-        ArrayList<Usuario> usuarios = new ArrayList();
+         ciclos.add(c);
+          
+       
         u = new Alumno("daniel","contra","71177171E",new Date(),c);
         usuarios.add(u);
         alumnos.add(u);
         
         p = new Profesor("gero","estilton","101010F",new Date(), modulos,ciclos);
+        profesores.add(p);
+        usuarios.add(p);
+          
         i = new Instituto(usuarios,ciclos,"camino","plaza","777777");
        
     }
@@ -142,12 +148,22 @@ public class jManejarUsuarios extends javax.swing.JDialog {
         jButtonAlumnos.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         jButtonAlumnos.setForeground(new java.awt.Color(255, 255, 255));
         jButtonAlumnos.setText("Alumnos");
+        jButtonAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlumnosActionPerformed(evt);
+            }
+        });
 
         jButtonProfesores.setBackground(new java.awt.Color(0, 0, 0));
         buttonGroup1.add(jButtonProfesores);
         jButtonProfesores.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         jButtonProfesores.setForeground(new java.awt.Color(255, 255, 255));
         jButtonProfesores.setText("Profesores");
+        jButtonProfesores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonProfesoresActionPerformed(evt);
+            }
+        });
 
         jButtonTodos.setBackground(new java.awt.Color(0, 0, 0));
         buttonGroup1.add(jButtonTodos);
@@ -268,6 +284,26 @@ public class jManejarUsuarios extends javax.swing.JDialog {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButtonAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlumnosActionPerformed
+
+            tabla = new DefaultTableModel(i.mostrarAlumnos(),cabeceraAlumnos);
+            tablaUsuarios.setModel(tabla);
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAlumnosActionPerformed
+
+    private void jButtonProfesoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProfesoresActionPerformed
+
+            tabla = new DefaultTableModel(i.mostrarProfesores(),cabeceraProfesores);
+            tablaUsuarios.setModel(tabla);
+        
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonProfesoresActionPerformed
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     }                                        
