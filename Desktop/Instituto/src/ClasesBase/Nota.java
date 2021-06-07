@@ -6,29 +6,39 @@
 package ClasesBase;
 
 import Usuarios.Alumno;
+import java.util.ArrayList;
 
 /**
  *
  * @author abili
  */
 public class Nota {
-    
+
     //Atributos
-    
     private Alumno alumno;
     private Modulo modulo;
     private int nota;
-    
-    //Constructor
 
+//Constructor
     public Nota(Alumno alumno, Modulo modulo, int nota) {
         this.alumno = alumno;
         this.modulo = modulo;
         this.nota = nota;
-    }
-    
-    //Metodos get
 
+    }
+
+    public boolean tieneNotas(String n) {
+        return true;
+    }
+
+    public Nota(Modulo modulo, int nota) {
+        // this.alumno = alumno;
+        this.modulo = modulo;
+        this.nota = nota;
+
+    }
+
+    //Metodos get
     public Alumno getAlumno() {
         return alumno;
     }
@@ -40,7 +50,10 @@ public class Nota {
     public int getNota() {
         return nota;
     }
-    
-    
+
+    public String toString() {
+        return String.valueOf(nota);
+
+    }
     
 }

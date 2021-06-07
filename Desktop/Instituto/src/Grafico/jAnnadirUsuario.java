@@ -43,9 +43,9 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         Ciclo primero = new Ciclo(mod, "DAW", 2, 1);
         Ciclo segundo = new Ciclo(mod2, "DAW", 2, 2);
 
-        Modulo programacion = new Modulo("Programacion", "12", 2, primero.getNombre());
-        Modulo entornos = new Modulo("entornos", "12", 2, primero.getNombre());
-        Modulo fol = new Modulo("fol", "12", 2, primero.getNombre());
+        Modulo programacion = new Modulo("Programacion", "12", 2);
+        Modulo entornos = new Modulo("entornos", "12", 2);
+        Modulo fol = new Modulo("fol", "12", 2);
         mod.add(programacion);
         mod.add(entornos);
         mod2.add(fol);

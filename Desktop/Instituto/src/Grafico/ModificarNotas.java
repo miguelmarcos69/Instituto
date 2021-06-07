@@ -8,11 +8,14 @@ package Grafico;
 import ClasesBase.Ciclo;
 import ClasesBase.Instituto;
 import ClasesBase.Modulo;
+import ClasesBase.Nota;
 import Usuarios.Alumno;
 import Usuarios.Profesor;
 import Usuarios.Usuario;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,8 +26,11 @@ public class ModificarNotas extends javax.swing.JFrame {
 
     Profesor prof;
     Instituto i;
+    Alumno a;
+    Nota nota;
     DefaultTableModel tabla;
     String cabecera[] = {"Nombre"};
+    String cabeceranNotas[] = {"Primer trimestre", "Segundo trimestre", "Final"};
 
     /**
      * Creates new form ModificarNotas
@@ -37,32 +43,49 @@ public class ModificarNotas extends javax.swing.JFrame {
 
         ArrayList<Usuario> al = new ArrayList<>();
         ArrayList<Ciclo> c = new ArrayList<>();
-        ArrayList<Modulo> mod = new ArrayList();
-        ArrayList<Modulo> mod2 = new ArrayList();
-
+        ArrayList<Modulo> mod = new ArrayList<>();
+        ArrayList<Modulo> mod2 = new ArrayList<>();
+        ArrayList<Nota> notas1 = new ArrayList<>();
+        
+        Modulo programacion = new Modulo("Programacion", "12", 2);
+        Modulo entornos = new Modulo("entornos", "12", 2);
+        Modulo fol = new Modulo("fol", "12", 2);
+        
         Ciclo primero = new Ciclo(mod, "DAW", 2, 1);
         Ciclo segundo = new Ciclo(mod2, "DAW", 2, 2);
 
-        Modulo programacion = new Modulo("Programacion", "12", 2, primero.getNombre());
-        Modulo entornos = new Modulo("entornos", "12", 2, primero.getNombre());
-        Modulo fol = new Modulo("fol", "12", 2, primero.getNombre());
         mod.add(programacion);
         mod.add(entornos);
         mod2.add(fol);
 
         c.add(primero);
         c.add(segundo);
+        Nota n1 = new Nota(entornos, 10);
+        Nota n2 = new Nota(programacion, 2);
 
-        Alumno lola = new Alumno("Lola", "lola", "1254", 2, 3, primero);
-        Alumno miguel = new Alumno("miguel", "miguel", "1254", 2, 3, primero);
-        Alumno pepe = new Alumno("pepe", "pepe", "1254", 2, 3, primero);
-        Alumno juan = new Alumno("juan", "juan", "1254", 2, 3, segundo);
+//        notas1.add(n1);
+//        notas1.add(n2);
+        //a.annadirNotas(n2);
+        Alumno lola = new Alumno("Lola", "lola", "1254", new Date(), primero);
+        Alumno miguel = new Alumno("miguel", "miguel", "1254", new Date(), primero);
+        Alumno pepe = new Alumno("pepe", "pepe", "1254", new Date(), primero);
+        Alumno juan = new Alumno("juan", "juan", "1254", new Date(), segundo);
 
         al.add(lola);
         al.add(miguel);
         al.add(pepe);
         al.add(juan);
 
+        pepe.annadirNotas(n1);
+        pepe.annadirNotas(n2);
+
+        Nota n3 = new Nota(miguel, entornos, 5);
+        Nota n4 = new Nota(pepe, programacion, 8);
+        Nota n5 = new Nota(pepe, entornos, 3);
+
+//        notas.add(n3);
+//        notas.add(n4);
+//        notas.add(n5);
         this.i = new Instituto(al, c, "camino", "la que sea", "69633245");
 
         llenar();
@@ -94,8 +117,12 @@ public class ModificarNotas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaAlumnos = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldNota = new javax.swing.JTextField();
         modificar = new javax.swing.JButton();
+        jTextFieldNota1 = new javax.swing.JTextField();
+        jTextFieldNota2 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaNotas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,93 +138,124 @@ public class ModificarNotas extends javax.swing.JFrame {
                 {null}
             },
             new String [] {
-                "Title 1"
+                "Nombre"
             }
         ));
         jScrollPane1.setViewportView(tablaAlumnos);
 
-        jTextField1.setText(" ");
-        jTextField1.setToolTipText("");
+        jTextFieldNota.setText(" ");
+        jTextFieldNota.setToolTipText("");
 
-        modificar.setText("Modificar nota");
+        modificar.setText("Buscar nota");
         modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modificarActionPerformed(evt);
             }
         });
 
+        jTextFieldNota1.setText(" ");
+        jTextFieldNota1.setToolTipText("");
+
+        jTextFieldNota2.setText(" ");
+        jTextFieldNota2.setToolTipText("");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(modificar)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(0, 39, Short.MAX_VALUE)
+                .addComponent(jTextFieldNota, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(jTextFieldNota2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                .addGap(38, 38, 38))
+                .addComponent(jTextFieldNota1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(78, 78, 78)
+                .addComponent(modificar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(modificar)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(modificar))
-                .addContainerGap(47, Short.MAX_VALUE))
+                    .addComponent(jTextFieldNota1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNota2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
+
+        tablaNotas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Primera", "Segunda", "Tercera", "FINAL"
+            }
+        ));
+        jScrollPane2.setViewportView(tablaNotas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(modulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(modulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(modulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGap(31, 31, 31)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void modulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modulosActionPerformed
-        // TODO add your handling code here:
-
         String itemSeleccionado = modulos.getSelectedItem().toString();//Recogemos el item seleccionado en el desplegable de ordenar
-        System.out.println(itemSeleccionado);
         tabla = new DefaultTableModel(i.getAlumnosAsignatura(itemSeleccionado), cabecera);
         tablaAlumnos.setModel(tabla);
 
-
     }//GEN-LAST:event_modulosActionPerformed
-
-
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
         // TODO add your handling code here:
 
-        
-        
-        
-        
-        
+        String itemSeleccionado = modulos.getSelectedItem().toString();
+        int alumnoSeleccionado = tablaAlumnos.getSelectedRow();
+        String nombreAlumno = i.getMombreAlumnosAsignatura(itemSeleccionado, alumnoSeleccionado);
+        System.out.println(nombreAlumno);
+        //i.recorrerArray();
+
+
     }//GEN-LAST:event_modificarActionPerformed
 
     /**
@@ -238,9 +296,13 @@ public class ModificarNotas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextFieldNota;
+    private javax.swing.JTextField jTextFieldNota1;
+    private javax.swing.JTextField jTextFieldNota2;
     private javax.swing.JButton modificar;
     private javax.swing.JComboBox<Object> modulos;
     private javax.swing.JTable tablaAlumnos;
+    private javax.swing.JTable tablaNotas;
     // End of variables declaration//GEN-END:variables
 }

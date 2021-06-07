@@ -50,7 +50,7 @@ public class jManejarUsuarios extends javax.swing.JDialog {
         ArrayList<Modulo> modulos = new ArrayList();
         ArrayList<Usuario> usuarios = new ArrayList();
         
-        m = new Modulo("programacion","1Daw",3,"DAW1");
+        m = new Modulo("programacion","1Daw",3);
         modulos.add(m);
       
         c = new Ciclo(modulos,"DAW1",1,76);

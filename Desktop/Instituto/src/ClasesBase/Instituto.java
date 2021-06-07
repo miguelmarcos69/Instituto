@@ -33,6 +33,7 @@ public class Instituto {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
+        System.out.println(usuarios);
     }
 
     public Instituto(String nombre, String direccion, String telefono) {
@@ -41,6 +42,8 @@ public class Instituto {
         this.direccion = direccion;
         this.telefono = telefono;
     }
+
+
 
     //metodos getters
     /*
@@ -71,11 +74,34 @@ public class Instituto {
                 if (a.tieneModulo(nombreAsignatura)) {
 
                     alumnos[contador++][0] = a.getNombre();
+
                 }
             }
         }
 
         return alumnos;
+    }
+
+    public String getMombreAlumnosAsignatura(String nom, int n) {
+        String al = null;
+        int contador = 0;
+
+        for (int i = 0; i < usuarios.size(); i++) {
+
+            if (usuarios.get(i) instanceof Alumno) {
+                Alumno a = (Alumno) usuarios.get(i);
+                if (a.tieneModulo(nom)) {
+                    if (contador == n) {
+                        al = a.getNombre();
+
+                    }
+                    contador++;
+
+                }
+            }
+        }
+
+        return al;
     }
 
     public String[][] mostrarUsuarios() {

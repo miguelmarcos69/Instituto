@@ -17,9 +17,9 @@ public class PruebasBaseDatos {
     public static void main(String args[]) {
     
         
-        Alumno a = new Alumno ("abel","pito","71951546K",2001,19);
+       // Alumno a = new Alumno ("abel","pito","71951546K",2001,19);
         
-        DaoInstituto.instancia().annadirAlumno(a,"camino");
+      //  DaoInstituto.instancia().annadirAlumno(a,"camino");
         
         Usuario b =DaoInstituto.instancia().cargarNombre("camino", "abel");
         
