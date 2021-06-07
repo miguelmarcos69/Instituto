@@ -99,7 +99,7 @@ public class Instituto {
 
     }
     
-    
+    /*
      public String[][] getAlumnos() {
      
         String [][] arrayAlumnos = new String[usuarios.size()][7];
@@ -118,7 +118,7 @@ public class Instituto {
             }
         }
         return ;
-    }
+    }*/
     
     
     
