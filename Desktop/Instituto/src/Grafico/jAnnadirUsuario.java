@@ -3,9 +3,12 @@ package Grafico;
 
 import ClasesBase.Ciclo;
 import ClasesBase.Instituto;
+import ClasesBase.Modulo;
 import Usuarios.Alumno;
+import Usuarios.Usuario;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -30,6 +33,37 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelDatosCoumnes.setVisible(false);
         jPanelProfesor.setVisible(false);
         jPanelAlumno.setVisible(false);
+        
+        
+        ArrayList<Usuario> al = new ArrayList<>();
+        ArrayList<Ciclo> c = new ArrayList<>();
+        ArrayList<Modulo> mod = new ArrayList();
+        ArrayList<Modulo> mod2 = new ArrayList();
+
+        Ciclo primero = new Ciclo(mod, "DAW", 2, 1);
+        Ciclo segundo = new Ciclo(mod2, "DAW", 2, 2);
+
+        Modulo programacion = new Modulo("Programacion", "12", 2, primero.getNombre());
+        Modulo entornos = new Modulo("entornos", "12", 2, primero.getNombre());
+        Modulo fol = new Modulo("fol", "12", 2, primero.getNombre());
+        mod.add(programacion);
+        mod.add(entornos);
+        mod2.add(fol);
+
+        c.add(primero);
+        c.add(segundo);
+
+        Alumno lola = new Alumno("Lola", "lola", "1254", new Date(), primero);
+        Alumno miguel = new Alumno("miguel", "miguel", "1254", new Date(), primero);
+        Alumno pepe = new Alumno("pepe", "pepe", "1254", new Date(), primero);
+        Alumno juan = new Alumno("juan", "juan", "1254", new Date(), segundo);
+
+        al.add(lola);
+        al.add(miguel);
+        al.add(pepe);
+        al.add(juan);
+
+        this.i = new Instituto(al, c, "camino", "la que sea", "69633245");
     }
 
    
@@ -70,7 +104,6 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         if (jPasswordFieldContra.getText().equals(jPasswordFieldRepetirContra.getText())){
             contrasennaValida = true;
         } else {
-            JOptionPane.showMessageDialog (getContentPane (), "Las contraseñas no coinciden");
             jPasswordFieldContra.setText("");
             jPasswordFieldRepetirContra.setText("");
             contrasennaValida = false;
@@ -800,6 +833,9 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 ContrasennaValida();
                 if (contrasennaValida == true){
                     annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC) );
+                } else {
+                    JOptionPane.showMessageDialog (getContentPane (), "Las contraseñas no coinciden",
+                "Error",JOptionPane.ERROR_MESSAGE);
                 }
             } else{
                 JOptionPane.showMessageDialog (getContentPane (), "Debe seleccionar una fila de la tabla",
@@ -807,10 +843,16 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             } 
             
             
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog (getContentPane (), "Las contraseñas no coinciden",
+        }catch (NullPointerException npe){
+        
+            JOptionPane.showMessageDialog (getContentPane (), "Porfavor selecciona una fila con datos",
             "Error",JOptionPane.ERROR_MESSAGE);
-        }
+        } 
+        
+        /*catch (Exception e) {
+            JOptionPane.showMessageDialog (getContentPane (), "Error desconocido",
+            "Error",JOptionPane.ERROR_MESSAGE);
+        }*/
     }//GEN-LAST:event_jButtonInscribirActionPerformed
 
 
