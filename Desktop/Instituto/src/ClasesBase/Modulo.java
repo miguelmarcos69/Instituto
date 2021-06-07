@@ -5,6 +5,7 @@
  */
 package ClasesBase;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 /**
@@ -17,14 +18,12 @@ public class Modulo {
     private String nombre;
     private String codigo_aula;
     private int horas_semana;
-    private String nombre_ciclo;
 
     //metodo constuctor
-    public Modulo(String nombre, String codigo_aula, int horas_semana, String nombre_ciclo) {
+    public Modulo(String nombre, String codigo_aula, int horas_semana) {
         this.nombre = nombre;
         this.codigo_aula = codigo_aula;
         this.horas_semana = horas_semana;
-        this.nombre_ciclo = nombre_ciclo;
     }
 
     //metodos getters
@@ -38,10 +37,6 @@ public class Modulo {
 
     public int getHoras_semana() {
         return horas_semana;
-    }
-
-    public String getNombre_ciclo() {
-        return nombre_ciclo;
     }
 
     public String toString() {

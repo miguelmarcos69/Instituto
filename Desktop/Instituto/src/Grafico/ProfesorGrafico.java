@@ -12,6 +12,7 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JPanel;
 
 /**
@@ -21,6 +22,7 @@ import javax.swing.JPanel;
 public class ProfesorGrafico extends javax.swing.JFrame {
 
     Profesor prof;
+    Nota n;
 
     /**
      * Creates new form Alumno
@@ -31,53 +33,70 @@ public class ProfesorGrafico extends javax.swing.JFrame {
         this.setBackground(Color.black);
         this.setForeground(Color.white);
     }
-    
-      class jPanelGardient extends JPanel{
-        protected void paintComponent(Graphics g){
+
+    class jPanelGardient extends JPanel {
+
+        protected void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
             int width = getWidth();
             int height = getHeight();
-            
+
             Color color1 = new Color(221, 0, 255);
-             Color color2 = new Color(255, 162, 0);
-             GradientPaint gp = new GradientPaint (0,0,color1,180,height,color2);
-             g2d.setPaint(gp);
+            Color color2 = new Color(255, 162, 0);
+            GradientPaint gp = new GradientPaint(0, 0, color1, 180, height, color2);
+            g2d.setPaint(gp);
             g2d.fillRect(0, 0, width, height);
         }
     }
-    
-    Alumno a;
 
     private ProfesorGrafico() {
         initComponents();
         ArrayList<Alumno> al = new ArrayList<>();
         ArrayList<Ciclo> c = new ArrayList<>();
-        ArrayList<Modulo> mod = new ArrayList();
-        ArrayList<Modulo> mod2 = new ArrayList();
+        ArrayList<Modulo> mod = new ArrayList<>();
+        ArrayList<Modulo> mod2 = new ArrayList<>();
+        ArrayList<Nota> notas1 = new ArrayList<>();
 
-        Ciclo primero = new Ciclo(mod, "DAW", 2,1);
-        Ciclo segundo = new Ciclo(mod2, "DAW", 2,2);
+        Modulo programacion = new Modulo("Programacion", "12", 2);
+        Modulo entornos = new Modulo("entornos", "12", 2);
+        Modulo fol = new Modulo("fol", "12", 2);
+
+        Ciclo primero = new Ciclo(mod, "DAW", 2, 1);
+        Ciclo segundo = new Ciclo(mod2, "DAW", 2, 2);
+
+        mod.add(programacion);
+        mod.add(entornos);
+        mod2.add(fol);
+
         c.add(primero);
         c.add(segundo);
+        Nota n1 = new Nota(entornos, 10);
+        Nota n2 = new Nota(programacion, 2);
 
-        Alumno lola = new Alumno("Lola", "lola", "1254", 2, 3, primero);
-        Alumno miguel = new Alumno("miguel", "miguel", "1254", 2, 3, segundo);
-        Alumno pepe = new Alumno("pepe", "pepe", "1254", 2, 3, primero);
-        Alumno juan = new Alumno("juan", "juan", "1254", 2, 3, segundo);
+//        notas1.add(n1);
+//        notas1.add(n2);
+        //a.annadirNotas(n2);
+        Alumno lola = new Alumno("Lola", "lola", "1254", new Date(), primero);
+        Alumno miguel = new Alumno("miguel", "miguel", "1254", new Date(), primero);
+        Alumno pepe = new Alumno("pepe", "pepe", "1254", new Date(), primero);
+        Alumno juan = new Alumno("juan", "juan", "1254", new Date(), segundo);
 
         al.add(lola);
         al.add(miguel);
         al.add(pepe);
         al.add(juan);
-  
-        Modulo programacion = new Modulo("Programacion", "12", 2, primero.getNombre());
-        Modulo entornos = new Modulo("entornos", "12", 2, primero.getNombre());
-        Modulo fol = new Modulo("fol", "12", 2, primero.getNombre());
-        mod.add(programacion);
-        mod.add(entornos);
-        mod2.add(fol);
 
-        this.prof = new Profesor("miguel", "miguel", "71972414D", 17091999, 21, mod, c, al);
+        pepe.annadirNotas(n1);
+        pepe.annadirNotas(n2);
+
+        Nota n3 = new Nota(miguel, entornos, 5);
+        Nota n4 = new Nota(pepe, programacion, 8);
+        Nota n5 = new Nota(pepe, entornos, 3);
+
+//        notas.add(n3);
+//        notas.add(n4);
+//        notas.add(n5);
+        this.prof = new Profesor("miguel", "miguel", "71972414D", new Date(), mod, c, al);
 
     }
 
