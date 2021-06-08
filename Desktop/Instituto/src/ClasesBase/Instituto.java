@@ -217,10 +217,10 @@ public class Instituto {
         for (int i = 0; i < ciclos.get(i).getSizeModulos(); i++) {
 
             if (ciclos.get(i).getNombre().equals(nombre) && ciclos.get(i).getAnno() == ano) {
-
+                tamanno = tamanno + ciclos.get(i).getSizeModulos();
                 s = ciclos.get(i).getModulos();
             }
-            tamanno = tamanno + ciclos.get(i).getSizeModulos();
+            
         }
         return s;
     }

@@ -893,19 +893,12 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     private void jRadioButtonTodasAsigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonTodasAsigActionPerformed
         
         
-        
-        try{
-            String nombreC = jTableVerCicloP.getValueAt(jTableVerCicloP.getSelectedRow(), 0).toString();
-            int annoC = Integer.parseInt(jTableVerCicloP.getValueAt(jTableVerCicloP.getSelectedRow(), 1).toString());
+       
             tabla = new DefaultTableModel(i.getModulosTot(),cabeceraModulo);
             jTableElegirAsignaturas .setModel(tabla);
             jPanelMostrarAsig.setVisible(true);
             jPanelSeleccionCiclo.setVisible(false);
-            
-        }catch (Exception e){
-            JOptionPane.showMessageDialog (getContentPane (), "No hay modulos en este centro",
-            "Error",JOptionPane.ERROR_MESSAGE);
-        }
+
     }//GEN-LAST:event_jRadioButtonTodasAsigActionPerformed
 
     
