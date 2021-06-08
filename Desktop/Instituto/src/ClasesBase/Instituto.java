@@ -20,20 +20,19 @@ public class Instituto {
      * @param args the command line arguments
      */
     //atributos de la clase
-    private ArrayList<Usuario> usuarios;
+    private ArrayList<Alumno> alumnos;
     private ArrayList<Ciclo> ciclos;
     private String nombre;
     private String direccion;
     //private long telefono;
     private String telefono; // para el manejo de datos se usa String
 
-    public Instituto(ArrayList<Usuario> Usuarios, ArrayList<Ciclo> ciclos, String nombre, String direccion, String telefono) {
-        this.usuarios = Usuarios;
+    public Instituto(ArrayList<Alumno> Alumnos, ArrayList<Ciclo> ciclos, String nombre, String direccion, String telefono) {
+        this.alumnos = Alumnos;
         this.ciclos = ciclos;
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
-        System.out.println(usuarios);
     }
 
     public Instituto(String nombre, String direccion, String telefono) {
@@ -42,8 +41,6 @@ public class Instituto {
         this.direccion = direccion;
         this.telefono = telefono;
     }
-
-
 
     //metodos getters
     /*
@@ -64,31 +61,47 @@ public class Instituto {
 
     public String[][] getAlumnosAsignatura(String nombreAsignatura) {
 
-        String[][] alumnos = new String[usuarios.size()][2];
+        String[][] alum = new String[alumnos.size()][6];
         int contador = 0;
 
-        for (int i = 0; i < usuarios.size(); i++) {
+        for (int i = 0; i < alumnos.size(); i++) {
 
-            if (usuarios.get(i) instanceof Alumno) {
-                Alumno a = (Alumno) usuarios.get(i);
+            if (alumnos.get(i) instanceof Alumno) {
+                Alumno a = (Alumno) alumnos.get(i);
                 if (a.tieneModulo(nombreAsignatura)) {
-                    alumnos[contador++][0] = a.getNombre();
+                    alum[contador++][0] = a.getNombre();
 
                 }
             }
         }
 
-        return alumnos;
+        return alum;
+    }
+
+    public String[][] getDos(String nomAlumn, String nombreMod) {
+        String[][] alum = new String[4][alumnos.size()];
+        for (int i = 0; i < alumnos.size(); i++) {
+
+            if (alumnos.get(i).getNombre().equals(nomAlumn)) {
+
+                alum = alumnos.get(i).getANotas(nombreMod);
+            } else {
+
+            }
+
+        }
+        return alum;
     }
 
     public String getMombreAlumnosAsignatura(String nom, int n) {
+
         String al = null;
         int contador = 0;
 
-        for (int i = 0; i < usuarios.size(); i++) {
+        for (int i = 0; i < alumnos.size(); i++) {
 
-            if (usuarios.get(i) instanceof Alumno) {
-                Alumno a = (Alumno) usuarios.get(i);
+            if (alumnos.get(i) instanceof Alumno) {
+                Alumno a = (Alumno) alumnos.get(i);
                 if (a.tieneModulo(nom)) {
                     if (contador == n) {
                         al = a.getNombre();
@@ -103,10 +116,10 @@ public class Instituto {
         return al;
     }
 
-    public String[][] mostrarUsuarios() {
-        String[][] arrayUsuarios = new String[usuarios.size()][6];
-        for (int i = 0; i < usuarios.size(); i++) {
-            Usuario u = usuarios.get(i);
+     public String[][] mostrarUsuarios() {
+        String[][] arrayUsuarios = new String[alumnos.size()][6];
+        for (int i = 0; i < alumnos.size(); i++) {
+            Usuario u = alumnos.get(i);
             if (u instanceof Profesor) {
                 arrayUsuarios[i][0] = "Profesor";
 
@@ -121,7 +134,7 @@ public class Instituto {
         return arrayUsuarios;
 
     }
-    
+
 //    
 //     public String[][] getAlumnos() {
 //     
@@ -143,14 +156,6 @@ public class Instituto {
 //        return ;
 //    }
 //    
-    
-    
-    
-    
-    
-    
-    
-    
     //Arralist para obtner todos los ciclos
     public String[][] getCicloTot() {
 

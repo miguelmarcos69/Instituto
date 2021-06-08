@@ -43,23 +43,23 @@ public class jManejarUsuarios extends javax.swing.JDialog {
     public jManejarUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        
-       
-        ArrayList<Modulo> modulos = new ArrayList();
-        m = new Modulo("programacion","1Daw",3,"DAW1");
-        modulos.add(m);
-        ArrayList<Ciclo> ciclos = new ArrayList();
-        c = new Ciclo(modulos,"DAW1",1,76);
-          ciclos.add(c);
-         ArrayList<Alumno> alumnos = new ArrayList();  
-        ArrayList<Usuario> usuarios = new ArrayList();
-        u = new Alumno("daniel","contra","71177171E",new Date(),c);
-        usuarios.add(u);
-        alumnos.add(u);
-        
-        p = new Profesor("gero","estilton","101010F",new Date(), modulos,ciclos);
-        i = new Instituto(usuarios,ciclos,"camino","plaza","777777");
+//        
+//        
+//       
+//        ArrayList<Modulo> modulos = new ArrayList();
+//        m = new Modulo("programacion","1Daw",3,"DAW1");
+//        modulos.add(m);
+//        ArrayList<Ciclo> ciclos = new ArrayList();
+//        c = new Ciclo(modulos,"DAW1",1,76);
+//          ciclos.add(c);
+//         ArrayList<Alumno> alumnos = new ArrayList();  
+//        ArrayList<Usuario> usuarios = new ArrayList();
+//        u = new Alumno("daniel","contra","71177171E",new Date(),c);
+//        usuarios.add(u);
+//        alumnos.add(u);
+//        
+//        p = new Profesor("gero","estilton","101010F",new Date(), modulos,ciclos);
+//        i = new Instituto(usuarios,ciclos,"camino","plaza","777777");
        
     }
     

@@ -504,6 +504,9 @@
                           <Properties>
                             <Property name="text" type="java.lang.String" value="CONSULTAR"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonConsultarCicloPActionPerformed"/>
+                          </Events>
                         </Component>
                         <Component class="javax.swing.JRadioButton" name="jRadioButtonVerTodosP">
                           <Properties>

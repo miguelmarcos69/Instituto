@@ -51,12 +51,6 @@ public class Ciclo {
     }
 
     
-    public void recorrerArray(){
-        for (Modulo Asignatura : Asignaturas) {
-            System.out.println(Asignatura);
-            
-        }
-    }
 
 
     public boolean existeModulo(String nombre) {

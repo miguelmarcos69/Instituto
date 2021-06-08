@@ -35,7 +35,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelAlumno.setVisible(false);
         
         
-        ArrayList<Usuario> al = new ArrayList<>();
+        ArrayList<Alumno> al = new ArrayList<>();
         ArrayList<Ciclo> c = new ArrayList<>();
         ArrayList<Modulo> mod = new ArrayList();
         ArrayList<Modulo> mod2 = new ArrayList();
@@ -43,12 +43,12 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         Ciclo primero = new Ciclo(mod, "DAW", 2, 1);
         Ciclo segundo = new Ciclo(mod2, "DAW", 2, 2);
 
-        Modulo programacion = new Modulo("Programacion", "12", 2, primero.getNombre());
-        Modulo entornos = new Modulo("entornos", "12", 2, primero.getNombre());
-        Modulo fol = new Modulo("fol", "12", 2, primero.getNombre());
-        mod.add(programacion);
-        mod.add(entornos);
-        mod2.add(fol);
+//        Modulo programacion = new Modulo("Programacion", "12", 2, primero.getNombre());
+//        Modulo entornos = new Modulo("entornos", "12", 2, primero.getNombre());
+//        Modulo fol = new Modulo("fol", "12", 2, primero.getNombre());
+//        mod.add(programacion);
+//        mod.add(entornos);
+//        mod2.add(fol);
 
         c.add(primero);
         c.add(segundo);
@@ -335,6 +335,11 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jLabel12.setText("¿Qué ciclos desa ver?");
 
         jButtonConsultarCicloP.setText("CONSULTAR");
+        jButtonConsultarCicloP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConsultarCicloPActionPerformed(evt);
+            }
+        });
 
         buttonGroupVerAnno.add(jRadioButtonVerTodosP);
         jRadioButtonVerTodosP.setText("Todos");
@@ -854,6 +859,10 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             "Error",JOptionPane.ERROR_MESSAGE);
         }*/
     }//GEN-LAST:event_jButtonInscribirActionPerformed
+
+    private void jButtonConsultarCicloPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarCicloPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonConsultarCicloPActionPerformed
 
 
     

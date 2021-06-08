@@ -18,7 +18,6 @@ public class Profesor extends Usuario {
 
     private ArrayList<Modulo> asignaturasDadas;
     private ArrayList<Ciclo> ci;
-    //private ArrayList<Alumno> alu;
 
     public Profesor(String nombre, String contrasenna, String DNI, Date fecha_nacimiento) {
         super(nombre, contrasenna, DNI, fecha_nacimiento);

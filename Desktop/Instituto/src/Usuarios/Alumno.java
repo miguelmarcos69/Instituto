@@ -23,18 +23,11 @@ public class Alumno extends Usuario {
     private Ciclo ciclo;
     private ArrayList<Nota> notas;
 
-    public Alumno(String nombre, String contrasenna, String DNI, Date fecha_nacimiento, Ciclo ciclo) {
+    public Alumno(String nombre, String contrasenna, String DNI, Date fecha_nacimiento,
+            Ciclo ciclo) {
         super(nombre, contrasenna, DNI, fecha_nacimiento);
         this.ciclo = ciclo;
         notas = new ArrayList();
-    }
-
-    public Alumno(String nombre, String contrasenna, String DNI,
-            Date fecha_nacimiento, Ciclo ciclo, ArrayList<Nota> not) {
-        super(nombre, contrasenna, DNI, fecha_nacimiento);
-        //this.notas = not;
-        this.ciclo = ciclo;
-       // System.out.println(notas.toString());
     }
 
     //constructor se utuliza al iniciar sesion
@@ -50,7 +43,7 @@ public class Alumno extends Usuario {
     //Este metodo esta hecho para insertar las notas de un alumno en una tabla 
     public String[][] getArrayNotas() {
 
-        String[][] retorno = new String[notas.size()][2];
+        String[][] retorno = new String[notas.size()][10];
 
         for (int i = 0; i < notas.size(); i++) {
 
@@ -61,17 +54,17 @@ public class Alumno extends Usuario {
         return retorno;
     }
 
-    public String[][] getNotas(String nom) {
-        System.out.println("Nombre Alumno:  " + nom);
-        String[][] retorno = new String[notas.size()][2];
+    public String[][] getANotas(String nombreMod) {
+        String[][] retorno = new String[1][notas.size()];
+        int contador = 0;
         for (int i = 0; i < notas.size(); i++) {
-            Nota n = (Nota) notas.get(i);
-            if (n.getAlumno().getNombre().equals(nom)) {
-                System.out.println("s");
-                retorno[i][1] = String.valueOf(n.getNota());
+            if (notas.get(i).getModulo().getNombre().equals(nombreMod)) {
+                retorno[0][contador++] = String.valueOf(notas.get(i).getNota());
 
             }
+
         }
+
         return retorno;
     }
 
