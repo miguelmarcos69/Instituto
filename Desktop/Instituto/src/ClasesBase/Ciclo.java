@@ -34,9 +34,6 @@ public class Ciclo {
     }
 
     //metodos getters
-    public ArrayList<Modulo> getAsignaturas() {
-        return Asignaturas;
-    }
 
     public int getAnno() {
         return anno;
@@ -86,6 +83,11 @@ public class Ciclo {
         }
 
         return elemento;
+    }
+    
+    public void anadirModulo (Modulo e){
+    
+        Asignaturas.add(e);
     }
 
 }
