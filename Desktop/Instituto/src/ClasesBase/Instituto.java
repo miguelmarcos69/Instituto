@@ -194,6 +194,7 @@ public class Instituto {
         return arrayCiclos;
     }
 
+    //Lo mismo pro filttrando por nombre y año
     public Ciclo getCicloNombre(String nombre, int ano) {
 
         Ciclo buscado = null;
@@ -208,5 +209,32 @@ public class Instituto {
 
         return buscado;
     }
+    
+    //Metodo para ir al ciclo seleccionado y llmar al metodo de obtener modulos
+    public String[][] getModulosCic(String nombre, int ano) {
+        int tamanno = 0;
+        String[][] s = new String[tamanno][10];
+        for (int i = 0; i < ciclos.get(i).getSizeModulos(); i++) {
+
+            if (ciclos.get(i).getNombre().equals(nombre) && ciclos.get(i).getAnno() == ano) {
+
+                s = ciclos.get(i).getModulos();
+            }
+            tamanno = tamanno + ciclos.get(i).getSizeModulos();
+        }
+        return s;
+    }
+    
+    //Metodo para llamar a todos los modulos y obtener sus asignaturas
+    public String[][] getModulosTot() {
+        int tamanno = 0;
+        String[][] s = new String[tamanno][10];
+        for (int i = 0; i < ciclos.get(i).getSizeModulos(); i++) {
+            s = ciclos.get(i).getModulos();
+            tamanno = tamanno + ciclos.get(i).getSizeModulos();
+        }
+        return s;
+    }
+
 
 }

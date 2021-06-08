@@ -42,5 +42,14 @@ public class Modulo {
     public String toString() {
         return nombre;
     }
+    
+    //Obtener arraylist para mostrar en tabla(todos los ciclos)
+    public String[] toArrayString() {
+        String[] elemento = new String[2];
+        elemento[0] = getNombre();
+        elemento[1] = getHoras_semana() + "";
+
+        return elemento;
+    }
 
 }
