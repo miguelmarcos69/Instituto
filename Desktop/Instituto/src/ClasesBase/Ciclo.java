@@ -94,7 +94,6 @@ public class Ciclo {
     
     //Arraylist para obtenr todos los modulos
     public String[][] getModulos() {
-
         String[][] arrayAsignaturas = new String[Asignaturas.size()][10];
         for (int i = 0; i < Asignaturas.size(); i++) {
 
@@ -103,6 +102,17 @@ public class Ciclo {
         }
 
         return arrayAsignaturas;
+    }
+    
+    public ArrayList<Modulo> concatenarModulos (ArrayList<Modulo> a){
+        
+        for (int i =0 ;i< this.Asignaturas.size();i++){
+        
+            a.add(this.Asignaturas.get(i));
+        
+        }
+        
+        return a; 
     }
     
     

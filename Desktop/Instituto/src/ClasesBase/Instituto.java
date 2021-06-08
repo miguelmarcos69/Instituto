@@ -228,21 +228,22 @@ public class Instituto {
     //Metodo para llamar a todos los modulos y obtener sus asignaturas
     public String[][] getModulosTot() {
         
-        int tamanno =0;
+        ArrayList<Modulo> listaModulos = new ArrayList();
+        
         for (int i =0;i<ciclos.size();i++){
         
-            tamanno = tamanno+ciclos.get(i).getSizeModulos();
+            
+            listaModulos=ciclos.get(i).concatenarModulos(listaModulos);
         }
-        String[][] s = new String[tamanno][10];
         
-        for (int i = 0; i < tamanno; i=i+ciclos.get(i).getSizeModulos()) {
-            
-            //Este metodo nos permite concatenar verticalmente 2 arrays 
-            
-            System.arraycopy(ciclos.get(i).getModulos(), 0, s, i, ciclos.get(i).getSizeModulos());
-            
+        String [][] arrayModulos = new String [listaModulos.size()][2];
+        
+        for(int i=0;i<listaModulos.size();i++){
+        
+            arrayModulos[i]= listaModulos.get(i).toArrayString();
         }
-        return s;
+        
+        return arrayModulos;
     }
 
 

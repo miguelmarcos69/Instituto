@@ -69,7 +69,7 @@ public class DaoInstituto {
             );
 //            System.out.println(rs.getString(1));
             if (rs.next()) {
-                i = new Instituto(rs.getString(2), rs.getString(3),rs.getString(4));
+               // i = new Instituto(rs.getString(2), rs.getString(3),rs.getString(4));
                 if (rs.getString(1).equals("adm")) {
                     System.out.println("Es un administrador");
                     u = new Administrador(rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5));
