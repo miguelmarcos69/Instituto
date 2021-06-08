@@ -24,7 +24,6 @@ public class Instituto {
     private ArrayList<Ciclo> ciclos;
     private String nombre;
     private String direccion;
-    //private long telefono;
     private String telefono; // para el manejo de datos se usa String
 
     public Instituto(ArrayList<Usuario> usuario, ArrayList<Ciclo> ciclos, String nombre, String direccion, String telefono) {
@@ -40,6 +39,8 @@ public class Instituto {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
+        this.usuarios=new ArrayList();
+        this.ciclos=new ArrayList();
     }
 
     //metodos getters
@@ -244,6 +245,16 @@ public class Instituto {
         }
         
         return arrayModulos;
+    }
+    
+    public void annadirUsuario (Usuario a){
+    
+        usuarios.add(a);
+    }
+    
+    public void annadirCiclo (Ciclo a){
+    
+        ciclos.add(a);
     }
 
 

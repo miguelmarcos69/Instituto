@@ -28,9 +28,11 @@ public class Ciclo {
         this.plazas = plazas;
     }
 
-    public Ciclo(String nombre, int plazas) {
+    public Ciclo(String nombre, int plazas,int ano) {
         this.nombre = nombre;
+        this.Asignaturas=new ArrayList();
         this.plazas = plazas;
+        this.anno=ano;
     }
     
     //metodos getters

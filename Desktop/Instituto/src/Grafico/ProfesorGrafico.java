@@ -22,16 +22,17 @@ import javax.swing.JPanel;
 public class ProfesorGrafico extends javax.swing.JFrame {
 
     Profesor prof;
-    Nota n;
+    Instituto insti;
 
     /**
      * Creates new form Alumno
      */
-    public ProfesorGrafico(java.awt.Frame parent, boolean modal, Profesor prof) {
+    public ProfesorGrafico(java.awt.Frame parent, boolean modal, Profesor prof,Instituto insti) {
         initComponents();
         this.prof = prof;
         this.setBackground(Color.black);
         this.setForeground(Color.white);
+        this.insti=insti;
     }
 
     class jPanelGardient extends JPanel {

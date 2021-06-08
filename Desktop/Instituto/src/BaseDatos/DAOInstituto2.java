@@ -15,6 +15,8 @@ import Usuarios.Profesor;
 import Usuarios.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,7 +38,7 @@ public class DAOInstituto2 {
 
         System.out.println("Dao");
 
-        int tipo =0;
+        int tipo = 0;
         try {
             ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery(
                     //"select * from instituto"
@@ -46,13 +48,13 @@ public class DAOInstituto2 {
             if (rs.next()) {
                 if (rs.getString(1).equals("adm")) {
                     System.out.println("Es un Administrador");
-                    tipo=1;
+                    tipo = 1;
                 } else if (rs.getString(1).equals("alu")) {
                     System.out.println("Es un Alumno");
-                    tipo=1;
+                    tipo = 1;
                 } else if (rs.getString(1).equals("pro")) {
                     System.out.println("Es un profesor");
-                   tipo=2;
+                    tipo = 2;
                 }
                 System.out.println("******************");
             }
@@ -82,7 +84,7 @@ public class DAOInstituto2 {
 
                 rs = ConexionDefault.instancia().getStatement().executeQuery("select * from ciclo where nombre  = " + nombreCiclo);
                 if (rs.next()) {
-                    ciclo = new Ciclo(rs.getString(1), rs.getInt(2));
+                    ciclo = new Ciclo(rs.getString(1), rs.getInt(2),rs.getInt(3));
 
                     rs = ConexionDefault.instancia().getStatement().executeQuery("select * from Modulo where ciclo  = " + nombreCiclo);
 
@@ -115,9 +117,6 @@ public class DAOInstituto2 {
     public Profesor obtenerProfesor(String nombre, String nombreInstituto) {
 
         Profesor p = null;
-
-        String nombreCiclo;
-        Ciclo ciclo;
         try {
             ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery(
                     //"select * from instituto"
@@ -125,7 +124,6 @@ public class DAOInstituto2 {
             );
 
             if (rs.next()) {
-                nombreCiclo = rs.getString(5);
                 p = new Profesor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
 
                 if (rs.next()) {
@@ -171,5 +169,58 @@ public class DAOInstituto2 {
 
         return a;
 
+    }
+
+    public Instituto obtenerInstituto(String nombre) {
+        Instituto i = null;
+        Ciclo c = null;
+
+        try {
+            ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select * from instituto where nombre= '" + nombre+"'");
+
+            if (rs.next()) {
+
+                i = new Instituto(rs.getString(1), rs.getString(2), rs.getString(3));
+                
+                rs=ConexionDefault.instancia().getStatement().executeQuery("select * from ciclo where instituto= '" + nombre+"'");
+                
+                while (rs.next()){
+                
+                    c= new Ciclo(rs.getString(1),rs.getInt(2),rs.getInt(3));
+                    
+                    rs=ConexionDefault.instancia().getStatement().executeQuery("select * from modulo where ciclo ='" + c.getNombre()+"'");
+                    
+                    while (rs.next()){
+                    
+                        c.anadirModulo(new Modulo (rs.getString(1),rs.getString(2),rs.getInt(3)));
+                    }
+                }
+                
+                rs = ConexionDefault.instancia().getStatement().executeQuery("select * from usuario where nombreInsti = '" + i.getNombre()+"'");
+                
+                while (rs.next()){
+                    
+                    Usuario a=null;
+                
+                    switch (rs.getString(5)){
+                    
+                        case "alu" :
+                            a = obtenerAlumno(rs.getString(1),nombre);
+                            break;
+                        case "prof":
+                            a =obtenerProfesor (rs.getString(1),nombre);
+                            break;
+                        case "adm":
+                            a = obtenerAdministrador (rs.getString(nombre),nombre);
+                    }
+                    
+                    i.annadirUsuario(a);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return i;
     }
 }

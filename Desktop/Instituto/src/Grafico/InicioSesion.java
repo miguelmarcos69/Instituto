@@ -198,6 +198,8 @@ public class InicioSesion extends javax.swing.JFrame {
         String contra = jPConstrasena.getText();
         ConexionDefault.crearConexion();
         int tipo = DAOInstituto2.instancia().obtenerTipoUsuario(nombre, nombreInsti);
+        
+        i=DAOInstituto2.instancia().obtenerInstituto(nombreInsti);
 
         switch (tipo) {
 
@@ -228,10 +230,9 @@ public class InicioSesion extends javax.swing.JFrame {
             case 3:
                 Profesor prof =  DAOInstituto2.instancia().obtenerProfesor(nombre, nombreInsti);
                 if (prof.getContrasenna().equals(contra)){
-                    //ProfesorGrafico pr = new ProfesorGrafico(null, true, prof, this);
+                    ProfesorGrafico pr = new ProfesorGrafico(null, true, prof, i);
                     this.setVisible(false);
-                    //pr.mostrar();
-                    //pr.setVisible(true);
+                    pr.setVisible(true);
                 }
                 
                 break;
