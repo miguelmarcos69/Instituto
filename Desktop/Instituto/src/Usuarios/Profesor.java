@@ -17,8 +17,7 @@ import java.util.Date;
 public class Profesor extends Usuario {
 
     private ArrayList<Modulo> asignaturasDadas;
-    private ArrayList<Ciclo> ci;
-
+    
     public Profesor(String nombre, String contrasenna, String DNI, Date fecha_nacimiento) {
         super(nombre, contrasenna, DNI, fecha_nacimiento);
         asignaturasDadas = new ArrayList();
@@ -27,16 +26,17 @@ public class Profesor extends Usuario {
     public Profesor(String nombre, String contrasenna, String DNI, Date fecha_nacimiento, ArrayList<Modulo> mod, ArrayList<Ciclo> ciclo){// ArrayList<Alumno> alumno) {
         super(nombre, contrasenna, DNI, fecha_nacimiento);
         asignaturasDadas = mod;
-        ci = ciclo;
       
     }
 
-    public ArrayList<Ciclo> getCi() {
-        return ci;
-    }
 
     public ArrayList<Modulo> getAsignaturasDadas() {
         return asignaturasDadas;
+    }
+    
+    public void annadirModulo (Modulo a){
+    
+        asignaturasDadas.add(a);
     }
 /*
     public ArrayList<Alumno> getAlu() {

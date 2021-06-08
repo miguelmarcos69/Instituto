@@ -36,7 +36,7 @@ public class DaoInstituto {
 
             ConexionDefault.crearConexion();
             ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('" + a.getNombre() + "','" + a.getContrasenna() + "','" + a.getDNI() + "'," + a.getFecha_nacimiento()
-                    + "," + a.getEdad() + ",'alu' , ' " + nombreInsituto + "')");
+                     + ",'alu' , ' " + nombreInsituto + "')");
             //ConexionBD.instancia().getStatement().execute("INSERT INTO usuario VALUES ('" + a.getNombre() + "','" + a.getContrasenna() +"','"+a.getDNI() + "'," + a.getFecha_nacimiento() 
             //        + "," +a.getEdad() + ",'alumno' , ' " + nombreInsituto + "'");
         } catch (SQLException ex) {
@@ -50,7 +50,7 @@ public class DaoInstituto {
 
             ConexionDefault.crearConexion();
             ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('" + a.getNombre() + "','" + a.getContrasenna() + "','" + a.getDNI() + "'," + a.getFecha_nacimiento()
-                    + "," + a.getEdad() + ",'pro' , ' " + nombreInsituto + "')");
+                    + ",'pro' , ' " + nombreInsituto + "')");
             //ConexionBD.instancia().getStatement().execute("INSERT INTO usuario VALUES ('" + a.getNombre() + "','" + a.getContrasenna() +"','"+a.getDNI() + "'," + a.getFecha_nacimiento() 
             //        + "," +a.getEdad() + ",'alumno' , ' " + nombreInsituto + "'");
         } catch (SQLException ex) {
@@ -65,21 +65,22 @@ public class DaoInstituto {
         try {
             ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery(
                     //"select * from instituto"
-                    "select tipo,nombre, contra, DNI, fechaNac, edad,nombreInsti from usuario where nombre= '" + nombre + "' and nombreInsti='" + nombreInstituto + "'"
+                    "select tipo,nombre, contra, DNI, fechaNac,nombreInsti from usuario where nombre= '" + nombre + "' and nombreInsti='" + nombreInstituto + "'"
             );
 //            System.out.println(rs.getString(1));
             if (rs.next()) {
-                //i = new Instituto(rs.getString(2), rs.getString(3),rs.getString(4));
+                i = new Instituto(rs.getString(2), rs.getString(3),rs.getString(4));
                 if (rs.getString(1).equals("adm")) {
                     System.out.println("Es un administrador");
-
-                  //  u = new Administrador(String.valueOf(rs.getString(2)), String.valueOf(rs.getString(3)), String.valueOf(rs.getString(4)), rs.getInt(5), rs.getInt(6), String.valueOf(rs.getString(1)), String.valueOf(rs.getString(7)));
+                    u = new Administrador(rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5));
                 } else if (rs.getString(1).equals("alu")) {
                     System.out.println("Es un Alumno");
-                    //u = new Alumno(String.valueOf(rs.getString(2)), String.valueOf(rs.getString(3)), String.valueOf(rs.getString(4)), rs.getInt(5), rs.getInt(6));
+                    u = new Alumno(rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5));
+                    
+                    rs =ConexionDefault.instancia().getStatement().executeQuery("");
                 } else if (rs.getString(1).equals("pro")) {
                     System.out.println("Es un profesor");
-                   // u = new Profesor(String.valueOf(rs.getString(2)), String.valueOf(rs.getString(3)), String.valueOf(rs.getString(4)), rs.getInt(5), rs.getInt(6));
+                   u = new Profesor(rs.getString(2),rs.getString(3),rs.getString(4),rs.getDate(5));
                 }
                 System.out.println("******************");
             }

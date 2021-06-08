@@ -19,7 +19,6 @@ public abstract class Usuario {
     String nombre;
     private String DNI;
     private Date fecha_nacimiento;
-    private int edad;
     String contrasenna;
     
 
@@ -48,14 +47,6 @@ public abstract class Usuario {
 
     public Date getFecha_nacimientoNumerico() {
         return fecha_nacimiento;
-    }
-
-    public String getEdad() {
-        return String.valueOf(edad);
-    }
-
-    public int getEdadNumerico() {
-        return edad;
     }
 
     public String getContrasenna() {

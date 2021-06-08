@@ -15,13 +15,11 @@ import java.util.ArrayList;
 public class Nota {
 
     //Atributos
-    private Alumno alumno;
-    private Modulo modulo;
+    private String modulo;
     private int nota;
 
 //Constructor
-    public Nota(Alumno alumno, Modulo modulo, int nota) {
-        this.alumno = alumno;
+    public Nota(String modulo, int nota) {
         this.modulo = modulo;
         this.nota = nota;
 
@@ -31,19 +29,10 @@ public class Nota {
         return true;
     }
 
-    public Nota(Modulo modulo, int nota) {
-        // this.alumno = alumno;
-        this.modulo = modulo;
-        this.nota = nota;
-
-    }
-
     //Metodos get
-    public Alumno getAlumno() {
-        return alumno;
-    }
 
-    public Modulo getModulo() {
+
+    public String getModulo() {
         return modulo;
     }
 

@@ -32,17 +32,19 @@ public class InicioSesion extends javax.swing.JFrame {
         initComponents();
         sistema = new SistemaGestion();
     }
+
     //colorines
-      class jPanelGardient extends JPanel{
-        protected void paintComponent(Graphics g){
+    class jPanelGardient extends JPanel {
+
+        protected void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
             int width = getWidth();
             int height = getHeight();
-            
+
             Color color1 = new Color(221, 0, 255);
-             Color color2 = new Color(255, 162, 0);
-             GradientPaint gp = new GradientPaint (0,0,color1,180,height,color2);
-             g2d.setPaint(gp);
+            Color color2 = new Color(255, 162, 0);
+            GradientPaint gp = new GradientPaint(0, 0, color1, 180, height, color2);
+            g2d.setPaint(gp);
             g2d.fillRect(0, 0, width, height);
         }
     }
@@ -195,41 +197,46 @@ public class InicioSesion extends javax.swing.JFrame {
         String nombre = jTUsuario.getText();
         String contra = jPConstrasena.getText();
         ConexionDefault.crearConexion();
-        Usuario u;
+        int tipo = DAOInstituto2.instancia().obtenerTipoUsuario(nombre, nombreInsti);
 
-        u = DaoInstituto.instancia().cargarNombre(nombreInsti, nombre);
-        if (u == null) {
-            JOptionPane.showMessageDialog(rootPane, "Has introducido mal los parámetros", "Inicio", JOptionPane.WARNING_MESSAGE);
-        } else {
-            if (u.getContra().equals(contra)) {
-                if (u instanceof Administrador) {
+        switch (tipo) {
 
-                    Administrador ad = (Administrador) u;
-                    AdministradorGrafico adm = new AdministradorGrafico(null, true, ad, this);
+            case 0:
+                Administrador admin = DAOInstituto2.instancia().obtenerAdministrador(nombre, nombreInsti);
+                if (admin.getContrasenna().equals(contra)) {
+                    AdministradorGrafico adm = new AdministradorGrafico(null, true, admin, this);
                     this.setVisible(false);
                     adm.mostrar(nombre);
                     adm.setVisible(true);
-                } else if (u instanceof Profesor) {
-                    Profesor pro = (Profesor) u;
-                    //añadir instituto;
-                    ProfesorGrafico pr = new ProfesorGrafico(null, true, pro);
-                    this.setVisible(false);
-                    //pr.mostrar();
-                    pr.setVisible(true);
                 } else {
+                    JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
+                }
+                break;
+            case 1:
 
-                    Alumno alu = (Alumno) u;
-                    AlumnoGrafico alG = new AlumnoGrafico(null, true, alu, this);
+                Alumno alum = DAOInstituto2.instancia().obtenerAlumno(nombre, nombreInsti);
+
+                if (alum.getContrasenna().equals(contra)) {
+                    AlumnoGrafico alG = new AlumnoGrafico(null, true, alum, this);
                     this.setVisible(false);
                     // adm.mostrar();
                     alG.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
                 }
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
-
-            }
-
+                break;
+            case 3:
+                Profesor prof =  DAOInstituto2.instancia().obtenerProfesor(nombre, nombreInsti);
+                if (prof.getContrasenna().equals(contra)){
+                    //ProfesorGrafico pr = new ProfesorGrafico(null, true, prof, this);
+                    this.setVisible(false);
+                    //pr.mostrar();
+                    //pr.setVisible(true);
+                }
+                
+                break;
         }
+
         //modificar el control de la contrasena
         /*
             if (u instanceof Administrador) {
@@ -274,7 +281,6 @@ public class InicioSesion extends javax.swing.JFrame {
 
         }
          */
-
 
     }//GEN-LAST:event_ButtonEntrarActionPerformed
 

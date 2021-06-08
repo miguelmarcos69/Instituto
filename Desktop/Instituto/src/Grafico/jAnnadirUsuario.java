@@ -23,7 +23,8 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     
     
     Instituto i;
-    String cabecera []={"Curso","Nombre"};
+    String cabecera []={"Nombre","Curso"};
+    String cabeceraModulo[]={"Nombre","Horas semanales"};
     DefaultTableModel tabla;
    
     //CONSTRUCTOR (GENERACION AL INICIO)
@@ -155,11 +156,11 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jButtonBuscarAsig = new javax.swing.JButton();
         jPanelMostrarAsig = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableElegirAsignaturas = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTableAsignaturasElegidas = new javax.swing.JTable();
         jLabel15 = new javax.swing.JLabel();
         jButtonAceptar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -464,35 +465,35 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableElegirAsignaturas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Horas semanales"
             }
         ));
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(jTableElegirAsignaturas);
 
         jButton1.setText("AÑADIR");
 
         jLabel14.setText("Seleccione la asignatura que desee añadir:");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableAsignaturasElegidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Horas semanales"
             }
         ));
-        jScrollPane4.setViewportView(jTable2);
+        jScrollPane4.setViewportView(jTableAsignaturasElegidas);
 
         jLabel15.setText("Asignaturas añadidas:");
 
@@ -891,8 +892,20 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     //Todas
     private void jRadioButtonTodasAsigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonTodasAsigActionPerformed
         
-        jPanelMostrarAsig.setVisible(true);
-        jPanelSeleccionCiclo.setVisible(false);
+        
+        
+        try{
+            String nombreC = jTableVerCicloP.getValueAt(jTableVerCicloP.getSelectedRow(), 0).toString();
+            int annoC = Integer.parseInt(jTableVerCicloP.getValueAt(jTableVerCicloP.getSelectedRow(), 1).toString());
+            tabla = new DefaultTableModel(i.getModulosTot(),cabeceraModulo);
+            jTableElegirAsignaturas .setModel(tabla);
+            jPanelMostrarAsig.setVisible(true);
+            jPanelSeleccionCiclo.setVisible(false);
+            
+        }catch (Exception e){
+            JOptionPane.showMessageDialog (getContentPane (), "No hay modulos en este centro",
+            "Error",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jRadioButtonTodasAsigActionPerformed
 
     
@@ -905,7 +918,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             jTableVerCicloP .setModel(tabla);
             
         } catch (Exception e){
-            JOptionPane.showMessageDialog (getContentPane (), "No hay ciclos",
+            JOptionPane.showMessageDialog (getContentPane (), "No hay ciclos en este centro",
             "Error",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jRadioButtonVerTodosPActionPerformed
@@ -937,9 +950,30 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jRadioButtonVerA2PActionPerformed
 
+    //BOTON BUSCAR modulos del ciclo seleccionado
     private void jButtonBuscarAsigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarAsigActionPerformed
-        
-        jPanelMostrarAsig.setVisible(true);
+                
+        try{
+            if(jTableVerCicloP.getSelectedRow()!=-1){
+                try{
+                    String nombreC = jTableVerCicloP.getValueAt(jTableVerCicloP.getSelectedRow(), 0).toString();
+                    int annoC = Integer.parseInt(jTableVerCicloP.getValueAt(jTableVerCicloP.getSelectedRow(), 1).toString());
+                    tabla = new DefaultTableModel(i.getModulosCic(nombreC, annoC),cabeceraModulo);
+                    jTableElegirAsignaturas .setModel(tabla);
+                    
+                } catch (Exception e){
+                    JOptionPane.showMessageDialog (getContentPane (), "No hay modulos del ciclo seleccionado",
+                    "Error",JOptionPane.ERROR_MESSAGE);
+                }
+                jPanelMostrarAsig.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog (getContentPane (), "Debe seleccionar una fila de la tabla",
+                "Error",JOptionPane.ERROR_MESSAGE);
+            }
+         }catch (NullPointerException npe){
+            JOptionPane.showMessageDialog (getContentPane (), "Porfavor selecciona una fila con datos",
+            "Error",JOptionPane.ERROR_MESSAGE);
+        } 
     }//GEN-LAST:event_jButtonBuscarAsigActionPerformed
 
     
@@ -1039,8 +1073,8 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTableAsignaturasElegidas;
+    private javax.swing.JTable jTableElegirAsignaturas;
     private javax.swing.JTable jTableVerCicloA;
     private javax.swing.JTable jTableVerCicloP;
     private javax.swing.JTextField jTextFieldDNI;

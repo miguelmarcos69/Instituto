@@ -32,7 +32,7 @@ public class Ciclo {
         this.nombre = nombre;
         this.plazas = plazas;
     }
-
+    
     //metodos getters
 
     public int getAnno() {
@@ -48,7 +48,14 @@ public class Ciclo {
     }
 
     
-
+    public int getSizeModulos(){
+        return Asignaturas.size();
+    }
+    
+    public void anadirModulo (Modulo e){
+    
+        Asignaturas.add(e);
+    }
 
     public boolean existeModulo(String nombre) {
         boolean resultado = false;
@@ -65,7 +72,7 @@ public class Ciclo {
         return resultado;
     }
 
-    //Obtener arraylist para mostrar en tabla(todos los modulos)
+    //Obtener arraylist para mostrar en tabla(todos los ciclos)
     public String[] toArrayString() {
         String[] elemento = new String[2];
         elemento[0] = getNombre();
@@ -74,7 +81,7 @@ public class Ciclo {
         return elemento;
     }
 
-    //Obtener rraylist para mostrar en tabla(todos en funcion del año)
+    //Obtener arraylist para mostrar en tabla(todos en funcion del año)
     public String[] toArrayString(int annoCic) {
         String[] elemento = new String[2];
         if (getAnno() == annoCic) {
@@ -85,9 +92,18 @@ public class Ciclo {
         return elemento;
     }
     
-    public void anadirModulo (Modulo e){
-    
-        Asignaturas.add(e);
-    }
+    //Arraylist para obtenr todos los modulos
+    public String[][] getModulos() {
 
+        String[][] arrayAsignaturas = new String[Asignaturas.size()][10];
+        for (int i = 0; i < Asignaturas.size(); i++) {
+
+            Modulo m = (Modulo) Asignaturas.get(i);
+            arrayAsignaturas[i] = m.toArrayString();
+        }
+
+        return arrayAsignaturas;
+    }
+    
+    
 }

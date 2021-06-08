@@ -70,11 +70,11 @@ public class ProfesorGrafico extends javax.swing.JFrame {
 
         c.add(primero);
         c.add(segundo);
-        Nota n1 = new Nota(entornos, 10);
-        Nota n2 = new Nota(programacion, 2);
-        Nota n3 = new Nota(entornos, 5);
-        Nota n4 = new Nota(programacion, 8);
-        Nota n5 = new Nota(entornos, 3);
+        Nota n1 = new Nota(entornos.getNombre(), 10);
+        Nota n2 = new Nota(programacion.getNombre(), 2);
+        Nota n3 = new Nota(entornos.getNombre(), 5);
+        Nota n4 = new Nota(programacion.getNombre(), 8);
+        Nota n5 = new Nota(entornos.getNombre(), 3);
 
         Alumno lola = new Alumno("Lola", "lola", "1254", new Date(), primero);
         Alumno miguel = new Alumno("miguel", "miguel", "1254", new Date(), primero);

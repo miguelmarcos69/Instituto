@@ -23,8 +23,7 @@ public class Alumno extends Usuario {
     private Ciclo ciclo;
     private ArrayList<Nota> notas;
 
-    public Alumno(String nombre, String contrasenna, String DNI, Date fecha_nacimiento,
-            Ciclo ciclo) {
+    public Alumno(String nombre, String contrasenna, String DNI, Date fecha_nacimiento,Ciclo ciclo) {
         super(nombre, contrasenna, DNI, fecha_nacimiento);
         this.ciclo = ciclo;
         notas = new ArrayList();
@@ -39,6 +38,20 @@ public class Alumno extends Usuario {
     public Ciclo getCiclo() {
         return ciclo;
     }
+    
+        public ArrayList<Nota> getNotas() {
+        return notas;
+    }
+
+    @Override
+    public String getNombre() {
+        return nombre;
+    }
+
+    @Override
+    public String getContrasenna() {
+        return contrasenna;
+    }
 
     //Este metodo esta hecho para insertar las notas de un alumno en una tabla 
     public String[][] getArrayNotas() {
@@ -47,7 +60,7 @@ public class Alumno extends Usuario {
 
         for (int i = 0; i < notas.size(); i++) {
 
-            retorno[i][1] = notas.get(i).getModulo().getNombre();
+            retorno[i][1] = notas.get(i).getModulo();
             retorno[i][2] = notas.get(i).getNota() + "";
         }
 
@@ -58,7 +71,7 @@ public class Alumno extends Usuario {
         String[][] retorno = new String[1][notas.size()];
         int contador = 0;
         for (int i = 0; i < notas.size(); i++) {
-            if (notas.get(i).getModulo().getNombre().equals(nombreMod)) {
+            if (notas.get(i).getModulo().equals(nombreMod)) {
                 retorno[0][contador++] = String.valueOf(notas.get(i).getNota());
 
             }
@@ -79,24 +92,16 @@ public class Alumno extends Usuario {
         notas.add(n);
 
     }
+    
+    public void setCiclo (Ciclo ciclo){
+        this.ciclo=ciclo;
+    }
 
     @Override
     public String toString() {
         return nombre;
     }
 
-    public ArrayList<Nota> getNotas() {
-        return notas;
-    }
 
-    @Override
-    public String getNombre() {
-        return nombre;
-    }
-
-    @Override
-    public String getContrasenna() {
-        return contrasenna;
-    }
 
 }
