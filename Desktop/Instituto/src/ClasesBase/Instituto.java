@@ -20,15 +20,15 @@ public class Instituto {
      * @param args the command line arguments
      */
     //atributos de la clase
-    private ArrayList<Alumno> alumnos;
+    private ArrayList<Usuario> usuarios;
     private ArrayList<Ciclo> ciclos;
     private String nombre;
     private String direccion;
     //private long telefono;
     private String telefono; // para el manejo de datos se usa String
 
-    public Instituto(ArrayList<Alumno> Alumnos, ArrayList<Ciclo> ciclos, String nombre, String direccion, String telefono) {
-        this.alumnos = Alumnos;
+    public Instituto(ArrayList<Usuario> usuario, ArrayList<Ciclo> ciclos, String nombre, String direccion, String telefono) {
+        this.usuarios = usuario;
         this.ciclos = ciclos;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -61,30 +61,31 @@ public class Instituto {
 
     public String[][] getAlumnosAsignatura(String nombreAsignatura) {
 
-        String[][] alum = new String[alumnos.size()][6];
+        String[][] alumn = new String[usuarios.size()][1];
         int contador = 0;
 
-        for (int i = 0; i < alumnos.size(); i++) {
+        for (int i = 0; i < usuarios.size(); i++) {
 
-            if (alumnos.get(i) instanceof Alumno) {
-                Alumno a = (Alumno) alumnos.get(i);
+            if (usuarios.get(i) instanceof Alumno) {
+                Alumno a = (Alumno) usuarios.get(i);
                 if (a.tieneModulo(nombreAsignatura)) {
-                    alum[contador++][0] = a.getNombre();
+
+                    alumn[contador++][0] = a.getNombre();
 
                 }
             }
         }
 
-        return alum;
+        return alumn;
     }
 
     public String[][] getDos(String nomAlumn, String nombreMod) {
-        String[][] alum = new String[4][alumnos.size()];
-        for (int i = 0; i < alumnos.size(); i++) {
+        String[][] alum = new String[4][usuarios.size()];
+        for (int i = 0; i < usuarios.size(); i++) {
+            Alumno al = (Alumno) usuarios.get(i);
+            if (usuarios.get(i).getNombre().equals(nomAlumn)) {
 
-            if (alumnos.get(i).getNombre().equals(nomAlumn)) {
-
-                alum = alumnos.get(i).getANotas(nombreMod);
+                alum = al.getANotas(nombreMod);
             } else {
 
             }
@@ -98,10 +99,10 @@ public class Instituto {
         String al = null;
         int contador = 0;
 
-        for (int i = 0; i < alumnos.size(); i++) {
+        for (int i = 0; i < usuarios.size(); i++) {
 
-            if (alumnos.get(i) instanceof Alumno) {
-                Alumno a = (Alumno) alumnos.get(i);
+            if (usuarios.get(i) instanceof Alumno) {
+                Alumno a = (Alumno) usuarios.get(i);
                 if (a.tieneModulo(nom)) {
                     if (contador == n) {
                         al = a.getNombre();
@@ -116,10 +117,10 @@ public class Instituto {
         return al;
     }
 
-     public String[][] mostrarUsuarios() {
-        String[][] arrayUsuarios = new String[alumnos.size()][6];
-        for (int i = 0; i < alumnos.size(); i++) {
-            Usuario u = alumnos.get(i);
+    public String[][] mostrarUsuarios() {
+        String[][] arrayUsuarios = new String[usuarios.size()][6];
+        for (int i = 0; i < usuarios.size(); i++) {
+            Usuario u = usuarios.get(i);
             if (u instanceof Profesor) {
                 arrayUsuarios[i][0] = "Profesor";
 
@@ -135,27 +136,38 @@ public class Instituto {
 
     }
 
-//    
-//     public String[][] getAlumnos() {
-//     
-//        String [][] arrayAlumnos = new String[usuarios.size()][7];
-//        for (int i = 0, j=0;i<usuarios.size();i++){
-//            Usuario u = usuarios.get(i);
-//            if (u instanceof Alumno){
-//                Alumno a = (Alumno)u;
-//             arrayAlumnos [j][0] = 
-//              arrayAlumnos [j][1] =
-//            arrayAlumnos [j][2] = 
-//             arrayAlumnos [j][3] = 
-//                arrayAlumnos [j][4] = 
-//              arrayAlumnos [j][5] = 
-//          arrayAlumnos [j][6] = 
-//                j++;
-//            }
-//        }
-//        return ;
-//    }
-//    
+    public String[][] mostrarAlumnos() {
+        String[][] arrayAlumnos = new String[usuarios.size()][7];
+        for (int i = 0, j = 0; i < usuarios.size(); i++) {
+            Usuario u = usuarios.get(i);
+            if (u instanceof Alumno) {
+                Alumno a = (Alumno) u;
+                arrayAlumnos[j][0] = u.getNombre();
+                arrayAlumnos[j][1] = u.getDNI();
+                arrayAlumnos[j][2] = u.getFecha_nacimiento();
+
+                j++;
+            }
+        }
+        return arrayAlumnos;
+    }
+
+    public String[][] mostrarProfesores() {
+        String[][] arrayProfesores = new String[usuarios.size()][7];
+        for (int i = 0, j = 0; i < usuarios.size(); i++) {
+            Usuario u = usuarios.get(i);
+            if (u instanceof Profesor) {
+                Profesor f = (Profesor) u;
+                arrayProfesores[j][0] = u.getNombre();
+                arrayProfesores[j][1] = u.getDNI();
+                arrayProfesores[j][2] = u.getFecha_nacimiento();
+
+                j++;
+            }
+        }
+        return arrayProfesores;
+    }
+
     //Arralist para obtner todos los ciclos
     public String[][] getCicloTot() {
 

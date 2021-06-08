@@ -42,7 +42,7 @@ public class ModificarNotas extends javax.swing.JFrame {
         this.setBackground(Color.black);
         this.setForeground(Color.white);
 
-        ArrayList<Alumno> al = new ArrayList<>();
+        ArrayList<Usuario> al = new ArrayList<>();
         ArrayList<Ciclo> c = new ArrayList<>();
         ArrayList<Modulo> mod = new ArrayList<>();
         ArrayList<Modulo> mod2 = new ArrayList<>();
