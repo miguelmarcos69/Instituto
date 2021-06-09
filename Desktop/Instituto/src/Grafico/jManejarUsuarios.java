@@ -212,8 +212,8 @@ public class jManejarUsuarios extends javax.swing.JDialog {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, -1, -1));
 
+        tablaUsuarios.setAutoCreateRowSorter(true);
         tablaUsuarios.setBackground(new java.awt.Color(0, 0, 0));
-        tablaUsuarios.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         tablaUsuarios.setForeground(new java.awt.Color(255, 255, 255));
         tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -226,7 +226,7 @@ public class jManejarUsuarios extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tablaUsuarios.setSelectionBackground(new java.awt.Color(204, 103, 255));
+        tablaUsuarios.setSelectionBackground(new java.awt.Color(255, 153, 51));
         jScrollPane1.setViewportView(tablaUsuarios);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 204, 825, 318));
