@@ -41,23 +41,25 @@ public class AdministradorGrafico extends javax.swing.JFrame {
         this.admin = ad;
         this.i = i;
     }
+
     //colorines
-       class jPanelGardient extends JPanel{
-        protected void paintComponent(Graphics g){
+    class jPanelGardient extends JPanel {
+
+        protected void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
             int width = getWidth();
             int height = getHeight();
-            
+
             Color color1 = new Color(221, 0, 255);
-             Color color2 = new Color(255, 162, 0);
-             GradientPaint gp = new GradientPaint (0,0,color1,180,height,color2);
-             g2d.setPaint(gp);
+            Color color2 = new Color(255, 162, 0);
+            GradientPaint gp = new GradientPaint(0, 0, color1, 180, height, color2);
+            g2d.setPaint(gp);
             g2d.fillRect(0, 0, width, height);
         }
     }
 
     private AdministradorGrafico() {
-          initComponents();
+        initComponents();
     }
 
     public void mostrar(String nom) {
@@ -80,12 +82,14 @@ public class AdministradorGrafico extends javax.swing.JFrame {
         nombre = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButtonTablon = new javax.swing.JButton();
-        jButtonCalendario = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         jRadioButton1.setText("jRadioButton1");
 
@@ -136,7 +140,7 @@ public class AdministradorGrafico extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(nombre)
                     .addComponent(jLabel1))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 527, -1));
@@ -146,36 +150,42 @@ public class AdministradorGrafico extends javax.swing.JFrame {
         jLabel2.setText("¿Qué quieres hacer?");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 109, -1, -1));
 
-        jButtonTablon.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonTablon.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonTablon.setText("Modificar tablón");
-        jPanel1.add(jButtonTablon, new org.netbeans.lib.awtextra.AbsoluteConstraints(353, 214, 140, -1));
-
-        jButtonCalendario.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonCalendario.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonCalendario.setText("Alterar Calendario");
-        jPanel1.add(jButtonCalendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(344, 317, 140, -1));
-
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_add_user_group_man_man_50px.png"))); // NOI18N
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel3MousePressed(evt);
             }
         });
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 280, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Manejar Usuarios");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Manejar Notas");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_report_card_50px_1.png"))); // NOI18N
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_calendar_50px_2.png"))); // NOI18N
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Modificar el tablón");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Modificar Calendario");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, -1, -1));
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_clipboard_50px_5.png"))); // NOI18N
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -194,21 +204,16 @@ public class AdministradorGrafico extends javax.swing.JFrame {
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // TODO add your handling code here:
-          jManejarUsuarios in = new jManejarUsuarios(null, true);
+        jManejarUsuarios in = new jManejarUsuarios(null, true);
         in.setVisible(true);
         this.setVisible(false);
-        
-        
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_jLabel3MousePressed
 
     private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
 
-            System.exit(0);
-
+        System.exit(0);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel5MousePressed
@@ -249,15 +254,17 @@ public class AdministradorGrafico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCalendario;
-    private javax.swing.JButton jButtonTablon;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton jRadioButton1;

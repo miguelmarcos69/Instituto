@@ -980,17 +980,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonBuscarAsigActionPerformed
 
     private void jButtonAnnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnadirActionPerformed
-        
-        try {
-            String nombreM = jTableElegirAsignaturas.getValueAt(jTableElegirAsignaturas.getSelectedRow(), 0).toString();
-            int horasM = Integer.parseInt(jTableElegirAsignaturas.getValueAt(jTableElegirAsignaturas.getSelectedRow(), 1).toString());
-            //Añadir a el array interno
-           // annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC) );
-            modulosAnnadidos = new Mod
-        }catch (NullPointerException npe){
-            JOptionPane.showMessageDialog (getContentPane (), "Porfavor selecciona una fila con datos",
-            "Error",JOptionPane.ERROR_MESSAGE);
-        } 
+ 
     }//GEN-LAST:event_jButtonAnnadirActionPerformed
 
     
