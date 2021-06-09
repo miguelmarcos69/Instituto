@@ -22,6 +22,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     private boolean segundosCiclos = false;
     
     
+    
     Instituto i;
     String cabecera []={"Nombre","Curso"};
     String cabeceraModulo[]={"Nombre","Horas semanales"};
@@ -35,6 +36,8 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelProfesor.setVisible(false);
         jPanelAlumno.setVisible(false);
         
+        //Araylist para guardar asignaturas de forma local
+        ArrayList<Modulo> modAnn = new ArrayList<>();
         
         ArrayList<Usuario> al = new ArrayList<>();
         ArrayList<Ciclo> c = new ArrayList<>();
@@ -157,7 +160,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelMostrarAsig = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableElegirAsignaturas = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        jButtonAnnadir = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableAsignaturasElegidas = new javax.swing.JTable();
@@ -478,7 +481,12 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         ));
         jScrollPane3.setViewportView(jTableElegirAsignaturas);
 
-        jButton1.setText("AÑADIR");
+        jButtonAnnadir.setText("AÑADIR");
+        jButtonAnnadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAnnadirActionPerformed(evt);
+            }
+        });
 
         jLabel14.setText("Seleccione la asignatura que desee añadir:");
 
@@ -517,7 +525,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                     .addComponent(jLabel14)
                     .addGroup(jPanelMostrarAsigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                        .addComponent(jButtonAnnadir, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(jPanelMostrarAsigLayout.createSequentialGroup()
                         .addGap(70, 70, 70)
@@ -534,7 +542,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 .addGap(3, 3, 3)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(jButtonAnnadir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -902,7 +910,9 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_jRadioButtonTodasAsigActionPerformed
 
     
+    
     ///BOTON GROUP ver ciclos para profesores\\\ 
+    
     //Ver todos los ciclos
     private void jRadioButtonVerTodosPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerTodosPActionPerformed
         
@@ -969,6 +979,20 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         } 
     }//GEN-LAST:event_jButtonBuscarAsigActionPerformed
 
+    private void jButtonAnnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnadirActionPerformed
+        
+        try {
+            String nombreM = jTableElegirAsignaturas.getValueAt(jTableElegirAsignaturas.getSelectedRow(), 0).toString();
+            int horasM = Integer.parseInt(jTableElegirAsignaturas.getValueAt(jTableElegirAsignaturas.getSelectedRow(), 1).toString());
+            //Añadir a el array interno
+           // annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC) );
+            modulosAnnadidos = new Mod
+        }catch (NullPointerException npe){
+            JOptionPane.showMessageDialog (getContentPane (), "Porfavor selecciona una fila con datos",
+            "Error",JOptionPane.ERROR_MESSAGE);
+        } 
+    }//GEN-LAST:event_jButtonAnnadirActionPerformed
+
     
 
     
@@ -1017,9 +1041,9 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroupTipoUsuario;
     private javax.swing.ButtonGroup buttonGroupVerAnno;
     private javax.swing.ButtonGroup buttonGroupVerAsignaturas;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonAceptar;
+    private javax.swing.JButton jButtonAnnadir;
     private javax.swing.JButton jButtonBuscarAsig;
     private javax.swing.JButton jButtonInscribir;
     private javax.swing.JLabel jLabel1;

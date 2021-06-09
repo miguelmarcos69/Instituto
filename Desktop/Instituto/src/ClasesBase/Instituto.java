@@ -207,7 +207,7 @@ public class Instituto {
         return arrayCiclos;
     }
 
-    //Lo mismo pro filttrando por nombre y año
+    //Encontrar un ciclo filttrando por nombre y año
     public Ciclo getCicloNombre(String nombre, int ano) {
 
         Ciclo buscado = null;
@@ -221,6 +221,31 @@ public class Instituto {
         }
 
         return buscado;
+    }
+    public ArrayList<Modulo> obtenerTodosModulos (){
+    ArrayList<Modulo> listaModulos = new ArrayList();
+        
+        for (int i =0;i<ciclos.size();i++){
+        
+            
+            listaModulos=ciclos.get(i).concatenarModulos(listaModulos);
+        }
+        
+        return listaModulos;
+        
+    }
+    
+    public Modulo getModuloNombreHor(String nombre, int horasSem){
+        Modulo buscado = null;
+        ArrayList<Modulo> listaModulos = new ArrayList();
+        listaModulos=obtenerTodosModulos();
+        for (int i = 0; i< listaModulos.size(); i++){
+            if (listaModulos.get(i).getNombre().equals(nombre) && listaModulos.get(i).getHoras_semana() == horasSem){
+                buscado = listaModulos.get(i);
+            }
+        }
+        return buscado;
+        
     }
     
     //Metodo para ir al ciclo seleccionado y llmar al metodo de obtener modulos
