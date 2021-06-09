@@ -32,6 +32,7 @@ public class Alumno extends Usuario {
     //constructor se utuliza al iniciar sesion
     public Alumno(String nombre, String contrasenna, String DNI, Date fecha_nacimiento) {
         super(nombre, contrasenna, DNI, fecha_nacimiento);
+        this.notas=new ArrayList();
     }
 
     //Metodos get

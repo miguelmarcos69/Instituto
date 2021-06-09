@@ -93,12 +93,14 @@ public class Instituto {
     public String[][] getDos(String nomAlumn, String nombreMod) {
         String[][] alum = new String[4][usuarios.size()];
         for (int i = 0; i < usuarios.size(); i++) {
+            if (usuarios.get(i) instanceof Alumno){            
             Alumno al = (Alumno) usuarios.get(i);
             if (usuarios.get(i).getNombre().equals(nomAlumn)) {
 
                 alum = al.getANotas(nombreMod);
             } else {
 
+            }
             }
 
         }
