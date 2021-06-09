@@ -232,7 +232,7 @@ public class ProfesorGrafico extends javax.swing.JFrame {
     }//GEN-LAST:event_jSalirActionPerformed
 
     private void jModificarNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarNotasActionPerformed
-        ModificarNotas mod = new ModificarNotas(null, true, prof);
+        ModificarNotas mod = new ModificarNotas(null, true, prof,insti);
         mod.setVisible(true);
         this.setVisible(false);
 

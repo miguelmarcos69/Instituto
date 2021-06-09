@@ -15,6 +15,7 @@ import Usuarios.Profesor;
 import Usuarios.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -52,7 +53,7 @@ public class DAOInstituto2 {
                 } else if (rs.getString(1).equals("alu")) {
                     System.out.println("Es un Alumno");
                     tipo = 1;
-                } else if (rs.getString(1).equals("pro")) {
+                } else if (rs.getString(1).equals("prof")) {
                     System.out.println("Es un profesor");
                     tipo = 2;
                 }
@@ -81,27 +82,7 @@ public class DAOInstituto2 {
             if (rs.next()) {
                 nombreCiclo = rs.getString(5);
                 a = new Alumno(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
-
-                rs = ConexionDefault.instancia().getStatement().executeQuery("select * from ciclo where nombre  = " + nombreCiclo);
-                if (rs.next()) {
-                    ciclo = new Ciclo(rs.getString(1), rs.getInt(2),rs.getInt(3));
-
-                    rs = ConexionDefault.instancia().getStatement().executeQuery("select * from Modulo where ciclo  = " + nombreCiclo);
-
-                    while (rs.next()) {
-
-                        ciclo.anadirModulo(new Modulo(rs.getString(1), rs.getString(2), rs.getInt(3)));
-                    }
-
-                    a.setCiclo(ciclo);
-                }
-
-                rs = ConexionDefault.instancia().getStatement().executeQuery("select * from nota where alumno  = " + nombre);
-
-                while (rs.next()) {
-
-                    a.annadirNotas(new Nota(rs.getString(2), rs.getInt(3)));
-                }
+                a = getDatosAlumno(a, nombreCiclo);
 
             } else {
 
@@ -111,6 +92,38 @@ public class DAOInstituto2 {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return a;
+    }
+
+    public Alumno getDatosAlumno(Alumno a,String nombreCiclo) {
+        Ciclo ciclo = null;
+
+        try {
+            ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select * from ciclo where nombre  = '" + nombreCiclo +"'");
+            if (rs.next()) {
+                ciclo = new Ciclo(rs.getString(1), rs.getInt(2), rs.getInt(3));
+
+                rs = ConexionDefault.instancia().getStatement().executeQuery("select * from modulo where ciclo  = '" + nombreCiclo+"'");
+
+                while (rs.next()) {
+
+                    ciclo.anadirModulo(new Modulo(rs.getString(1), rs.getString(2), rs.getInt(3)));
+                }
+
+                a.setCiclo(ciclo);
+            }
+
+            rs = ConexionDefault.instancia().getStatement().executeQuery("select * from nota where alumno  = '" + a.getNombre()+"'");
+
+            while (rs.next()) {
+
+                a.annadirNotas(new Nota(rs.getString(2), rs.getInt(3)));
+            }
+        } catch (SQLException sqle) {
+
+            sqle.printStackTrace();
+        }
+
         return a;
     }
 
@@ -125,16 +138,7 @@ public class DAOInstituto2 {
 
             if (rs.next()) {
                 p = new Profesor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
-
-                if (rs.next()) {
-
-                    rs = ConexionDefault.instancia().getStatement().executeQuery("select * from Modulo where profesor  = " + nombre);
-
-                    while (rs.next()) {
-
-                        p.annadirModulo(new Modulo(rs.getString(1), rs.getString(2), rs.getInt(3)));
-                    }
-                }
+                    p=getDatosProfesor(p);
 
             } else {
 
@@ -143,6 +147,23 @@ public class DAOInstituto2 {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+
+        return p;
+
+    }
+
+    public Profesor getDatosProfesor(Profesor p) {
+        try {
+            ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select * from modulo where profesor  = '" + p.getNombre()+"'");
+
+            while (rs.next()) {
+
+                p.annadirModulo(new Modulo(rs.getString(1), rs.getString(2), rs.getInt(3)));
+            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
         }
 
         return p;
@@ -176,45 +197,78 @@ public class DAOInstituto2 {
         Ciclo c = null;
 
         try {
-            ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select * from instituto where nombre= '" + nombre+"'");
+            ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select * from instituto where nombre= '" + nombre + "'");
 
             if (rs.next()) {
 
                 i = new Instituto(rs.getString(1), rs.getString(2), rs.getString(3));
-                
-                rs=ConexionDefault.instancia().getStatement().executeQuery("select * from ciclo where instituto= '" + nombre+"'");
-                
-                while (rs.next()){
-                
-                    c= new Ciclo(rs.getString(1),rs.getInt(2),rs.getInt(3));
-                    
-                    rs=ConexionDefault.instancia().getStatement().executeQuery("select * from modulo where ciclo ='" + c.getNombre()+"'");
-                    
-                    while (rs.next()){
-                    
-                        c.anadirModulo(new Modulo (rs.getString(1),rs.getString(2),rs.getInt(3)));
+
+                rs = ConexionDefault.instancia().getStatement().executeQuery("select * from ciclo where instituto= '" + nombre + "'");
+
+                while (rs.next()) {
+
+                    c = new Ciclo(rs.getString(1), rs.getInt(2), rs.getInt(3));
+
+                    rs = ConexionDefault.instancia().getStatement().executeQuery("select * from modulo where ciclo ='" + c.getNombre() + "'");
+
+                    while (rs.next()) {
+
+                        c.anadirModulo(new Modulo(rs.getString(1), rs.getString(2), rs.getInt(3)));
                     }
+                    
+                     i.annadirCiclo(c);
                 }
+               
+
+                rs = ConexionDefault.instancia().getStatement().executeQuery("select * from usuario where nombreInsti = '" + i.getNombre() + "'");
+                ArrayList<Usuario> listaUsuario = new ArrayList();
+                int cantidadFilas=0;
+                if (rs.last()){
                 
-                rs = ConexionDefault.instancia().getStatement().executeQuery("select * from usuario where nombreInsti = '" + i.getNombre()+"'");
+                    cantidadFilas = rs.getRow();
+                    rs.beforeFirst();
+                }
+                String [] ciclosAlumnos = new String [cantidadFilas];
                 
-                while (rs.next()){
-                    
-                    Usuario a=null;
-                
-                    switch (rs.getString(5)){
-                    
-                        case "alu" :
-                            a = obtenerAlumno(rs.getString(1),nombre);
+                int contador =0;
+                while (rs.next()) {
+
+                    Usuario a = null;
+
+                    switch (rs.getString(5)) {
+
+                        case "alu":
+                            a = new Alumno(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
+                            ciclosAlumnos[contador++]=rs.getString(6);
                             break;
                         case "prof":
-                            a =obtenerProfesor (rs.getString(1),nombre);
+                            a = new Profesor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
                             break;
                         case "adm":
-                            a = obtenerAdministrador (rs.getString(nombre),nombre);
+                            a = new Administrador(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
                     }
+
+                    listaUsuario.add(a);
+
+                }
+                
+                for (int j=0;j<listaUsuario.size();j++ ){
+                
+                    if (listaUsuario.get(j) instanceof Alumno){
+                        Alumno a=(Alumno) listaUsuario.get(j);
+                        a=getDatosAlumno(a,ciclosAlumnos[j]);              
+                        
+                        i.annadirUsuario(a);
+                    }else if (listaUsuario.get(j) instanceof Profesor){
                     
-                    i.annadirUsuario(a);
+                        Profesor p= (Profesor)listaUsuario.get(j);
+                        p=getDatosProfesor(p);
+                        i.annadirUsuario(p);                      
+                        
+                    }else{
+                    
+                        i.annadirUsuario(listaUsuario.get(j));
+                    }
                 }
             }
         } catch (SQLException ex) {

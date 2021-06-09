@@ -26,9 +26,6 @@ public class ModificarNotas extends javax.swing.JFrame {
 
     Profesor prof;
     Instituto i;
-    Alumno a;
-    Ciclo ci;
-    Nota nota;
     DefaultTableModel tabla;
     String cabecera[] = {"Alumnos"};
     String cabeceranNotas[] = {"Primera", "Segunda", "Tercera", "Final"};
@@ -36,12 +33,14 @@ public class ModificarNotas extends javax.swing.JFrame {
     /**
      * Creates new form ModificarNotas
      */
-    public ModificarNotas(java.awt.Frame parent, boolean modal, Profesor prof) {
+    public ModificarNotas(java.awt.Frame parent, boolean modal, Profesor prof,Instituto i) {
         initComponents();
         this.prof = prof;
+        this.i=i;
+        llenar();
         this.setBackground(Color.black);
         this.setForeground(Color.white);
-
+        /* 
         ArrayList<Usuario> al = new ArrayList<>();
         ArrayList<Ciclo> c = new ArrayList<>();
         ArrayList<Modulo> mod = new ArrayList<>();
@@ -86,9 +85,12 @@ public class ModificarNotas extends javax.swing.JFrame {
         pepe.annadirNotas(n4);
         pepe.annadirNotas(n3);
 
-        this.i = new Instituto(al, c, "camino", "la que sea", "69633245");
-
-        llenar();
+        this.i = new Instituto(al, c, "camino", "la que sea", "69633245");       
+       
+*/
+        
+        
+         
     }
 
     private void llenar() {

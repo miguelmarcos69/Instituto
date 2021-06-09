@@ -59,6 +59,16 @@ public class Instituto {
     public String getTelefono() {
         return telefono;
     }
+    
+    public int getUsuariosSize (){
+    
+        return usuarios.size();
+    }
+    
+    public int getCiclosSize (){
+    
+        return ciclos.size();
+    }
 
     public String[][] getAlumnosAsignatura(String nombreAsignatura) {
 
