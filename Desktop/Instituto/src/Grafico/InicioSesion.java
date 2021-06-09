@@ -23,14 +23,12 @@ import javax.swing.JPanel;
 public class InicioSesion extends javax.swing.JFrame {
 
     private Instituto i;
-    SistemaGestion sistema;
 
     /**
      * Creates new form InicioSesionç
      */
     public InicioSesion() {
         initComponents();
-        sistema = new SistemaGestion();
     }
 
     //colorines
@@ -227,7 +225,7 @@ public class InicioSesion extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
                 }
                 break;
-            case 3:
+            case 2:
                 Profesor prof =  DAOInstituto2.instancia().obtenerProfesor(nombre, nombreInsti);
                 if (prof.getContrasenna().equals(contra)){
                     ProfesorGrafico pr = new ProfesorGrafico(null, true, prof, i);
