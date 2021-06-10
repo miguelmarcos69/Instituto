@@ -25,6 +25,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     String cabeceraModulo[] = {"Nombre", "Horas semanales"};
     DefaultTableModel tabla;
 
+
     //CONSTRUCTOR (GENERACION AL INICIO)
     public jAnnadirUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -32,7 +33,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelDatosCoumnes.setVisible(false);
         jPanelProfesor.setVisible(false);
         jPanelAlumno.setVisible(false);
-
+        /*
         //Araylist para guardar asignaturas de forma local
         ArrayList<Modulo> modAnn = new ArrayList<>();
 
@@ -65,6 +66,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         al.add(juan);
 
         this.i = new Instituto(al, c, "camino", "la que sea", "69633245");
+        */
     }
 
     ///METODOS GET\\\
@@ -83,7 +85,11 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     public String getContrasenna() {
         return jPasswordFieldContra.getText();
     }
-
+    
+    public void setInstituto(Instituto i){
+        this.i=i;
+    }
+    
     //CONVERTIR STRING EN DATE
     public static Date ParseFecha(String fecha) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -859,7 +865,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 ContrasennaValida();
                 if (contrasennaValida == true) {
                     annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
-                    
+
                 } else {
                     JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
                             "Error", JOptionPane.ERROR_MESSAGE);
@@ -933,7 +939,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         try {
             tabla = new DefaultTableModel(i.getCicloTot(an), cabecera);
             jTableVerCicloP.setModel(tabla);
- 
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -972,9 +978,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             String nombreM = jTableElegirAsignaturas.getValueAt(jTableElegirAsignaturas.getSelectedRow(), 0).toString();
             int horasM = Integer.parseInt(jTableElegirAsignaturas.getValueAt(jTableElegirAsignaturas.getSelectedRow(), 1).toString());
 
-            
-
-            String[][] modulos = new String[jTableAsignaturasElegidas.getModel().getRowCount() +1][2];
+            String[][] modulos = new String[jTableAsignaturasElegidas.getModel().getRowCount() + 1][2];
 
             for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
 
@@ -982,8 +986,8 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 modulos[j][1] = jTableAsignaturasElegidas.getModel().getValueAt(j, 1) + "";
             }
 
-            modulos[jTableAsignaturasElegidas.getModel().getRowCount() ][0] = nombreM;
-            modulos[jTableAsignaturasElegidas.getModel().getRowCount() ][1] = horasM + "";
+            modulos[jTableAsignaturasElegidas.getModel().getRowCount()][0] = nombreM;
+            modulos[jTableAsignaturasElegidas.getModel().getRowCount()][1] = horasM + "";
 
             jTableAsignaturasElegidas.setModel(new DefaultTableModel(modulos, cabecera));
 
