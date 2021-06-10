@@ -1,4 +1,3 @@
-
 package Grafico;
 
 import ClasesBase.Ciclo;
@@ -12,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
+import javax.swing.table.TableModel;
 
 public class jAnnadirUsuario extends javax.swing.JDialog {
 
@@ -20,14 +19,12 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     private boolean todosCiclos = false;
     private boolean primerosCiclos = false;
     private boolean segundosCiclos = false;
-    
-    
-    
+
     Instituto i;
-    String cabecera []={"Nombre","Curso"};
-    String cabeceraModulo[]={"Nombre","Horas semanales"};
+    String cabecera[] = {"Nombre", "Curso"};
+    String cabeceraModulo[] = {"Nombre", "Horas semanales"};
     DefaultTableModel tabla;
-   
+
     //CONSTRUCTOR (GENERACION AL INICIO)
     public jAnnadirUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -35,16 +32,16 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelDatosCoumnes.setVisible(false);
         jPanelProfesor.setVisible(false);
         jPanelAlumno.setVisible(false);
-        
+
         //Araylist para guardar asignaturas de forma local
         ArrayList<Modulo> modAnn = new ArrayList<>();
-        
+
         ArrayList<Usuario> al = new ArrayList<>();
         ArrayList<Ciclo> c = new ArrayList<>();
         ArrayList<Modulo> mod = new ArrayList();
         ArrayList<Modulo> mod2 = new ArrayList();
 
-        Ciclo primero = new Ciclo(mod, "DAW", 2, 1);
+        Ciclo primero = new Ciclo(mod, "DAW", 1, 1);
         Ciclo segundo = new Ciclo(mod2, "DAW", 2, 2);
 
         Modulo programacion = new Modulo("Programacion", "12", 2);
@@ -70,42 +67,38 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         this.i = new Instituto(al, c, "camino", "la que sea", "69633245");
     }
 
-   
-    
     ///METODOS GET\\\
-    
-    public String getNombre(){
+    public String getNombre() {
         return jTextFieldNombre.getText();
     }
-    public String getDNI(){
+
+    public String getDNI() {
         return jTextFieldDNI.getText();
-    }  
-    public Date getFechaNacimiento(){
+    }
+
+    public Date getFechaNacimiento() {
         return ParseFecha(jTextFieldFechaNacimiento.getText());//LLamar al metodo para converir String en Date
     }
-    public String getContrasenna(){
+
+    public String getContrasenna() {
         return jPasswordFieldContra.getText();
     }
-    
-    
+
     //CONVERTIR STRING EN DATE
-    public static Date ParseFecha(String fecha)
-    {
+    public static Date ParseFecha(String fecha) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date fechaDate = null;
         try {
             fechaDate = formato.parse(fecha);
-        } 
-        catch (ParseException ex) 
-        {
+        } catch (ParseException ex) {
             System.out.println(ex);
         }
         return fechaDate;
     }
-    
+
     //COMPROVAR SI LAS CONTRASEÑAS SON IGUALES
-    public void ContrasennaValida(){
-        if (jPasswordFieldContra.getText().equals(jPasswordFieldRepetirContra.getText())){
+    public void ContrasennaValida() {
+        if (jPasswordFieldContra.getText().equals(jPasswordFieldRepetirContra.getText())) {
             contrasennaValida = true;
         } else {
             jPasswordFieldContra.setText("");
@@ -113,8 +106,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             contrasennaValida = false;
         }
     }
-    
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -492,10 +484,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
         jTableAsignaturasElegidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Nombre", "Horas semanales"
@@ -608,7 +597,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel9.setText("¿Qué ciclos desa ver?");
+        jLabel9.setText("¿Qué cursos desa ver?");
 
         buttonGroupVerAnno.add(jRadioButtonVerTodosA);
         jRadioButtonVerTodosA.setText("Todos");
@@ -814,45 +803,45 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     //Ver todos los ciclos
     private void jRadioButtonVerTodosAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerTodosAActionPerformed
 
-        try{
-            tabla = new DefaultTableModel(i.getCicloTot(),cabecera);
+        try {
+            tabla = new DefaultTableModel(i.getCicloTot(), cabecera);
             jTableVerCicloA.setModel(tabla);
-            
-        } catch (Exception e){
-            JOptionPane.showMessageDialog (getContentPane (), "No hay ciclos",
-            "Error",JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jRadioButtonVerTodosAActionPerformed
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAceptarActionPerformed
-    
+
     //Ver los ciclos de primer año
     private void jRadioButtonVerA1AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerA1AActionPerformed
-        
+
         int an = 1;
-        try{
-            tabla = new DefaultTableModel(i.getCicloTot(an),cabecera);
+        try {
+            tabla = new DefaultTableModel(i.getCicloTot(an), cabecera);
             jTableVerCicloA.setModel(tabla);
-            
-        } catch (Exception e){
-            JOptionPane.showMessageDialog (getContentPane (), "No hay ciclos",
-            "Error",JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jRadioButtonVerA1AActionPerformed
 
     //Ver los ciclos de segundo año
     private void jRadioButtonVerA2AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerA2AActionPerformed
-        
+
         int an = 2;
-        try{
-            tabla = new DefaultTableModel(i.getCicloTot(an),cabecera);
+        try {
+            tabla = new DefaultTableModel(i.getCicloTot(an), cabecera);
             jTableVerCicloA.setModel(tabla);
-            
-        } catch (Exception e){
-            JOptionPane.showMessageDialog (getContentPane (), "No hay ciclos",
-            "Error",JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jRadioButtonVerA2AActionPerformed
 
@@ -860,133 +849,145 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     private void jButtonInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscribirActionPerformed
         Alumno annadir = null;
         try {
-            if(jTableVerCicloA.getSelectedRow()!=-1){
+            if (jTableVerCicloA.getSelectedRow() != -1) {
                 String nombreC = jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 0).toString();
                 int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
                 ContrasennaValida();
-                if (contrasennaValida == true){
-                    annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC) );
+                if (contrasennaValida == true) {
+                    annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
                 } else {
-                    JOptionPane.showMessageDialog (getContentPane (), "Las contraseñas no coinciden",
-                "Error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
+                            "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            } else{
-                JOptionPane.showMessageDialog (getContentPane (), "Debe seleccionar una fila de la tabla",
-                "Error",JOptionPane.ERROR_MESSAGE);
-            } 
-            
-            
-        }catch (NullPointerException npe){
-        
-            JOptionPane.showMessageDialog (getContentPane (), "Porfavor selecciona una fila con datos",
-            "Error",JOptionPane.ERROR_MESSAGE);
-        } 
-        
+            } else {
+                JOptionPane.showMessageDialog(getContentPane(), "Debe seleccionar una fila de la tabla",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (NullPointerException npe) {
+
+            JOptionPane.showMessageDialog(getContentPane(), "Porfavor selecciona una fila con datos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
         /*catch (Exception e) {
             JOptionPane.showMessageDialog (getContentPane (), "Error desconocido",
             "Error",JOptionPane.ERROR_MESSAGE);
         }*/
     }//GEN-LAST:event_jButtonInscribirActionPerformed
 
-    
     ///BOTON GROUP elegir como mostrar asignaturas\\\
     //De un ciclo concreto
     private void jRadioButtonCicloAsigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonCicloAsigActionPerformed
-        
+
         jPanelSeleccionCiclo.setVisible(true);
         jPanelMostrarAsig.setVisible(false);
     }//GEN-LAST:event_jRadioButtonCicloAsigActionPerformed
 
     //Todas
     private void jRadioButtonTodasAsigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonTodasAsigActionPerformed
-        
-        
-       
-            tabla = new DefaultTableModel(i.getModulosTot(),cabeceraModulo);
-            jTableElegirAsignaturas .setModel(tabla);
-            jPanelMostrarAsig.setVisible(true);
-            jPanelSeleccionCiclo.setVisible(false);
+
+        tabla = new DefaultTableModel(i.getModulosTot(), cabeceraModulo);
+        jTableElegirAsignaturas.setModel(tabla);
+        jPanelMostrarAsig.setVisible(true);
+        jPanelSeleccionCiclo.setVisible(false);
 
     }//GEN-LAST:event_jRadioButtonTodasAsigActionPerformed
 
-    
-    
     ///BOTON GROUP ver ciclos para profesores\\\ 
-    
     //Ver todos los ciclos
     private void jRadioButtonVerTodosPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerTodosPActionPerformed
-        
-        try{
-            tabla = new DefaultTableModel(i.getCicloTot(),cabecera);
-            jTableVerCicloP .setModel(tabla);
-            
-        } catch (Exception e){
-            JOptionPane.showMessageDialog (getContentPane (), "No hay ciclos en este centro",
-            "Error",JOptionPane.ERROR_MESSAGE);
+
+        try {
+            tabla = new DefaultTableModel(i.getCicloTot(), cabecera);
+            jTableVerCicloP.setModel(tabla);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos en este centro",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jRadioButtonVerTodosPActionPerformed
 
     //Ver los ciclos de primer año
     private void jRadioButtonVerA1PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerA1PActionPerformed
-        
+
         int an = 1;
-        try{
-            tabla = new DefaultTableModel(i.getCicloTot(an),cabecera);
+        try {
+            tabla = new DefaultTableModel(i.getCicloTot(an), cabecera);
             jTableVerCicloP.setModel(tabla);
-            
-        } catch (Exception e){
-            JOptionPane.showMessageDialog (getContentPane (), "No hay ciclos",
-            "Error",JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jRadioButtonVerA1PActionPerformed
 
     //Ver los ciclos de segundo año
     private void jRadioButtonVerA2PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerA2PActionPerformed
         int an = 2;
-        try{
-            tabla = new DefaultTableModel(i.getCicloTot(an),cabecera);
+        try {
+            tabla = new DefaultTableModel(i.getCicloTot(an), cabecera);
             jTableVerCicloP.setModel(tabla);
-            
-        } catch (Exception e){
-            JOptionPane.showMessageDialog (getContentPane (), "No hay ciclos",
-            "Error",JOptionPane.ERROR_MESSAGE);
+ 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jRadioButtonVerA2PActionPerformed
 
     //BOTON BUSCAR modulos del ciclo seleccionado
     private void jButtonBuscarAsigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarAsigActionPerformed
-                
-        try{
-            if(jTableVerCicloP.getSelectedRow()!=-1){
-                try{
+
+        try {
+            if (jTableVerCicloP.getSelectedRow() != -1) {
+                try {
                     String nombreC = jTableVerCicloP.getValueAt(jTableVerCicloP.getSelectedRow(), 0).toString();
                     int annoC = Integer.parseInt(jTableVerCicloP.getValueAt(jTableVerCicloP.getSelectedRow(), 1).toString());
-                    tabla = new DefaultTableModel(i.getModulosCic(nombreC, annoC),cabeceraModulo);
-                    jTableElegirAsignaturas .setModel(tabla);
-                    
-                } catch (Exception e){
-                    JOptionPane.showMessageDialog (getContentPane (), "No hay modulos del ciclo seleccionado",
-                    "Error",JOptionPane.ERROR_MESSAGE);
+                    tabla = new DefaultTableModel(i.getModulosCic(nombreC, annoC), cabeceraModulo);
+                    jTableElegirAsignaturas.setModel(tabla);
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(getContentPane(), "No hay modulos del ciclo seleccionado",
+                            "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 jPanelMostrarAsig.setVisible(true);
             } else {
-                JOptionPane.showMessageDialog (getContentPane (), "Debe seleccionar una fila de la tabla",
-                "Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(getContentPane(), "Debe seleccionar una fila de la tabla",
+                        "Error", JOptionPane.ERROR_MESSAGE);
             }
-         }catch (NullPointerException npe){
-            JOptionPane.showMessageDialog (getContentPane (), "Porfavor selecciona una fila con datos",
-            "Error",JOptionPane.ERROR_MESSAGE);
-        } 
+        } catch (NullPointerException npe) {
+            JOptionPane.showMessageDialog(getContentPane(), "Porfavor selecciona una fila con datos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonBuscarAsigActionPerformed
 
     private void jButtonAnnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnadirActionPerformed
- 
+
+        try {
+            String nombreM = jTableElegirAsignaturas.getValueAt(jTableElegirAsignaturas.getSelectedRow(), 0).toString();
+            int horasM = Integer.parseInt(jTableElegirAsignaturas.getValueAt(jTableElegirAsignaturas.getSelectedRow(), 1).toString());
+
+            
+
+            String[][] modulos = new String[jTableAsignaturasElegidas.getModel().getRowCount() +1][2];
+
+            for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
+
+                modulos[j][0] = jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + "";
+                modulos[j][1] = jTableAsignaturasElegidas.getModel().getValueAt(j, 1) + "";
+            }
+
+            modulos[jTableAsignaturasElegidas.getModel().getRowCount() ][0] = nombreM;
+            modulos[jTableAsignaturasElegidas.getModel().getRowCount() ][1] = horasM + "";
+
+            jTableAsignaturasElegidas.setModel(new DefaultTableModel(modulos, cabecera));
+
+        } catch (NullPointerException npe) {
+            JOptionPane.showMessageDialog(getContentPane(), "Porfavor selecciona una fila con datos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonAnnadirActionPerformed
 
-    
-
-    
-    
     //METODO MAIN
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
