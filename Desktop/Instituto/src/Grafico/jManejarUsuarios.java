@@ -8,6 +8,7 @@ package Grafico;
 import ClasesBase.Ciclo;
 import ClasesBase.Instituto;
 import ClasesBase.Modulo;
+import Usuarios.Administrador;
 import Usuarios.Alumno;
 import Usuarios.Profesor;
 import Usuarios.Usuario;
@@ -24,13 +25,10 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author MR.Pitiilin
  */
-public class jManejarUsuarios extends javax.swing.JDialog {
+public class jManejarUsuarios extends javax.swing.JFrame {
 
     Instituto i;
-    Ciclo c;
-    Alumno u;
-    Modulo m;
-    Profesor p;
+    //Administrador adm;
 
     //tablas
     String cabeceraTodos[] = {"tipo", "Nombre", "Dni", "fecha nacimiento"};
@@ -38,11 +36,40 @@ public class jManejarUsuarios extends javax.swing.JDialog {
     String cabeceraProfesores[] = {"Nombre", "dni", "fecha nacimiento"};
 
     DefaultTableModel tabla;
-
-    public jManejarUsuarios(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    
+    public jManejarUsuarios (){
+    
         initComponents();
+        /*
+        ArrayList<Alumno> alumnos = new ArrayList();
+        ArrayList<Ciclo> ciclos = new ArrayList();
+        ArrayList<Modulo> modulos = new ArrayList();
+        ArrayList<Usuario> usuarios = new ArrayList();
 
+        m = new Modulo("programacion", "1Daw", 3);
+        modulos.add(m);
+
+        c = new Ciclo(modulos, "DAW1", 1, 76);
+        ciclos.add(c);
+
+        u = new Alumno("daniel", "contra", "71177171E", new Date(), c);
+        usuarios.add(u);
+        alumnos.add(u);
+
+        p = new Profesor("gero", "estilton", "101010F", new Date(), modulos, ciclos);
+        profesores.add(p);
+        usuarios.add(p);
+
+        i = new Instituto(usuarios, ciclos, "camino", "plaza", "777777");
+        */
+    }
+
+    public jManejarUsuarios(Instituto i) {
+        initComponents();
+        this.i=i;
+        //this.adm=adm;
+        
+        /*
         ArrayList<Profesor> profesores = new ArrayList();
         ArrayList<Alumno> alumnos = new ArrayList();
         ArrayList<Ciclo> ciclos = new ArrayList();
@@ -64,7 +91,7 @@ public class jManejarUsuarios extends javax.swing.JDialog {
         usuarios.add(p);
 
         i = new Instituto(usuarios, ciclos, "camino", "plaza", "777777");
-
+        */
     }
 
     class jPanelGardient extends JPanel {
@@ -345,14 +372,7 @@ public class jManejarUsuarios extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                jManejarUsuarios dialog = new jManejarUsuarios(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new jManejarUsuarios().setVisible(true);
             }
         });
     }

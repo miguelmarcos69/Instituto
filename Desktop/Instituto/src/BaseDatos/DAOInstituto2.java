@@ -49,7 +49,7 @@ public class DAOInstituto2 {
             if (rs.next()) {
                 if (rs.getString(1).equals("adm")) {
                     System.out.println("Es un Administrador");
-                    tipo = 1;
+                    tipo = 0;
                 } else if (rs.getString(1).equals("alu")) {
                     System.out.println("Es un Alumno");
                     tipo = 1;
@@ -223,6 +223,7 @@ public class DAOInstituto2 {
                 rs = ConexionDefault.instancia().getStatement().executeQuery("select * from usuario where nombreInsti = '" + i.getNombre() + "'");
                 ArrayList<Usuario> listaUsuario = new ArrayList();
                 int cantidadFilas=0;
+                //cojo el numero de usuarios
                 if (rs.last()){
                 
                     cantidadFilas = rs.getRow();
@@ -239,7 +240,7 @@ public class DAOInstituto2 {
 
                         case "alu":
                             a = new Alumno(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
-                            ciclosAlumnos[contador++]=rs.getString(6);
+                            ciclosAlumnos[contador]=rs.getString(6);
                             break;
                         case "prof":
                             a = new Profesor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
@@ -247,6 +248,7 @@ public class DAOInstituto2 {
                         case "adm":
                             a = new Administrador(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
                     }
+                    contador++;
 
                     listaUsuario.add(a);
 

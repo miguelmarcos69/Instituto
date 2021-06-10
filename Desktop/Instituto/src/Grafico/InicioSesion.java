@@ -203,7 +203,7 @@ public class InicioSesion extends javax.swing.JFrame {
             case 0:
                 Administrador admin = DAOInstituto2.instancia().obtenerAdministrador(nombre, nombreInsti);
                 if (admin.getContrasenna().equals(contra)) {
-                    AdministradorGrafico adm = new AdministradorGrafico(null, true, admin, this);
+                    AdministradorGrafico adm = new AdministradorGrafico(admin,i);//Modificar
                     this.setVisible(false);
                     adm.mostrar(nombre);
                     adm.setVisible(true);

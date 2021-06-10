@@ -6,6 +6,7 @@
  */
 package Grafico;
 
+import ClasesBase.Instituto;
 import Usuarios.*;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -22,9 +23,8 @@ import javax.swing.table.DefaultTableModel;
 public class AdministradorGrafico extends javax.swing.JFrame {
 
     //Crear un usuario Admin
-    Usuario usuario;
     Administrador admin;
-    InicioSesion i;
+    Instituto i;
 
     /**
      * Creates new form Administrador
@@ -34,7 +34,7 @@ public class AdministradorGrafico extends javax.swing.JFrame {
      * @param ad
      * @param i
      */
-    public AdministradorGrafico(java.awt.Frame parent, boolean modal, Administrador ad, InicioSesion i) {
+    public AdministradorGrafico(Administrador ad, Instituto i) {
         initComponents();
         this.setBackground(Color.black);
         this.setForeground(Color.white);
@@ -136,13 +136,13 @@ public class AdministradorGrafico extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(nombre))))
+                            .addComponent(nombre)))
+                    .addComponent(jLabel5))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -207,7 +207,7 @@ public class AdministradorGrafico extends javax.swing.JFrame {
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // TODO add your handling code here:
-        jManejarUsuarios in = new jManejarUsuarios(null, true);
+        jManejarUsuarios in = new jManejarUsuarios(i);
         in.setVisible(true);
         this.setVisible(false);
 
