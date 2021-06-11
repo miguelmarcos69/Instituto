@@ -73,6 +73,23 @@ public class Ciclo {
 
         return resultado;
     }
+    
+    public Modulo getModulo (String nombreModulo){
+        Modulo m = null;
+        
+        for (int i = 0; i<Asignaturas.size();i++){
+        
+            if(Asignaturas.get(i).getNombre().equals(nombreModulo)){
+            
+                m = Asignaturas.get(i);
+                
+                i=Asignaturas.size();
+            }
+        }
+        
+        return m;
+    
+    }
 
     //Obtener arraylist para mostrar en tabla(todos los ciclos)
     public String[] toArrayString() {

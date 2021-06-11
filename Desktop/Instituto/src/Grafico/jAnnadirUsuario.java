@@ -1,9 +1,9 @@
 package Grafico;
-
 import ClasesBase.Ciclo;
 import ClasesBase.Instituto;
 import ClasesBase.Modulo;
 import Usuarios.Alumno;
+import Usuarios.Profesor;
 import Usuarios.Usuario;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,12 +14,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 public class jAnnadirUsuario extends javax.swing.JDialog {
-
-    private boolean contrasennaValida = false;
-    private boolean todosCiclos = false;
-    private boolean primerosCiclos = false;
-    private boolean segundosCiclos = false;
-
+    
+    //
     Instituto i;
     String cabecera[] = {"Nombre", "Curso"};
     String cabeceraModulo[] = {"Nombre", "Horas semanales"};
@@ -33,7 +29,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelDatosCoumnes.setVisible(false);
         jPanelProfesor.setVisible(false);
         jPanelAlumno.setVisible(false);
-        /*
+        
         //Araylist para guardar asignaturas de forma local
         ArrayList<Modulo> modAnn = new ArrayList<>();
 
@@ -66,7 +62,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         al.add(juan);
 
         this.i = new Instituto(al, c, "camino", "la que sea", "69633245");
-        */
+        
     }
 
     ///METODOS GET\\\
@@ -103,14 +99,15 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     }
 
     //COMPROVAR SI LAS CONTRASEÑAS SON IGUALES
-    public void ContrasennaValida() {
+    public boolean ContrasennaValida() {
+        
+        boolean valida = false;
+        
         if (jPasswordFieldContra.getText().equals(jPasswordFieldRepetirContra.getText())) {
-            contrasennaValida = true;
-        } else {
-            jPasswordFieldContra.setText("");
-            jPasswordFieldRepetirContra.setText("");
-            contrasennaValida = false;
+            valida = true;
         }
+        
+        return valida;
     }
 
     @SuppressWarnings("unchecked")
@@ -823,6 +820,26 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
+        Profesor annadir = null;
+        
+       
+        ArrayList modulos = new ArrayList();
+        
+        for (int j = 0; j< jTableAsignaturasElegidas.getModel().getRowCount(); j++){            
+               
+                modulos.add(i.buscarModuloNombre(jTableAsignaturasElegidas.getModel().getValueAt(j, 0)+""));
+            }
+
+        
+        if (ContrasennaValida() == true) {
+                    annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento(),modulos);
+                    i.annadirUsuario(annadir);
+                    //Añadir profesor a la base de datos
+        } else {
+            JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     //Ver los ciclos de primer año
@@ -861,7 +878,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 String nombreC = jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 0).toString();
                 int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
                 ContrasennaValida();
-                if (contrasennaValida == true) {
+                if (ContrasennaValida() == true) {
                     annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
 
                 } else {
@@ -878,11 +895,8 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(getContentPane(), "Porfavor selecciona una fila con datos",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        /*catch (Exception e) {
-            JOptionPane.showMessageDialog (getContentPane (), "Error desconocido",
-            "Error",JOptionPane.ERROR_MESSAGE);
-        }*/
+        
+        
     }//GEN-LAST:event_jButtonInscribirActionPerformed
 
     ///BOTON GROUP elegir como mostrar asignaturas\\\
@@ -970,6 +984,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonBuscarAsigActionPerformed
 
+    //BOTON AÑADIR modulos selecconados
     private void jButtonAnnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnadirActionPerformed
 
         try {

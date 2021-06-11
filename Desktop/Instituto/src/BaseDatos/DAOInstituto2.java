@@ -279,4 +279,22 @@ public class DAOInstituto2 {
 
         return i;
     }
+    
+    public boolean annadirUsuario(Instituto i, Usuario u) {
+        boolean annadido = false;
+            
+            try {
+                if (u instanceof Alumno){
+                    Instituto in = (Instituto)i;
+                    Alumno a = (Alumno)u;
+
+                    ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery(
+                            "SELECT nombre FROM usuario WHERE nombre='"+u.getNombre()+ "'AND nombreInsti='"+i.getNombre());
+                } 
+            }catch (SQLException ex) {
+                Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+    }
+
 }
