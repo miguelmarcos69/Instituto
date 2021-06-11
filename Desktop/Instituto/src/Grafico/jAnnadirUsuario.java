@@ -68,6 +68,14 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         this.i = new Instituto(al, c, "camino", "la que sea", "69633245");
         */
     }
+    
+
+        
+        
+        
+        
+        
+    
 
     ///METODOS GET\\\
     public String getNombre() {
@@ -101,6 +109,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         }
         return fechaDate;
     }
+    
 
     //COMPROVAR SI LAS CONTRASEÑAS SON IGUALES
     public void ContrasennaValida() {
