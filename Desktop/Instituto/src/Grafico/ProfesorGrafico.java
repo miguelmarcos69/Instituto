@@ -49,6 +49,9 @@ public class ProfesorGrafico extends javax.swing.JFrame {
             g2d.fillRect(0, 0, width, height);
         }
     }
+       public void mostrar(String nom) {
+        this.nombre.setText(nom);
+    }
 
     private ProfesorGrafico() {
         initComponents();
@@ -103,7 +106,7 @@ public class ProfesorGrafico extends javax.swing.JFrame {
         jPanel1 = new jPanelGardient();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jNombre = new javax.swing.JLabel();
+        nombre = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jModificarNotas = new javax.swing.JLabel();
@@ -114,6 +117,7 @@ public class ProfesorGrafico extends javax.swing.JFrame {
         jLabelTablon = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -123,10 +127,10 @@ public class ProfesorGrafico extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Bienvenido ");
 
-        jNombre.setBackground(new java.awt.Color(255, 255, 255));
-        jNombre.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
-        jNombre.setForeground(new java.awt.Color(255, 255, 255));
-        jNombre.setText("Nombre");
+        nombre.setBackground(new java.awt.Color(255, 255, 255));
+        nombre.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
+        nombre.setForeground(new java.awt.Color(255, 255, 255));
+        nombre.setText("Nombre");
 
         jLabel6.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -142,16 +146,15 @@ public class ProfesorGrafico extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(158, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(47, 47, 47)
-                        .addComponent(jNombre)
-                        .addGap(116, 116, 116))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addContainerGap())))
+                .addContainerGap(548, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(jLabel1)
+                .addGap(63, 63, 63)
+                .addComponent(nombre)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +164,7 @@ public class ProfesorGrafico extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jNombre))
+                    .addComponent(nombre))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
 
@@ -213,6 +216,7 @@ public class ProfesorGrafico extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jModificarNotasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jModificarNotasMouseClicked
@@ -274,9 +278,9 @@ public class ProfesorGrafico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelTablon;
     private javax.swing.JLabel jModificarNotas;
-    private javax.swing.JLabel jNombre;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel jTablon;
+    private javax.swing.JLabel nombre;
     // End of variables declaration//GEN-END:variables
 }

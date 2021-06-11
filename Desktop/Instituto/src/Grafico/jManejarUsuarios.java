@@ -13,13 +13,18 @@ import Usuarios.Alumno;
 import Usuarios.Profesor;
 import Usuarios.Usuario;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -38,7 +43,8 @@ public class jManejarUsuarios extends javax.swing.JFrame {
     DefaultTableModel tabla;
     
     public jManejarUsuarios (){
-    
+    tablaUsuarios.getTableHeader().setDefaultRenderer((TableCellRenderer) new jManejarUsuarios ());
+        
         initComponents();
         /*
         ArrayList<Alumno> alumnos = new ArrayList();
@@ -93,6 +99,9 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         i = new Instituto(usuarios, ciclos, "camino", "plaza", "777777");
         */
     }
+    
+    
+
 
     class jPanelGardient extends JPanel {
 
@@ -160,7 +169,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(383, Short.MAX_VALUE)
+                .addContainerGap(394, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(331, 331, 331)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,10 +182,10 @@ public class jManejarUsuarios extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 999, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-11, -8, 1010, 100));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -287,14 +296,16 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 984, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(985, 632));
+        setSize(new java.awt.Dimension(985, 593));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -381,8 +392,24 @@ public class jManejarUsuarios extends javax.swing.JFrame {
                 new jManejarUsuarios().setVisible(true);
             }
         });
-    }
 
+    }
+    
+    
+   
+    static public class HeaderColor extends DefaultTableCellRenderer{
+        public HeaderColor(){
+            setOpaque(true);
+        }
+        public Component getTableCellRendererComponent(JTable tablaUsuarios, Object value,boolean selected,boolean focused,int row,int column){
+            
+            super.getTableCellRendererComponent(tablaUsuarios, value, selected, focused, row, column);
+        
+            setBackground(Color.BLACK);
+            
+            return this;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;

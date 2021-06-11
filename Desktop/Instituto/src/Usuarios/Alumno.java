@@ -48,6 +48,8 @@ public class Alumno extends Usuario {
     public String getNombre() {
         return nombre;
     }
+    
+    
 
     @Override
     public String getContrasenna() {

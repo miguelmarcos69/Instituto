@@ -51,6 +51,9 @@ public class AlumnoGrafico extends javax.swing.JFrame {
             g2d.fillRect(0, 0, width, height);
         }
     }
+       public void mostrar(String nom) {
+        this.nombre.setText(nom);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,7 +67,7 @@ public class AlumnoGrafico extends javax.swing.JFrame {
         jPanel1 = new jPanelGardient();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jnombre = new javax.swing.JLabel();
+        nombre = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -81,10 +84,10 @@ public class AlumnoGrafico extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Bienvenido");
 
-        jnombre.setBackground(new java.awt.Color(255, 255, 255));
-        jnombre.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jnombre.setForeground(new java.awt.Color(255, 255, 255));
-        jnombre.setText("nombre");
+        nombre.setBackground(new java.awt.Color(255, 255, 255));
+        nombre.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        nombre.setForeground(new java.awt.Color(255, 255, 255));
+        nombre.setText("nombre");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -103,7 +106,7 @@ public class AlumnoGrafico extends javax.swing.JFrame {
                 .addGap(58, 58, 58)
                 .addComponent(jLabel1)
                 .addGap(72, 72, 72)
-                .addComponent(jnombre)
+                .addComponent(nombre)
                 .addContainerGap(83, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -117,7 +120,7 @@ public class AlumnoGrafico extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jnombre))
+                    .addComponent(nombre))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
 
@@ -231,6 +234,6 @@ public class AlumnoGrafico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel jnombre;
+    private javax.swing.JLabel nombre;
     // End of variables declaration//GEN-END:variables
 }

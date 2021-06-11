@@ -31,6 +31,11 @@ public class Calendario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jCalendar1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jCalendar1.setForeground(new java.awt.Color(0, 0, 0));
+        jCalendar1.setDate(new java.util.Date(1623443707000L));
+        jCalendar1.setDecorationBackgroundColor(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

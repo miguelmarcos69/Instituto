@@ -195,15 +195,15 @@ public class InicioSesion extends javax.swing.JFrame {
         String contra = jPConstrasena.getText();
         ConexionDefault.crearConexion();
         int tipo = DAOInstituto2.instancia().obtenerTipoUsuario(nombre, nombreInsti);
-        
-        i=DAOInstituto2.instancia().obtenerInstituto(nombreInsti);
+
+        i = DAOInstituto2.instancia().obtenerInstituto(nombreInsti);
 
         switch (tipo) {
 
             case 0:
                 Administrador admin = DAOInstituto2.instancia().obtenerAdministrador(nombre, nombreInsti);
                 if (admin.getContrasenna().equals(contra)) {
-                    AdministradorGrafico adm = new AdministradorGrafico(admin,i);//Modificar
+                    AdministradorGrafico adm = new AdministradorGrafico(admin, i);//Modificar
                     this.setVisible(false);
                     adm.mostrar(nombre);
                     adm.setVisible(true);
@@ -218,20 +218,21 @@ public class InicioSesion extends javax.swing.JFrame {
                 if (alum.getContrasenna().equals(contra)) {
                     AlumnoGrafico alG = new AlumnoGrafico(null, true, alum, this);
                     this.setVisible(false);
-                    // adm.mostrar();
+                    alG.mostrar(nombre);
                     alG.setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
                 }
                 break;
             case 2:
-                Profesor prof =  DAOInstituto2.instancia().obtenerProfesor(nombre, nombreInsti);
-                if (prof.getContrasenna().equals(contra)){
+                Profesor prof = DAOInstituto2.instancia().obtenerProfesor(nombre, nombreInsti);
+                if (prof.getContrasenna().equals(contra)) {
                     ProfesorGrafico pr = new ProfesorGrafico(null, true, prof, i);
                     this.setVisible(false);
+                    pr.mostrar(nombre);
                     pr.setVisible(true);
                 }
-                
+
                 break;
         }
 
@@ -284,8 +285,7 @@ public class InicioSesion extends javax.swing.JFrame {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
 
- System.exit(0);
-
+        System.exit(0);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel5MouseClicked
@@ -296,15 +296,11 @@ public class InicioSesion extends javax.swing.JFrame {
 
     private void jTNombreInstitutoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTNombreInstitutoMousePressed
 
-
-
-
         jTNombreInstituto.setText("");
         // TODO add your handling code here:
     }//GEN-LAST:event_jTNombreInstitutoMousePressed
 
     private void jTUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTUsuarioMousePressed
-
 
         jTUsuario.setText("");
 
