@@ -12,25 +12,25 @@ import java.util.ArrayList;
  *
  * @author alumno
  */
-public class Ciclo {
+public class Curso {
 
     //atributos de la clase
-    private ArrayList<Modulo> Asignaturas;
+    private ArrayList<Modulo> modulos;
     private String nombre;
     private int plazas;
     private int anno;
 
     //metodo constructor
-    public Ciclo(ArrayList<Modulo> Asignatura, String nombre, int anno, int plazas) {
-        this.Asignaturas = Asignatura;
+    public Curso(ArrayList<Modulo> Asignatura, String nombre, int anno, int plazas) {
+        this.modulos = Asignatura;
         this.nombre = nombre;
         this.anno = anno;
         this.plazas = plazas;
     }
 
-    public Ciclo(String nombre, int plazas, int ano) {
+    public Curso(String nombre, int plazas, int ano) {
         this.nombre = nombre;
-        this.Asignaturas = new ArrayList();
+        this.modulos = new ArrayList();
         this.plazas = plazas;
         this.anno = ano;
     }
@@ -42,7 +42,7 @@ public class Ciclo {
 
     public ArrayList<Modulo> getArrayListModulos() {
 
-        return this.Asignaturas;
+        return this.modulos;
     }
 
     public String getNombre() {
@@ -54,22 +54,22 @@ public class Ciclo {
     }
 
     public int getSizeModulos() {
-        return Asignaturas.size();
+        return modulos.size();
     }
 
     public void anadirModulo(Modulo e) {
 
-        Asignaturas.add(e);
+        modulos.add(e);
     }
 
     public boolean existeModulo(String nombre) {
         boolean resultado = false;
 
-        for (int i = 0; i < Asignaturas.size(); i++) {
+        for (int i = 0; i < modulos.size(); i++) {
 
-            if (Asignaturas.get(i).getNombre().equals(nombre)) {
+            if (modulos.get(i).getNombre().equals(nombre)) {
                 
-                System.out.println(Asignaturas.get(i).getNombre());
+                System.out.println(modulos.get(i).getNombre());
 
                 resultado = true;
             }
@@ -81,13 +81,13 @@ public class Ciclo {
     public Modulo getModulo(String nombreModulo) {
         Modulo m = null;
 
-        for (int i = 0; i < Asignaturas.size(); i++) {
+        for (int i = 0; i < modulos.size(); i++) {
 
-            if (Asignaturas.get(i).getNombre().equals(nombreModulo)) {
+            if (modulos.get(i).getNombre().equals(nombreModulo)) {
 
-                m = Asignaturas.get(i);
+                m = modulos.get(i);
 
-                i = Asignaturas.size();
+                i = modulos.size();
             }
         }
 
@@ -117,10 +117,10 @@ public class Ciclo {
 
     //Arraylist para obtenr todos los modulos
     public String[][] getModulos() {
-        String[][] arrayAsignaturas = new String[Asignaturas.size()][10];
-        for (int i = 0; i < Asignaturas.size(); i++) {
+        String[][] arrayAsignaturas = new String[modulos.size()][10];
+        for (int i = 0; i < modulos.size(); i++) {
 
-            Modulo m = (Modulo) Asignaturas.get(i);
+            Modulo m = (Modulo) modulos.get(i);
             arrayAsignaturas[i] = m.toArrayString();
         }
 
@@ -129,9 +129,9 @@ public class Ciclo {
 
     public ArrayList<Modulo> concatenarModulos(ArrayList<Modulo> a) {
 
-        for (int i = 0; i < this.Asignaturas.size(); i++) {
+        for (int i = 0; i < this.modulos.size(); i++) {
 
-            a.add(this.Asignaturas.get(i));
+            a.add(this.modulos.get(i));
 
         }
 

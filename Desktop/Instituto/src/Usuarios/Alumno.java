@@ -5,7 +5,7 @@ package Usuarios;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import ClasesBase.Ciclo;
+import ClasesBase.Curso;
 import ClasesBase.Modulo;
 import ClasesBase.Nota;
 import Usuarios.Usuario;
@@ -20,12 +20,12 @@ import Grafico.*;
 public class Alumno extends Usuario {
     //Atributos
 
-    private Ciclo ciclo;
+    private Curso curso;
     private ArrayList<Nota> notas;
 
-    public Alumno(String nombre, String contrasenna, String DNI, Date fecha_nacimiento, Ciclo ciclo) {
+    public Alumno(String nombre, String contrasenna, String DNI, Date fecha_nacimiento, Curso ciclo) {
         super(nombre, contrasenna, DNI, fecha_nacimiento);
-        this.ciclo = ciclo;
+        this.curso = ciclo;
         notas = new ArrayList();
     }
 
@@ -37,18 +37,18 @@ public class Alumno extends Usuario {
 
     public String[][] getNotasModulos() {
 
-        String[][] modulosNotas = new String[ciclo.getSizeModulos()][5];
+        String[][] modulosNotas = new String[curso.getSizeModulos()][5];
 
-        for (int i = 0; i < ciclo.getSizeModulos(); i++) {
+        for (int i = 0; i < curso.getSizeModulos(); i++) {
 
-            modulosNotas[i][0] = ciclo.getArrayListModulos().get(i).getNombre();
+            modulosNotas[i][0] = curso.getArrayListModulos().get(i).getNombre();
 
             int nNotasModulo = 0;
             int notaFinal = 0;
 
             for (int j = 0; j < notas.size(); j++) {
 
-                if (notas.get(j).getModulo().equals(ciclo.getArrayListModulos().get(i).getNombre())) {
+                if (notas.get(j).getModulo().equals(curso.getArrayListModulos().get(i).getNombre())) {
 
                     modulosNotas[i][j + 1] = notas.get(j).getNota() + "";
                     notaFinal = notaFinal + notas.get(j).getNota();
@@ -65,8 +65,8 @@ public class Alumno extends Usuario {
     }
 
     //Metodos get
-    public Ciclo getCiclo() {
-        return ciclo;
+    public Curso getCiclo() {
+        return curso;
     }
 
     public ArrayList<Nota> getNotas() {
@@ -113,7 +113,7 @@ public class Alumno extends Usuario {
 
     public boolean tieneModulo(String nombreAsignatura) {
 
-        boolean resultado = ciclo.existeModulo(nombreAsignatura);
+        boolean resultado = curso.existeModulo(nombreAsignatura);
 
         return resultado;
     }
@@ -123,13 +123,28 @@ public class Alumno extends Usuario {
 
     }
 
-    public void setCiclo(Ciclo ciclo) {
-        this.ciclo = ciclo;
+    public void setCiclo(Curso ciclo) {
+        this.curso = ciclo;
     }
 
     @Override
     public String toString() {
         return nombre;
+    }
+    
+    public ArrayList<Nota> getNotasModulo (String modulo){
+    
+        ArrayList<Nota> notas = new ArrayList();
+        
+        for (int i=0;i<notas.size();i++){
+        
+            if (notas.get(i).getModulo().equals(modulo)){
+            
+                notas.add(notas.get(i));
+            }
+        }
+        
+        return notas;
     }
 
 }

@@ -5,7 +5,7 @@
  */
 package BaseDatos;
 
-import ClasesBase.Ciclo;
+import ClasesBase.Curso;
 import ClasesBase.Instituto;
 import ClasesBase.Modulo;
 import ClasesBase.Nota;
@@ -75,7 +75,7 @@ public class DAOInstituto2 {
 
         Alumno a = null;
         String nombreCiclo;
-        Ciclo ciclo;
+        Curso ciclo;
 
         try {
             ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery(
@@ -100,12 +100,12 @@ public class DAOInstituto2 {
     }
 
     public Alumno getDatosAlumno(Alumno a, String nombreCiclo) {
-        Ciclo ciclo = null;
+        Curso ciclo = null;
 
         try {
             ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select * from ciclo where nombre  = '" + nombreCiclo + "'");
             if (rs.next()) {
-                ciclo = new Ciclo(rs.getString(1), rs.getInt(2), rs.getInt(3));
+                ciclo = new Curso(rs.getString(1), rs.getInt(2), rs.getInt(3));
 
                 rs = ConexionDefault.instancia().getStatement().executeQuery("select * from modulo where ciclo  = '" + nombreCiclo + "'");
 
@@ -198,7 +198,7 @@ public class DAOInstituto2 {
 
     public Instituto obtenerInstituto(String nombre) {
         Instituto i = null;
-        Ciclo c = null;
+        Curso c = null;
 
         try {
             ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select * from instituto where nombre= '" + nombre + "'");
@@ -211,7 +211,7 @@ public class DAOInstituto2 {
 
                 while (rs.next()) {
 
-                    c = new Ciclo(rs.getString(1), rs.getInt(2), rs.getInt(3));
+                    c = new Curso(rs.getString(1), rs.getInt(2), rs.getInt(3));
 
                     rs = ConexionDefault.instancia().getStatement().executeQuery("select * from modulo where ciclo ='" + c.getNombre() + "'");
 

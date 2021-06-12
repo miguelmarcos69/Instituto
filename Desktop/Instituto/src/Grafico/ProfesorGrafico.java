@@ -56,7 +56,7 @@ public class ProfesorGrafico extends javax.swing.JFrame {
     private ProfesorGrafico() {
         initComponents();
         ArrayList<Alumno> al = new ArrayList<>();
-        ArrayList<Ciclo> c = new ArrayList<>();
+        ArrayList<Curso> c = new ArrayList<>();
         ArrayList<Modulo> mod = new ArrayList<>();
         ArrayList<Modulo> mod2 = new ArrayList<>();
         ArrayList<Nota> notas1 = new ArrayList<>();
@@ -65,8 +65,8 @@ public class ProfesorGrafico extends javax.swing.JFrame {
         Modulo entornos = new Modulo("entornos", "12", 2);
         Modulo fol = new Modulo("fol", "12", 2);
 
-        Ciclo primero = new Ciclo(mod, "DAW", 2, 1);
-        Ciclo segundo = new Ciclo(mod2, "DAW", 2, 2);
+        Curso primero = new Curso(mod, "DAW", 2, 1);
+        Curso segundo = new Curso(mod2, "DAW", 2, 2);
 
         mod.add(programacion);
         mod.add(entornos);

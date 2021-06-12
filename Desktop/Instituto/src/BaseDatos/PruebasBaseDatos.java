@@ -5,7 +5,7 @@
  */
 package BaseDatos;
 
-import ClasesBase.Ciclo;
+import ClasesBase.Curso;
 import ClasesBase.Instituto;
 import ClasesBase.Modulo;
 import Usuarios.Alumno;
@@ -26,12 +26,12 @@ public class PruebasBaseDatos {
         ArrayList<Modulo> modAnn = new ArrayList<>();
 
         ArrayList<Usuario> al = new ArrayList<>();
-        ArrayList<Ciclo> c = new ArrayList<>();
+        ArrayList<Curso> c = new ArrayList<>();
         ArrayList<Modulo> mod = new ArrayList();
         ArrayList<Modulo> mod2 = new ArrayList();
 
-        Ciclo primero = new Ciclo(mod, "DAW", 1, 1);
-        Ciclo segundo = new Ciclo(mod2, "DAW", 2, 2);
+        Curso primero = new Curso(mod, "DAW", 1, 1);
+        Curso segundo = new Curso(mod2, "DAW", 2, 2);
 
         Modulo programacion = new Modulo("Programacion", "12", 2);
         Modulo entornos = new Modulo("entornos", "12", 2);

@@ -5,7 +5,7 @@
  */
 package Grafico;
 
-import ClasesBase.Ciclo;
+import ClasesBase.Curso;
 import ClasesBase.Instituto;
 import ClasesBase.Modulo;
 import Usuarios.Administrador;

@@ -6,7 +6,7 @@
 package Grafico;
 
 import BaseDatos.DAOInstituto2;
-import ClasesBase.Ciclo;
+import ClasesBase.Curso;
 import ClasesBase.Instituto;
 import ClasesBase.Modulo;
 import ClasesBase.Nota;
@@ -128,7 +128,7 @@ public class ModificarNotas extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaAlumnos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 364, 133));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 380, 133));
 
         modulos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,7 +143,7 @@ public class ModificarNotas extends javax.swing.JFrame {
                 modificarActionPerformed(evt);
             }
         });
-        jPanel1.add(modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 324, -1, -1));
+        jPanel1.add(modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
 
         nota1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,7 +202,7 @@ public class ModificarNotas extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, 280, 220));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 160, 280, 220));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -228,7 +228,7 @@ public class ModificarNotas extends javax.swing.JFrame {
                 .addGap(41, 41, 41))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1308, -1));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 1308, -1));
 
         tablaNotas.setBackground(new java.awt.Color(0, 0, 0));
         tablaNotas.setForeground(new java.awt.Color(255, 255, 255));
@@ -247,19 +247,23 @@ public class ModificarNotas extends javax.swing.JFrame {
         tablaNotas.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane2.setViewportView(tablaNotas);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 290, 380, 137));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 380, 137));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 410, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -277,6 +281,15 @@ public class ModificarNotas extends javax.swing.JFrame {
         String nombreAlumno = i.getMombreAlumnosAsignatura(itemSeleccionado, alumnoSeleccionado);
         System.out.println(nombreAlumno);
         notaAlum.setText(nombreAlumno);
+        try{
+        nota1.setText(i.buscarAlumno(nombreAlumno).getNotas().get(0).getNota()+"");
+        nota2.setText(i.buscarAlumno(nombreAlumno).getNotas().get(1).getNota()+"");
+        nota3.setText(i.buscarAlumno(nombreAlumno).getNotas().get(2).getNota()+"");
+        }catch(NullPointerException a ){
+        
+            //Esta null pointer no la tratamos ya que puede dar si un usuario no tiene todas las notas
+        
+        }
         jPanel2.setVisible(true);
 
 

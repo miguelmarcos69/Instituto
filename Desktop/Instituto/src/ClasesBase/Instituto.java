@@ -22,14 +22,14 @@ public class Instituto {
      */
     //atributos de la clase
     private ArrayList<Usuario> usuarios;
-    private ArrayList<Ciclo> ciclos;
+    private ArrayList<Curso> cursos;
     private String nombre;
     private String direccion;
     private String telefono; // para el manejo de datos se usa String
     
-    public Instituto(ArrayList<Usuario> usuario, ArrayList<Ciclo> ciclos, String nombre, String direccion, String telefono) {
+    public Instituto(ArrayList<Usuario> usuario, ArrayList<Curso> ciclos, String nombre, String direccion, String telefono) {
         this.usuarios = usuario;
-        this.ciclos = ciclos;
+        this.cursos = ciclos;
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
@@ -41,7 +41,7 @@ public class Instituto {
         this.direccion = direccion;
         this.telefono = telefono;
         this.usuarios = new ArrayList();
-        this.ciclos = new ArrayList();
+        this.cursos = new ArrayList();
     }
 
     //metodos getters
@@ -68,20 +68,20 @@ public class Instituto {
 
     public int getCiclosSize() {
 
-        return ciclos.size();
+        return cursos.size();
     }
 
     public Modulo buscarModuloNombre(String nombreModulo) {
 
         Modulo m = null;
 
-        for (int i = 0; i < ciclos.size(); i++) {
+        for (int i = 0; i < cursos.size(); i++) {
 
-            m = ciclos.get(i).getModulo(nombreModulo);
+            m = cursos.get(i).getModulo(nombreModulo);
 
             if (m != null) {
 
-                i = ciclos.size();
+                i = cursos.size();
             }
         }
 
@@ -252,10 +252,10 @@ public class Instituto {
     //Arralist para obtner todos los ciclos
     public String[][] getCicloTot() {
 
-        String[][] arrayCiclos = new String[ciclos.size()][10];
-        for (int i = 0; i < ciclos.size(); i++) {
+        String[][] arrayCiclos = new String[cursos.size()][10];
+        for (int i = 0; i < cursos.size(); i++) {
 
-            Ciclo c = (Ciclo) ciclos.get(i);
+            Curso c = (Curso) cursos.get(i);
             arrayCiclos[i] = c.toArrayString();
         }
 
@@ -267,8 +267,8 @@ public class Instituto {
 
         int nModulos = 0;
 
-        for (int i = 0; i < ciclos.size(); i++) {
-            Ciclo c = (Ciclo) ciclos.get(i);
+        for (int i = 0; i < cursos.size(); i++) {
+            Curso c = (Curso) cursos.get(i);
             if (c.getAnno() == annoCic) {
                 nModulos++;
             }
@@ -278,8 +278,8 @@ public class Instituto {
 
         int contador = 0;
 
-        for (int i = 0; i < ciclos.size(); i++) {
-            Ciclo c = (Ciclo) ciclos.get(i);
+        for (int i = 0; i < cursos.size(); i++) {
+            Curso c = (Curso) cursos.get(i);
             if (c.getAnno() == annoCic) {
                 arrayCiclos[contador++] = c.toArrayString();
             }
@@ -289,15 +289,15 @@ public class Instituto {
     }
 
     //Encontrar un ciclo filttrando por nombre y año
-    public Ciclo getCicloNombre(String nombre, int ano) {
+    public Curso getCicloNombre(String nombre, int ano) {
 
-        Ciclo buscado = null;
+        Curso buscado = null;
 
-        for (int i = 0; i < ciclos.size(); i++) {
+        for (int i = 0; i < cursos.size(); i++) {
 
-            if (ciclos.get(i).getNombre().equals(nombre) && ciclos.get(i).getAnno() == ano) {
+            if (cursos.get(i).getNombre().equals(nombre) && cursos.get(i).getAnno() == ano) {
 
-                buscado = ciclos.get(i);
+                buscado = cursos.get(i);
             }
         }
 
@@ -308,9 +308,9 @@ public class Instituto {
     public ArrayList<Modulo> obtenerTodosModulos() {
         ArrayList<Modulo> listaModulos = new ArrayList();
 
-        for (int i = 0; i < ciclos.size(); i++) {
+        for (int i = 0; i < cursos.size(); i++) {
 
-            listaModulos = ciclos.get(i).concatenarModulos(listaModulos);
+            listaModulos = cursos.get(i).concatenarModulos(listaModulos);
         }
 
         return listaModulos;
@@ -335,11 +335,11 @@ public class Instituto {
     public String[][] getModulosCic(String nombre, int ano) {
         int tamanno = 0;
         String[][] s = new String[tamanno][10];
-        for (int i = 0; i < ciclos.get(i).getSizeModulos(); i++) {
+        for (int i = 0; i < cursos.get(i).getSizeModulos(); i++) {
 
-            if (ciclos.get(i).getNombre().equals(nombre) && ciclos.get(i).getAnno() == ano) {
-                tamanno = tamanno + ciclos.get(i).getSizeModulos();
-                s = ciclos.get(i).getModulos();
+            if (cursos.get(i).getNombre().equals(nombre) && cursos.get(i).getAnno() == ano) {
+                tamanno = tamanno + cursos.get(i).getSizeModulos();
+                s = cursos.get(i).getModulos();
             }
 
         }
@@ -351,9 +351,9 @@ public class Instituto {
 
         ArrayList<Modulo> listaModulos = new ArrayList();
 
-        for (int i = 0; i < ciclos.size(); i++) {
+        for (int i = 0; i < cursos.size(); i++) {
 
-            listaModulos = ciclos.get(i).concatenarModulos(listaModulos);
+            listaModulos = cursos.get(i).concatenarModulos(listaModulos);
         }
 
         String[][] arrayModulos = new String[listaModulos.size()][2];
@@ -371,9 +371,24 @@ public class Instituto {
         usuarios.add(a);
     }
 
-    public void annadirCiclo(Ciclo a) {
+    public void annadirCiclo(Curso a) {
 
-        ciclos.add(a);
+        cursos.add(a);
     }
 
+    public Alumno buscarAlumno (String nombre){
+    
+        Alumno a = null;
+        
+        for (int i=0;i<usuarios.size();i++){
+        
+            if (usuarios.get(i).getNombre().equals(nombre)){
+            
+                a= (Alumno)usuarios.get(i);
+                i=usuarios.size();
+            }
+        }
+        
+        return a;
+    }
 }
