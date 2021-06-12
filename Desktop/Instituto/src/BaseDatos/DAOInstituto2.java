@@ -294,7 +294,9 @@ public class DAOInstituto2 {
             }catch (SQLException ex) {
                 Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
             }
+        return false;
 
     }
+    }
 
-}
+

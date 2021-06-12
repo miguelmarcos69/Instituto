@@ -44,7 +44,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
     
     public jManejarUsuarios (){
 
-        
+   
         initComponents();
         /*
         ArrayList<Alumno> alumnos = new ArrayList();
@@ -73,6 +73,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
     public jManejarUsuarios(Instituto i) {
         initComponents();
         this.i=i;
+    
         //this.adm=adm;
         
         /*
@@ -263,6 +264,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
             }
         ));
         tablaUsuarios.setSelectionBackground(new java.awt.Color(255, 153, 51));
+        tablaUsuarios.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaUsuarios);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 204, 825, 318));
@@ -314,6 +316,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
         tabla = new DefaultTableModel(i.mostrarUsuarios(), cabeceraTodos);
         tablaUsuarios.setModel(tabla);
+
         
 
     }//GEN-LAST:event_jButtonTodosActionPerformed
@@ -325,7 +328,6 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         a.setInstituto(i);
         this.setVisible(false);
         a.setVisible(true);
-        a.mostrarTodo();
         
 
         // TODO add your handling code here:

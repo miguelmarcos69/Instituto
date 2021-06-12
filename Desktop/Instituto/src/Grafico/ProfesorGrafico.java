@@ -95,7 +95,7 @@ public class ProfesorGrafico extends javax.swing.JFrame {
 //        miguel.annadirNotas(n3);
 //        pepe.annadirNotas(n4);
 //        pepe.annadirNotas(n5);
-        this.prof = new Profesor("miguel", "miguel", "71972414D", new Date(), mod, c);
+        this.prof = new Profesor("miguel", "miguel", "71972414D", new Date(), mod);
 
     }
 
