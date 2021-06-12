@@ -296,7 +296,7 @@ public class DAOInstituto2 {
                             + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + sdf.format(u.getFecha_nacimientoNumerico()) + "', 'alu', '" + ((Alumno) u).getCiclo() + "', '" + i + "');");
 
                 } catch (SQLIntegrityConstraintViolationException s) {
-                    JOptionPane.showMessageDialog(null,"Ya existe un usuario en el instituto con este nombre");
+                    JOptionPane.showMessageDialog(null, "Ya existe un usuario en el instituto con este nombre");
                 }
 
             } else if (u instanceof Profesor) {
@@ -306,21 +306,47 @@ public class DAOInstituto2 {
 
                     ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('"
                             + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + sdf.format(u.getFecha_nacimientoNumerico()) + "', 'prof', '', '" + i + "');");
-                    
+
                     //Cambiar el profesor del modulo
-                    for(int j = 0; j < p.getAsignaturasDadas().size(); j++){
-                    String modulo = p.getAsignaturasDadas().get(j).getNombre();
-                    ConexionDefault.instancia().getStatement().execute("Update modulo set profesor = '" + p.getNombre() + "' where nombre ='" + modulo + "'");
-                } 
-                } catch (SQLIntegrityConstraintViolationException s){
-                    JOptionPane.showMessageDialog(null,"Ya existe un usuario en el instituto con este nombre");
+                    for (int j = 0; j < p.getAsignaturasDadas().size(); j++) {
+                        String modulo = p.getAsignaturasDadas().get(j).getNombre();
+                        ConexionDefault.instancia().getStatement().execute("Update modulo set profesor = '" + p.getNombre() + "' where nombre ='" + modulo + "'");
+                    }
+                } catch (SQLIntegrityConstraintViolationException s) {
+                    JOptionPane.showMessageDialog(null, "Ya existe un usuario en el instituto con este nombre");
                 }
-                                  
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    public void eliminarUsuario(String nombreUsuario, String instituto) {
+
+        try {
+            ConexionDefault.crearConexion();
+            ConexionDefault.instancia().getStatement().execute("DELETE FROM usuario where nombre = '" + nombreUsuario + "' AND nombreInsti ='" + instituto + "'");
+            ConexionDefault.instancia().getStatement().execute("DELETE FROM nota where alumno = '" + nombreUsuario + "' AND instituto ='" + instituto + "'");
+        } catch (SQLException ex) {
+            Logger.getLogger(DaoInstituto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void modificarContrasena(String nombreUsuario, String nombreInstituto, String contrasennaNueva) {
+
+        try {
+            ConexionDefault.instancia().getStatement().execute("update usuario set contra ='" + contrasennaNueva + "'where nombre = '" + nombreUsuario + "' AND nombreInsti = '" + nombreInstituto + "'");
+
+        } catch (SQLException ex) {
+
+            System.out.println("No se ha podido modificar la contrasena");
+        }
+
+    }
+
+    public void annadirCiclo() {
+    }
 
 }
