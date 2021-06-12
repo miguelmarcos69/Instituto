@@ -15,6 +15,7 @@ import Usuarios.Profesor;
 import Usuarios.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -289,20 +290,32 @@ public class DAOInstituto2 {
 
         try {
             if (u instanceof Alumno) {
+                try {
 
-                ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('"
-                        + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + sdf.format(u.getFecha_nacimientoNumerico()) + "', 'alu', '" + ((Alumno) u).getCiclo() + "', '" + i + "');");
+                    ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('"
+                            + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + sdf.format(u.getFecha_nacimientoNumerico()) + "', 'alu', '" + ((Alumno) u).getCiclo() + "', '" + i + "');");
 
-            }
-            if (u instanceof Profesor) {
-                Profesor p = (Profesor) u;
+                } catch (SQLIntegrityConstraintViolationException s) {
+                    JOptionPane.showMessageDialog(null, "Ya existe un usuario en el instituto con este nombre");
+                }
 
-                ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('"
-                        + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + sdf.format(u.getFecha_nacimientoNumerico()) + "', 'prof', '', '" + i + "');");
+            } else if (u instanceof Profesor) {
 
-                //for ( ) {
-                //  ConexionDefault.instancia().getStatement().execute("Update Modulo Profesor = '" + p.getNombre() + "' where nombre ");
-                //}
+                try {
+                    Profesor p = (Profesor) u;
+
+                    ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('"
+                            + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + sdf.format(u.getFecha_nacimientoNumerico()) + "', 'prof', '', '" + i + "');");
+
+                    //Cambiar el profesor del modulo
+                    for (int j = 0; j < p.getAsignaturasDadas().size(); j++) {
+                        String modulo = p.getAsignaturasDadas().get(j).getNombre();
+                        ConexionDefault.instancia().getStatement().execute("Update modulo set profesor = '" + p.getNombre() + "' where nombre ='" + modulo + "'");
+                    }
+                } catch (SQLIntegrityConstraintViolationException s) {
+                    JOptionPane.showMessageDialog(null, "Ya existe un usuario en el instituto con este nombre");
+                }
+
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
@@ -330,9 +343,6 @@ public class DAOInstituto2 {
         ConexionDefault.instancia().getStatement().execute(""
                 + "INSERT INTO nota VALUES ('" + nombreUsuario + "', '" + modulo + "',  '" + nota + "', '" + instituto + "')");
 
-     
-    
-
     }
 
-} 
+}
