@@ -116,7 +116,7 @@ public class Alumno extends Usuario {
 
     public boolean tieneModulo(String nombreAsignatura) {
 
-        boolean resultado = ciclo.existeModulo(nombreAsignatura);
+        boolean resultado = true;//ciclo.existeModulo(nombreAsignatura);
 
         return resultado;
     }

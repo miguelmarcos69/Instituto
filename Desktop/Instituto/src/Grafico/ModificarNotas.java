@@ -5,6 +5,7 @@
  */
 package Grafico;
 
+import BaseDatos.DAOInstituto2;
 import ClasesBase.Ciclo;
 import ClasesBase.Instituto;
 import ClasesBase.Modulo;
@@ -59,8 +60,8 @@ public class ModificarNotas extends javax.swing.JFrame {
     private ModificarNotas() {
         initComponents();
     }
-    
-      class jPanelGardient extends JPanel {
+
+    class jPanelGardient extends JPanel {
 
         protected void paintComponent(Graphics g) {
             Graphics2D g2d = (Graphics2D) g;
@@ -74,10 +75,6 @@ public class ModificarNotas extends javax.swing.JFrame {
             g2d.fillRect(0, 0, width, height);
         }
     }
-    
-    
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -195,15 +192,14 @@ public class ModificarNotas extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(nota1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(nota2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(nota3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(nota2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nota3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(jButton1)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 591, -1, 90));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 140, 280, 220));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -260,7 +256,7 @@ public class ModificarNotas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 410, Short.MAX_VALUE))
         );
 
         pack();
@@ -299,11 +295,18 @@ public class ModificarNotas extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String itemSeleccionado = modulos.getSelectedItem().toString();
+        int alumnoSeleccionado = tablaAlumnos.getSelectedRow();
+        String nombreAlumno = i.getMombreAlumnosAsignatura(itemSeleccionado, alumnoSeleccionado);
+        System.out.println("ItemSelecionado: " + itemSeleccionado);
+        System.out.println("alumnoSelecionado: " + alumnoSeleccionado);
+        System.out.println("nombreAlumno: " + nombreAlumno);
+
         System.out.println(nota1.getText());
         System.out.println(nota2.getText());
         System.out.println(nota3.getText());
         jPanel2.setVisible(false);
-
+        DAOInstituto2.instancia().modificarNotas(nombreAlumno, nota1.getText(), itemSeleccionado);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

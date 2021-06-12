@@ -95,15 +95,15 @@ public class DAOInstituto2 {
         return a;
     }
 
-    public Alumno getDatosAlumno(Alumno a,String nombreCiclo) {
+    public Alumno getDatosAlumno(Alumno a, String nombreCiclo) {
         Ciclo ciclo = null;
 
         try {
-            ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select * from ciclo where nombre  = '" + nombreCiclo +"'");
+            ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select * from ciclo where nombre  = '" + nombreCiclo + "'");
             if (rs.next()) {
                 ciclo = new Ciclo(rs.getString(1), rs.getInt(2), rs.getInt(3));
 
-                rs = ConexionDefault.instancia().getStatement().executeQuery("select * from modulo where ciclo  = '" + nombreCiclo+"'");
+                rs = ConexionDefault.instancia().getStatement().executeQuery("select * from modulo where ciclo  = '" + nombreCiclo + "'");
 
                 while (rs.next()) {
 
@@ -113,7 +113,7 @@ public class DAOInstituto2 {
                 a.setCiclo(ciclo);
             }
 
-            rs = ConexionDefault.instancia().getStatement().executeQuery("select * from nota where alumno  = '" + a.getNombre()+"'");
+            rs = ConexionDefault.instancia().getStatement().executeQuery("select * from nota where alumno  = '" + a.getNombre() + "'");
 
             while (rs.next()) {
 
@@ -138,7 +138,7 @@ public class DAOInstituto2 {
 
             if (rs.next()) {
                 p = new Profesor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
-                    p=getDatosProfesor(p);
+                p = getDatosProfesor(p);
 
             } else {
 
@@ -155,7 +155,7 @@ public class DAOInstituto2 {
 
     public Profesor getDatosProfesor(Profesor p) {
         try {
-            ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select * from modulo where profesor  = '" + p.getNombre()+"'");
+            ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select * from modulo where profesor  = '" + p.getNombre() + "'");
 
             while (rs.next()) {
 
@@ -215,23 +215,22 @@ public class DAOInstituto2 {
 
                         c.anadirModulo(new Modulo(rs.getString(1), rs.getString(2), rs.getInt(3)));
                     }
-                    
-                     i.annadirCiclo(c);
+
+                    i.annadirCiclo(c);
                 }
-               
 
                 rs = ConexionDefault.instancia().getStatement().executeQuery("select * from usuario where nombreInsti = '" + i.getNombre() + "'");
                 ArrayList<Usuario> listaUsuario = new ArrayList();
-                int cantidadFilas=0;
+                int cantidadFilas = 0;
                 //cojo el numero de usuarios
-                if (rs.last()){
-                
+                if (rs.last()) {
+
                     cantidadFilas = rs.getRow();
                     rs.beforeFirst();
                 }
-                String [] ciclosAlumnos = new String [cantidadFilas];
-                
-                int contador =0;
+                String[] ciclosAlumnos = new String[cantidadFilas];
+
+                int contador = 0;
                 while (rs.next()) {
 
                     Usuario a = null;
@@ -240,7 +239,7 @@ public class DAOInstituto2 {
 
                         case "alu":
                             a = new Alumno(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
-                            ciclosAlumnos[contador]=rs.getString(6);
+                            ciclosAlumnos[contador] = rs.getString(6);
                             break;
                         case "prof":
                             a = new Profesor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
@@ -253,22 +252,22 @@ public class DAOInstituto2 {
                     listaUsuario.add(a);
 
                 }
-                
-                for (int j=0;j<listaUsuario.size();j++ ){
-                
-                    if (listaUsuario.get(j) instanceof Alumno){
-                        Alumno a=(Alumno) listaUsuario.get(j);
-                        a=getDatosAlumno(a,ciclosAlumnos[j]);              
-                        
+
+                for (int j = 0; j < listaUsuario.size(); j++) {
+
+                    if (listaUsuario.get(j) instanceof Alumno) {
+                        Alumno a = (Alumno) listaUsuario.get(j);
+                        a = getDatosAlumno(a, ciclosAlumnos[j]);
+
                         i.annadirUsuario(a);
-                    }else if (listaUsuario.get(j) instanceof Profesor){
-                    
-                        Profesor p= (Profesor)listaUsuario.get(j);
-                        p=getDatosProfesor(p);
-                        i.annadirUsuario(p);                      
-                        
-                    }else{
-                    
+                    } else if (listaUsuario.get(j) instanceof Profesor) {
+
+                        Profesor p = (Profesor) listaUsuario.get(j);
+                        p = getDatosProfesor(p);
+                        i.annadirUsuario(p);
+
+                    } else {
+
                         i.annadirUsuario(listaUsuario.get(j));
                     }
                 }
@@ -279,35 +278,45 @@ public class DAOInstituto2 {
 
         return i;
     }
-    
+
     public void annadirUsuario(String i, Usuario u) {
         boolean annadido = false;
-            
-            try {
-                if (u instanceof Alumno){
-                    Alumno a = (Alumno)u;
 
-                    ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery(
-                            "SELECT nombre FROM usuario WHERE nombre='"+u.getNombre()+ "'AND nombreInsti='"+i);
-                    if (rs.next()){
-                        ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('" +
-                        u.getNombre() + "', '" + u.getContra() +"', '" + u.getDNI() + "', '" + u.getFecha_nacimiento() +"', 'alu', '" + ((Alumno) u).getCiclo() + "', '" + i + "');");
-                    }
-                } 
-                if (u instanceof Profesor){
-                    Profesor p = (Profesor)u;
+        try {
+            if (u instanceof Alumno) {
+                Alumno a = (Alumno) u;
 
-                    ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery(
-                            "SELECT nombre FROM usuario WHERE nombre='"+u.getNombre()+ "'AND nombreInsti='"+i);
-                    if (rs.next()){
-                        ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('" +
-                        u.getNombre() + "', '" + u.getContra() +"', '" + u.getDNI() + "', '" + u.getFecha_nacimiento() +"', 'prof', '', '" + i + "');");
-                    }
-                } 
-            }catch (SQLException ex) {
-                Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
+                ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery(
+                        "SELECT nombre FROM usuario WHERE nombre='" + u.getNombre() + "'AND nombreInsti='" + i);
+                if (rs.next()) {
+                    ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('"
+                            + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + u.getFecha_nacimiento() + "', 'alu', '" + ((Alumno) u).getCiclo() + "', '" + i + "');");
+                }
             }
-    }
+            if (u instanceof Profesor) {
+                Profesor p = (Profesor) u;
+
+                ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery(
+                        "SELECT nombre FROM usuario WHERE nombre='" + u.getNombre() + "'AND nombreInsti='" + i);
+                if (rs.next()) {
+                    ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('"
+                            + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + u.getFecha_nacimiento() + "', 'prof', '', '" + i + "');");
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
+    public void modificarNotas(String NombreUsu, String nota, String modulo) {
+        // Inserta las nuevas notas y elimina las anteriores
+        try {
+            ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery(
+                    //"select * from instituto"
+                    "select alumno,modulo,nota from nota WHERE alumno=+'" + NombreUsu + "'and modulo='" + modulo + "' and nota='" + nota + "'"
+            );
 
+        } catch (Exception e) {
+        }
+    }
+}
