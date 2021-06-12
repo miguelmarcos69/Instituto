@@ -300,10 +300,10 @@ public class DAOInstituto2 {
                 ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('"
                         + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + sdf.format(u.getFecha_nacimientoNumerico()) + "', 'prof', '', '" + i + "');");
 
-                for ( ) {
+                //for ( ) {
 
-                    ConexionDefault.instancia().getStatement().execute("Update Modulo Profesor = '" + p.getNombre() + "' where nombre ");
-                }
+                  //  ConexionDefault.instancia().getStatement().execute("Update Modulo Profesor = '" + p.getNombre() + "' where nombre ");
+                //}
 
             }
         } catch (SQLException ex) {

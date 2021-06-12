@@ -30,10 +30,19 @@ public class AlumnoGrafico extends javax.swing.JFrame {
         this.setBackground(Color.black);
         this.setForeground(Color.white);
         this.alumno = al;
+        this.tabla_notas.setVisible(false);
+        
     }
 
     private AlumnoGrafico() {
         initComponents();
+        this.tabla_notas.setVisible(false);
+        
+    }
+    
+    public void tablaInvisisble(){
+    
+        this.tabla_notas.setVisible(false);
     }
 
     class jPanelGardient extends JPanel {
@@ -48,10 +57,12 @@ public class AlumnoGrafico extends javax.swing.JFrame {
             GradientPaint gp = new GradientPaint(0, 0, color1, 180, height, color2);
             g2d.setPaint(gp);
             g2d.fillRect(0, 0, width, height);
+            
         }
     }
        public void mostrar(String nom) {
         this.nombre.setText(nom);
+        this.tabla_notas.setEnabled(false);
     }
 
     /**
@@ -226,6 +237,7 @@ public class AlumnoGrafico extends javax.swing.JFrame {
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // TODO add your handling code here:
+        this.tabla_notas.setVisible(true);
         tabla_notas.setModel(new DefaultTableModel(alumno.getNotasModulos(),cabecera));
     }//GEN-LAST:event_jLabel3MousePressed
 
@@ -260,6 +272,7 @@ public class AlumnoGrafico extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AlumnoGrafico().setVisible(true);
+                
             }
         });
     }
