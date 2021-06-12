@@ -34,6 +34,36 @@ public class Alumno extends Usuario {
         super(nombre, contrasenna, DNI, fecha_nacimiento);
         this.notas=new ArrayList();
     }
+    
+    public String [][] getNotasModulos (){
+    
+    
+        String [][] modulosNotas = new String [ciclo.getSizeModulos()][5];
+        
+        for (int i=0;i<ciclo.getSizeModulos();i++){
+        
+            modulosNotas[i][0]=ciclo.getArrayListModulos().get(i).getNombre();
+            
+            int nNotasModulo=0;
+            int notaFinal=0;
+            
+            for (int j=0;j<notas.size();i++){
+            
+                if (notas.get(j).getModulo().equals(ciclo.getArrayListModulos().get(i).getNombre())){
+                
+                    modulosNotas[i][j+1]=notas.get(j).getNota()+"";                    
+                    notaFinal=notaFinal+notas.get(j).getNota();
+                    
+                    if (nNotasModulo==3){
+                    
+                        modulosNotas[i][4]=(notaFinal/3)+"";
+                    }
+                }
+            }
+        }
+        
+        return modulosNotas;
+    }
 
     //Metodos get
     public Ciclo getCiclo() {

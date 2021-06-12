@@ -40,6 +40,11 @@ public class Ciclo {
     public int getAnno() {
         return anno;
     }
+    
+    public ArrayList<Modulo> getArrayListModulos (){
+    
+        return this.Asignaturas;
+    }
 
     public String getNombre() {
         return nombre;

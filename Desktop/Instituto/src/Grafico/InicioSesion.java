@@ -216,7 +216,7 @@ public class InicioSesion extends javax.swing.JFrame {
                 Alumno alum = DAOInstituto2.instancia().obtenerAlumno(nombre, nombreInsti);
 
                 if (alum.getContrasenna().equals(contra)) {
-                    AlumnoGrafico alG = new AlumnoGrafico(null, true, alum, this);
+                    AlumnoGrafico alG = new AlumnoGrafico(null, true, alum);
                     this.setVisible(false);
                     alG.mostrar(nombre);
                     alG.setVisible(true);
