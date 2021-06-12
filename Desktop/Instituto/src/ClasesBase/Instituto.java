@@ -9,6 +9,7 @@ import Usuarios.Alumno;
 import Usuarios.Profesor;
 import Usuarios.Usuario;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -69,21 +70,21 @@ public class Instituto {
 
         return ciclos.size();
     }
-    
-    public Modulo buscarModuloNombre (String nombreModulo){
-    
+
+    public Modulo buscarModuloNombre(String nombreModulo) {
+
         Modulo m = null;
-        
-        for (int i=0;i<ciclos.size();i++){
-        
+
+        for (int i = 0; i < ciclos.size(); i++) {
+
             m = ciclos.get(i).getModulo(nombreModulo);
-            
-            if(m!=null){
-            
-                i=ciclos.size();
+
+            if (m != null) {
+
+                i = ciclos.size();
             }
         }
-        
+
         return m;
     }
 
@@ -145,6 +146,53 @@ public class Instituto {
         }
 
         return al;
+    }
+
+    public void borrarNotas(String nombre, String nombreModulo) {
+
+        Usuario u = null;
+
+        for (Usuario usuario : usuarios) {
+            if (usuario instanceof Alumno) {
+                if (usuario.getNombre().equals(nombre)) {
+                    System.out.println("Usuario enconrado");
+                    Alumno a = (Alumno) usuario;// convertir el suauario en alumno
+                    for (int i = 0; i < a.getNotas().size(); i++) {
+                        if (a.getNotas().get(i).equals(nombreModulo)) {
+                            a.getNotas().remove(i);
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    public String ModificarNotas(String modulo, String alum, Nota nota1, Nota nota2, Nota nota3) {
+
+        String al = null;
+
+        for (int i = 0; i < usuarios.size(); i++) {
+
+            if (usuarios.get(i) instanceof Alumno) {
+                Alumno a = (Alumno) usuarios.get(i);
+                if (a.getNombre().equals(alum)) {
+
+                    a.annadirNotas(nota1);
+                    a.annadirNotas(nota2);
+                    a.annadirNotas(nota3);
+
+                }
+            }
+        }
+
+        return al;
+
     }
 
     public String[][] mostrarUsuarios() {
@@ -213,8 +261,8 @@ public class Instituto {
 
     //Lo mismo pero filtrando por año
     public String[][] getCicloTot(int annoCic) {
-        
-        int nModulos =0;
+
+        int nModulos = 0;
 
         for (int i = 0; i < ciclos.size(); i++) {
             Ciclo c = (Ciclo) ciclos.get(i);

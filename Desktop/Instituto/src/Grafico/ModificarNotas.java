@@ -17,9 +17,12 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -306,7 +309,24 @@ public class ModificarNotas extends javax.swing.JFrame {
         System.out.println(nota2.getText());
         System.out.println(nota3.getText());
         jPanel2.setVisible(false);
-        //DAOInstituto2.instancia().modificarNotas(nombreAlumno, nota1.getText(), itemSeleccionado);
+        DAOInstituto2.instancia().borrarNotas(nombreAlumno);
+        try {
+            DAOInstituto2.instancia().modificarNotas(nombreAlumno, nota1.getText(), itemSeleccionado, i.getNombre());
+            DAOInstituto2.instancia().modificarNotas(nombreAlumno, nota2.getText(), itemSeleccionado, i.getNombre());
+            DAOInstituto2.instancia().modificarNotas(nombreAlumno, nota3.getText(), itemSeleccionado, i.getNombre());
+            Nota n1 = new Nota(itemSeleccionado, Integer.parseInt(nota1.getText()));
+            Nota n2 = new Nota(itemSeleccionado, Integer.parseInt(nota2.getText()));
+            Nota n3 = new Nota(itemSeleccionado, Integer.parseInt(nota3.getText()));
+            i.borrarNotas(nombreAlumno, itemSeleccionado);
+            i.ModificarNotas(itemSeleccionado, nombreAlumno, n1, n2, n3);
+            tabla = new DefaultTableModel(i.getDos(nombreAlumno, itemSeleccionado), cabeceranNotas);
+            tablaNotas.setModel(tabla);
+
+        } catch (SQLException ex) {
+            System.out.println("Error al actualizar las notas");
+        }
+
+        //actualizar tabla
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

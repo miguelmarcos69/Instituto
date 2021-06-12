@@ -34,34 +34,33 @@ public class Alumno extends Usuario {
         super(nombre, contrasenna, DNI, fecha_nacimiento);
         this.notas = new ArrayList();
     }
-    
-    public String [][] getNotasModulos (){
-    
-    
-        String [][] modulosNotas = new String [ciclo.getSizeModulos()][5];
-        
-        for (int i=0;i<ciclo.getSizeModulos();i++){
-        
-            modulosNotas[i][0]=ciclo.getArrayListModulos().get(i).getNombre();
-            
-            int nNotasModulo=0;
-            int notaFinal=0;
-            
-            for (int j=0;j<notas.size();j++){
-            
-                if (notas.get(j).getModulo().equals(ciclo.getArrayListModulos().get(i).getNombre())){
-                
-                    modulosNotas[i][j+1]=notas.get(j).getNota()+"";                    
-                    notaFinal=notaFinal+notas.get(j).getNota();
-                    
-                    if (nNotasModulo==3){
-                    
-                        modulosNotas[i][4]=(notaFinal/3)+"";
+
+    public String[][] getNotasModulos() {
+
+        String[][] modulosNotas = new String[ciclo.getSizeModulos()][5];
+
+        for (int i = 0; i < ciclo.getSizeModulos(); i++) {
+
+            modulosNotas[i][0] = ciclo.getArrayListModulos().get(i).getNombre();
+
+            int nNotasModulo = 0;
+            int notaFinal = 0;
+
+            for (int j = 0; j < notas.size(); j++) {
+
+                if (notas.get(j).getModulo().equals(ciclo.getArrayListModulos().get(i).getNombre())) {
+
+                    modulosNotas[i][j + 1] = notas.get(j).getNota() + "";
+                    notaFinal = notaFinal + notas.get(j).getNota();
+
+                    if (nNotasModulo == 3) {
+
+                        modulosNotas[i][4] = (notaFinal / 3) + "";
                     }
                 }
             }
         }
-        
+
         return modulosNotas;
     }
 
@@ -78,8 +77,6 @@ public class Alumno extends Usuario {
     public String getNombre() {
         return nombre;
     }
-    
-    
 
     @Override
     public String getContrasenna() {
@@ -116,7 +113,7 @@ public class Alumno extends Usuario {
 
     public boolean tieneModulo(String nombreAsignatura) {
 
-        boolean resultado = true;//ciclo.existeModulo(nombreAsignatura);
+        boolean resultado = ciclo.existeModulo(nombreAsignatura);
 
         return resultado;
     }

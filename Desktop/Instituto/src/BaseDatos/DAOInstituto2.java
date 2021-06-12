@@ -301,14 +301,38 @@ public class DAOInstituto2 {
                         + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + sdf.format(u.getFecha_nacimientoNumerico()) + "', 'prof', '', '" + i + "');");
 
                 //for ( ) {
-
-                  //  ConexionDefault.instancia().getStatement().execute("Update Modulo Profesor = '" + p.getNombre() + "' where nombre ");
+                //  ConexionDefault.instancia().getStatement().execute("Update Modulo Profesor = '" + p.getNombre() + "' where nombre ");
                 //}
-
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-}
+    public void borrarNotas(String nombreUsuario) {
+
+        ConexionDefault.crearConexion();
+
+        try {
+
+            ConexionDefault.instancia().getStatement().execute(""
+                    + "delete  from nota where alumno='" + nombreUsuario + "'");
+
+            System.out.println("Borrado");
+
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void modificarNotas(String nombreUsuario, String nota, String modulo, String instituto) throws SQLException {
+
+        ConexionDefault.instancia().getStatement().execute(""
+                + "INSERT INTO nota VALUES ('" + nombreUsuario + "', '" + modulo + "',  '" + nota + "', '" + instituto + "')");
+
+     
+    
+
+    }
+
+} 
