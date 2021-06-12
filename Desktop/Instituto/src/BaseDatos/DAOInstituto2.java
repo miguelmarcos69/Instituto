@@ -322,7 +322,30 @@ public class DAOInstituto2 {
         }
     }
 
-    public void eliminarUsuario(String nombreUsuario, String instituto) {
+    public void borrarNotas(String nombreUsuario) {
+
+        ConexionDefault.crearConexion();
+
+        try {
+
+            ConexionDefault.instancia().getStatement().execute(""
+                    + "delete  from nota where alumno='" + nombreUsuario + "'");
+
+            System.out.println("Borrado");
+
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void modificarNotas(String nombreUsuario, String nota, String modulo, String instituto) throws SQLException {
+
+        ConexionDefault.instancia().getStatement().execute(""
+                + "INSERT INTO nota VALUES ('" + nombreUsuario + "', '" + modulo + "',  '" + nota + "', '" + instituto + "')");
+
+    }
+    
+      public void eliminarUsuario(String nombreUsuario, String instituto) {
 
         try {
             ConexionDefault.crearConexion();

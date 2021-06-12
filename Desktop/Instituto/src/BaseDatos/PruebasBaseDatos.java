@@ -57,7 +57,7 @@ public class PruebasBaseDatos {
         al.add(juan);
 
         Instituto i = new Instituto(al, c, "camino", "la que sea", "69633245");
-        DaoInstituto.instancia().modificarContrasena("a", "camino", "pepito");
+        DAOInstituto2.instancia().modificarContrasena("a", "camino", "pepito");
         //DaoInstituto.instancia().eliminarUsuario(juan.getNombre(), i.getNombre());
         //DaoInstituto.instancia().eliminarUsuario("Ruben", "camino");
         

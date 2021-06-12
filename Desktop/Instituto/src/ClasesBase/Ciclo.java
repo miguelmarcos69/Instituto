@@ -28,21 +28,20 @@ public class Ciclo {
         this.plazas = plazas;
     }
 
-    public Ciclo(String nombre, int plazas,int ano) {
+    public Ciclo(String nombre, int plazas, int ano) {
         this.nombre = nombre;
-        this.Asignaturas=new ArrayList();
+        this.Asignaturas = new ArrayList();
         this.plazas = plazas;
-        this.anno=ano;
+        this.anno = ano;
     }
-    
-    //metodos getters
 
+    //metodos getters
     public int getAnno() {
         return anno;
     }
-    
-    public ArrayList<Modulo> getArrayListModulos (){
-    
+
+    public ArrayList<Modulo> getArrayListModulos() {
+
         return this.Asignaturas;
     }
 
@@ -54,13 +53,12 @@ public class Ciclo {
         return nombre;
     }
 
-    
-    public int getSizeModulos(){
+    public int getSizeModulos() {
         return Asignaturas.size();
     }
-    
-    public void anadirModulo (Modulo e){
-    
+
+    public void anadirModulo(Modulo e) {
+
         Asignaturas.add(e);
     }
 
@@ -70,7 +68,8 @@ public class Ciclo {
         for (int i = 0; i < Asignaturas.size(); i++) {
 
             if (Asignaturas.get(i).getNombre().equals(nombre)) {
-               // System.out.println(Asignaturas.get(i).getNombre());
+                
+                System.out.println(Asignaturas.get(i).getNombre());
 
                 resultado = true;
             }
@@ -78,22 +77,22 @@ public class Ciclo {
 
         return resultado;
     }
-    
-    public Modulo getModulo (String nombreModulo){
+
+    public Modulo getModulo(String nombreModulo) {
         Modulo m = null;
-        
-        for (int i = 0; i<Asignaturas.size();i++){
-        
-            if(Asignaturas.get(i).getNombre().equals(nombreModulo)){
-            
+
+        for (int i = 0; i < Asignaturas.size(); i++) {
+
+            if (Asignaturas.get(i).getNombre().equals(nombreModulo)) {
+
                 m = Asignaturas.get(i);
-                
-                i=Asignaturas.size();
+
+                i = Asignaturas.size();
             }
         }
-        
+
         return m;
-    
+
     }
 
     //Obtener arraylist para mostrar en tabla(todos los ciclos)
@@ -115,7 +114,7 @@ public class Ciclo {
 
         return elemento;
     }
-    
+
     //Arraylist para obtenr todos los modulos
     public String[][] getModulos() {
         String[][] arrayAsignaturas = new String[Asignaturas.size()][10];
@@ -127,17 +126,16 @@ public class Ciclo {
 
         return arrayAsignaturas;
     }
-    
-    public ArrayList<Modulo> concatenarModulos (ArrayList<Modulo> a){
-        
-        for (int i =0 ;i< this.Asignaturas.size();i++){
-        
+
+    public ArrayList<Modulo> concatenarModulos(ArrayList<Modulo> a) {
+
+        for (int i = 0; i < this.Asignaturas.size(); i++) {
+
             a.add(this.Asignaturas.get(i));
-        
+
         }
-        
-        return a; 
+
+        return a;
     }
-    
-    
+
 }

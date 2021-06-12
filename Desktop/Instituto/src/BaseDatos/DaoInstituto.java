@@ -123,31 +123,6 @@ public class DaoInstituto {
         return usuarios;
     }
     
-    public void eliminarUsuario (String nombreUsuario,String instituto){
     
-        try {
-            ConexionDefault.crearConexion();
-            ConexionDefault.instancia().getStatement().execute("DELETE FROM usuario where nombre = '" + nombreUsuario + "' AND nombreInsti ='"+instituto+"'");
-            ConexionDefault.instancia().getStatement().execute("DELETE FROM nota where alumno = '" + nombreUsuario + "' AND instituto ='"+instituto+"'" );            
-        } catch (SQLException ex) {
-            Logger.getLogger(DaoInstituto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    
-    }
-    
-    public void modificarContrasena (String nombreUsuario,String nombreInstituto,String contrasennaNueva){
-        
-        try{
-             ConexionDefault.instancia().getStatement().execute("update usuario set contra ='"+ contrasennaNueva+"'where nombre = '"+nombreUsuario+"' AND nombreInsti = '"+nombreInstituto+"'");
-            
-        }catch(SQLException ex){
-        
-            System.out.println("No se ha podido modificar la contrasena");
-        }
-    
-    }
-    
-    
-    public void annadirCiclo (){}
 
 }
