@@ -308,5 +308,6 @@ public class DAOInstituto2 {
                 Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
+    }
 
-}
+

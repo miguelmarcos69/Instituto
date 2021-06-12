@@ -43,8 +43,8 @@ public class jManejarUsuarios extends javax.swing.JFrame {
     DefaultTableModel tabla;
     
     public jManejarUsuarios (){
-    tablaUsuarios.getTableHeader().setDefaultRenderer((TableCellRenderer) new jManejarUsuarios ());
-        
+
+   
         initComponents();
         /*
         ArrayList<Alumno> alumnos = new ArrayList();
@@ -73,6 +73,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
     public jManejarUsuarios(Instituto i) {
         initComponents();
         this.i=i;
+    
         //this.adm=adm;
         
         /*
@@ -139,9 +140,9 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         jButtonTodos = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaUsuarios = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jModificar = new javax.swing.JButton();
+        jEliminar = new javax.swing.JButton();
+        jAnnadir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -263,34 +264,35 @@ public class jManejarUsuarios extends javax.swing.JFrame {
             }
         ));
         tablaUsuarios.setSelectionBackground(new java.awt.Color(255, 153, 51));
+        tablaUsuarios.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaUsuarios);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 204, 825, 318));
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 0));
-        jButton2.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Modificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jModificar.setBackground(new java.awt.Color(0, 0, 0));
+        jModificar.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
+        jModificar.setForeground(new java.awt.Color(255, 255, 255));
+        jModificar.setText("Modificar");
+        jModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jModificarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 550, -1, -1));
+        jPanel1.add(jModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 550, -1, -1));
 
-        jButton4.setBackground(new java.awt.Color(0, 0, 0));
-        jButton4.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Eliminar");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 550, -1, -1));
+        jEliminar.setBackground(new java.awt.Color(0, 0, 0));
+        jEliminar.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
+        jEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        jEliminar.setText("Eliminar");
+        jPanel1.add(jEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 550, -1, -1));
 
-        jButton3.setText("Añadir");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jAnnadir.setText("Añadir");
+        jAnnadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jAnnadirActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 550, 110, -1));
+        jPanel1.add(jAnnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 550, 110, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -315,18 +317,27 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         tabla = new DefaultTableModel(i.mostrarUsuarios(), cabeceraTodos);
         tablaUsuarios.setModel(tabla);
 
+        
 
     }//GEN-LAST:event_jButtonTodosActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
+        
+
+        jAnnadirUsuario a = new jAnnadirUsuario(this,true);
+        a.setInstituto(i);
+        this.setVisible(false);
+        a.setVisible(true);
+        
+
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jModificarActionPerformed
 
     private void jButtonAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlumnosActionPerformed
 
         tabla = new DefaultTableModel(i.mostrarAlumnos(), cabeceraAlumnos);
         tablaUsuarios.setModel(tabla);
-
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAlumnosActionPerformed
 
@@ -347,14 +358,14 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel2MouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jAnnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAnnadirActionPerformed
         // TODO add your handling code here:
         jAnnadirUsuario a = new jAnnadirUsuario(this,true);
         a.setInstituto(i);
         this.setVisible(false);
         a.setVisible(true);
         
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jAnnadirActionPerformed
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
@@ -397,30 +408,19 @@ public class jManejarUsuarios extends javax.swing.JFrame {
     
     
    
-    static public class HeaderColor extends DefaultTableCellRenderer{
-        public HeaderColor(){
-            setOpaque(true);
-        }
-        public Component getTableCellRendererComponent(JTable tablaUsuarios, Object value,boolean selected,boolean focused,int row,int column){
-            
-            super.getTableCellRendererComponent(tablaUsuarios, value, selected, focused, row, column);
-        
-            setBackground(Color.BLACK);
-            
-            return this;
-        }
-    }
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jAnnadir;
     private javax.swing.JRadioButton jButtonAlumnos;
     private javax.swing.JRadioButton jButtonProfesores;
     private javax.swing.JRadioButton jButtonTodos;
+    private javax.swing.JButton jEliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jModificar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
