@@ -80,7 +80,7 @@ public class DAOInstituto2 {
             );
 
             if (rs.next()) {
-                nombreCiclo = rs.getString(5);
+                nombreCiclo = rs.getString(6);
                 a = new Alumno(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
                 a = getDatosAlumno(a, nombreCiclo);
 

@@ -47,7 +47,7 @@ public class Alumno extends Usuario {
             int nNotasModulo=0;
             int notaFinal=0;
             
-            for (int j=0;j<notas.size();i++){
+            for (int j=0;j<notas.size();j++){
             
                 if (notas.get(j).getModulo().equals(ciclo.getArrayListModulos().get(i).getNombre())){
                 
