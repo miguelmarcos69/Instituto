@@ -1,4 +1,5 @@
 package Grafico;
+import BaseDatos.DAOInstituto2;
 import ClasesBase.Ciclo;
 import ClasesBase.Instituto;
 import ClasesBase.Modulo;
@@ -828,6 +829,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         for (int j = 0; j< jTableAsignaturasElegidas.getModel().getRowCount(); j++){            
                
                 modulos.add(i.buscarModuloNombre(jTableAsignaturasElegidas.getModel().getValueAt(j, 0)+""));
+                DAOInstituto2.instancia().annadirUsuario(i.getNombre(),annadir);
             }
 
         
@@ -873,13 +875,14 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     //BOTON INSCRIBIR (da de alta un alumno)
     private void jButtonInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscribirActionPerformed
         Alumno annadir = null;
-        try {
+        
             if (jTableVerCicloA.getSelectedRow() != -1) {
                 String nombreC = jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 0).toString();
                 int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
                 ContrasennaValida();
                 if (ContrasennaValida() == true) {
                     annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
+                    DAOInstituto2.instancia().annadirUsuario(i.getNombre(),annadir);
 
                 } else {
                     JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
@@ -890,11 +893,6 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                         "Error", JOptionPane.ERROR_MESSAGE);
             }
 
-        } catch (NullPointerException npe) {
-
-            JOptionPane.showMessageDialog(getContentPane(), "Porfavor selecciona una fila con datos",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
         
         
     }//GEN-LAST:event_jButtonInscribirActionPerformed
