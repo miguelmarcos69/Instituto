@@ -280,21 +280,33 @@ public class DAOInstituto2 {
         return i;
     }
     
-    public boolean annadirUsuario(Instituto i, Usuario u) {
+    public void annadirUsuario(String i, Usuario u) {
         boolean annadido = false;
             
             try {
                 if (u instanceof Alumno){
-                    Instituto in = (Instituto)i;
                     Alumno a = (Alumno)u;
 
                     ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery(
-                            "SELECT nombre FROM usuario WHERE nombre='"+u.getNombre()+ "'AND nombreInsti='"+i.getNombre());
+                            "SELECT nombre FROM usuario WHERE nombre='"+u.getNombre()+ "'AND nombreInsti='"+i);
+                    if (rs.next()){
+                        ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('" +
+                        u.getNombre() + "', '" + u.getContra() +"', '" + u.getDNI() + "', '" + u.getFecha_nacimiento() +"', 'alu', '" + ((Alumno) u).getCiclo() + "', '" + i + "');");
+                    }
+                } 
+                if (u instanceof Profesor){
+                    Profesor p = (Profesor)u;
+
+                    ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery(
+                            "SELECT nombre FROM usuario WHERE nombre='"+u.getNombre()+ "'AND nombreInsti='"+i);
+                    if (rs.next()){
+                        ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('" +
+                        u.getNombre() + "', '" + u.getContra() +"', '" + u.getDNI() + "', '" + u.getFecha_nacimiento() +"', 'prof', '', '" + i + "');");
+                    }
                 } 
             }catch (SQLException ex) {
                 Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
             }
-
     }
 
 }
