@@ -22,7 +22,7 @@ public class PruebasBaseDatos {
     
     public static void main(String args[]) {
     
-        
+        ConexionDefault.crearConexion();
         ArrayList<Modulo> modAnn = new ArrayList<>();
 
         ArrayList<Usuario> al = new ArrayList<>();
@@ -57,8 +57,9 @@ public class PruebasBaseDatos {
         al.add(juan);
 
         Instituto i = new Instituto(al, c, "camino", "la que sea", "69633245");
-        
-        DAOInstituto2.instancia().annadirUsuario(i.getNombre(), ruben);
+        DaoInstituto.instancia().modificarContrasena("a", "camino", "pepito");
+        //DaoInstituto.instancia().eliminarUsuario(juan.getNombre(), i.getNombre());
+        //DaoInstituto.instancia().eliminarUsuario("Ruben", "camino");
         
         
     }

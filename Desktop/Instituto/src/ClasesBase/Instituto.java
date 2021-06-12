@@ -26,7 +26,7 @@ public class Instituto {
     private String nombre;
     private String direccion;
     private String telefono; // para el manejo de datos se usa String
-
+    
     public Instituto(ArrayList<Usuario> usuario, ArrayList<Ciclo> ciclos, String nombre, String direccion, String telefono) {
         this.usuarios = usuario;
         this.ciclos = ciclos;
