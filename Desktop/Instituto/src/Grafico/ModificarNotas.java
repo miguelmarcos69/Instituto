@@ -330,6 +330,22 @@ public class ModificarNotas extends javax.swing.JFrame {
         }
 
         jPanel2.setVisible(false);
+        DAOInstituto2.instancia().borrarNotas(nombreAlumno);
+        try {
+            DAOInstituto2.instancia().modificarNotas(nombreAlumno, nota1.getText(), itemSeleccionado, i.getNombre());
+            DAOInstituto2.instancia().modificarNotas(nombreAlumno, nota2.getText(), itemSeleccionado, i.getNombre());
+            DAOInstituto2.instancia().modificarNotas(nombreAlumno, nota3.getText(), itemSeleccionado, i.getNombre());
+            Nota n1 = new Nota(itemSeleccionado, Integer.parseInt(nota1.getText()));
+            Nota n2 = new Nota(itemSeleccionado, Integer.parseInt(nota2.getText()));
+            Nota n3 = new Nota(itemSeleccionado, Integer.parseInt(nota3.getText()));
+            i.borrarNotas(nombreAlumno, itemSeleccionado);
+            i.ModificarNotas(itemSeleccionado, nombreAlumno, n1, n2, n3);
+            tabla = new DefaultTableModel(i.getDos(nombreAlumno, itemSeleccionado), cabeceranNotas);
+            tablaNotas.setModel(tabla);
+
+        } catch (SQLException ex) {
+            System.out.println("Error al actualizar las notas");
+        }
 
         //actualizar tabla
 
