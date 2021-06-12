@@ -884,7 +884,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     //BOTON INSCRIBIR (da de alta un alumno)
     private void jButtonInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscribirActionPerformed
         Alumno annadir = null;
-        
+      
             if (jTableVerCicloA.getSelectedRow() != -1) {
                 String nombreC = jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 0).toString();
                 int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
