@@ -13,13 +13,18 @@ import Usuarios.Alumno;
 import Usuarios.Profesor;
 import Usuarios.Usuario;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -38,7 +43,8 @@ public class jManejarUsuarios extends javax.swing.JFrame {
     DefaultTableModel tabla;
     
     public jManejarUsuarios (){
-    
+
+   
         initComponents();
         /*
         ArrayList<Alumno> alumnos = new ArrayList();
@@ -67,6 +73,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
     public jManejarUsuarios(Instituto i) {
         initComponents();
         this.i=i;
+    
         //this.adm=adm;
         
         /*
@@ -93,6 +100,9 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         i = new Instituto(usuarios, ciclos, "camino", "plaza", "777777");
         */
     }
+    
+    
+
 
     class jPanelGardient extends JPanel {
 
@@ -130,9 +140,9 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         jButtonTodos = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaUsuarios = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jModificar = new javax.swing.JButton();
+        jEliminar = new javax.swing.JButton();
+        jAnnadir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -160,7 +170,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(383, Short.MAX_VALUE)
+                .addContainerGap(394, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(331, 331, 331)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,10 +183,10 @@ public class jManejarUsuarios extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 999, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-11, -8, 1010, 100));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -254,50 +264,50 @@ public class jManejarUsuarios extends javax.swing.JFrame {
             }
         ));
         tablaUsuarios.setSelectionBackground(new java.awt.Color(255, 153, 51));
+        tablaUsuarios.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaUsuarios);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(66, 204, 825, 318));
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Añadir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jModificar.setBackground(new java.awt.Color(0, 0, 0));
+        jModificar.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
+        jModificar.setForeground(new java.awt.Color(255, 255, 255));
+        jModificar.setText("Modificar");
+        jModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jModificarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 550, -1, -1));
+        jPanel1.add(jModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 550, -1, -1));
 
-        jButton2.setBackground(new java.awt.Color(0, 0, 0));
-        jButton2.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Modificar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jEliminar.setBackground(new java.awt.Color(0, 0, 0));
+        jEliminar.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
+        jEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        jEliminar.setText("Eliminar");
+        jPanel1.add(jEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 550, -1, -1));
+
+        jAnnadir.setText("Añadir");
+        jAnnadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jAnnadirActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 550, -1, -1));
-
-        jButton4.setBackground(new java.awt.Color(0, 0, 0));
-        jButton4.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Eliminar");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 550, -1, -1));
+        jPanel1.add(jAnnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 550, 110, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 984, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(985, 632));
+        setSize(new java.awt.Dimension(985, 593));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -307,18 +317,27 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         tabla = new DefaultTableModel(i.mostrarUsuarios(), cabeceraTodos);
         tablaUsuarios.setModel(tabla);
 
+        
 
     }//GEN-LAST:event_jButtonTodosActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
+        
+
+        jAnnadirUsuario a = new jAnnadirUsuario(this,true);
+        a.setInstituto(i);
+        this.setVisible(false);
+        a.setVisible(true);
+        
+
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jModificarActionPerformed
 
     private void jButtonAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlumnosActionPerformed
 
         tabla = new DefaultTableModel(i.mostrarAlumnos(), cabeceraAlumnos);
         tablaUsuarios.setModel(tabla);
-
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAlumnosActionPerformed
 
@@ -338,6 +357,15 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jAnnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAnnadirActionPerformed
+        // TODO add your handling code here:
+        jAnnadirUsuario a = new jAnnadirUsuario(this,true);
+        a.setInstituto(i);
+        this.setVisible(false);
+        a.setVisible(true);
+        
+    }//GEN-LAST:event_jAnnadirActionPerformed
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
@@ -375,19 +403,24 @@ public class jManejarUsuarios extends javax.swing.JFrame {
                 new jManejarUsuarios().setVisible(true);
             }
         });
-    }
 
+    }
+    
+    
+   
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jAnnadir;
     private javax.swing.JRadioButton jButtonAlumnos;
     private javax.swing.JRadioButton jButtonProfesores;
     private javax.swing.JRadioButton jButtonTodos;
+    private javax.swing.JButton jEliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jModificar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -69,6 +69,23 @@ public class Instituto {
 
         return ciclos.size();
     }
+    
+    public Modulo buscarModuloNombre (String nombreModulo){
+    
+        Modulo m = null;
+        
+        for (int i=0;i<ciclos.size();i++){
+        
+            m = ciclos.get(i).getModulo(nombreModulo);
+            
+            if(m!=null){
+            
+                i=ciclos.size();
+            }
+        }
+        
+        return m;
+    }
 
     public String[][] getAlumnosAsignatura(String nombreAsignatura) {
 
