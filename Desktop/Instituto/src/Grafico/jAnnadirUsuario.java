@@ -890,7 +890,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
                 ContrasennaValida();
                 if (ContrasennaValida() == true) {
-                    annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
+                    annadir = new Alumno(getNombre(), getContrasenna(),getDNI(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
                     DAOInstituto2.instancia().annadirUsuario(i.getNombre(),annadir);
 
                 } else {
