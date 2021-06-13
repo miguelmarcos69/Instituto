@@ -123,6 +123,20 @@ public class DaoInstituto {
         return usuarios;
     }
     
-    
+        public void annadirCurso(Instituto i,Curso c) throws SQLException {
+            
+         ConexionDefault.instancia().getStatement().execute("INSERT INTO ciclo VALUES ('"
+                            + c.getNombre() + "', '" + c.getPlazas() + "', '" + c.getAnno()+"', '"+ i.getNombre()+"');");
+         
+        
+    }
+         public void annadirModulo(Instituto i,Modulo m,Curso c) throws SQLException {
+            
+         ConexionDefault.instancia().getStatement().execute("INSERT INTO modulo VALUES ('"
+                            + m.getNombre() + "', '" + m.getCodigo_aula() + "', '" + m.getHoras_semana()+"', '"+ c.getNombre()+ "', '"+c.getAnno()+"','', '"+ i.getNombre()+"');");
+         
+        
+    }
+        
 
 }

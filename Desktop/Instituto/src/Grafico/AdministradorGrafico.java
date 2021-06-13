@@ -89,7 +89,7 @@ public class AdministradorGrafico extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jCrearCursos = new javax.swing.JLabel();
 
         jRadioButton1.setText("jRadioButton1");
 
@@ -179,16 +179,21 @@ public class AdministradorGrafico extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Modificar el tablón");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, -1, -1));
+        jLabel9.setText("Añadir cursos");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Modificar Calendario");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, -1, -1));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_clipboard_50px_5.png"))); // NOI18N
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, -1));
+        jCrearCursos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_clipboard_50px_5.png"))); // NOI18N
+        jCrearCursos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jCrearCursosMousePressed(evt);
+            }
+        });
+        jPanel1.add(jCrearCursos, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -220,6 +225,15 @@ public class AdministradorGrafico extends javax.swing.JFrame {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel5MousePressed
+
+    private void jCrearCursosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCrearCursosMousePressed
+        //llamamos al grafico de crear cursos y le pasamos el instituto
+        CrearCursos Cr = new CrearCursos(i);
+        Cr.setVisible(true);
+        this.setVisible(false);
+
+        
+    }//GEN-LAST:event_jCrearCursosMousePressed
 
     /**
      * @param args the command line arguments
@@ -257,8 +271,8 @@ public class AdministradorGrafico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jCrearCursos;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
