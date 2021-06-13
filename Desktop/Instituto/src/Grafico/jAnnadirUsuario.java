@@ -1074,6 +1074,33 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonBuscarAsigActionPerformed
 
+    //BOTON AÑADIR modulos selecconados
+    private void jButtonAnnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnadirActionPerformed
+
+        try {
+            String nombreM = jTableElegirAsignaturas.getValueAt(jTableElegirAsignaturas.getSelectedRow(), 0).toString();
+            int horasM = Integer.parseInt(jTableElegirAsignaturas.getValueAt(jTableElegirAsignaturas.getSelectedRow(), 1).toString());
+
+            String[][] modulos = new String[jTableAsignaturasElegidas.getModel().getRowCount() + 1][2];
+
+            for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
+
+                modulos[j][0] = jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + "";
+                modulos[j][1] = jTableAsignaturasElegidas.getModel().getValueAt(j, 1) + "";
+            }
+
+            modulos[jTableAsignaturasElegidas.getModel().getRowCount()][0] = nombreM;
+            modulos[jTableAsignaturasElegidas.getModel().getRowCount()][1] = horasM + "";
+
+            jTableAsignaturasElegidas.setModel(new DefaultTableModel(modulos, cabecera));
+
+        } catch (NullPointerException npe) {
+            JOptionPane.showMessageDialog(getContentPane(), "Porfavor selecciona una fila con datos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonAnnadirActionPerformed
+
+    //Cancelar
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
         jTableAsignaturasElegidas.setModel(new DefaultTableModel(new String[0][cabeceraModulo.length], cabeceraModulo));
