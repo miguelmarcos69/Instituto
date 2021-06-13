@@ -1,5 +1,4 @@
 package Grafico;
-
 import BaseDatos.DAOInstituto2;
 import ClasesBase.Curso;
 import ClasesBase.Instituto;
@@ -861,6 +860,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
 
                 modulos.add(i.buscarModuloNombre(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
+                
 
             }
 

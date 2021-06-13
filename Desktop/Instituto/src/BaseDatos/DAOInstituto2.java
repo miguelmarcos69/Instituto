@@ -313,7 +313,8 @@ public class DAOInstituto2 {
                 try {
 
                     ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('"
-                            + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + sdf.format(u.getFecha_nacimientoNumerico()) + "', 'alu', '" + ((Alumno) u).getCiclo() + "', '" + i + "');");
+                            + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + sdf.format(u.getFecha_nacimientoNumerico()) +
+                            "', 'alu', '" + ((Alumno) u).getCiclo().getNombre() + "', '"+((Alumno) u).getCiclo().getAnno()+"', '" + i + "')");
 
                 } catch (SQLIntegrityConstraintViolationException s) {
                     JOptionPane.showMessageDialog(null, "Ya existe un usuario en el instituto con este nombre");
@@ -325,7 +326,7 @@ public class DAOInstituto2 {
                     Profesor p = (Profesor) u;
 
                     ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('"
-                            + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + sdf.format(u.getFecha_nacimientoNumerico()) + "', 'prof', '', '" + i + "');");
+                            + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + sdf.format(u.getFecha_nacimientoNumerico()) + "', 'prof', '', "+ 0 +",'"+ i + "');");
 
                     //Cambiar el profesor del modulo
                     for (int j = 0; j < p.getAsignaturasDadas().size(); j++) {
@@ -405,7 +406,7 @@ public class DAOInstituto2 {
         for (int i=0;i<anadirModulos.size();i++){
         
             try {
-                ConexionDefault.instancia().getStatement().execute("update modulos set profesor = '" + nombreProfesor + "' where nombre= '" +anadirModulos.get(i).getNombre()+"' AND isntituo ='"+nombreInstituto+"'" );
+                ConexionDefault.instancia().getStatement().execute("update modulo set profesor = '" + nombreProfesor + "' where nombre= '" +anadirModulos.get(i).getNombre()+"' AND Instituto ='"+nombreInstituto+"'" );
             } catch (SQLException ex) {
                 Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
             }
