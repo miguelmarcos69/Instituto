@@ -282,6 +282,11 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         jEliminar.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
         jEliminar.setForeground(new java.awt.Color(255, 255, 255));
         jEliminar.setText("Eliminar");
+        jEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEliminarActionPerformed(evt);
+            }
+        });
         jPanel1.add(jEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 550, -1, -1));
 
         jAnnadir.setText("Añadir");
@@ -296,9 +301,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 984, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 985, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -372,6 +375,13 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         a.setVisible(true);
 
     }//GEN-LAST:event_jAnnadirActionPerformed
+
+    private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
+
+
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jEliminarActionPerformed
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }

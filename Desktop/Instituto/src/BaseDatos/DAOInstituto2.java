@@ -284,7 +284,7 @@ public class DAOInstituto2 {
     }
 
     public void annadirUsuario(String i, Usuario u) {
-        boolean annadido = false;
+        //boolean annadido = false;
         ConexionDefault.crearConexion();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -369,7 +369,13 @@ public class DAOInstituto2 {
 
     }
 
-    public void annadirCiclo() {
+    public void annadirCurso(Instituto i,Curso c) throws SQLException {
+        //para saber si esta añadido o no
+         boolean annadido = false;
+         ConexionDefault.instancia().getStatement().execute("INSERT INTO ciclo VALUES ('"
+                            + c.getNombre() + "', '" + c.getPlazas() + "', '" + c.getAnno()+"');");
+         
+        
     }
 
 }
