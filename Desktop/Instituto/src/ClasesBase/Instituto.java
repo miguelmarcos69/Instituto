@@ -373,6 +373,22 @@ public class Instituto {
 
         return arrayModulos;
     }
+    
+      public boolean existeCuros(String nombre) {
+        boolean resultado = false;
+
+        for (int i = 0; i <cursos.size(); i++) {
+
+            if (cursos.get(i).getNombre().equals(nombre)) {
+                
+                System.out.println(cursos.get(i).getNombre());
+
+                resultado = true;
+            }
+        }
+
+        return resultado;
+    }
 
     public void annadirUsuario(Usuario a) {
 

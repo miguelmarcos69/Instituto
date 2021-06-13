@@ -56,7 +56,6 @@ public class CrearCursos extends javax.swing.JFrame {
         ConexionDefault.crearConexion();
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -250,22 +249,25 @@ public class CrearCursos extends javax.swing.JFrame {
         //creamos el curso con los parametros dados
         Curso cursos = new Curso(jNombreCurso.getText(), Integer.parseInt(jNPlazas.getText()), Integer.parseInt(jAnno.getText()));
         //buscar si existe  el  modulo
-      if (jNombreCurso.getText().equals(i.buscarModuloNombre(jNombreCurso.getText()).getNombre())){
-             JOptionPane.showMessageDialog(null, "Este modulo ya exixtse");
-     }else{
-         
-        
-        i.buscarCurso(jNombreCurso.getText());
-        i.annadirCiclo(cursos);
-        //hacemos visible la creacion de moulos
-        jPanelCrearModulos.setVisible(true);
-        try {
-            DaoInstituto.instancia().annadirCurso(i, cursos);
-        } catch (SQLException ex) {
-            Logger.getLogger(CrearCursos.class.getName()).log(Level.SEVERE, null, ex);
+
+        if (i.existeCuros(jNombreCurso.getText())) {
+            jNombreCurso.setText("");
+            jNPlazas.setText("");
+            jAnno.setText("");
+            JOptionPane.showMessageDialog(null, "Este curso ya exixtse");
+        } else {
+            
+            //añade curso
+            i.annadirCiclo(cursos);
+            //hacemos visible la creacion de moulos
+            jPanelCrearModulos.setVisible(true);
+            try {
+                DaoInstituto.instancia().annadirCurso(i, cursos);
+            } catch (SQLException ex) {
+                Logger.getLogger(CrearCursos.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
-      }
     }//GEN-LAST:event_jCrearCursosActionPerformed
 
     private void JNombreModuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JNombreModuloActionPerformed
@@ -276,23 +278,22 @@ public class CrearCursos extends javax.swing.JFrame {
 
         //creamos un modulo 
         Modulo modulos = new Modulo(JNombreModulo.getText(), jCodigoAula.getText(), Integer.parseInt(jHorasSemana.getText()));
-        //busca si hay ese moudlo en sistema
-        if (JNombreModulo.getText().equals(i.buscarModuloNombre(JNombreModulo.getText()).getNombre())){
-            
-             JOptionPane.showMessageDialog(null, "Este modulo ya exixtse");
-        }else{
         //buscamos lo que haya puesto el usuario como curso     
         Curso c = i.getCicloNombre(jNombreCurso.getText(), Integer.parseInt(jAnno.getText()));
+        if (c.existeModulo(JNombreModulo.getText())) {
 
-        try {
-            DaoInstituto.instancia().annadirModulo(i, modulos, c);
-            JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
-        } catch (SQLException ex) {
-            Logger.getLogger(CrearCursos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        JNombreModulo.setText("");
-        jCodigoAula.setText("");
-        jHorasSemana.setText("");
+            JOptionPane.showMessageDialog(null, "Este modulo ya exixtse");
+        } else {
+
+            try {
+                DaoInstituto.instancia().annadirModulo(i, modulos, c);
+                JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
+            } catch (SQLException ex) {
+                Logger.getLogger(CrearCursos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JNombreModulo.setText("");
+            jCodigoAula.setText("");
+            jHorasSemana.setText("");
         }
     }//GEN-LAST:event_jAnnadirModuloActionPerformed
 
