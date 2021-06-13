@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -55,6 +56,7 @@ public class CrearCursos extends javax.swing.JFrame {
         ConexionDefault.crearConexion();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -102,16 +104,16 @@ public class CrearCursos extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(327, 327, 327)
+                .addGap(325, 325, 325)
                 .addComponent(jLabel1)
-                .addContainerGap(327, Short.MAX_VALUE))
+                .addContainerGap(329, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(15, 15, 15)
                 .addComponent(jLabel1)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, -1));
@@ -139,7 +141,7 @@ public class CrearCursos extends javax.swing.JFrame {
                 jCrearCursosActionPerformed(evt);
             }
         });
-        jPanel3.add(jCrearCursos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, -1, -1));
+        jPanel3.add(jCrearCursos, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, -1, -1));
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
         jPanel3.add(jAnno, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, 40, -1));
 
@@ -198,10 +200,10 @@ public class CrearCursos extends javax.swing.JFrame {
                     .addGroup(jPanelCrearModulosLayout.createSequentialGroup()
                         .addGap(172, 172, 172)
                         .addGroup(jPanelCrearModulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jHorasSemana)
-                            .addComponent(JNombreModulo)
-                            .addComponent(jCodigoAula, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))))
-                .addGap(173, 173, 173))
+                            .addComponent(JNombreModulo, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                            .addComponent(jCodigoAula)
+                            .addComponent(jHorasSemana))))
+                .addGap(78, 78, 78))
         );
         jPanelCrearModulosLayout.setVerticalGroup(
             jPanelCrearModulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,7 +218,7 @@ public class CrearCursos extends javax.swing.JFrame {
                 .addGroup(jPanelCrearModulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jCodigoAula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelCrearModulosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(jHorasSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -237,7 +239,7 @@ public class CrearCursos extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -247,6 +249,13 @@ public class CrearCursos extends javax.swing.JFrame {
 
         //creamos el curso con los parametros dados
         Curso cursos = new Curso(jNombreCurso.getText(), Integer.parseInt(jNPlazas.getText()), Integer.parseInt(jAnno.getText()));
+        //buscar si existe  el  modulo
+      if (jNombreCurso.getText().equals(i.buscarModuloNombre(jNombreCurso.getText()).getNombre())){
+             JOptionPane.showMessageDialog(null, "Este modulo ya exixtse");
+     }else{
+         
+        
+        i.buscarCurso(jNombreCurso.getText());
         i.annadirCiclo(cursos);
         //hacemos visible la creacion de moulos
         jPanelCrearModulos.setVisible(true);
@@ -256,7 +265,7 @@ public class CrearCursos extends javax.swing.JFrame {
             Logger.getLogger(CrearCursos.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-
+      }
     }//GEN-LAST:event_jCrearCursosActionPerformed
 
     private void JNombreModuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JNombreModuloActionPerformed
@@ -264,17 +273,27 @@ public class CrearCursos extends javax.swing.JFrame {
     }//GEN-LAST:event_JNombreModuloActionPerformed
 
     private void jAnnadirModuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAnnadirModuloActionPerformed
+
         //creamos un modulo 
         Modulo modulos = new Modulo(JNombreModulo.getText(), jCodigoAula.getText(), Integer.parseInt(jHorasSemana.getText()));
+        //busca si hay ese moudlo en sistema
+        if (JNombreModulo.getText().equals(i.buscarModuloNombre(JNombreModulo.getText()).getNombre())){
+            
+             JOptionPane.showMessageDialog(null, "Este modulo ya exixtse");
+        }else{
         //buscamos lo que haya puesto el usuario como curso     
         Curso c = i.getCicloNombre(jNombreCurso.getText(), Integer.parseInt(jAnno.getText()));
 
         try {
             DaoInstituto.instancia().annadirModulo(i, modulos, c);
+            JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
         } catch (SQLException ex) {
             Logger.getLogger(CrearCursos.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        JNombreModulo.setText("");
+        jCodigoAula.setText("");
+        jHorasSemana.setText("");
+        }
     }//GEN-LAST:event_jAnnadirModuloActionPerformed
 
     /**
