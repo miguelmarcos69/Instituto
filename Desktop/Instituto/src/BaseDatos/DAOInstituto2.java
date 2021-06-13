@@ -231,7 +231,7 @@ public class DAOInstituto2 {
 
                     c = new Curso(rs.getString(1), rs.getInt(2), rs.getInt(3));
 
-                    rs = ConexionDefault.instancia().getStatement().executeQuery("select * from modulo where ciclo ='" + c.getNombre() + "'");
+                    rs = ConexionDefault.instancia().getStatement().executeQuery("select * from modulo where ciclo ='" + c.getNombre() + "'");//No puedo abrir 2 result sets a la vez
 
                     while (rs.next()) {
 

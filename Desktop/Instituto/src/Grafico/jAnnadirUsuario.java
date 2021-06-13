@@ -163,7 +163,6 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelMostrarAsig = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableElegirAsignaturas = new javax.swing.JTable();
-        jButtonAnnadir = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTableAsignaturasElegidas = new javax.swing.JTable();
@@ -494,14 +493,12 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 "Nombre", "Horas semanales"
             }
         ));
-        jScrollPane3.setViewportView(jTableElegirAsignaturas);
-
-        jButtonAnnadir.setText("AÑADIR");
-        jButtonAnnadir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAnnadirActionPerformed(evt);
+        jTableElegirAsignaturas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableElegirAsignaturasMouseClicked(evt);
             }
         });
+        jScrollPane3.setViewportView(jTableElegirAsignaturas);
 
         jLabel14.setText("Seleccione la asignatura que desee añadir:");
 
@@ -546,8 +543,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                     .addComponent(jLabel15)
                     .addComponent(jLabel14)
                     .addGroup(jPanelMostrarAsigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonAnnadir, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(jPanelMostrarAsigLayout.createSequentialGroup()
                         .addGap(70, 70, 70)
@@ -563,9 +559,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 .addComponent(jLabel14)
                 .addGap(3, 3, 3)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonAnnadir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -609,7 +603,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                     .addGroup(jPanelProfesorLayout.createSequentialGroup()
                         .addGap(165, 165, 165)
                         .addComponent(jLabel11)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 192, Short.MAX_VALUE))
             .addGroup(jPanelProfesorLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jRadioButtonTodasAsig)
@@ -874,6 +868,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento(), modulos);
                 i.annadirUsuario(annadir);
                 DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
+                datosVacios ();
             } else {
                 JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
                         "Error", JOptionPane.ERROR_MESSAGE);
@@ -891,6 +886,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 i.eliminarUsuario(annadir.getNombre());
                 i.annadirUsuario(annadir);
                 DAOInstituto2.instancia().modificarProfesor(i.getNombre(), annadir.getNombre(), annadir.getContra(), modulos);
+                datosVacios ();
             } else {
                 JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
                         "Error", JOptionPane.ERROR_MESSAGE);
@@ -942,11 +938,12 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                         annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
                         DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
                         JOptionPane.showMessageDialog(getContentPane(), "El usuario ha sido creado con exito",
-                                "Error", JOptionPane.OK_OPTION);
+                                "correcto", JOptionPane.OK_OPTION);
+                        datosVacios ();
                     } else {
 
                         JOptionPane.showMessageDialog(getContentPane(), "El curso esta completo",
-                                "correcto", JOptionPane.ERROR_MESSAGE);
+                                "Error", JOptionPane.ERROR_MESSAGE);
                     }
 
                 } else {
@@ -996,6 +993,8 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
         jPanelSeleccionCiclo.setVisible(true);
         jPanelMostrarAsig.setVisible(false);
+        tabla = new DefaultTableModel(i.getModulosTot(), cabeceraModulo);
+        jRadioButtonVerTodosP.setSelected(true);
     }//GEN-LAST:event_jRadioButtonCicloAsigActionPerformed
 
     //Todas
@@ -1075,35 +1074,10 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonBuscarAsigActionPerformed
 
-    //BOTON AÑADIR modulos selecconados
-    private void jButtonAnnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnadirActionPerformed
-
-        try {
-            String nombreM = jTableElegirAsignaturas.getValueAt(jTableElegirAsignaturas.getSelectedRow(), 0).toString();
-            int horasM = Integer.parseInt(jTableElegirAsignaturas.getValueAt(jTableElegirAsignaturas.getSelectedRow(), 1).toString());
-
-            String[][] modulos = new String[jTableAsignaturasElegidas.getModel().getRowCount() + 1][2];
-
-            for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
-
-                modulos[j][0] = jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + "";
-                modulos[j][1] = jTableAsignaturasElegidas.getModel().getValueAt(j, 1) + "";
-            }
-
-            modulos[jTableAsignaturasElegidas.getModel().getRowCount()][0] = nombreM;
-            modulos[jTableAsignaturasElegidas.getModel().getRowCount()][1] = horasM + "";
-
-            jTableAsignaturasElegidas.setModel(new DefaultTableModel(modulos, cabecera));
-
-        } catch (NullPointerException npe) {
-            JOptionPane.showMessageDialog(getContentPane(), "Porfavor selecciona una fila con datos",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jButtonAnnadirActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
         jTableAsignaturasElegidas.setModel(new DefaultTableModel(new String[0][cabeceraModulo.length], cabeceraModulo));
+        jTableElegirAsignaturas.setModel(new DefaultTableModel(i.getModulosTot(),cabecera));
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActionPerformed
@@ -1126,6 +1100,33 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         tablaSeleccionada.removeRow(jTableAsignaturasElegidas.getSelectedRow());
         
     }//GEN-LAST:event_jTableAsignaturasElegidasMouseClicked
+
+    private void jTableElegirAsignaturasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableElegirAsignaturasMouseClicked
+        try {
+            String nombreM = jTableElegirAsignaturas.getValueAt(jTableElegirAsignaturas.getSelectedRow(), 0).toString();
+            int horasM = Integer.parseInt(jTableElegirAsignaturas.getValueAt(jTableElegirAsignaturas.getSelectedRow(), 1).toString());
+            
+            DefaultTableModel tabla= (DefaultTableModel)jTableElegirAsignaturas.getModel();
+            tabla.removeRow(jTableElegirAsignaturas.getSelectedRow());
+
+            String[][] modulos = new String[jTableAsignaturasElegidas.getModel().getRowCount() + 1][2];
+
+            for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
+
+                modulos[j][0] = jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + "";
+                modulos[j][1] = jTableAsignaturasElegidas.getModel().getValueAt(j, 1) + "";
+            }
+
+            modulos[jTableAsignaturasElegidas.getModel().getRowCount()][0] = nombreM;
+            modulos[jTableAsignaturasElegidas.getModel().getRowCount()][1] = horasM + "";
+
+            jTableAsignaturasElegidas.setModel(new DefaultTableModel(modulos, cabecera));
+
+        } catch (NullPointerException npe) {
+            JOptionPane.showMessageDialog(getContentPane(), "Porfavor selecciona una fila con datos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jTableElegirAsignaturasMouseClicked
 
     //METODO MAIN
     public static void main(String args[]) {
@@ -1233,6 +1234,24 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jTableAsignaturasElegidas.setModel(new DefaultTableModel(p.getModulosInpartidos(), cabeceraModulo));
 
     }
+    
+    public void datosVacios (){
+    
+        jTextFieldNombre.setText("");
+        jTextFieldDNI.setText("");
+        jTextFieldFechaNacimiento.setText("dia/mes/año");
+        jPasswordFieldContra.setText("");
+        jPasswordFieldRepetirContra.setText("");
+
+        jPanelDatosCoumnes.setVisible(true);
+        jPanelProfesor.setVisible(false);
+        jPanelAlumno.setVisible(false);
+        
+        jRadioButtonVerTodosA.setVisible(false);
+        jRadioButtonVerA1A.setVisible(false);
+        jRadioButtonVerA2A.setVisible(false);
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupTipoUsuario;
@@ -1240,7 +1259,6 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroupVerAsignaturas;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonAceptar;
-    private javax.swing.JButton jButtonAnnadir;
     private javax.swing.JButton jButtonBuscarAsig;
     private javax.swing.JButton jButtonInscribir;
     private javax.swing.JLabel jLabel1;
