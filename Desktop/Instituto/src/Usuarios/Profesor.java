@@ -39,7 +39,20 @@ public class Profesor extends Usuario {
         asignaturasDadas.add(a);
     }
     
-    public
+    public String [][] getModulosInpartidos (){
+    
+        String [][] modulos = new String [this.asignaturasDadas.size()][2];
+        
+        for (int i =0;i<asignaturasDadas.size();i++){
+        
+            modulos[i][0]=asignaturasDadas.get(i).getNombre();
+            modulos[i][1]=asignaturasDadas.get(i).getHoras_semana()+"";
+        }
+        
+        return modulos;
+    }
+            
+            
 /*
     public ArrayList<Alumno> getAlu() {
         return alu;

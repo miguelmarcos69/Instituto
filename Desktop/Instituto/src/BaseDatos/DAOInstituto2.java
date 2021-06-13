@@ -80,13 +80,12 @@ public class DAOInstituto2 {
         try {
             ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery(
                     //"select * from instituto"
-                    "select nombre, contra, DNI, fechaNac,nombreInsti,ciclo from usuario where nombre= '" + nombre + "' and nombreInsti='" + nombreInstituto + "'"
+                    "select nombre, contra, DNI, fechaNac,nombreInsti,ciclo,ano from usuario where nombre= '" + nombre + "' and nombreInsti='" + nombreInstituto + "'"
             );
 
             if (rs.next()) {
-                nombreCiclo = rs.getString(6);
                 a = new Alumno(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
-                a = getDatosAlumno(a, nombreCiclo);
+                a = getDatosAlumno(a, rs.getString(6),rs.getInt(7));
 
             } else {
 
@@ -99,11 +98,11 @@ public class DAOInstituto2 {
         return a;
     }
 
-    public Alumno getDatosAlumno(Alumno a, String nombreCiclo) {
+    public Alumno getDatosAlumno(Alumno a, String nombreCiclo,int anno) {
         Curso ciclo = null;
 
         try {
-            ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select * from ciclo where nombre  = '" + nombreCiclo + "'");
+            ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select * from ciclo where nombre  = '" + nombreCiclo + "' AND anno ='" +anno+ "'");
             if (rs.next()) {
                 ciclo = new Curso(rs.getString(1), rs.getInt(2), rs.getInt(3));
 
@@ -233,6 +232,7 @@ public class DAOInstituto2 {
                     rs.beforeFirst();
                 }
                 String[] ciclosAlumnos = new String[cantidadFilas];
+                int[] annoCiclo = new int [cantidadFilas];
 
                 int contador = 0;
                 while (rs.next()) {
@@ -244,6 +244,7 @@ public class DAOInstituto2 {
                         case "alu":
                             a = new Alumno(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
                             ciclosAlumnos[contador] = rs.getString(6);
+                            annoCiclo[contador]=rs.getInt(7);
                             break;
                         case "prof":
                             a = new Profesor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
@@ -261,7 +262,7 @@ public class DAOInstituto2 {
 
                     if (listaUsuario.get(j) instanceof Alumno) {
                         Alumno a = (Alumno) listaUsuario.get(j);
-                        a = getDatosAlumno(a, ciclosAlumnos[j]);
+                        a = getDatosAlumno(a, ciclosAlumnos[j],annoCiclo[j]);
 
                         i.annadirUsuario(a);
                     } else if (listaUsuario.get(j) instanceof Profesor) {
@@ -371,5 +372,21 @@ public class DAOInstituto2 {
 
     public void annadirCiclo() {
     }
+    
+    public void modificarProfesor (String nombreInstituto,String nombreProfesor,String contrasena,ArrayList<Modulo> anadirModulos){
+    
+        modificarContrasena(nombreProfesor,nombreInstituto,contrasena);
+        
+        for (int i=0;i<anadirModulos.size();i++){
+        
+            try {
+                ConexionDefault.instancia().getStatement().execute("update modulos set profesor = '" + nombreProfesor + "' where nombre= '" +anadirModulos.get(i).getNombre()+"' AND isntituo ='"+nombreInstituto+"'" );
+            } catch (SQLException ex) {
+                Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public void modificarAlumno (String nombreInstituto,String nombreProfesor,String contrasena,String nombreciclo){}
 
 }

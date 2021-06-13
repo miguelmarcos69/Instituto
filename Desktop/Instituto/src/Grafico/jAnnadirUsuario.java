@@ -17,8 +17,8 @@ import javax.swing.table.TableModel;
 
 public class jAnnadirUsuario extends javax.swing.JDialog {
 
-    //
     Instituto i;
+    boolean modificando = false;
     String cabecera[] = {"Nombre", "Curso"};
     String cabeceraModulo[] = {"Nombre", "Horas semanales"};
     DefaultTableModel tabla;
@@ -71,6 +71,11 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     ///METODOS GET\\\
     public String getNombre() {
         return jTextFieldNombre.getText();
+    }
+
+    public void setModificando() {
+
+        modificando = true;
     }
 
     public String getDNI() {
@@ -508,6 +513,11 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 "Nombre", "Horas semanales"
             }
         ));
+        jTableAsignaturasElegidas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableAsignaturasElegidasMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(jTableAsignaturasElegidas);
 
         jLabel15.setText("Asignaturas añadidas:");
@@ -852,19 +862,40 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
         ArrayList modulos = new ArrayList();
 
-        for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
+        if (modificando == false) {
 
-            modulos.add(i.buscarModuloNombre(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
+            for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
 
-        }
+                modulos.add(i.buscarModuloNombre(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
 
-        if (ContrasennaValida() == true) {
-            annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento(), modulos);
-            i.annadirUsuario(annadir);
-            DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
+            }
+
+            if (ContrasennaValida() == true) {
+                annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento(), modulos);
+                i.annadirUsuario(annadir);
+                DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
+            } else {
+                JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-            JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
-                    "Error", JOptionPane.ERROR_MESSAGE);
+
+            for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
+
+                modulos.add(i.buscarModuloNombre(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
+
+            }
+
+            if (ContrasennaValida() == true) {
+                annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento(), modulos);
+                i.eliminarUsuario(annadir.getNombre());
+                i.annadirUsuario(annadir);
+                DAOInstituto2.instancia().modificarProfesor(i.getNombre(), annadir.getNombre(), annadir.getContra(), modulos);
+            } else {
+                JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
         }
 
     }//GEN-LAST:event_jButtonAceptarActionPerformed
@@ -901,29 +932,59 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     private void jButtonInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscribirActionPerformed
         Alumno annadir = null;
 
-        if (jTableVerCicloA.getSelectedRow() != -1) {
-            String nombreC = jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 0).toString();
-            int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
-            ContrasennaValida();
-            if (ContrasennaValida() == true) {
-                if (i.getNAlumnosCurso(nombreC) < i.getCicloNombre(nombreC, annoC).getPlazas()) {
-                    annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
-                    DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
-                    JOptionPane.showMessageDialog(getContentPane(), "El usuario ha sido creado con exito",
-                            "Error", JOptionPane.OK_OPTION);
+        if (modificando == false) {
+            if (jTableVerCicloA.getSelectedRow() != -1) {
+                String nombreC = jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 0).toString();
+                int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
+                ContrasennaValida();
+                if (ContrasennaValida() == true) {
+                    if (i.getNAlumnosCurso(nombreC) < i.getCicloNombre(nombreC, annoC).getPlazas()) {
+                        annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
+                        DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
+                        JOptionPane.showMessageDialog(getContentPane(), "El usuario ha sido creado con exito",
+                                "Error", JOptionPane.OK_OPTION);
+                    } else {
+
+                        JOptionPane.showMessageDialog(getContentPane(), "El curso esta completo",
+                                "correcto", JOptionPane.ERROR_MESSAGE);
+                    }
+
                 } else {
-
-                    JOptionPane.showMessageDialog(getContentPane(), "El curso esta completo",
-                            "correcto", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
+                            "Error", JOptionPane.ERROR_MESSAGE);
                 }
-
             } else {
-                JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
+                JOptionPane.showMessageDialog(getContentPane(), "Debe seleccionar una fila de la tabla",
                         "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            JOptionPane.showMessageDialog(getContentPane(), "Debe seleccionar una fila de la tabla",
-                    "Error", JOptionPane.ERROR_MESSAGE);
+            
+            
+             if (jTableVerCicloA.getSelectedRow() != -1) {
+                String nombreC = jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 0).toString();
+                int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
+                ContrasennaValida();
+                if (ContrasennaValida() == true) {
+                    if (i.getNAlumnosCurso(nombreC) < i.getCicloNombre(nombreC, annoC).getPlazas()) {
+                        annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
+                        //DAOInstituto2.instancia().modificarAlumno(i.getNombre(), annadir);
+                        JOptionPane.showMessageDialog(getContentPane(), "El usuario ha sido creado con exito",
+                                "Error", JOptionPane.OK_OPTION);
+                    } else {
+
+                        JOptionPane.showMessageDialog(getContentPane(), "El curso esta completo",
+                                "correcto", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(getContentPane(), "Debe seleccionar una fila de la tabla",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
         }
 
 
@@ -1053,6 +1114,19 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldDNIActionPerformed
 
+    private void jTableAsignaturasElegidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAsignaturasElegidasMouseClicked
+
+        DefaultTableModel tablaSeleccionada = (DefaultTableModel)jTableAsignaturasElegidas.getModel();
+        DefaultTableModel tabla= (DefaultTableModel)jTableElegirAsignaturas.getModel();
+        String [] modulo = new String [2];
+        modulo[0]=jTableAsignaturasElegidas.getValueAt(jTableAsignaturasElegidas.getSelectedRow(), 0)+"";
+        modulo[1]=jTableAsignaturasElegidas.getValueAt(jTableAsignaturasElegidas.getSelectedRow(), 1)+"";
+        tabla.addRow(modulo);
+        
+        tablaSeleccionada.removeRow(jTableAsignaturasElegidas.getSelectedRow());
+        
+    }//GEN-LAST:event_jTableAsignaturasElegidasMouseClicked
+
     //METODO MAIN
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1138,8 +1212,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         }
 
     }
-    
-    
+
     public void mostrarDatosProfesor(Profesor p) {
 
         jTextFieldNombre.setText(p.getNombre());
@@ -1157,10 +1230,8 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelProfesor.setVisible(true);
         jPanelAlumno.setVisible(false);
 
-        jTableAsignaturasElegidas.setModel(new DefaultTableModel());
-        
-        
-        
+        jTableAsignaturasElegidas.setModel(new DefaultTableModel(p.getModulosInpartidos(), cabeceraModulo));
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
