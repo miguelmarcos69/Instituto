@@ -1,5 +1,4 @@
 package Grafico;
-
 import BaseDatos.DAOInstituto2;
 import ClasesBase.Curso;
 import ClasesBase.Instituto;
@@ -867,6 +866,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
 
                 modulos.add(i.buscarModuloNombre(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
+                
 
             }
 
@@ -1101,6 +1101,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonAnnadirActionPerformed
 
+    //Cancelar
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
         jTableAsignaturasElegidas.setModel(new DefaultTableModel(new String[0][cabeceraModulo.length], cabeceraModulo));
