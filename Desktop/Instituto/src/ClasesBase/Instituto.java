@@ -391,4 +391,22 @@ public class Instituto {
         
         return a;
     }
+    
+    public int getNAlumnosCurso (String modulo){
+    
+        int nAlumnos=0;
+        
+        for (int i=0;i<usuarios.size();i++){
+        
+            if (usuarios.get(i) instanceof Alumno){
+            
+                if (((Alumno)usuarios.get(i)).getNombre().equals(modulo)){
+                
+                    nAlumnos++;
+                }
+            }
+        }
+        
+        return nAlumnos;
+    }
 }

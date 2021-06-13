@@ -41,10 +41,9 @@ public class jManejarUsuarios extends javax.swing.JFrame {
     String cabeceraProfesores[] = {"Nombre", "dni", "fecha nacimiento"};
 
     DefaultTableModel tabla;
-    
-    public jManejarUsuarios (){
 
-   
+    public jManejarUsuarios() {
+
         initComponents();
         /*
         ArrayList<Alumno> alumnos = new ArrayList();
@@ -67,15 +66,16 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         usuarios.add(p);
 
         i = new Instituto(usuarios, ciclos, "camino", "plaza", "777777");
-        */
+         */
     }
 
     public jManejarUsuarios(Instituto i) {
         initComponents();
-        this.i=i;
-    
+        this.i = i;
+        tabla = new DefaultTableModel(i.mostrarUsuarios(), cabeceraTodos);
+        tablaUsuarios.setModel(tabla);
         //this.adm=adm;
-        
+
         /*
         ArrayList<Profesor> profesores = new ArrayList();
         ArrayList<Alumno> alumnos = new ArrayList();
@@ -98,11 +98,8 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         usuarios.add(p);
 
         i = new Instituto(usuarios, ciclos, "camino", "plaza", "777777");
-        */
+         */
     }
-    
-    
-
 
     class jPanelGardient extends JPanel {
 
@@ -216,6 +213,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         buttonGroup1.add(jButtonTodos);
         jButtonTodos.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
         jButtonTodos.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonTodos.setSelected(true);
         jButtonTodos.setText("Todos");
         jButtonTodos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -317,18 +315,17 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         tabla = new DefaultTableModel(i.mostrarUsuarios(), cabeceraTodos);
         tablaUsuarios.setModel(tabla);
 
-        
 
     }//GEN-LAST:event_jButtonTodosActionPerformed
 
     private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
-        
 
-        jAnnadirUsuario a = new jAnnadirUsuario(this,true);
+        jAnnadirUsuario a = new jAnnadirUsuario(this, true);
         a.setInstituto(i);
+        Alumno alumno = i.buscarAlumno(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
+        a.mostrarDatosAlumno(alumno);
         this.setVisible(false);
         a.setVisible(true);
-        
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jModificarActionPerformed
@@ -337,7 +334,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
         tabla = new DefaultTableModel(i.mostrarAlumnos(), cabeceraAlumnos);
         tablaUsuarios.setModel(tabla);
-        
+
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAlumnosActionPerformed
 
@@ -351,20 +348,18 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
 
-    System.exit(0);
-
-        
+        System.exit(0);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jAnnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAnnadirActionPerformed
         // TODO add your handling code here:
-        jAnnadirUsuario a = new jAnnadirUsuario(this,true);
+        jAnnadirUsuario a = new jAnnadirUsuario(this, true);
         a.setInstituto(i);
         this.setVisible(false);
         a.setVisible(true);
-        
+
     }//GEN-LAST:event_jAnnadirActionPerformed
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
@@ -405,11 +400,8 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         });
 
     }
-    
-    
-   
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;

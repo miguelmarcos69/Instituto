@@ -27,10 +27,12 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     public jAnnadirUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
         jPanelDatosCoumnes.setVisible(false);
         jPanelProfesor.setVisible(false);
         jPanelAlumno.setVisible(false);
 
+        /*
         //Araylist para guardar asignaturas de forma local
         ArrayList<Modulo> modAnn = new ArrayList<>();
 
@@ -63,7 +65,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         al.add(juan);
 
         this.i = new Instituto(al, c, "camino", "la que sea", "69633245");
-
+         */
     }
 
     ///METODOS GET\\\
@@ -264,6 +266,18 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jLabel7.setText("Contraseña:");
 
         jLabel8.setText("Repita la contraseña:");
+
+        jTextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNombreActionPerformed(evt);
+            }
+        });
+
+        jTextFieldDNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldDNIActionPerformed(evt);
+            }
+        });
 
         jTextFieldFechaNacimiento.setText("dia/mes/año");
         jTextFieldFechaNacimiento.setToolTipText("");
@@ -808,6 +822,13 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelDatosCoumnes.setVisible(true);
         jPanelProfesor.setVisible(false);
         jPanelAlumno.setVisible(true);
+        jTableVerCicloA.setModel(new DefaultTableModel(i.getCicloTot(), cabecera));
+
+        jRadioButtonVerTodosA.setVisible(false);
+        jRadioButtonVerA1A.setVisible(false);
+        jRadioButtonVerA2A.setVisible(false);
+
+
     }//GEN-LAST:event_jRadioButtonAlumnoActionPerformed
 
     ///BOTON GROUP ver ciclos para alumnos\\\ 
@@ -885,8 +906,16 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
             ContrasennaValida();
             if (ContrasennaValida() == true) {
-                annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
-                DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
+                if (i.getNAlumnosCurso(nombreC) < i.getCicloNombre(nombreC, annoC).getPlazas()) {
+                    annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
+                    DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
+                    JOptionPane.showMessageDialog(getContentPane(), "El usuario ha sido creado con exito",
+                            "Error", JOptionPane.OK_OPTION);
+                } else {
+
+                    JOptionPane.showMessageDialog(getContentPane(), "El curso esta completo",
+                            "correcto", JOptionPane.ERROR_MESSAGE);
+                }
 
             } else {
                 JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
@@ -1016,6 +1045,14 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jTableAsignaturasElegidas.setModel(new DefaultTableModel(new String[0][cabeceraModulo.length], cabeceraModulo));
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jTextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNombreActionPerformed
+
+    private void jTextFieldDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDNIActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldDNIActionPerformed
+
     //METODO MAIN
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1054,6 +1091,99 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
+    }
+
+    public void mostrarDatosAlumno(Alumno a) {
+
+        jTextFieldNombre.setText(a.getNombre());
+        jTextFieldNombre.setEditable(false);
+
+        jTextFieldDNI.setText(a.getDNI());
+        jTextFieldDNI.setEditable(false);
+
+        jTextFieldFechaNacimiento.setText(a.getFecha_nacimiento());
+        jTextFieldFechaNacimiento.setEditable(false);
+
+        jRadioButtonVerTodosA.setSelected(true);
+        jRadioButtonVerTodosA.setEnabled(false);
+
+        jRadioButtonAlumno.setSelected(true);
+
+        jPanelDatosCoumnes.setVisible(true);
+        jPanelProfesor.setVisible(false);
+        jPanelAlumno.setVisible(true);
+        jTableVerCicloA.setModel(new DefaultTableModel(i.getCicloTot(), cabecera));
+
+        jRadioButtonVerTodosA.setVisible(false);
+        jRadioButtonVerA1A.setVisible(false);
+        jRadioButtonVerA2A.setVisible(false);
+
+        try {
+
+            if (a.aprobado()) {
+
+                tabla = new DefaultTableModel(i.getCicloTot(1), cabecera);
+                String[] segundo = new String[2];
+                segundo[0] = a.getCiclo().getNombre();
+                segundo[1] = a.getCiclo().getAnno() + "";
+                tabla.addRow(segundo);
+                jTableVerCicloA.setModel(tabla);
+            } else {
+                tabla = new DefaultTableModel(i.getCicloTot(1), cabecera);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+    
+    
+    public void mostrarDatosProfesor(Alumno a) {
+
+        jTextFieldNombre.setText(a.getNombre());
+        jTextFieldNombre.setEditable(false);
+
+        jTextFieldDNI.setText(a.getDNI());
+        jTextFieldDNI.setEditable(false);
+
+        jTextFieldFechaNacimiento.setText(a.getFecha_nacimiento());
+        jTextFieldFechaNacimiento.setEditable(false);
+
+        jRadioButtonVerTodosA.setSelected(true);
+        jRadioButtonVerTodosA.setEnabled(false);
+
+        jRadioButtonAlumno.setSelected(true);
+
+        jPanelDatosCoumnes.setVisible(true);
+        jPanelProfesor.setVisible(false);
+        jPanelAlumno.setVisible(true);
+        jTableVerCicloA.setModel(new DefaultTableModel(i.getCicloTot(), cabecera));
+
+        jRadioButtonVerTodosA.setVisible(false);
+        jRadioButtonVerA1A.setVisible(false);
+        jRadioButtonVerA2A.setVisible(false);
+
+        try {
+
+            if (a.aprobado()) {
+
+                tabla = new DefaultTableModel(i.getCicloTot(1), cabecera);
+                String[] segundo = new String[2];
+                segundo[0] = a.getCiclo().getNombre();
+                segundo[1] = a.getCiclo().getAnno() + "";
+                tabla.addRow(segundo);
+                jTableVerCicloA.setModel(tabla);
+            } else {
+                tabla = new DefaultTableModel(i.getCicloTot(1), cabecera);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

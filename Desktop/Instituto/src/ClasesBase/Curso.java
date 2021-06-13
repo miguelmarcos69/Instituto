@@ -56,6 +56,10 @@ public class Curso {
     public int getSizeModulos() {
         return modulos.size();
     }
+    public int getPlazas (){
+    
+        return this.plazas;
+    }
 
     public void anadirModulo(Modulo e) {
 

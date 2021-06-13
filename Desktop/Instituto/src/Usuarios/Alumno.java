@@ -146,5 +146,49 @@ public class Alumno extends Usuario {
         
         return notas;
     }
+    
+    public int notaFinal(String modulo){
+    
+        int nota=0;
+        int contador=0;
+        boolean todas=false;
+        
+        for (int i=0;i<notas.size();i++){
+        
+            if(notas.get(i).getModulo().equals(modulo)){
+            
+                nota=notas.get(i).getNota()+nota;
+                contador++;
+            }
+            
+            if(contador==3){
+            
+                nota=nota/3;
+                todas=true;
+            }
+        }
+        
+        if(todas==false){
+        
+            nota=-1;
+        }
+        
+        return nota;
+    }
+    
+    public boolean aprobado (){
+    
+        boolean aprobado =true;
+        
+        for (int i=0;i<curso.getSizeModulos();i++){
+        
+            if(notaFinal(curso.getArrayListModulos().get(i).getNombre())<5){
+            
+                aprobado=false;
+            }
+        }
+        
+        return aprobado;
+    }
 
 }
