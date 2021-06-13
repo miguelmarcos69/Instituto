@@ -56,8 +56,9 @@ public class Curso {
     public int getSizeModulos() {
         return modulos.size();
     }
-    public int getPlazas (){
-    
+
+    public int getPlazas() {
+
         return this.plazas;
     }
 
@@ -72,7 +73,7 @@ public class Curso {
         for (int i = 0; i < modulos.size(); i++) {
 
             if (modulos.get(i).getNombre().equals(nombre)) {
-                
+
                 System.out.println(modulos.get(i).getNombre());
 
                 resultado = true;
@@ -97,6 +98,20 @@ public class Curso {
 
         return m;
 
+    }
+
+    public Boolean ContarHoras(int horas) {
+        boolean añadido = false;
+        int horasSemama = horas;
+        for (int i = 0; i < modulos.size(); i++) {
+            horasSemama = horasSemama+modulos.get(i).getHoras_semana();
+
+        }
+        if (horasSemama <= 30) {
+            añadido = true;
+        }
+
+        return añadido;
     }
 
     //Obtener arraylist para mostrar en tabla(todos los ciclos)
@@ -141,7 +156,5 @@ public class Curso {
 
         return a;
     }
-    
-    
 
 }

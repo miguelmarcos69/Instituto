@@ -256,7 +256,7 @@ public class CrearCursos extends javax.swing.JFrame {
             jAnno.setText("");
             JOptionPane.showMessageDialog(null, "Este curso ya exixtse");
         } else {
-            
+
             //añade curso
             i.annadirCiclo(cursos);
             //hacemos visible la creacion de moulos
@@ -284,7 +284,8 @@ public class CrearCursos extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Este modulo ya exixtse");
         } else {
-
+            if(c.ContarHoras(Integer.parseInt(jHorasSemana.getText()))){
+                c.anadirModulo(modulos);
             try {
                 DaoInstituto.instancia().annadirModulo(i, modulos, c);
                 JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
@@ -294,7 +295,11 @@ public class CrearCursos extends javax.swing.JFrame {
             JNombreModulo.setText("");
             jCodigoAula.setText("");
             jHorasSemana.setText("");
+        }else {
+                JOptionPane.showMessageDialog(null, "La suma de las horas es mayor a 30");
+            }
         }
+    
     }//GEN-LAST:event_jAnnadirModuloActionPerformed
 
     /**
