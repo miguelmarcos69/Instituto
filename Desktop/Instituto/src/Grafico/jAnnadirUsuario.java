@@ -183,6 +183,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(204, 103, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -240,23 +241,26 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(441, 441, 441))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jPanelTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(309, 309, 309))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jPanelTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(190, 190, 190)
+                        .addComponent(jLabel1)))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jPanelTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap())
         );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 510, -1));
 
         jPanelDatos.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -308,7 +312,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 .addGroup(jPanelDatosCoumnesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPasswordFieldContra, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPasswordFieldRepetirContra, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelDatosCoumnesLayout.setVerticalGroup(
             jPanelDatosCoumnesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -452,7 +456,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             jPanelSeleccionCicloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSeleccionCicloLayout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 113, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
             .addGroup(jPanelSeleccionCicloLayout.createSequentialGroup()
                 .addGroup(jPanelSeleccionCicloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSeleccionCicloLayout.createSequentialGroup()
@@ -596,19 +600,20 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelProfesorLayout.setHorizontalGroup(
             jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelProfesorLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(57, 57, 57)
+                .addComponent(jPanelSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelProfesorLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanelProfesorLayout.createSequentialGroup()
-                        .addGap(165, 165, 165)
-                        .addComponent(jLabel11)))
-                .addGap(0, 192, Short.MAX_VALUE))
-            .addGroup(jPanelProfesorLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jRadioButtonTodasAsig)
-                .addGap(150, 150, 150)
-                .addComponent(jRadioButtonCicloAsig)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelProfesorLayout.createSequentialGroup()
+                        .addComponent(jRadioButtonTodasAsig)
+                        .addGap(101, 101, 101)
+                        .addComponent(jRadioButtonCicloAsig)
+                        .addGap(105, 105, 105))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelProfesorLayout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(174, 174, 174))))
         );
         jPanelProfesorLayout.setVerticalGroup(
             jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -734,7 +739,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAlumnoLayout.createSequentialGroup()
                                 .addComponent(jLabel9)
                                 .addGap(95, 95, 95)))))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelAlumnoLayout.setVerticalGroup(
             jPanelAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -757,11 +762,10 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDatosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanelDatosCoumnes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanelProfesor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelDatosCoumnes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelDatosLayout.setVerticalGroup(
@@ -770,309 +774,31 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 .addGap(6, 6, 6)
                 .addComponent(jPanelDatosCoumnes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanelProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jPanel1.add(jPanelDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 530, 1100));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    //BOTON ELEGIR PROFESOR
-    private void jRadioButtonProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonProfesorActionPerformed
-
-        jPanelDatosCoumnes.setVisible(true);
-        jPanelProfesor.setVisible(true);
-        jPanelAlumno.setVisible(false);
-        jPanelMostrarAsig.setVisible(false);
-        jPanelSeleccionCiclo.setVisible(false);
-    }//GEN-LAST:event_jRadioButtonProfesorActionPerformed
-
-    //BOTON ELEGIR ALUMNO
-    private void jRadioButtonAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAlumnoActionPerformed
-
-        jPanelDatosCoumnes.setVisible(true);
-        jPanelProfesor.setVisible(false);
-        jPanelAlumno.setVisible(true);
-        jTableVerCicloA.setModel(new DefaultTableModel(i.getCicloTot(), cabecera));
-
-        jRadioButtonVerTodosA.setVisible(false);
-        jRadioButtonVerA1A.setVisible(false);
-        jRadioButtonVerA2A.setVisible(false);
-
-
-    }//GEN-LAST:event_jRadioButtonAlumnoActionPerformed
-
-    ///BOTON GROUP ver ciclos para alumnos\\\ 
-    //Ver todos los ciclos
-    private void jRadioButtonVerTodosAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerTodosAActionPerformed
-
-        try {
-            tabla = new DefaultTableModel(i.getCicloTot(), cabecera);
-            jTableVerCicloA.setModel(tabla);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jRadioButtonVerTodosAActionPerformed
-
-    //AÑADIR PROFESORES
-    private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
-        // TODO add your handling code here:
-        Profesor annadir = null;
-
-        ArrayList modulos = new ArrayList();
-
-        if (modificando == false) {
-
-            for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
-
-                modulos.add(i.buscarModuloNombre(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
-                
-
-            }
-
-            if (ContrasennaValida() == true) {
-                annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento(), modulos);
-                i.annadirUsuario(annadir);
-                DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
-                datosVacios ();
-            } else {
-                JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
-                        "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-
-            for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
-
-                modulos.add(i.buscarModuloNombre(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
-
-            }
-
-            if (ContrasennaValida() == true) {
-                annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento(), modulos);
-                i.eliminarUsuario(annadir.getNombre());
-                i.annadirUsuario(annadir);
-                DAOInstituto2.instancia().modificarProfesor(i.getNombre(), annadir.getNombre(), annadir.getContra(), modulos);
-                datosVacios ();
-            } else {
-                JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
-                        "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-        }
-
-    }//GEN-LAST:event_jButtonAceptarActionPerformed
-
-    //Ver los ciclos de primer año
-    private void jRadioButtonVerA1AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerA1AActionPerformed
-
-        int an = 1;
-        try {
-            tabla = new DefaultTableModel(i.getCicloTot(an), cabecera);
-            jTableVerCicloA.setModel(tabla);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jRadioButtonVerA1AActionPerformed
-
-    //Ver los ciclos de segundo año
-    private void jRadioButtonVerA2AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerA2AActionPerformed
-
-        int an = 2;
-        try {
-            tabla = new DefaultTableModel(i.getCicloTot(an), cabecera);
-            jTableVerCicloA.setModel(tabla);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jRadioButtonVerA2AActionPerformed
-
-    //BOTON INSCRIBIR (da de alta un alumno)
-    private void jButtonInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscribirActionPerformed
-        Alumno annadir = null;
-
-        if (modificando == false) {
-            if (jTableVerCicloA.getSelectedRow() != -1) {
-                String nombreC = jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 0).toString();
-                int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
-                ContrasennaValida();
-                if (ContrasennaValida() == true) {
-                    if (i.getNAlumnosCurso(nombreC) < i.getCicloNombre(nombreC, annoC).getPlazas()) {
-                        annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
-                        DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
-                        JOptionPane.showMessageDialog(getContentPane(), "El usuario ha sido creado con exito",
-                                "correcto", JOptionPane.OK_OPTION);
-                        datosVacios ();
-                    } else {
-
-                        JOptionPane.showMessageDialog(getContentPane(), "El curso esta completo",
-                                "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-
-                } else {
-                    JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(getContentPane(), "Debe seleccionar una fila de la tabla",
-                        "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            
-            
-             if (jTableVerCicloA.getSelectedRow() != -1) {
-                String nombreC = jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 0).toString();
-                int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
-                ContrasennaValida();
-                if (ContrasennaValida() == true) {
-                    if (i.getNAlumnosCurso(nombreC) < i.getCicloNombre(nombreC, annoC).getPlazas()) {
-                        annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
-                        //DAOInstituto2.instancia().modificarAlumno(i.getNombre(), annadir);
-                        JOptionPane.showMessageDialog(getContentPane(), "El usuario ha sido creado con exito",
-                                "Error", JOptionPane.OK_OPTION);
-                    } else {
-
-                        JOptionPane.showMessageDialog(getContentPane(), "El curso esta completo",
-                                "correcto", JOptionPane.ERROR_MESSAGE);
-                    }
-
-                } else {
-                    JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(getContentPane(), "Debe seleccionar una fila de la tabla",
-                        "Error", JOptionPane.ERROR_MESSAGE);
-            }
-
-        }
-
-
-    }//GEN-LAST:event_jButtonInscribirActionPerformed
-
-    ///BOTON GROUP elegir como mostrar asignaturas\\\
-    //De un ciclo concreto
-    private void jRadioButtonCicloAsigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonCicloAsigActionPerformed
-
-        jPanelSeleccionCiclo.setVisible(true);
-        jPanelMostrarAsig.setVisible(false);
-        tabla = new DefaultTableModel(i.getModulosTot(), cabeceraModulo);
-        jRadioButtonVerTodosP.setSelected(true);
-    }//GEN-LAST:event_jRadioButtonCicloAsigActionPerformed
-
-    //Todas
-    private void jRadioButtonTodasAsigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonTodasAsigActionPerformed
-
-        tabla = new DefaultTableModel(i.getModulosTot(), cabeceraModulo);
-        jTableElegirAsignaturas.setModel(tabla);
-        jPanelMostrarAsig.setVisible(true);
-        jPanelSeleccionCiclo.setVisible(false);
-
-    }//GEN-LAST:event_jRadioButtonTodasAsigActionPerformed
-
-    ///BOTON GROUP ver ciclos para profesores\\\ 
-    //Ver todos los ciclos
-    private void jRadioButtonVerTodosPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerTodosPActionPerformed
-
-        try {
-            tabla = new DefaultTableModel(i.getCicloTot(), cabecera);
-            jTableVerCicloP.setModel(tabla);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos en este centro",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jRadioButtonVerTodosPActionPerformed
-
-    //Ver los ciclos de primer año
-    private void jRadioButtonVerA1PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerA1PActionPerformed
-
-        int an = 1;
-        try {
-            tabla = new DefaultTableModel(i.getCicloTot(an), cabecera);
-            jTableVerCicloP.setModel(tabla);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jRadioButtonVerA1PActionPerformed
-
-    //Ver los ciclos de segundo año
-    private void jRadioButtonVerA2PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerA2PActionPerformed
-        int an = 2;
-        try {
-            tabla = new DefaultTableModel(i.getCicloTot(an), cabecera);
-            jTableVerCicloP.setModel(tabla);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jRadioButtonVerA2PActionPerformed
-
-    //BOTON BUSCAR modulos del ciclo seleccionado
-    private void jButtonBuscarAsigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarAsigActionPerformed
-
-        try {
-            if (jTableVerCicloP.getSelectedRow() != -1) {
-                try {
-                    String nombreC = jTableVerCicloP.getValueAt(jTableVerCicloP.getSelectedRow(), 0).toString();
-                    int annoC = Integer.parseInt(jTableVerCicloP.getValueAt(jTableVerCicloP.getSelectedRow(), 1).toString());
-                    tabla = new DefaultTableModel(i.getModulosCic(nombreC, annoC), cabeceraModulo);
-                    jTableElegirAsignaturas.setModel(tabla);
-
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(getContentPane(), "No hay modulos del ciclo seleccionado",
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                jPanelMostrarAsig.setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(getContentPane(), "Debe seleccionar una fila de la tabla",
-                        "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (NullPointerException npe) {
-            JOptionPane.showMessageDialog(getContentPane(), "Porfavor selecciona una fila con datos",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_jButtonBuscarAsigActionPerformed
 
     //BOTON AÑADIR modulos selecconados
     private void jButtonAnnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnnadirActionPerformed
@@ -1100,6 +826,109 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButtonAnnadirActionPerformed
 
+    //BOTON INSCRIBIR (da de alta un alumno)
+    private void jButtonInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscribirActionPerformed
+        Alumno annadir = null;
+
+        if (modificando == false) {
+            if (jTableVerCicloA.getSelectedRow() != -1) {
+                String nombreC = jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 0).toString();
+                int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
+                ContrasennaValida();
+                if (ContrasennaValida() == true) {
+                    if (i.getNAlumnosCurso(nombreC) < i.getCicloNombre(nombreC, annoC).getPlazas()) {
+                        annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
+                        DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
+                        JOptionPane.showMessageDialog(getContentPane(), "El usuario ha sido creado con exito",
+                            "correcto", JOptionPane.OK_OPTION);
+                        datosVacios ();
+                    } else {
+
+                        JOptionPane.showMessageDialog(getContentPane(), "El curso esta completo",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(getContentPane(), "Debe seleccionar una fila de la tabla",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+
+            if (jTableVerCicloA.getSelectedRow() != -1) {
+                String nombreC = jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 0).toString();
+                int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
+                ContrasennaValida();
+                if (ContrasennaValida() == true) {
+                    if (i.getNAlumnosCurso(nombreC) < i.getCicloNombre(nombreC, annoC).getPlazas()) {
+                        annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
+                        //DAOInstituto2.instancia().modificarAlumno(i.getNombre(), annadir);
+                        JOptionPane.showMessageDialog(getContentPane(), "El usuario ha sido creado con exito",
+                            "Error", JOptionPane.OK_OPTION);
+                    } else {
+
+                        JOptionPane.showMessageDialog(getContentPane(), "El curso esta completo",
+                            "correcto", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(getContentPane(), "Debe seleccionar una fila de la tabla",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+
+    }//GEN-LAST:event_jButtonInscribirActionPerformed
+
+    //Ver los ciclos de segundo año
+    private void jRadioButtonVerA2AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerA2AActionPerformed
+
+        int an = 2;
+        try {
+            tabla = new DefaultTableModel(i.getCicloTot(an), cabecera);
+            jTableVerCicloA.setModel(tabla);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jRadioButtonVerA2AActionPerformed
+
+    //Ver los ciclos de primer año
+    private void jRadioButtonVerA1AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerA1AActionPerformed
+
+        int an = 1;
+        try {
+            tabla = new DefaultTableModel(i.getCicloTot(an), cabecera);
+            jTableVerCicloA.setModel(tabla);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jRadioButtonVerA1AActionPerformed
+
+    ///BOTON GROUP ver ciclos para alumnos\\\ 
+    //Ver todos los ciclos
+    private void jRadioButtonVerTodosAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerTodosAActionPerformed
+
+        try {
+            tabla = new DefaultTableModel(i.getCicloTot(), cabecera);
+            jTableVerCicloA.setModel(tabla);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jRadioButtonVerTodosAActionPerformed
+
     //Cancelar
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
@@ -1107,13 +936,51 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jTableElegirAsignaturas.setModel(new DefaultTableModel(i.getModulosTot(),cabecera));
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActionPerformed
+    //AÑADIR PROFESORES
+    private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNombreActionPerformed
+        Profesor annadir = null;
 
-    private void jTextFieldDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDNIActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldDNIActionPerformed
+        ArrayList modulos = new ArrayList();
+
+        if (modificando == false) {
+
+            for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
+
+                modulos.add(i.buscarModuloNombre(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
+
+            }
+
+            if (ContrasennaValida() == true) {
+                annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento(), modulos);
+                i.annadirUsuario(annadir);
+                DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
+                datosVacios ();
+            } else {
+                JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+
+            for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
+
+                modulos.add(i.buscarModuloNombre(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
+
+            }
+
+            if (ContrasennaValida() == true) {
+                annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento(), modulos);
+                i.eliminarUsuario(annadir.getNombre());
+                i.annadirUsuario(annadir);
+                DAOInstituto2.instancia().modificarProfesor(i.getNombre(), annadir.getNombre(), annadir.getContra(), modulos);
+                datosVacios ();
+            } else {
+                JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        }
+    }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void jTableAsignaturasElegidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableAsignaturasElegidasMouseClicked
 
@@ -1123,16 +990,16 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         modulo[0]=jTableAsignaturasElegidas.getValueAt(jTableAsignaturasElegidas.getSelectedRow(), 0)+"";
         modulo[1]=jTableAsignaturasElegidas.getValueAt(jTableAsignaturasElegidas.getSelectedRow(), 1)+"";
         tabla.addRow(modulo);
-        
+
         tablaSeleccionada.removeRow(jTableAsignaturasElegidas.getSelectedRow());
-        
+
     }//GEN-LAST:event_jTableAsignaturasElegidasMouseClicked
 
     private void jTableElegirAsignaturasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableElegirAsignaturasMouseClicked
         try {
             String nombreM = jTableElegirAsignaturas.getValueAt(jTableElegirAsignaturas.getSelectedRow(), 0).toString();
             int horasM = Integer.parseInt(jTableElegirAsignaturas.getValueAt(jTableElegirAsignaturas.getSelectedRow(), 1).toString());
-            
+
             DefaultTableModel tabla= (DefaultTableModel)jTableElegirAsignaturas.getModel();
             tabla.removeRow(jTableElegirAsignaturas.getSelectedRow());
 
@@ -1151,9 +1018,127 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
         } catch (NullPointerException npe) {
             JOptionPane.showMessageDialog(getContentPane(), "Porfavor selecciona una fila con datos",
-                    "Error", JOptionPane.ERROR_MESSAGE);
+                "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jTableElegirAsignaturasMouseClicked
+
+    //Ver los ciclos de segundo año
+    private void jRadioButtonVerA2PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerA2PActionPerformed
+        int an = 2;
+        try {
+            tabla = new DefaultTableModel(i.getCicloTot(an), cabecera);
+            jTableVerCicloP.setModel(tabla);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jRadioButtonVerA2PActionPerformed
+
+    //BOTON BUSCAR modulos del ciclo seleccionado
+    private void jButtonBuscarAsigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarAsigActionPerformed
+
+        try {
+            if (jTableVerCicloP.getSelectedRow() != -1) {
+                try {
+                    String nombreC = jTableVerCicloP.getValueAt(jTableVerCicloP.getSelectedRow(), 0).toString();
+                    int annoC = Integer.parseInt(jTableVerCicloP.getValueAt(jTableVerCicloP.getSelectedRow(), 1).toString());
+                    tabla = new DefaultTableModel(i.getModulosCic(nombreC, annoC), cabeceraModulo);
+                    jTableElegirAsignaturas.setModel(tabla);
+
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(getContentPane(), "No hay modulos del ciclo seleccionado",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                jPanelMostrarAsig.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(getContentPane(), "Debe seleccionar una fila de la tabla",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (NullPointerException npe) {
+            JOptionPane.showMessageDialog(getContentPane(), "Porfavor selecciona una fila con datos",
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonBuscarAsigActionPerformed
+
+    //Ver los ciclos de primer año
+    private void jRadioButtonVerA1PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerA1PActionPerformed
+
+        int an = 1;
+        try {
+            tabla = new DefaultTableModel(i.getCicloTot(an), cabecera);
+            jTableVerCicloP.setModel(tabla);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jRadioButtonVerA1PActionPerformed
+
+    ///BOTON GROUP ver ciclos para profesores\\\ 
+    //Ver todos los ciclos
+    private void jRadioButtonVerTodosPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerTodosPActionPerformed
+
+        try {
+            tabla = new DefaultTableModel(i.getCicloTot(), cabecera);
+            jTableVerCicloP.setModel(tabla);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos en este centro",
+                "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jRadioButtonVerTodosPActionPerformed
+
+    ///BOTON GROUP elegir como mostrar asignaturas\\\
+    //De un ciclo concreto
+    private void jRadioButtonCicloAsigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonCicloAsigActionPerformed
+
+        jPanelSeleccionCiclo.setVisible(true);
+        jPanelMostrarAsig.setVisible(false);
+        tabla = new DefaultTableModel(i.getModulosTot(), cabeceraModulo);
+        jRadioButtonVerTodosP.setSelected(true);
+    }//GEN-LAST:event_jRadioButtonCicloAsigActionPerformed
+
+    //Todas
+    private void jRadioButtonTodasAsigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonTodasAsigActionPerformed
+
+        tabla = new DefaultTableModel(i.getModulosTot(), cabeceraModulo);
+        jTableElegirAsignaturas.setModel(tabla);
+        jPanelMostrarAsig.setVisible(true);
+        jPanelSeleccionCiclo.setVisible(false);
+    }//GEN-LAST:event_jRadioButtonTodasAsigActionPerformed
+
+    private void jTextFieldDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDNIActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldDNIActionPerformed
+
+    private void jTextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNombreActionPerformed
+
+    //BOTON ELEGIR ALUMNO
+    private void jRadioButtonAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonAlumnoActionPerformed
+
+        jPanelDatosCoumnes.setVisible(true);
+        jPanelProfesor.setVisible(false);
+        jPanelAlumno.setVisible(true);
+        jTableVerCicloA.setModel(new DefaultTableModel(i.getCicloTot(), cabecera));
+
+        jRadioButtonVerTodosA.setVisible(false);
+        jRadioButtonVerA1A.setVisible(false);
+        jRadioButtonVerA2A.setVisible(false);
+
+    }//GEN-LAST:event_jRadioButtonAlumnoActionPerformed
+
+    //BOTON ELEGIR PROFESOR
+    private void jRadioButtonProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonProfesorActionPerformed
+
+        jPanelDatosCoumnes.setVisible(true);
+        jPanelProfesor.setVisible(true);
+        jPanelAlumno.setVisible(false);
+        jPanelMostrarAsig.setVisible(false);
+        jPanelSeleccionCiclo.setVisible(false);
+    }//GEN-LAST:event_jRadioButtonProfesorActionPerformed
 
     //METODO MAIN
     public static void main(String args[]) {
