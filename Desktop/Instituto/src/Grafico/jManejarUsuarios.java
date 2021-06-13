@@ -327,6 +327,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
         jAnnadirUsuario a = new jAnnadirUsuario(this, true);
         a.setInstituto(i);
+        a.setModificando();
 
         if (usuario instanceof Alumno) {
 

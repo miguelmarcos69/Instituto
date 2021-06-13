@@ -16,27 +16,41 @@ import java.util.Date;
  */
 public class Profesor extends Usuario {
 
-    private ArrayList<Modulo> asignaturasDadas;
+    private ArrayList<Modulo> modulosImpartidos;
     
     public Profesor(String nombre, String contrasenna, String DNI, Date fecha_nacimiento) {
         super(nombre, contrasenna, DNI, fecha_nacimiento);
-        asignaturasDadas = new ArrayList();
+        modulosImpartidos = new ArrayList();
     }
 
     public Profesor(String nombre, String contrasenna, String DNI, Date fecha_nacimiento, ArrayList<Modulo> mod){// ArrayList<Alumno> alumno) {
         super(nombre, contrasenna, DNI, fecha_nacimiento);
-        asignaturasDadas = mod;
+        modulosImpartidos = mod;
       
     }
 
 
     public ArrayList<Modulo> getAsignaturasDadas() {
-        return asignaturasDadas;
+        return modulosImpartidos;
     }
     
     public void annadirModulo (Modulo a){
     
-        asignaturasDadas.add(a);
+        modulosImpartidos.add(a);
+    }
+    
+    public String [][] getModulosInpartidos(){
+    
+        String [][] impratidos = new String [this.modulosImpartidos.size()][2];
+        
+        for (int i=0;i<this.modulosImpartidos.size();i++){
+        
+            impratidos[i][0]=this.modulosImpartidos.get(i).getNombre();
+            impratidos[i][0]=this.modulosImpartidos.get(i).getHoras_semana()+"";
+            
+        }
+        
+        return impratidos;
     }
     
    

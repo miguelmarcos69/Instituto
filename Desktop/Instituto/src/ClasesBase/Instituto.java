@@ -26,7 +26,7 @@ public class Instituto {
     private String nombre;
     private String direccion;
     private String telefono; // para el manejo de datos se usa String
-    
+
     public Instituto(ArrayList<Usuario> usuario, ArrayList<Curso> ciclos, String nombre, String direccion, String telefono) {
         this.usuarios = usuario;
         this.cursos = ciclos;
@@ -154,17 +154,19 @@ public class Instituto {
     }
 
     public void borrarNotas(String nombre, String nombreModulo) {
-        try{
-        for (Usuario usuario : usuarios) {
-            if (usuario instanceof Alumno) {
-                if (usuario.getNombre().equals(nombre)) {
-                    System.out.println("Usuario enconrado");
-                    Alumno a = (Alumno) usuario;// convertir el suauario en alumno
-                    for (int i = 0; i <= a.getNotas().size(); i++) { 
-                        if (a.getNotas().get(i).getModulo().equals(nombreModulo)) {
-                            
-                            a.getNotas().remove(i);
-                            i=i-1;
+        try {
+            for (Usuario usuario : usuarios) {
+                if (usuario instanceof Alumno) {
+                    if (usuario.getNombre().equals(nombre)) {
+                        System.out.println("Usuario enconrado");
+                        Alumno a = (Alumno) usuario;// convertir el suauario en alumno
+                        for (int i = 0; i <= a.getNotas().size(); i++) {
+                            if (a.getNotas().get(i).getModulo().equals(nombreModulo)) {
+
+                                a.getNotas().remove(i);
+                                i = i - 1;
+
+                            }
 
                         }
 
@@ -173,10 +175,8 @@ public class Instituto {
                 }
 
             }
+        } catch (IndexOutOfBoundsException nohaynotas) {
 
-        }
-        }catch(IndexOutOfBoundsException nohaynotas){
-        
         }
 
     }
@@ -210,8 +210,11 @@ public class Instituto {
             if (u instanceof Profesor) {
                 arrayUsuarios[i][0] = "Profesor";
 
-            } else {
+            } else if (u instanceof Alumno) {
                 arrayUsuarios[i][0] = "Alumno";
+            }else{
+            
+                arrayUsuarios[i][0] = "Administrador";
             }
             arrayUsuarios[i][1] = u.getNombre();
             arrayUsuarios[i][2] = u.getDNI();
@@ -381,56 +384,67 @@ public class Instituto {
         cursos.add(a);
     }
 
-    public Alumno buscarAlumno (String nombre){
-    
+    public Alumno buscarAlumno(String nombre) {
+
         Alumno a = null;
-        
-        for (int i=0;i<usuarios.size();i++){
-        
-            if (usuarios.get(i).getNombre().equals(nombre)){
-            
-                a= (Alumno)usuarios.get(i);
-                i=usuarios.size();
+
+        for (int i = 0; i < usuarios.size(); i++) {
+
+            if (usuarios.get(i).getNombre().equals(nombre)) {
+
+                a = (Alumno) usuarios.get(i);
+                i = usuarios.size();
             }
         }
-        
+
         return a;
     }
-    
-    public int getNAlumnosCurso (String modulo){
-    
-        int nAlumnos=0;
-        
-        for (int i=0;i<usuarios.size();i++){
-        
-            if (usuarios.get(i) instanceof Alumno){
-            
-                if (((Alumno)usuarios.get(i)).getNombre().equals(modulo)){
-                
+
+    public int getNAlumnosCurso(String modulo) {
+
+        int nAlumnos = 0;
+
+        for (int i = 0; i < usuarios.size(); i++) {
+
+            if (usuarios.get(i) instanceof Alumno) {
+
+                if (((Alumno) usuarios.get(i)).getNombre().equals(modulo)) {
+
                     nAlumnos++;
                 }
             }
         }
-        
+
         return nAlumnos;
     }
-    
-    
-    public Usuario buscarUsuario(String nombre){
-    
+
+    public Usuario buscarUsuario(String nombre) {
+
         Usuario buscado = null;
-        
-        for (int i=0;i<usuarios.size();i++){
-        
-            if(usuarios.get(i).getNombre().equals(nombre)){
-            
-                buscado=usuarios.get(i);
-                i=usuarios.size();
+
+        for (int i = 0; i < usuarios.size(); i++) {
+
+            if (usuarios.get(i).getNombre().equals(nombre)) {
+
+                buscado = usuarios.get(i);
+                i = usuarios.size();
             }
         }
-        
+
         return buscado;
-        
+
+    }
+
+    public void eliminarUsuario(String nombre) {
+
+        for (int i = 0; i < usuarios.size(); i++) {
+
+            if (usuarios.get(i).getNombre().equals(nombre)) {
+
+                usuarios.remove(i);
+                i = usuarios.size();
+            }
+        }
     }
     
      public Curso buscarCurso(String nombre){
