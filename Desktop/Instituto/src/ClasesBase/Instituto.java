@@ -409,4 +409,22 @@ public class Instituto {
         
         return nAlumnos;
     }
+    
+    
+    public Usuario buscarUsuario(String nombre){
+    
+        Usuario buscado = null;
+        
+        for (int i=0;i<usuarios.size();i++){
+        
+            if(usuarios.get(i).getNombre().equals(nombre)){
+            
+                buscado=usuarios.get(i);
+                i=usuarios.size();
+            }
+        }
+        
+        return buscado;
+        
+    }
 }

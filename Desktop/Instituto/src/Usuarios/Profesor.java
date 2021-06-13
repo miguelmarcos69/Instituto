@@ -38,6 +38,8 @@ public class Profesor extends Usuario {
     
         asignaturasDadas.add(a);
     }
+    
+    public
 /*
     public ArrayList<Alumno> getAlu() {
         return alu;

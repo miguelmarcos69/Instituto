@@ -320,10 +320,21 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
     private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
 
+        Usuario usuario = i.buscarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
+
         jAnnadirUsuario a = new jAnnadirUsuario(this, true);
         a.setInstituto(i);
-        Alumno alumno = i.buscarAlumno(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
-        a.mostrarDatosAlumno(alumno);
+
+        if (usuario instanceof Alumno) {
+
+            Alumno alumno = (Alumno) usuario;
+            a.mostrarDatosAlumno(alumno);
+        }else if (usuario instanceof Profesor){
+            Profesor profesor = (Profesor) usuario;
+            
+            
+        }
+
         this.setVisible(false);
         a.setVisible(true);
 

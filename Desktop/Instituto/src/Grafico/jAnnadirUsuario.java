@@ -28,7 +28,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        jPanelDatosCoumnes.setVisible(false);
+        jPanelDatosCoumnes.setVisible(true);
         jPanelProfesor.setVisible(false);
         jPanelAlumno.setVisible(false);
 
@@ -1140,50 +1140,27 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     }
     
     
-    public void mostrarDatosProfesor(Alumno a) {
+    public void mostrarDatosProfesor(Profesor p) {
 
-        jTextFieldNombre.setText(a.getNombre());
+        jTextFieldNombre.setText(p.getNombre());
         jTextFieldNombre.setEditable(false);
 
-        jTextFieldDNI.setText(a.getDNI());
+        jTextFieldDNI.setText(p.getDNI());
         jTextFieldDNI.setEditable(false);
 
-        jTextFieldFechaNacimiento.setText(a.getFecha_nacimiento());
+        jTextFieldFechaNacimiento.setText(p.getFecha_nacimiento());
         jTextFieldFechaNacimiento.setEditable(false);
 
-        jRadioButtonVerTodosA.setSelected(true);
-        jRadioButtonVerTodosA.setEnabled(false);
+        jRadioButtonAlumno.setSelected(false);
+        jRadioButtonProfesor.setSelected(true);
 
-        jRadioButtonAlumno.setSelected(true);
+        jPanelProfesor.setVisible(true);
+        jPanelAlumno.setVisible(false);
 
-        jPanelDatosCoumnes.setVisible(true);
-        jPanelProfesor.setVisible(false);
-        jPanelAlumno.setVisible(true);
-        jTableVerCicloA.setModel(new DefaultTableModel(i.getCicloTot(), cabecera));
-
-        jRadioButtonVerTodosA.setVisible(false);
-        jRadioButtonVerA1A.setVisible(false);
-        jRadioButtonVerA2A.setVisible(false);
-
-        try {
-
-            if (a.aprobado()) {
-
-                tabla = new DefaultTableModel(i.getCicloTot(1), cabecera);
-                String[] segundo = new String[2];
-                segundo[0] = a.getCiclo().getNombre();
-                segundo[1] = a.getCiclo().getAnno() + "";
-                tabla.addRow(segundo);
-                jTableVerCicloA.setModel(tabla);
-            } else {
-                tabla = new DefaultTableModel(i.getCicloTot(1), cabecera);
-            }
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(getContentPane(), "No hay ciclos",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-
+        jTableAsignaturasElegidas.setModel(new DefaultTableModel());
+        
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
