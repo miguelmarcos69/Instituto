@@ -1014,7 +1014,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             modulos[jTableAsignaturasElegidas.getModel().getRowCount()][0] = nombreM;
             modulos[jTableAsignaturasElegidas.getModel().getRowCount()][1] = horasM + "";
 
-            jTableAsignaturasElegidas.setModel(new DefaultTableModel(modulos, cabecera));
+            jTableAsignaturasElegidas.setModel(new DefaultTableModel(modulos, cabeceraModulo));
 
         } catch (NullPointerException npe) {
             JOptionPane.showMessageDialog(getContentPane(), "Porfavor selecciona una fila con datos",

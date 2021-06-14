@@ -225,20 +225,23 @@ public class DAOInstituto2 {
 
                 i = new Instituto(rs.getString(1), rs.getString(2), rs.getString(3));
 
-                rs = ConexionDefault.instancia().getStatement().executeQuery("select c.nombre,c.plazas,c.anno,c.instituto,m.nombre,m.codigoAula,m.horas_semana,m.profesor from ciclo c, modulo m where c.nombre=m.ciclo AND c.instituto=m.Instituto AND c.anno=m.anno AND c.instituto='" + nombre + "'");
+                rs = ConexionDefault.instancia().getStatement().executeQuery("select c.nombre,c.plazas,c.anno,m.nombre,m.codigoAula,m.horas_semana from ciclo c, modulo m where m.ciclo=c.nombre AND m.anno=c.anno AND c.instituto=m.Instituto AND c.instituto='" + nombre + "'");
 
                 while (rs.next()) {
 
-                    if (i.getCicloNombre(rs.getString(1),rs.getInt(3))==null) {
+                    if (i.getCicloNombre(rs.getString(1), rs.getInt(3)) == null) {
 
                         c = new Curso(rs.getString(1), rs.getInt(2), rs.getInt(3));
-                        Modulo m = new Modulo(rs.getString(5), rs.getString(6), rs.getInt(7));
+
+                        Modulo m = new Modulo(rs.getString(4), rs.getString(5), rs.getInt(6));
                         c.anadirModulo(m);
                         i.annadirCiclo(c);
-                    }else{
-                    
-                        Modulo m = new Modulo(rs.getString(5), rs.getString(6), rs.getInt(7));
+                    } else {
+                        c = i.getCicloNombre(rs.getString(1), rs.getInt(3));
+
+                        Modulo m = new Modulo(rs.getString(4), rs.getString(5), rs.getInt(6));
                         c.anadirModulo(m);
+                        i.annadirCiclo(c);
                     }
                 }
 

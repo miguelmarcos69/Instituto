@@ -123,6 +123,11 @@ public class InicioSesion extends javax.swing.JFrame {
                 jTNombreInstitutoMousePressed(evt);
             }
         });
+        jTNombreInstituto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTNombreInstitutoKeyPressed(evt);
+            }
+        });
         jPanel1.add(jTNombreInstituto, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, 319, -1));
 
         jTUsuario.setBackground(new java.awt.Color(255, 255, 255));
@@ -311,6 +316,10 @@ public class InicioSesion extends javax.swing.JFrame {
 
         jPConstrasena.setText("");
     }//GEN-LAST:event_jPConstrasenaMousePressed
+
+    private void jTNombreInstitutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreInstitutoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTNombreInstitutoKeyPressed
 
     /**
      * @param args the command line arguments
