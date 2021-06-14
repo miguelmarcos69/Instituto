@@ -71,7 +71,7 @@ public class Instituto {
         return cursos.size();
     }
 
-    public  Modulo buscarModuloNombre(String nombreModulo) {
+    public Modulo buscarModuloNombre(String nombreModulo) {
 
         Modulo m = null;
 
@@ -87,15 +87,10 @@ public class Instituto {
 
         return m;
     }
-    
-    
-    
-    
-    
 
     public String[][] getAlumnosAsignatura(String nombreAsignatura) {
 
-        String[][] alumn = new String[usuarios.size()][1];
+        String[][] alumn = new String[10][2];
         int contador = 0;
 
         for (int i = 0; i < usuarios.size(); i++) {
@@ -104,9 +99,11 @@ public class Instituto {
                 Alumno a = (Alumno) usuarios.get(i);
                 if (a.tieneModulo(nombreAsignatura)) {
 
-                    alumn[contador++][0] = a.getNombre();
+                    alumn[contador][0] = a.getNombre();
+                    alumn[contador][1] = a.getDNI();
 
                 }
+                contador++;
             }
         }
 
@@ -212,8 +209,8 @@ public class Instituto {
 
             } else if (u instanceof Alumno) {
                 arrayUsuarios[i][0] = "Alumno";
-            }else{
-            
+            } else {
+
                 arrayUsuarios[i][0] = "Administrador";
             }
             arrayUsuarios[i][1] = u.getNombre();
@@ -373,16 +370,15 @@ public class Instituto {
 
         return arrayModulos;
     }
-    
-      public boolean existeCuros(String nombre) {
+
+    public boolean existeCuros(String nombre) {
         boolean resultado = false;
 
-        for (int i = 0; i <cursos.size(); i++) {
+        for (int i = 0; i < cursos.size(); i++) {
 
             if (cursos.get(i).getNombre().equals(nombre)) {
-                
-                System.out.println(cursos.get(i).getNombre());
 
+                //System.out.println(cursos.get(i).getNombre());
                 resultado = true;
             }
         }
@@ -462,23 +458,22 @@ public class Instituto {
             }
         }
     }
-    
-     public Curso buscarCurso(String nombre){
-    
+
+    public Curso buscarCurso(String nombre) {
+
         Curso buscado = null;
-        
-        for (int i=0;i<cursos.size();i++){
-        
-            if(cursos.get(i).getNombre().equals(nombre)){
-            
-                buscado=cursos.get(i);
-                i=cursos.size();
+
+        for (int i = 0; i < cursos.size(); i++) {
+
+            if (cursos.get(i).getNombre().equals(nombre)) {
+
+                buscado = cursos.get(i);
+                i = cursos.size();
             }
         }
-        
+
         return buscado;
-        
+
     }
-    
-  
+
 }
