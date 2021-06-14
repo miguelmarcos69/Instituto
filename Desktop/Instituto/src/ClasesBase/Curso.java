@@ -17,8 +17,9 @@ public class Curso {
     //atributos de la clase
     private ArrayList<Modulo> modulos;
     private String nombre;
+        private int anno;
     private int plazas;
-    private int anno;
+
 
     //metodo constructor
     public Curso(ArrayList<Modulo> Asignatura, String nombre, int anno, int plazas) {

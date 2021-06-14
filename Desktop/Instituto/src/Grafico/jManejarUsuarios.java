@@ -339,6 +339,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
                 a.mostrarDatosAlumno(alumno);
             } else if (usuario instanceof Profesor) {
                 Profesor profesor = (Profesor) usuario;
+                a.mostrarDatosProfesor(profesor);
 
             }
 

@@ -406,5 +406,24 @@ public class DAOInstituto2 {
             Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public ArrayList<Curso> getCiclosdeProfesor (String nombreProfesor,Instituto instituto){
+    
+        ArrayList<Curso> cursos = new ArrayList();
+        
+        try {
+            ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select ciclo,anno from modulo where profesor= '" + nombreProfesor+"' AND instituto ='"+instituto.getNombre()+"'");
+            
+            while (rs.next()){
+            
+                cursos.add(instituto.buscarCurso(rs.getString(1), rs.getInt(2)));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return cursos;
+    }
 
 }

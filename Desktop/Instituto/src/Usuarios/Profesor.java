@@ -5,6 +5,7 @@ package Usuarios;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import BaseDatos.DAOInstituto2;
 import ClasesBase.*;
 import Usuarios.*;
 import java.util.ArrayList;
@@ -39,14 +40,18 @@ public class Profesor extends Usuario {
         modulosImpartidos.add(a);
     }
     
-    public String [][] getModulosInpartidos(){
+    public String [][] getModulosInpartidos(Instituto instituto){
     
-        String [][] impratidos = new String [this.modulosImpartidos.size()][2];
+        String [][] impratidos = new String [this.modulosImpartidos.size()][4];
         
+        ArrayList<Curso> cursos = DAOInstituto2.instancia().getCiclosdeProfesor(nombre, instituto);       
+                
         for (int i=0;i<this.modulosImpartidos.size();i++){
         
             impratidos[i][0]=this.modulosImpartidos.get(i).getNombre();
-            impratidos[i][0]=this.modulosImpartidos.get(i).getHoras_semana()+"";
+            impratidos[i][1]=this.modulosImpartidos.get(i).getHoras_semana()+"";
+            impratidos[i][2]=cursos.get(i).getNombre();
+            impratidos[i][3]=cursos.get(i).getAnno()+"";
             
         }
         

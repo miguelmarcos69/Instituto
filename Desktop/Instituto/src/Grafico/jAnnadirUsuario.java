@@ -1219,6 +1219,9 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jTextFieldFechaNacimiento.setText(a.getFecha_nacimiento());
         jTextFieldFechaNacimiento.setEditable(false);
 
+        this.jPasswordFieldContra.setText(a.getContra());
+        this.jPasswordFieldRepetirContra.setText(a.getContra());
+
         jRadioButtonVerTodosA.setSelected(true);
         jRadioButtonVerTodosA.setEnabled(false);
 
@@ -1261,6 +1264,8 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
         jTextFieldDNI.setText(p.getDNI());
         jTextFieldDNI.setEditable(false);
+        this.jPasswordFieldContra.setText(p.getContra());
+        this.jPasswordFieldRepetirContra.setText(p.getContra());
 
         jTextFieldFechaNacimiento.setText(p.getFecha_nacimiento());
         jTextFieldFechaNacimiento.setEditable(false);
@@ -1270,8 +1275,9 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
         jPanelProfesor.setVisible(true);
         jPanelAlumno.setVisible(false);
+        jRadioButtonTodasAsig.setSelected(true);
 
-        jTableAsignaturasElegidas.setModel(new DefaultTableModel(p.getModulosInpartidos(), cabeceraModulo));
+        jTableAsignaturasElegidas.setModel(new DefaultTableModel(p.getModulosInpartidos(i), cabeceraModulo));
 
     }
 
