@@ -340,7 +340,7 @@ public class Instituto {
     public String[][] getModulosCic(String nombre, int ano) {
         int tamanno = 0;
         String[][] s = new String[tamanno][10];
-        for (int i = 0; i < cursos.get(i).getSizeModulos(); i++) {
+        for (int i = 0; i < cursos.size(); i++) {
 
             if (cursos.get(i).getNombre().equals(nombre) && cursos.get(i).getAnno() == ano) {
                 tamanno = tamanno + cursos.get(i).getSizeModulos();

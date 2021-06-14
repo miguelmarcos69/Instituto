@@ -5,6 +5,7 @@
  */
 package Grafico;
 
+import BaseDatos.DAOInstituto2;
 import ClasesBase.Curso;
 import ClasesBase.Instituto;
 import ClasesBase.Modulo;
@@ -19,6 +20,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -323,24 +325,29 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
     private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
 
-        Usuario usuario = i.buscarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
+        if (tablaUsuarios.getSelectedRow() != -1) {
 
-        jAnnadirUsuario a = new jAnnadirUsuario(this, true);
-        a.setInstituto(i);
-        a.setModificando();
+            Usuario usuario = i.buscarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
 
-        if (usuario instanceof Alumno) {
+            jAnnadirUsuario a = new jAnnadirUsuario(this, true);
+            a.setInstituto(i);
+            a.setModificando();
 
-            Alumno alumno = (Alumno) usuario;
-            a.mostrarDatosAlumno(alumno);
-        }else if (usuario instanceof Profesor){
-            Profesor profesor = (Profesor) usuario;
-            
-            
+            if (usuario instanceof Alumno) {
+
+                Alumno alumno = (Alumno) usuario;
+                a.mostrarDatosAlumno(alumno);
+            } else if (usuario instanceof Profesor) {
+                Profesor profesor = (Profesor) usuario;
+
+            }
+
+            this.setVisible(false);
+            a.setVisible(true);
+        } else {
+
+            JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
         }
-
-        this.setVisible(false);
-        a.setVisible(true);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jModificarActionPerformed
@@ -379,9 +386,35 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
     private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
 
+        int result = JOptionPane.showConfirmDialog(this, "Estas seguro de que quieres eliminar el usuario" + tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString(), "Swing Tester",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
 
+        if (result == JOptionPane.YES_OPTION) {
 
-        // TODO add your handling code here:
+            if (tablaUsuarios.getSelectedRow() != -1) {
+                i.eliminarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
+
+                DAOInstituto2.instancia().eliminarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString(), i.getNombre());
+
+                if (jButtonTodos.isSelected()) {
+
+                    tabla = new DefaultTableModel(i.mostrarUsuarios(), cabeceraTodos);
+                    tablaUsuarios.setModel(tabla);
+                } else if (jButtonAlumnos.isSelected()) {
+
+                    tabla = new DefaultTableModel(i.mostrarAlumnos(), cabeceraAlumnos);
+                    tablaUsuarios.setModel(tabla);
+                } else {
+
+                    tabla = new DefaultTableModel(i.mostrarProfesores(), cabeceraProfesores);
+                    tablaUsuarios.setModel(tabla);
+                }
+            } else {
+
+                JOptionPane.showMessageDialog(rootPane, "Porfavor seleccione un usuario", "Inicio", JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_jEliminarActionPerformed
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:

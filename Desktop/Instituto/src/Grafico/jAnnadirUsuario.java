@@ -100,7 +100,8 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         try {
             fechaDate = formato.parse(fecha);
         } catch (ParseException ex) {
-            System.out.println(ex);
+            JOptionPane.showMessageDialog(null, "Introduzca un formato de fecha correcto",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
         return fechaDate;
     }
@@ -837,10 +838,9 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 ContrasennaValida();
                 if (ContrasennaValida() == true) {
                     if (i.getNAlumnosCurso(nombreC) < i.getCicloNombre(nombreC, annoC).getPlazas()) {
-                        annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
+                        annadir = new Alumno(getNombre(),  getContrasenna(),getDNI(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
                         DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
-                        JOptionPane.showMessageDialog(getContentPane(), "El usuario ha sido creado con exito",
-                            "correcto", JOptionPane.OK_OPTION);
+                        JOptionPane.showMessageDialog(null, "Inscrito con exito");
                         datosVacios ();
                     } else {
 
@@ -1095,7 +1095,8 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
         jPanelSeleccionCiclo.setVisible(true);
         jPanelMostrarAsig.setVisible(false);
-        tabla = new DefaultTableModel(i.getModulosTot(), cabeceraModulo);
+        tabla = new DefaultTableModel(i.getCicloTot(), cabecera);
+        jTableVerCicloP.setModel(tabla);
         jRadioButtonVerTodosP.setSelected(true);
     }//GEN-LAST:event_jRadioButtonCicloAsigActionPerformed
 

@@ -241,7 +241,6 @@ public class DAOInstituto2 {
 
                         Modulo m = new Modulo(rs.getString(4), rs.getString(5), rs.getInt(6));
                         c.anadirModulo(m);
-                        i.annadirCiclo(c);
                     }
                 }
 

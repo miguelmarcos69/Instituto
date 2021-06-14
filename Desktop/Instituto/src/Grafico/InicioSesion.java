@@ -203,42 +203,54 @@ public class InicioSesion extends javax.swing.JFrame {
 
         i = DAOInstituto2.instancia().obtenerInstituto(nombreInsti);
 
-        switch (tipo) {
+        if (i != null) {
 
-            case 0:
-                Administrador admin = DAOInstituto2.instancia().obtenerAdministrador(nombre, nombreInsti);
-                if (admin.getContrasenna().equals(contra)) {
-                    AdministradorGrafico adm = new AdministradorGrafico(admin, i);//Modificar
-                    this.setVisible(false);
-                    adm.mostrar(nombre);
-                    adm.setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
-                }
-                break;
-            case 1:
+            switch (tipo) {
 
-                Alumno alum = DAOInstituto2.instancia().obtenerAlumno(nombre, nombreInsti);
+                case 0:
+                    Administrador admin = DAOInstituto2.instancia().obtenerAdministrador(nombre, nombreInsti);
 
-                if (alum.getContrasenna().equals(contra)) {
-                    AlumnoGrafico alG = new AlumnoGrafico(null, true, alum);
-                    this.setVisible(false);
-                    alG.mostrar(nombre);
-                    alG.setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
-                }
-                break;
-            case 2:
-                Profesor prof = DAOInstituto2.instancia().obtenerProfesor(nombre, nombreInsti);
-                if (prof.getContrasenna().equals(contra)) {
-                    ProfesorGrafico pr = new ProfesorGrafico(null, true, prof, i);
-                    this.setVisible(false);
-                    pr.mostrar(nombre);
-                    pr.setVisible(true);
-                }
+                    if (admin!= null) {
+                        if (admin.getContrasenna().equals(contra)) {
+                            AdministradorGrafico adm = new AdministradorGrafico(admin, i);//Modificar
+                            this.setVisible(false);
+                            adm.mostrar(nombre);
+                            adm.setVisible(true);
+                        } else {
+                            JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
+                        }
+                    }else{
+                    
+                        JOptionPane.showMessageDialog(rootPane, "El usuario no existe", "Inicio", JOptionPane.WARNING_MESSAGE);
+                    }
+                    break;
+                case 1:
 
-                break;
+                    Alumno alum = DAOInstituto2.instancia().obtenerAlumno(nombre, nombreInsti);
+
+                    if (alum.getContrasenna().equals(contra)) {
+                        AlumnoGrafico alG = new AlumnoGrafico(null, true, alum);
+                        this.setVisible(false);
+                        alG.mostrar(nombre);
+                        alG.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
+                    }
+                    break;
+                case 2:
+                    Profesor prof = DAOInstituto2.instancia().obtenerProfesor(nombre, nombreInsti);
+                    if (prof.getContrasenna().equals(contra)) {
+                        ProfesorGrafico pr = new ProfesorGrafico(null, true, prof, i);
+                        this.setVisible(false);
+                        pr.mostrar(nombre);
+                        pr.setVisible(true);
+                    }
+
+                    break;
+            }
+        } else {
+
+            JOptionPane.showMessageDialog(rootPane, "El instituto no existe", "Inicio", JOptionPane.WARNING_MESSAGE);
         }
 
         //modificar el control de la contrasena
