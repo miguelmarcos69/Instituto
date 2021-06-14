@@ -5,6 +5,7 @@
  */
 package Grafico;
 
+import BaseDatos.DAOInstituto2;
 import ClasesBase.Curso;
 import ClasesBase.Instituto;
 import ClasesBase.Modulo;
@@ -324,7 +325,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
     private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
 
-        if (tablaUsuarios.getSelectedRow() !=-1) {
+        if (tablaUsuarios.getSelectedRow() != -1) {
 
             Usuario usuario = i.buscarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
 
@@ -343,8 +344,8 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
             this.setVisible(false);
             a.setVisible(true);
-        }else{
-        
+        } else {
+
             JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
         }
 
@@ -385,7 +386,20 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
     private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
 
-        // TODO add your handling code here:
+        int result = JOptionPane.showConfirmDialog(this, "Sure? You want to exit?", "Swing Tester",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
+
+        if (result ==JOptionPane.YES_OPTION ) {
+
+            if (tablaUsuarios.getSelectedRow() != -1) {
+                i.eliminarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
+                DAOInstituto2.instancia().eliminarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString(), i.getNombre());
+            } else {
+
+                JOptionPane.showMessageDialog(rootPane, "Porfavor seleccione un usuario", "Inicio", JOptionPane.WARNING_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_jEliminarActionPerformed
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
