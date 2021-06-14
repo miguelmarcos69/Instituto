@@ -341,13 +341,13 @@ public class Instituto {
 
     //Metodo para ir al ciclo seleccionado y llmar al metodo de obtener modulos
     public String[][] getModulosCic(String nombre, int ano) {
-        int tamanno = 0;
-        String[][] s = new String[tamanno][10];
+        String[][] s = new String[this.buscarCurso(nombre, ano).getSizeModulos()][4];
+        
         for (int i = 0; i < cursos.size(); i++) {
 
             if (cursos.get(i).getNombre().equals(nombre) && cursos.get(i).getAnno() == ano) {
-                tamanno = tamanno + cursos.get(i).getSizeModulos();
                 s = cursos.get(i).getModulos();
+                i=cursos.size();
             }
 
         }
@@ -356,19 +356,25 @@ public class Instituto {
 
     //Metodo para llamar a todos los modulos y obtener sus asignaturas
     public String[][] getModulosTot() {
-
-        ArrayList<Modulo> listaModulos = new ArrayList();
-
-        for (int i = 0; i < cursos.size(); i++) {
-
-            listaModulos = cursos.get(i).concatenarModulos(listaModulos);
+        int nModulos = 0;
+        for (int i=0;i<cursos.size();i++){
+        
+            nModulos += cursos.get(i).getSizeModulos();
         }
-
-        String[][] arrayModulos = new String[listaModulos.size()][2];
-
-        for (int i = 0; i < listaModulos.size(); i++) {
-
-            arrayModulos[i] = listaModulos.get(i).toArrayString();
+        String [][] arrayModulos = new String [nModulos][4];
+        int contador=0;
+        
+        for (int i=0;i<cursos.size();i++){
+        
+            for (int j=0;j<cursos.get(i).getArrayListModulos().size();j++){
+            
+                arrayModulos[contador][0]=cursos.get(i).getArrayListModulos().get(j).getNombre();
+                arrayModulos[contador][1]=cursos.get(i).getArrayListModulos().get(j).getHoras_semana()+"";
+                arrayModulos[contador][2]=cursos.get(i).getNombre();
+                arrayModulos[contador][3]=cursos.get(i).getAnno()+"";
+                contador++;
+                
+            }
         }
 
         return arrayModulos;
@@ -463,13 +469,13 @@ public class Instituto {
         }
     }
     
-     public Curso buscarCurso(String nombre){
+     public Curso buscarCurso(String nombre,int ano){
     
         Curso buscado = null;
         
         for (int i=0;i<cursos.size();i++){
         
-            if(cursos.get(i).getNombre().equals(nombre)){
+            if(cursos.get(i).getNombre().equals(nombre)&&cursos.get(i).getAnno()==ano){
             
                 buscado=cursos.get(i);
                 i=cursos.size();

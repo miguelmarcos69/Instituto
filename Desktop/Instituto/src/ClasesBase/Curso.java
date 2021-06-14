@@ -136,11 +136,14 @@ public class Curso {
 
     //Arraylist para obtenr todos los modulos
     public String[][] getModulos() {
-        String[][] arrayAsignaturas = new String[modulos.size()][10];
+        String[][] arrayAsignaturas = new String[modulos.size()][4];
         for (int i = 0; i < modulos.size(); i++) {
 
             Modulo m = (Modulo) modulos.get(i);
-            arrayAsignaturas[i] = m.toArrayString();
+            arrayAsignaturas[i][0] = m.getNombre();
+            arrayAsignaturas[i][1] = m.getHoras_semana()+"";
+            arrayAsignaturas[i][2]=this.getNombre();
+            arrayAsignaturas[i][3]=this.getAnno()+"";
         }
 
         return arrayAsignaturas;

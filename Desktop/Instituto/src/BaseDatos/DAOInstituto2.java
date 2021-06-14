@@ -331,11 +331,6 @@ public class DAOInstituto2 {
                     ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('"
                             + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + sdf.format(u.getFecha_nacimientoNumerico()) + "', 'prof', '', " + 0 + ",'" + i + "');");
 
-                    //Cambiar el profesor del modulo
-                    for (int j = 0; j < p.getAsignaturasDadas().size(); j++) {
-                        String modulo = p.getAsignaturasDadas().get(j).getNombre();
-                        ConexionDefault.instancia().getStatement().execute("Update modulo set profesor = '" + p.getNombre() + "' where nombre ='" + modulo + "'");
-                    }
                 } catch (SQLIntegrityConstraintViolationException s) {
                     JOptionPane.showMessageDialog(null, "Ya existe un usuario en el instituto con este nombre");
                 }
@@ -401,21 +396,15 @@ public class DAOInstituto2 {
 
     }
 
-    public void modificarProfesor(String nombreInstituto, String nombreProfesor, String contrasena, ArrayList<Modulo> anadirModulos) {
 
-        modificarContrasena(nombreProfesor, nombreInstituto, contrasena);
 
-        for (int i = 0; i < anadirModulos.size(); i++) {
+    public void modificarprofesorModulo(String nombreProfesor, Modulo m,Curso c,String nombreInstituto) {
 
-            try {
-                ConexionDefault.instancia().getStatement().execute("update modulo set profesor = '" + nombreProfesor + "' where nombre= '" + anadirModulos.get(i).getNombre() + "' AND Instituto ='" + nombreInstituto + "'");
-            } catch (SQLException ex) {
-                Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            ConexionDefault.instancia().getStatement().execute("update modulo set profesor='" + nombreProfesor + "' where nombre='"+m.getNombre()+"' AND ciclo= '"+c.getNombre()+"' AND anno ='"+ c.getAnno()+"' AND instituto ='"+nombreInstituto+"'");
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public void modificarAlumno(String nombreInstituto, String nombreProfesor, String contrasena, String nombreciclo) {
     }
 
 }

@@ -58,7 +58,7 @@ public class PruebasBaseDatos {
         
         Instituto i = new Instituto(al, c, "camino", "la que sea", "69633245");
         //DAOInstituto2.instancia().annadirUsuario(i.getNombre(), ruben);
-        DAOInstituto2.instancia().modificarProfesor(i.getNombre(), "Ruben", "ruben", ruben.getAsignaturasDadas());
+        //DAOInstituto2.instancia().modificarProfesor(i.getNombre(), "Ruben", "ruben", ruben.getAsignaturasDadas());
         //DAOInstituto2.instancia().modificarContrasena("a", "camino", "pepito");
         //DaoInstituto.instancia().eliminarUsuario(juan.getNombre(), i.getNombre());
         //DaoInstituto.instancia().eliminarUsuario("Ruben", "camino");      
