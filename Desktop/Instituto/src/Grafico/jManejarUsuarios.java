@@ -386,15 +386,30 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
     private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
 
-        int result = JOptionPane.showConfirmDialog(this, "Sure? You want to exit?", "Swing Tester",
+        int result = JOptionPane.showConfirmDialog(this, "Estas seguro de que quieres eliminar el usuario" + tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString(), "Swing Tester",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE);
 
-        if (result ==JOptionPane.YES_OPTION ) {
+        if (result == JOptionPane.YES_OPTION) {
 
             if (tablaUsuarios.getSelectedRow() != -1) {
                 i.eliminarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
+
                 DAOInstituto2.instancia().eliminarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString(), i.getNombre());
+
+                if (jButtonTodos.isSelected()) {
+
+                    tabla = new DefaultTableModel(i.mostrarUsuarios(), cabeceraTodos);
+                    tablaUsuarios.setModel(tabla);
+                } else if (jButtonAlumnos.isSelected()) {
+
+                    tabla = new DefaultTableModel(i.mostrarAlumnos(), cabeceraAlumnos);
+                    tablaUsuarios.setModel(tabla);
+                } else {
+
+                    tabla = new DefaultTableModel(i.mostrarProfesores(), cabeceraProfesores);
+                    tablaUsuarios.setModel(tabla);
+                }
             } else {
 
                 JOptionPane.showMessageDialog(rootPane, "Porfavor seleccione un usuario", "Inicio", JOptionPane.WARNING_MESSAGE);
