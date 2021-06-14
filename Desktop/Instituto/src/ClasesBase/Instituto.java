@@ -279,7 +279,7 @@ public class Instituto {
             }
         }
 
-        String[][] arrayCiclos = new String[nModulos][10];
+        String[][] arrayCiclos = new String[nModulos][2];
 
         int contador = 0;
 

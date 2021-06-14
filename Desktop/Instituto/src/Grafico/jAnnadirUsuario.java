@@ -1247,7 +1247,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 tabla.addRow(segundo);
                 jTableVerCicloA.setModel(tabla);
             } else {
-                tabla = new DefaultTableModel(i.getCicloTot(1), cabecera);
+                jTableVerCicloA.setModel(new DefaultTableModel(i.getCicloTot(1), cabecera));
             }
 
         } catch (Exception e) {
