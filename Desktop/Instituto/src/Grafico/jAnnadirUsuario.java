@@ -100,7 +100,8 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         try {
             fechaDate = formato.parse(fecha);
         } catch (ParseException ex) {
-            System.out.println(ex);
+            JOptionPane.showMessageDialog(null, "Introduzca un formato de fecha correcto",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
         return fechaDate;
     }
