@@ -932,11 +932,21 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
     //Cancelar
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        //Retocar esto salen todos los modulos siempre
-        if (jRadioButtonTodasAsig.isSelected()) {
-            jTableAsignaturasElegidas.setModel(new DefaultTableModel(new String[0][cabeceraModulo.length], cabeceraModulo));
-            jTableElegirAsignaturas.setModel(new DefaultTableModel(i.getModulosTot(), cabecera));
-        }//else if (){}
+        //Retocar esto salen todos los modulos siempre    
+        int nFilas = jTableAsignaturasElegidas.getRowCount();
+        for (int i = 0; i < nFilas; i++) {
+
+            DefaultTableModel tablaSeleccionada = (DefaultTableModel) jTableAsignaturasElegidas.getModel();
+            DefaultTableModel tabla = (DefaultTableModel) jTableElegirAsignaturas.getModel();
+            String[] modulo = new String[4];
+            modulo[0] = jTableAsignaturasElegidas.getValueAt(0, 0) + "";
+            modulo[1] = jTableAsignaturasElegidas.getValueAt(0, 1) + "";
+            modulo[2] = jTableAsignaturasElegidas.getValueAt(0, 2) + "";
+            modulo[3] = jTableAsignaturasElegidas.getValueAt(0, 3) + "";
+            tabla.addRow(modulo);
+
+            tablaSeleccionada.removeRow(0);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     //AÑADIR PROFESORES
@@ -956,11 +966,11 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
 
                     annadir.annadirModulo(i.buscarModuloNombre(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
-                    
-                    String nombreCurso =jTableAsignaturasElegidas.getModel().getValueAt(j, 2)+"";
-                    int anoCurso =Integer.parseInt(jTableAsignaturasElegidas.getModel().getValueAt(j, 3)+"");
-                    
-                    Curso c= i.buscarCurso(nombreCurso,anoCurso );
+
+                    String nombreCurso = jTableAsignaturasElegidas.getModel().getValueAt(j, 2) + "";
+                    int anoCurso = Integer.parseInt(jTableAsignaturasElegidas.getModel().getValueAt(j, 3) + "");
+
+                    Curso c = i.buscarCurso(nombreCurso, anoCurso);
                     DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), i.buscarModuloNombre(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
 
                 }

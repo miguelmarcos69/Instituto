@@ -346,7 +346,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
             a.setVisible(true);
         } else {
 
-            JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Por favor selecciona un usuario", "Inicio", JOptionPane.WARNING_MESSAGE);
         }
 
         // TODO add your handling code here:
