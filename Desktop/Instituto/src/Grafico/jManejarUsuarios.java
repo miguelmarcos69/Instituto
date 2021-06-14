@@ -19,6 +19,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -323,24 +324,29 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
     private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
 
-        Usuario usuario = i.buscarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
+        if (tablaUsuarios.getSelectedRow() !=-1) {
 
-        jAnnadirUsuario a = new jAnnadirUsuario(this, true);
-        a.setInstituto(i);
-        a.setModificando();
+            Usuario usuario = i.buscarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
 
-        if (usuario instanceof Alumno) {
+            jAnnadirUsuario a = new jAnnadirUsuario(this, true);
+            a.setInstituto(i);
+            a.setModificando();
 
-            Alumno alumno = (Alumno) usuario;
-            a.mostrarDatosAlumno(alumno);
-        }else if (usuario instanceof Profesor){
-            Profesor profesor = (Profesor) usuario;
-            
-            
+            if (usuario instanceof Alumno) {
+
+                Alumno alumno = (Alumno) usuario;
+                a.mostrarDatosAlumno(alumno);
+            } else if (usuario instanceof Profesor) {
+                Profesor profesor = (Profesor) usuario;
+
+            }
+
+            this.setVisible(false);
+            a.setVisible(true);
+        }else{
+        
+            JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
         }
-
-        this.setVisible(false);
-        a.setVisible(true);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jModificarActionPerformed
@@ -378,8 +384,6 @@ public class jManejarUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jAnnadirActionPerformed
 
     private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
-
-
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jEliminarActionPerformed
