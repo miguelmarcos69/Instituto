@@ -150,6 +150,45 @@ public class Instituto {
         return al;
     }
 
+    //calcula la nota final del alumno
+    public int calcularNotaFinal(String nombreAl, String mod) {
+        int fin = 0;
+        for (Usuario usuario : usuarios) {
+            if (usuario instanceof Alumno) {
+                if (usuario.getNombre().equals(nombreAl)) {
+                    System.out.println("Usuario enconrado");
+                    Alumno a = (Alumno) usuario;// convertir el suauario en alumno
+                    for (int i = 0; i <= a.getNotas().size(); i++) {
+                        if (a.getNotas().get(i).getModulo().equals(mod)) {
+
+                            int num1 = a.getNotas().get(0).getNota();
+                            int num2 = a.getNotas().get(1).getNota();
+                            int num3 = a.getNotas().get(2).getNota();
+                            int media = a.getNotas().size();
+                            int suma = num1 + num2 + num3;
+                            if (num1 >= 1 && num2 >= 1 && num3 >= 1) {
+                                System.out.println("a");
+                                fin = suma / media;
+                                break;
+
+                            } else {
+                                fin = 0;
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+        System.out.println(fin);
+        return fin;
+
+    }
+
     public void borrarNotas(String nombre, String nombreModulo) {
         try {
             for (Usuario usuario : usuarios) {
@@ -339,12 +378,12 @@ public class Instituto {
     //Metodo para ir al ciclo seleccionado y llmar al metodo de obtener modulos
     public String[][] getModulosCic(String nombre, int ano) {
         String[][] s = new String[this.buscarCurso(nombre, ano).getSizeModulos()][4];
-        
+
         for (int i = 0; i < cursos.size(); i++) {
 
             if (cursos.get(i).getNombre().equals(nombre) && cursos.get(i).getAnno() == ano) {
                 s = cursos.get(i).getModulos();
-                i=cursos.size();
+                i = cursos.size();
             }
 
         }
@@ -354,23 +393,23 @@ public class Instituto {
     //Metodo para llamar a todos los modulos y obtener sus asignaturas
     public String[][] getModulosTot() {
         int nModulos = 0;
-        for (int i=0;i<cursos.size();i++){
-        
+        for (int i = 0; i < cursos.size(); i++) {
+
             nModulos += cursos.get(i).getSizeModulos();
         }
-        String [][] arrayModulos = new String [nModulos][4];
-        int contador=0;
-        
-        for (int i=0;i<cursos.size();i++){
-        
-            for (int j=0;j<cursos.get(i).getArrayListModulos().size();j++){
-            
-                arrayModulos[contador][0]=cursos.get(i).getArrayListModulos().get(j).getNombre();
-                arrayModulos[contador][1]=cursos.get(i).getArrayListModulos().get(j).getHoras_semana()+"";
-                arrayModulos[contador][2]=cursos.get(i).getNombre();
-                arrayModulos[contador][3]=cursos.get(i).getAnno()+"";
+        String[][] arrayModulos = new String[nModulos][4];
+        int contador = 0;
+
+        for (int i = 0; i < cursos.size(); i++) {
+
+            for (int j = 0; j < cursos.get(i).getArrayListModulos().size(); j++) {
+
+                arrayModulos[contador][0] = cursos.get(i).getArrayListModulos().get(j).getNombre();
+                arrayModulos[contador][1] = cursos.get(i).getArrayListModulos().get(j).getHoras_semana() + "";
+                arrayModulos[contador][2] = cursos.get(i).getNombre();
+                arrayModulos[contador][3] = cursos.get(i).getAnno() + "";
                 contador++;
-                
+
             }
         }
 
@@ -464,17 +503,17 @@ public class Instituto {
             }
         }
     }
-    
-     public Curso buscarCurso(String nombre,int ano){
-    
+
+    public Curso buscarCurso(String nombre, int ano) {
+
         Curso buscado = null;
-        
-        for (int i=0;i<cursos.size();i++){
-        
-            if(cursos.get(i).getNombre().equals(nombre)&&cursos.get(i).getAnno()==ano){
-            
-                buscado=cursos.get(i);
-                i=cursos.size();
+
+        for (int i = 0; i < cursos.size(); i++) {
+
+            if (cursos.get(i).getNombre().equals(nombre) && cursos.get(i).getAnno() == ano) {
+
+                buscado = cursos.get(i);
+                i = cursos.size();
             }
         }
 
