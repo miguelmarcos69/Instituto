@@ -8,11 +8,11 @@ package Grafico;
 import BaseDatos.*;
 import ClasesBase.*;
 import Usuarios.*;
-import Grafico.*;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -133,6 +133,11 @@ public class InicioSesion extends javax.swing.JFrame {
         jTUsuario.setBackground(new java.awt.Color(255, 255, 255));
         jTUsuario.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 24)); // NOI18N
         jTUsuario.setText("Usuario");
+        jTUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTUsuarioFocusGained(evt);
+            }
+        });
         jTUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jTUsuarioMousePressed(evt);
@@ -143,14 +148,32 @@ public class InicioSesion extends javax.swing.JFrame {
                 jTUsuarioActionPerformed(evt);
             }
         });
+        jTUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTUsuarioKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTUsuarioKeyReleased(evt);
+            }
+        });
         jPanel1.add(jTUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 319, -1));
 
         jPConstrasena.setBackground(new java.awt.Color(255, 255, 255));
         jPConstrasena.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 24)); // NOI18N
         jPConstrasena.setText("jkdhasgh jkasdhasdkas");
+        jPConstrasena.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPConstrasenaFocusGained(evt);
+            }
+        });
         jPConstrasena.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jPConstrasenaMousePressed(evt);
+            }
+        });
+        jPConstrasena.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPConstrasenaKeyPressed(evt);
             }
         });
         jPanel1.add(jPConstrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 319, -1));
@@ -161,6 +184,11 @@ public class InicioSesion extends javax.swing.JFrame {
         ButtonEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonEntrarActionPerformed(evt);
+            }
+        });
+        ButtonEntrar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ButtonEntrarKeyPressed(evt);
             }
         });
         jPanel1.add(ButtonEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 450, -1, -1));
@@ -210,7 +238,7 @@ public class InicioSesion extends javax.swing.JFrame {
                 case 0:
                     Administrador admin = DAOInstituto2.instancia().obtenerAdministrador(nombre, nombreInsti);
 
-                    if (admin!= null) {
+                    if (admin != null) {
                         if (admin.getContrasenna().equals(contra)) {
                             AdministradorGrafico adm = new AdministradorGrafico(admin, i);//Modificar
                             this.setVisible(false);
@@ -219,8 +247,8 @@ public class InicioSesion extends javax.swing.JFrame {
                         } else {
                             JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
                         }
-                    }else{
-                    
+                    } else {
+
                         JOptionPane.showMessageDialog(rootPane, "El usuario no existe", "Inicio", JOptionPane.WARNING_MESSAGE);
                     }
                     break;
@@ -253,50 +281,6 @@ public class InicioSesion extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "El instituto no existe", "Inicio", JOptionPane.WARNING_MESSAGE);
         }
 
-        //modificar el control de la contrasena
-        /*
-            if (u instanceof Administrador) {
-                if (u.getContra().equals(contra)) {
-                    Administrador ad = (Administrador) u;
-                    AdministradorGrafico adm = new AdministradorGrafico(null, true, ad, this);
-                    this.setVisible(false);
-                    adm.mostrar(nombre);
-                    adm.setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
-
-                }
-
-            }
-            if (u instanceof Profesor) {
-                if (u.getContra().equals(contra)) {
-                    Profesor pro = (Profesor) u;
-                    ProfesorGrafico pr = new ProfesorGrafico(null, true, pro, this);
-                    this.setVisible(false);
-                    //pr.mostrar();
-                    pr.setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
-
-                }
-
-            }
-            if (u instanceof Alumno) {
-                if (u.getContra().equals(contra)) {
-                    Alumno alu = (Alumno) u;
-                    AlumnoGrafico alG = new AlumnoGrafico(null, true, alu, this);
-                    this.setVisible(false);
-                    // adm.mostrar();
-                    alG.setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
-
-                }
-
-            }
-
-        }
-         */
 
     }//GEN-LAST:event_ButtonEntrarActionPerformed
 
@@ -330,8 +314,97 @@ public class InicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_jPConstrasenaMousePressed
 
     private void jTNombreInstitutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTNombreInstitutoKeyPressed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jTNombreInstitutoKeyPressed
+
+
+    private void jTUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTUsuarioKeyPressed
+
+    }//GEN-LAST:event_jTUsuarioKeyPressed
+
+
+    private void jPConstrasenaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPConstrasenaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String nombreInsti = jTNombreInstituto.getText();
+            String nombre = jTUsuario.getText();
+            String contra = jPConstrasena.getText();
+            ConexionDefault.crearConexion();
+            int tipo = DAOInstituto2.instancia().obtenerTipoUsuario(nombre, nombreInsti);
+
+            i = DAOInstituto2.instancia().obtenerInstituto(nombreInsti);
+
+            if (i != null) {
+
+                switch (tipo) {
+
+                    case 0:
+                        Administrador admin = DAOInstituto2.instancia().obtenerAdministrador(nombre, nombreInsti);
+
+                        if (admin != null) {
+                            if (admin.getContrasenna().equals(contra)) {
+                                AdministradorGrafico adm = new AdministradorGrafico(admin, i);//Modificar
+                                this.setVisible(false);
+                                adm.mostrar(nombre);
+                                adm.setVisible(true);
+                            } else {
+                                JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
+                            }
+                        } else {
+
+                            JOptionPane.showMessageDialog(rootPane, "El usuario no existe", "Inicio", JOptionPane.WARNING_MESSAGE);
+                        }
+                        break;
+                    case 1:
+
+                        Alumno alum = DAOInstituto2.instancia().obtenerAlumno(nombre, nombreInsti);
+
+                        if (alum.getContrasenna().equals(contra)) {
+                            AlumnoGrafico alG = new AlumnoGrafico(null, true, alum);
+                            this.setVisible(false);
+                            alG.mostrar(nombre);
+                            alG.setVisible(true);
+                        } else {
+                            JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
+                        }
+                        break;
+                    case 2:
+                        Profesor prof = DAOInstituto2.instancia().obtenerProfesor(nombre, nombreInsti);
+                        if (prof.getContrasenna().equals(contra)) {
+                            ProfesorGrafico pr = new ProfesorGrafico(null, true, prof, i);
+                            this.setVisible(false);
+                            pr.mostrar(nombre);
+                            pr.setVisible(true);
+                        }
+
+                        break;
+                }
+            } else {
+
+                JOptionPane.showMessageDialog(rootPane, "El instituto no existe", "Inicio", JOptionPane.WARNING_MESSAGE);
+            }
+
+        }
+    }//GEN-LAST:event_jPConstrasenaKeyPressed
+
+    private void jTUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTUsuarioKeyReleased
+
+    }//GEN-LAST:event_jTUsuarioKeyReleased
+
+    private void jTUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTUsuarioFocusGained
+        // TODO add your handling code here:
+        jTUsuario.setText("");
+
+
+    }//GEN-LAST:event_jTUsuarioFocusGained
+
+    private void jPConstrasenaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPConstrasenaFocusGained
+        jPConstrasena.setText("");
+    }//GEN-LAST:event_jPConstrasenaFocusGained
+
+    private void ButtonEntrarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ButtonEntrarKeyPressed
+        // TODO add your handling code here:
+
+     }//GEN-LAST:event_ButtonEntrarKeyPressed
 
     /**
      * @param args the command line arguments
