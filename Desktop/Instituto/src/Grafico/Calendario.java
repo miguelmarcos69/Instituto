@@ -5,17 +5,27 @@
  */
 package Grafico;
 
+import ClasesBase.Instituto;
+
 /**
  *
  * @author alumno
  */
 public class Calendario extends javax.swing.JFrame {
 
+    Instituto i;
+
     /**
      * Creates new form Calendario
+     *
+     * @param i
      */
-    public Calendario() {
+    public Calendario(Instituto i) {
         initComponents();
+        this.i = i;
+    }
+
+    private Calendario() {
     }
 
     /**
@@ -35,15 +45,25 @@ public class Calendario extends javax.swing.JFrame {
         jCalendar1.setForeground(new java.awt.Color(0, 0, 0));
         jCalendar1.setDate(new java.util.Date(1623443707000L));
         jCalendar1.setDecorationBackgroundColor(new java.awt.Color(255, 255, 255));
+        jCalendar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jCalendar1MouseClicked(evt);
+            }
+        });
+        jCalendar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jCalendar1KeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
                 .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -56,6 +76,17 @@ public class Calendario extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(694, 640));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jCalendar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jCalendar1KeyPressed
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_jCalendar1KeyPressed
+
+    private void jCalendar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCalendar1MouseClicked
+        // TODO add your handling code here:
+        System.out.println("click");
+    }//GEN-LAST:event_jCalendar1MouseClicked
 
     /**
      * @param args the command line arguments
