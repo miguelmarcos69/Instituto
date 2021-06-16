@@ -253,8 +253,8 @@ public class AdministradorGrafico extends javax.swing.JFrame {
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
         // TODO add your handling code here:
 
-        Calendario c = new Calendario(i);
-        c.setVisible(true);
+        //Calendario c = new Calendario(i);
+        //c.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel8MouseClicked
 

@@ -31,7 +31,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelDatosCoumnes.setVisible(true);
         jPanelProfesor.setVisible(false);
         jPanelAlumno.setVisible(false);
-
+        this.setSize(567, 300);
         /*
         //Araylist para guardar asignaturas de forma local
         ArrayList<Modulo> modAnn = new ArrayList<>();
@@ -190,6 +190,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Añadir Usuarios");
 
         jPanelTipoUsuario.setBackground(new java.awt.Color(204, 204, 255));
@@ -383,10 +384,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
         jTableVerCicloP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Nombre", "Año"
@@ -489,10 +487,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
         jTableElegirAsignaturas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Nombre", "Horas semanales", "Curso", "Año"
@@ -543,19 +538,23 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelMostrarAsigLayout.setHorizontalGroup(
             jPanelMostrarAsigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMostrarAsigLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
                 .addGroup(jPanelMostrarAsigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel14)
-                    .addGroup(jPanelMostrarAsigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(jPanelMostrarAsigLayout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(jButtonAceptar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addGap(40, 40, 40)
+                        .addGroup(jPanelMostrarAsigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel14)
+                            .addGroup(jPanelMostrarAsigLayout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addComponent(jButtonAceptar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton3))))
+                    .addGroup(jPanelMostrarAsigLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanelMostrarAsigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanelMostrarAsigLayout.setVerticalGroup(
             jPanelMostrarAsigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -659,10 +658,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
         jTableVerCicloA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Nombre", "Año"
@@ -711,13 +707,12 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonInscribir)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButtonInscribir))
         );
 
         javax.swing.GroupLayout jPanelAlumnoLayout = new javax.swing.GroupLayout(jPanelAlumno);
@@ -746,16 +741,16 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelAlumnoLayout.setVerticalGroup(
             jPanelAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAlumnoLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelAlumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButtonVerTodosA)
                     .addComponent(jRadioButtonVerA1A)
                     .addComponent(jRadioButtonVerA2A))
-                .addGap(37, 37, 37)
+                .addGap(25, 25, 25)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout jPanelDatosLayout = new javax.swing.GroupLayout(jPanelDatos);
@@ -765,9 +760,9 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             .addGroup(jPanelDatosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanelProfesor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanelDatosCoumnes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanelAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelDatosLayout.setVerticalGroup(
@@ -779,24 +774,26 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 .addComponent(jPanelProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanelDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 530, 1100));
+        jPanel1.add(jPanelDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 540, 1100));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -1078,6 +1075,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 jTableElegirAsignaturas.setModel(tabla);
 
                 jPanelMostrarAsig.setVisible(true);
+                this.setSize(567, 950);
             } else {
                 JOptionPane.showMessageDialog(getContentPane(), "Debe seleccionar una fila de la tabla",
                         "Error", JOptionPane.ERROR_MESSAGE);
@@ -1125,6 +1123,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         tabla = new DefaultTableModel(i.getCicloTot(), cabecera);
         jTableVerCicloP.setModel(tabla);
         jRadioButtonVerTodosP.setSelected(true);
+        this.setSize(567, 650);
     }//GEN-LAST:event_jRadioButtonCicloAsigActionPerformed
 
     //Todas
@@ -1134,6 +1133,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jTableElegirAsignaturas.setModel(tabla);
         jPanelMostrarAsig.setVisible(true);
         jPanelSeleccionCiclo.setVisible(false);
+        this.setSize(567, 700);
     }//GEN-LAST:event_jRadioButtonTodasAsigActionPerformed
 
     private void jTextFieldDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDNIActionPerformed
@@ -1155,6 +1155,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jRadioButtonVerTodosA.setVisible(false);
         jRadioButtonVerA1A.setVisible(false);
         jRadioButtonVerA2A.setVisible(false);
+        this.setSize(567, 550);
 
     }//GEN-LAST:event_jRadioButtonAlumnoActionPerformed
 
@@ -1166,6 +1167,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelAlumno.setVisible(false);
         jPanelMostrarAsig.setVisible(false);
         jPanelSeleccionCiclo.setVisible(false);
+        this.setSize(567, 400);
     }//GEN-LAST:event_jRadioButtonProfesorActionPerformed
 
     //METODO MAIN
