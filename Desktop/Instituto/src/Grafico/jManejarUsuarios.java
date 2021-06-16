@@ -35,6 +35,7 @@ import javax.swing.table.TableCellRenderer;
 public class jManejarUsuarios extends javax.swing.JFrame {
 
     Instituto i;
+    Administrador admin;
     //Administrador adm;
 
     //tablas
@@ -71,9 +72,10 @@ public class jManejarUsuarios extends javax.swing.JFrame {
          */
     }
 
-    public jManejarUsuarios(Instituto i) {
+    public jManejarUsuarios(Instituto i,Administrador admin) {
         initComponents();
         this.i = i;
+        this.admin=admin;
         tabla = new DefaultTableModel(i.mostrarUsuarios(), cabeceraTodos);
         tablaUsuarios.setModel(tabla);
         //this.adm=adm;
@@ -142,6 +144,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         jModificar = new javax.swing.JButton();
         jEliminar = new javax.swing.JButton();
         jAnnadir = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -299,6 +302,14 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         });
         jPanel1.add(jAnnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 550, 110, -1));
 
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -417,9 +428,14 @@ public class jManejarUsuarios extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jEliminarActionPerformed
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    }
+        AdministradorGrafico a = new AdministradorGrafico(this.admin,this.i);
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -462,6 +478,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jAnnadir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JRadioButton jButtonAlumnos;
     private javax.swing.JRadioButton jButtonProfesores;
     private javax.swing.JRadioButton jButtonTodos;

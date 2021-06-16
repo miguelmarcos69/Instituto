@@ -40,6 +40,8 @@ public class AdministradorGrafico extends javax.swing.JFrame {
         this.setForeground(Color.white);
         this.admin = ad;
         this.i = i;
+        nombre.setText(ad.getNombre());
+        
     }
 
     //colorines
@@ -222,7 +224,7 @@ public class AdministradorGrafico extends javax.swing.JFrame {
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // TODO add your handling code here:
-        jManejarUsuarios in = new jManejarUsuarios(i);
+        jManejarUsuarios in = new jManejarUsuarios(this.i,this.admin);
         in.setVisible(true);
         this.setVisible(false);
 
