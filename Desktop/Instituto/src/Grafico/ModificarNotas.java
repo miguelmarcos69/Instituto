@@ -53,8 +53,13 @@ public class ModificarNotas extends javax.swing.JFrame {
 
     private void llenar() {
 
-        for (Modulo m : prof.getModulosDados()) {
-            modulos.addItem(m.toString());
+        for (int j = 0; j < prof.getModulosDados().size(); j++) {
+
+            Modulo m = prof.getModulosDados().get(j);
+
+            ArrayList<Curso> cursos = DAOInstituto2.instancia().getCursosdeProfesor(prof.getNombre(), i);
+
+            modulos.addItem(m.toString() + " " + cursos.get(j).getNombre() + " " + cursos.get(j).getAnno());
 
         }
 
@@ -139,14 +144,14 @@ public class ModificarNotas extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaAlumnos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 380, 133));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 380, 133));
 
         modulos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modulosActionPerformed(evt);
             }
         });
-        jPanel1.add(modulos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 120, -1));
+        jPanel1.add(modulos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 150, -1));
 
         nota1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -311,7 +316,7 @@ public class ModificarNotas extends javax.swing.JFrame {
                     .addGroup(panelNotasLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabelFinal)))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNotasLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(modificarNota)
@@ -347,8 +352,8 @@ public class ModificarNotas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(

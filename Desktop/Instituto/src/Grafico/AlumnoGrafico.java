@@ -20,7 +20,8 @@ import javax.swing.table.DefaultTableModel;
 public class AlumnoGrafico extends javax.swing.JFrame {
 
     Alumno alumno;
-    String [] cabecera = {"Modulo","Primera","Segunda","Tercera","Final"};
+    String[] cabeceraNotas = {"Modulo", "Primera", "Segunda", "Tercera", "Final"};
+    String[] cabeceraEventos = {"Modulo", "Fecha", "Mensaje"};
 
     /**
      * Creates new form Alumno
@@ -30,19 +31,14 @@ public class AlumnoGrafico extends javax.swing.JFrame {
         this.setBackground(Color.black);
         this.setForeground(Color.white);
         this.alumno = al;
-        this.tabla_notas.setVisible(false);
-        
+        this.tabla.setVisible(false);
+
     }
 
     private AlumnoGrafico() {
         initComponents();
-        this.tabla_notas.setVisible(false);
-        
-    }
-    
-    public void tablaInvisisble(){
-    
-        this.tabla_notas.setVisible(false);
+        this.tabla.setVisible(false);
+
     }
 
     class jPanelGardient extends JPanel {
@@ -57,12 +53,13 @@ public class AlumnoGrafico extends javax.swing.JFrame {
             GradientPaint gp = new GradientPaint(0, 0, color1, 180, height, color2);
             g2d.setPaint(gp);
             g2d.fillRect(0, 0, width, height);
-            
+
         }
     }
-       public void mostrar(String nom) {
+
+    public void mostrar(String nom) {
         this.nombre.setText(nom);
-        this.tabla_notas.setEnabled(false);
+        this.tabla.setEnabled(false);
     }
 
     /**
@@ -84,7 +81,7 @@ public class AlumnoGrafico extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tabla_notas = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
         BotonAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -120,7 +117,7 @@ public class AlumnoGrafico extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(72, 72, 72)
                 .addComponent(nombre)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
@@ -153,11 +150,16 @@ public class AlumnoGrafico extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Ver Tablón");
+        jLabel6.setText("Ver Calendario");
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_clipboard_50px_5.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel5MousePressed(evt);
+            }
+        });
 
-        tabla_notas.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -168,7 +170,7 @@ public class AlumnoGrafico extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(tabla_notas);
+        jScrollPane2.setViewportView(tabla);
 
         BotonAtras.setText("Atras");
         BotonAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -187,7 +189,7 @@ public class AlumnoGrafico extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
-                .addGap(77, 77, 77))
+                .addGap(99, 99, 99))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addComponent(jLabel4)
@@ -219,7 +221,7 @@ public class AlumnoGrafico extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BotonAtras)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -245,22 +247,28 @@ public class AlumnoGrafico extends javax.swing.JFrame {
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // TODO add your handling code here:
-        this.tabla_notas.setVisible(true);
-        tabla_notas.setModel(new DefaultTableModel(alumno.getNotasModulos(),cabecera));
+        this.tabla.setVisible(true);
+        tabla.setModel(new DefaultTableModel(alumno.getNotasModulos(), cabeceraNotas));
     }//GEN-LAST:event_jLabel3MousePressed
 
     private void BotonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAtrasActionPerformed
-        
+
         InicioSesion a = new InicioSesion();
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_BotonAtrasActionPerformed
+
+    private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
+        // TODO add your handling code here:
+        tabla.setVisible(true);
+        tabla.setModel(new DefaultTableModel(this.alumno.getCiclo().obtenerEventos(), cabeceraEventos));
+    }//GEN-LAST:event_jLabel5MousePressed
 
     /**
      * @param args the command line arguments
@@ -293,7 +301,7 @@ public class AlumnoGrafico extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AlumnoGrafico().setVisible(true);
-                
+
             }
         });
     }
@@ -310,6 +318,6 @@ public class AlumnoGrafico extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel nombre;
-    private javax.swing.JTable tabla_notas;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

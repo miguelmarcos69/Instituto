@@ -44,7 +44,7 @@ public class Profesor extends Usuario {
     
         String [][] impratidos = new String [this.modulosImpartidos.size()][4];
         
-        ArrayList<Curso> cursos = DAOInstituto2.instancia().getCiclosdeProfesor(nombre, instituto);       
+        ArrayList<Curso> cursos = DAOInstituto2.instancia().getCursosdeProfesor(nombre, instituto);       
                 
         for (int i=0;i<this.modulosImpartidos.size();i++){
         

@@ -39,8 +39,13 @@ public class jCalendarioProfesor extends javax.swing.JFrame {
         cabecera[3] = "Fecha";
         cabecera[4] = "Mensaje";
         jTable1.setModel(new DefaultTableModel(obtenerEventos(), cabecera));
-        for (Modulo m : p.getModulosDados()) {
-            jComboBoxModulos.addItem(m.toString());
+        for (int j=0;j<p.getModulosDados().size();j++) {
+            
+            Modulo m = p.getModulosDados().get(j);
+            
+            ArrayList<Curso> cursos = DAOInstituto2.instancia().getCursosdeProfesor(p.getNombre(), i);
+            
+            jComboBoxModulos.addItem(m.toString()+" "+cursos.get(j).getNombre()+" "+cursos.get(j).getAnno());
 
         }
 
@@ -145,7 +150,7 @@ public class jCalendarioProfesor extends javax.swing.JFrame {
         String mensaje = jTextFieldMensaje.getText();//Obtenemos tambien el mensaje
         Evento e = new Evento(mensaje, fecha);//Creamos el nuevo evento
         //Los cursos estan ordenados en las mismas posiciones que los modulos por lo tanto un curso corresponde a un Modulo
-        ArrayList<Curso> cursos = DAOInstituto2.instancia().getCiclosdeProfesor(p.getNombre(), i);//Obtenemos los cursos de los modulos que tiene asignados un profesor
+        ArrayList<Curso> cursos = DAOInstituto2.instancia().getCursosdeProfesor(p.getNombre(), i);//Obtenemos los cursos de los modulos que tiene asignados un profesor
         Modulo m = i.getModuloNombre(cursos.get(jComboBoxModulos.getSelectedIndex()), p.getModulosDados().get(jComboBoxModulos.getSelectedIndex()).getNombre());//Obtenemos el modulo seleeccionado por el combo box y este lo relacionamos con su curso
         m.annnadirEvento(e);//Creamos el modulo al que annadir el evento
         DAOInstituto2.instancia().anadirEvento(e, p.getModulosDados().get(jComboBoxModulos.getSelectedIndex()).getNombre(), cursos.get(jComboBoxModulos.getSelectedIndex()), i.getNombre());
@@ -194,9 +199,12 @@ public class jCalendarioProfesor extends javax.swing.JFrame {
 
     public String[][] obtenerEventos() {
 
+        
+        
+        
         String eventos[][] = new String[100][5];
         int contador = 0;
-        ArrayList<Curso> cursos = DAOInstituto2.instancia().getCiclosdeProfesor(p.getNombre(), i);//Obtenemos los cursos de los modulos que tiene asignados un profesor
+        ArrayList<Curso> cursos = DAOInstituto2.instancia().getCursosdeProfesor(p.getNombre(), i);//Obtenemos los cursos de los modulos que tiene asignados un profesor
 
         for (int i = 0; i < p.getModulosDados().size(); i++) {
 

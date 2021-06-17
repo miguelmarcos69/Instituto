@@ -394,7 +394,7 @@ public class DAOInstituto2 {
         }
     }
 
-    public ArrayList<Curso> getCiclosdeProfesor(String nombreProfesor, Instituto instituto) {
+    public ArrayList<Curso> getCursosdeProfesor(String nombreProfesor, Instituto instituto) {
 
         ArrayList<Curso> cursos = new ArrayList();
 
@@ -436,6 +436,40 @@ public class DAOInstituto2 {
         } catch (SQLException ex) {
             Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public int getNeventosProfesor(String nombreProfe){
+    
+        int nEventos=0;
+        try {
+            ResultSet rs=ConexionDefault.instancia().getStatement().executeQuery("select count(*) from modulo m, Eventos e where m.nombre=e.Modulo AND m.ciclo=e.Ciclo AND m.anno= e.Anno AND m.profesor='"+nombreProfe+"'");
+            if(rs.next()){
+            
+                nEventos=rs.getInt(1);
+            }
+        
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return nEventos;        
+    }
+    
+    public int getEventosCurso (Curso c){
+    
+        int nEventos=0;
+        
+        try {
+            ResultSet rs= ConexionDefault.instancia().getStatement().executeQuery("select count(*) from Eventos e where Ciclo='"+c.getNombre()+"' AND Anno ='"+c.getAnno()+"'");
+        
+            if(rs.next()){
+            
+                nEventos=rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return nEventos;
     }
 
 }
