@@ -6,6 +6,7 @@
 package BaseDatos;
 
 import ClasesBase.Curso;
+import ClasesBase.Evento;
 import ClasesBase.Instituto;
 import ClasesBase.Modulo;
 import Usuarios.Alumno;
@@ -56,7 +57,13 @@ public class PruebasBaseDatos {
         al.add(pepe);
         al.add(juan);
         
+        Evento examenProg = new Evento ("Examen programacion",new Date ());
+        
+        programacion.annnadirEvento(examenProg);
+        
         Instituto i = new Instituto(al, c, "camino", "la que sea", "69633245");
+        
+        DAOInstituto2.instancia().anadirEvento(examenProg, programacion.getNombre(), primero, i.getNombre());
         //DAOInstituto2.instancia().annadirUsuario(i.getNombre(), ruben);
         //DAOInstituto2.instancia().modificarProfesor(i.getNombre(), "Ruben", "ruben", ruben.getAsignaturasDadas());
         //DAOInstituto2.instancia().modificarContrasena("a", "camino", "pepito");

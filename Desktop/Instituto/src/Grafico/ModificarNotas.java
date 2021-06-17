@@ -423,7 +423,7 @@ public class ModificarNotas extends javax.swing.JFrame {
             System.out.println(n1);
             System.out.println(n2);
             System.out.println(n3);
-            i.ModificarNotas(itemSeleccionado, nombreAlumno, n1, n2, n3);
+            i.modificarNotas(itemSeleccionado, nombreAlumno, n1, n2, n3);
 
         } catch (SQLException ex) {
 

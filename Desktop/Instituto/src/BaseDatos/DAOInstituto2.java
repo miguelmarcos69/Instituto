@@ -6,27 +6,7 @@
 package BaseDatos;
 
 import ClasesBase.Curso;
-import ClasesBase.Instituto;
-import ClasesBase.Modulo;
-import ClasesBase.Nota;
-import Usuarios.Administrador;
-import Usuarios.Alumno;
-import Usuarios.Profesor;
-import Usuarios.Usuario;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-
-import BaseDatos.ConexionDefault;
-import BaseDatos.DaoInstituto;
-import ClasesBase.Curso;
+import ClasesBase.Evento;
 import ClasesBase.Instituto;
 import ClasesBase.Modulo;
 import ClasesBase.Nota;
@@ -424,6 +404,17 @@ public class DAOInstituto2 {
         }
         
         return cursos;
+    }
+    
+    public void anadirEvento (Evento e,String modulo,Curso ciclo,String instituto){
+    
+        try {
+            
+             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            ConexionDefault.instancia().getStatement().execute("insert into Eventos values ('"+e.getMensaje()+"','"+sdf.format(e.getFecha())+"','"+modulo+"','"+ciclo.getNombre()+"',"+ciclo.getAnno()+",'"+instituto+"')");
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

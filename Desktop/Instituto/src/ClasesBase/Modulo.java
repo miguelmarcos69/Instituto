@@ -18,12 +18,33 @@ public class Modulo {
     private String nombre;
     private String codigo_aula;
     private int horas_semana;
+    private ArrayList<Evento> calendario;
 
     //metodo constuctor
     public Modulo(String nombre, String codigo_aula, int horas_semana) {
         this.nombre = nombre;
         this.codigo_aula = codigo_aula;
         this.horas_semana = horas_semana;
+        calendario=new ArrayList();
+    
+    }
+    
+    
+    public Modulo(String nombre, String codigo_aula, int horas_semana,ArrayList<Evento> calendario) {
+        this.nombre = nombre;
+        this.codigo_aula = codigo_aula;
+        this.horas_semana = horas_semana;
+        this.calendario=calendario;
+    }
+    
+    public void annnadirEvento (Evento anadir){
+    
+        calendario.add(anadir);
+    }
+    
+    public void eliminarEvento (int posicion){
+    
+        calendario.remove(posicion);
     }
 
     //metodos getters

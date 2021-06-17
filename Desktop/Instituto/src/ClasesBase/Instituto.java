@@ -71,22 +71,7 @@ public class Instituto {
         return cursos.size();
     }
 
-    public Modulo buscarModuloNombre(String nombreModulo) {
 
-        Modulo m = null;
-
-        for (int i = 0; i < cursos.size(); i++) {
-
-            m = cursos.get(i).getModulo(nombreModulo);
-
-            if (m != null) {
-
-                i = cursos.size();
-            }
-        }
-
-        return m;
-    }
 
     public String[][] getAlumnosAsignatura(String nombreAsignatura) {
 
@@ -108,6 +93,21 @@ public class Instituto {
         }
 
         return alumn;
+    }
+    
+    public Modulo getModuloNombre (Curso c, String nombre){
+    
+        Modulo buscado = null;
+        
+        for (int i=0;i<cursos.size();i++){
+        
+            if (cursos.get(i).getNombre().equals(c.getNombre())&& cursos.get(i).getAnno()==c.getAnno()){
+            
+                buscado = cursos.get(i).getModulo(nombre);
+            }
+        }
+        
+        return buscado;
     }
 
     public String[][] getDos(String nomAlumn, String nombreMod) {
@@ -217,7 +217,7 @@ public class Instituto {
 
     }
 
-    public String ModificarNotas(String modulo, String alum, Nota nota1, Nota nota2, Nota nota3) {
+    public String modificarNotas(String modulo, String alum, Nota nota1, Nota nota2, Nota nota3) {
 
         String al = null;
 

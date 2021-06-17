@@ -962,13 +962,13 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
                 for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
 
-                    annadir.annadirModulo(i.buscarModuloNombre(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
-
                     String nombreCurso = jTableAsignaturasElegidas.getModel().getValueAt(j, 2) + "";
                     int anoCurso = Integer.parseInt(jTableAsignaturasElegidas.getModel().getValueAt(j, 3) + "");
-
                     Curso c = i.buscarCurso(nombreCurso, anoCurso);
-                    DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), i.buscarModuloNombre(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
+                    
+                    annadir.annadirModulo(c.getModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));                 
+                    
+                    DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.getModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
 
                 }
                 i.annadirUsuario(annadir);
@@ -985,10 +985,12 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 i.annadirUsuario(annadir);
 
                 for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
+                    
+                     Curso c = i.buscarCurso(jTableAsignaturasElegidas.getValueAt(jTableAsignaturasElegidas.getSelectedRow(), 3) + "", Integer.parseInt(jTableAsignaturasElegidas.getValueAt(jTableAsignaturasElegidas.getSelectedRow(), 4) + ""));
 
-                    annadir.annadirModulo(i.buscarModuloNombre(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
-                    Curso c = i.buscarCurso(jTableAsignaturasElegidas.getValueAt(jTableAsignaturasElegidas.getSelectedRow(), 3) + "", Integer.parseInt(jTableAsignaturasElegidas.getValueAt(jTableAsignaturasElegidas.getSelectedRow(), 4) + ""));
-                    DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), i.buscarModuloNombre(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
+                    annadir.annadirModulo(c.getModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
+                   
+                    DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.getModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
 
                 }
                 i.eliminarUsuario(annadir.getNombre());
