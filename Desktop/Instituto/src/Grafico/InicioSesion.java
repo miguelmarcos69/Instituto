@@ -230,13 +230,15 @@ public class InicioSesion extends javax.swing.JFrame {
         int tipo = DAOInstituto2.instancia().obtenerTipoUsuario(nombre, nombreInsti);
 
         i = DAOInstituto2.instancia().obtenerInstituto(nombreInsti);
+        
+        
 
         if (i != null) {
 
             switch (tipo) {
 
                 case 0:
-                    Administrador admin = DAOInstituto2.instancia().obtenerAdministrador(nombre, nombreInsti);
+                    Administrador admin = (Administrador)i.buscarUsuario(nombre);//DAOInstituto2.instancia().obtenerAdministrador(nombre, nombreInsti);
 
                     if (admin != null) {
                         if (admin.getContrasenna().equals(contra)) {
@@ -254,7 +256,7 @@ public class InicioSesion extends javax.swing.JFrame {
                     break;
                 case 1:
 
-                    Alumno alum = DAOInstituto2.instancia().obtenerAlumno(nombre, nombreInsti);
+                    Alumno alum = (Alumno)i.buscarUsuario(nombre);//DAOInstituto2.instancia().obtenerAlumno(nombre, nombreInsti);
 
                     if (alum.getContrasenna().equals(contra)) {
                         AlumnoGrafico alG = new AlumnoGrafico(null, true, alum);
@@ -266,7 +268,7 @@ public class InicioSesion extends javax.swing.JFrame {
                     }
                     break;
                 case 2:
-                    Profesor prof = DAOInstituto2.instancia().obtenerProfesor(nombre, nombreInsti);
+                    Profesor prof = (Profesor)i.buscarUsuario(nombre);//DAOInstituto2.instancia().obtenerProfesor(nombre, nombreInsti);
                     if (prof.getContrasenna().equals(contra)) {
                         ProfesorGrafico pr = new ProfesorGrafico(null, true, prof, i);
                         this.setVisible(false);
@@ -356,7 +358,7 @@ public class InicioSesion extends javax.swing.JFrame {
                         break;
                     case 1:
 
-                        Alumno alum = DAOInstituto2.instancia().obtenerAlumno(nombre, nombreInsti);
+                        Alumno alum = DAOInstituto2.instancia().obtenerAlumno(nombre, nombreInsti,i);
 
                         if (alum.getContrasenna().equals(contra)) {
                             AlumnoGrafico alG = new AlumnoGrafico(null, true, alum);
@@ -368,7 +370,7 @@ public class InicioSesion extends javax.swing.JFrame {
                         }
                         break;
                     case 2:
-                        Profesor prof = DAOInstituto2.instancia().obtenerProfesor(nombre, nombreInsti);
+                        Profesor prof = DAOInstituto2.instancia().obtenerProfesor(nombre, nombreInsti,i);
                         if (prof.getContrasenna().equals(contra)) {
                             ProfesorGrafico pr = new ProfesorGrafico(null, true, prof, i);
                             this.setVisible(false);

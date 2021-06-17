@@ -262,7 +262,7 @@ public class CrearCursos extends javax.swing.JFrame {
             //hacemos visible la creacion de moulos
             jPanelCrearModulos.setVisible(true);
             try {
-                DaoInstituto.instancia().annadirCurso(i, cursos);
+                DAOInstituto2.instancia().annadirCurso(i, cursos);
             } catch (SQLException ex) {
                 Logger.getLogger(CrearCursos.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -287,7 +287,7 @@ public class CrearCursos extends javax.swing.JFrame {
             if(c.ContarHoras(Integer.parseInt(jHorasSemana.getText()))){
                 c.anadirModulo(modulos);
             try {
-                DaoInstituto.instancia().annadirModulo(i, modulos, c);
+                DAOInstituto2.instancia().annadirModulo(i, modulos, c);
                 JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
             } catch (SQLException ex) {
                 Logger.getLogger(CrearCursos.class.getName()).log(Level.SEVERE, null, ex);

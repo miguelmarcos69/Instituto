@@ -31,7 +31,7 @@ public class Profesor extends Usuario {
     }
 
 
-    public ArrayList<Modulo> getAsignaturasDadas() {
+    public ArrayList<Modulo> getModulosDados() {
         return modulosImpartidos;
     }
     

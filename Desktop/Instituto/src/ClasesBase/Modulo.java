@@ -46,6 +46,11 @@ public class Modulo {
     
         calendario.remove(posicion);
     }
+    
+    public ArrayList<Evento> getCalendario(){
+    
+        return calendario;
+    }
 
     //metodos getters
     public String getNombre() {

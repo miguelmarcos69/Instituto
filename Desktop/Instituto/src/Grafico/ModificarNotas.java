@@ -53,7 +53,7 @@ public class ModificarNotas extends javax.swing.JFrame {
 
     private void llenar() {
 
-        for (Modulo m : prof.getAsignaturasDadas()) {
+        for (Modulo m : prof.getModulosDados()) {
             modulos.addItem(m.toString());
 
         }
