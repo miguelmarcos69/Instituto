@@ -58,6 +58,9 @@
           <Color blue="ff" green="67" red="cc" type="rgb"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new jPanelGardient()"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">

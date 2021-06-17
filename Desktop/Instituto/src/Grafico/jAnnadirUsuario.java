@@ -147,7 +147,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         buttonGroupVerAnno = new javax.swing.ButtonGroup();
         buttonGroupVerAsignaturas = new javax.swing.ButtonGroup();
         jCalendarTheme1 = new com.toedter.plaf.JCalendarTheme();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new jPanelGardient();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanelTipoUsuario = new javax.swing.JPanel();
