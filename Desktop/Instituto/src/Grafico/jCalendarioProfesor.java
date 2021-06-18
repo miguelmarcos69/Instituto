@@ -13,6 +13,8 @@ import ClasesBase.Modulo;
 import Usuarios.Profesor;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -23,15 +25,43 @@ public class jCalendarioProfesor extends javax.swing.JFrame {
     /**
      * Creates new form jCalendario
      */
-    
     Instituto i;
     Profesor p;
-    public jCalendarioProfesor(Profesor p,Instituto i) {
+    String[] cabecera = new String[5];
+
+    public jCalendarioProfesor(Profesor p, Instituto i) {
         initComponents();
-        this.i=i;
-        this.p=p;
+        this.i = i;
+        this.p = p;
+        cabecera[0] = "Modulo";
+        cabecera[1] = "Curso";
+        cabecera[2] = "Ano";//Que alguien cambie la n que no tengo la que va antes de la o XD
+        cabecera[3] = "Fecha";
+        cabecera[4] = "Mensaje";
+        jTable1.setModel(new DefaultTableModel(obtenerEventos(), cabecera));
+        for (int j=0;j<p.getModulosDados().size();j++) {
+            
+            Modulo m = p.getModulosDados().get(j);
+            
+            ArrayList<Curso> cursos = DAOInstituto2.instancia().getCursosdeProfesor(p.getNombre(), i);
+            
+            jComboBoxModulos.addItem(m.toString()+" "+cursos.get(j).getNombre()+" "+cursos.get(j).getAnno());
+
+        }
+
+        /*
+        TableColumnModel modelo = (TableColumnModel) jTable1.getColorModel();
+        modelo.getColumn(0).setWidth(100);
+        modelo.getColumn(1).setWidth(100);
+        modelo.getColumn(2).setWidth(30);
+        modelo.getColumn(3).setWidth(100);
+        modelo.getColumn(4).setWidth(170);
+        jTable1.setColumnModel(modelo);
+        */
+        
+
     }
-    
+
     public jCalendarioProfesor() {
         initComponents();
     }
@@ -51,10 +81,9 @@ public class jCalendarioProfesor extends javax.swing.JFrame {
         jButtonNuevoEvento = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jComboBoxModulos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jTextFieldMensaje.setText("Nombre del evento");
 
@@ -67,16 +96,22 @@ public class jCalendarioProfesor extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Modulo", "Curso", "Ano", "Fecha", "Mensaje"
             }
         ));
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
         jScrollPane1.setViewportView(jTable1);
+
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Atras");
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel10MousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,49 +120,65 @@ public class jCalendarioProfesor extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBoxModulos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldMensaje)
-                            .addComponent(jButtonNuevoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane1)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextFieldMensaje)
+                                .addComponent(jButtonNuevoEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBoxModulos, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jComboBoxModulos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
+                        .addGap(18, 18, 18)
                         .addComponent(jTextFieldMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(jButtonNuevoEvento)))
-                .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonNuevoEvento))
+                    .addComponent(jCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonNuevoEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoEventoActionPerformed
-        
+
         Date fecha = jCalendar.getDate();//Obtenemos la fecha seleccionada por el usuario
         String mensaje = jTextFieldMensaje.getText();//Obtenemos tambien el mensaje
-        Evento e =new Evento(mensaje,fecha);//Creamos el nuevo evento
-        ArrayList<Curso> cursos = DAOInstituto2.instancia().getCiclosdeProfesor(p.getNombre(), i);//Obtenemos los cursos de los modulos que tiene asignados un profesor
-        Modulo m = i.getModuloNombre(cursos.get(jComboBoxModulos.getSelectedIndex()), p.getAsignaturasDadas().get(jComboBoxModulos.getSelectedIndex()).getNombre());//Obtenemos el modulo seleeccionado por el combo box y este lo relacionamos con su curso
+        Evento e = new Evento(mensaje, fecha);//Creamos el nuevo evento
+        //Los cursos estan ordenados en las mismas posiciones que los modulos por lo tanto un curso corresponde a un Modulo
+        ArrayList<Curso> cursos = DAOInstituto2.instancia().getCursosdeProfesor(p.getNombre(), i);//Obtenemos los cursos de los modulos que tiene asignados un profesor
+        Modulo m = i.getModuloNombre(cursos.get(jComboBoxModulos.getSelectedIndex()), p.getModulosDados().get(jComboBoxModulos.getSelectedIndex()).getNombre());//Obtenemos el modulo seleeccionado por el combo box y este lo relacionamos con su curso
         m.annnadirEvento(e);//Creamos el modulo al que annadir el evento
-        DAOInstituto2.instancia().anadirEvento(e, p.getAsignaturasDadas().get(jComboBoxModulos.getSelectedIndex()).getNombre(), cursos.get(jComboBoxModulos.getSelectedIndex()), i.getNombre());
+        DAOInstituto2.instancia().anadirEvento(e, p.getModulosDados().get(jComboBoxModulos.getSelectedIndex()).getNombre(), cursos.get(jComboBoxModulos.getSelectedIndex()), i.getNombre());
         //anadimos a la tabla eventos el vevento creado con su modulo, ciclo,fechay mensaje
+
         //Como mostrar los datos en la tabla
-        
+        jTable1.setModel(new DefaultTableModel(obtenerEventos(), cabecera));
+
     }//GEN-LAST:event_jButtonNuevoEventoActionPerformed
+
+    private void jLabel10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MousePressed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        ProfesorGrafico pr = new ProfesorGrafico(this.p,this.i);
+        pr.mostrar(this.p.getNombre());
+        pr.setVisible(true);
+        
+    }//GEN-LAST:event_jLabel10MousePressed
 
     /**
      * @param args the command line arguments
@@ -165,10 +216,39 @@ public class jCalendarioProfesor extends javax.swing.JFrame {
         });
     }
 
+    public String[][] obtenerEventos() {
+
+        
+        
+        
+        String eventos[][] = new String[100][5];
+        int contador = 0;
+        ArrayList<Curso> cursos = DAOInstituto2.instancia().getCursosdeProfesor(p.getNombre(), i);//Obtenemos los cursos de los modulos que tiene asignados un profesor
+
+        for (int i = 0; i < p.getModulosDados().size(); i++) {
+
+            Modulo a = p.getModulosDados().get(i);
+
+            for (int j = 0; j < a.getCalendario().size(); j++) {
+
+                eventos[contador][0] = a.getNombre();
+                eventos[contador][1] = cursos.get(i).getNombre();
+                eventos[contador][2] = cursos.get(i).getAnno() + "";
+                eventos[contador][3] = a.getCalendario().get(j).getFecha() + "";
+                eventos[contador][4] = a.getCalendario().get(j).getMensaje();
+                contador++;
+
+            }
+        }
+
+        return eventos;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonNuevoEvento;
     private com.toedter.calendar.JCalendar jCalendar;
     private javax.swing.JComboBox<String> jComboBoxModulos;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextFieldMensaje;

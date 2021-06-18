@@ -4,20 +4,29 @@ import BaseDatos.DAOInstituto2;
 import ClasesBase.Curso;
 import ClasesBase.Instituto;
 import ClasesBase.Modulo;
+import Usuarios.Administrador;
 import Usuarios.Alumno;
 import Usuarios.Profesor;
 import Usuarios.Usuario;
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 public class jAnnadirUsuario extends javax.swing.JDialog {
 
     Instituto i;
+    Administrador a;
     boolean modificando = false;
     String cabecera[] = {"Nombre", "Curso"};
     String cabeceraModulo[] = {"Nombre", "Horas semanales", "Ciclo", "Año"};
@@ -68,6 +77,21 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
          */
     }
 
+    class jPanelGardient extends JPanel {
+
+        protected void paintComponent(Graphics g) {
+            Graphics2D g2d = (Graphics2D) g;
+            int width = getWidth();
+            int height = getHeight();
+
+            Color color1 = new Color(221, 0, 255);
+            Color color2 = new Color(255, 162, 0);
+            GradientPaint gp = new GradientPaint(0, 0, color1, 180, height, color2);
+            g2d.setPaint(gp);
+            g2d.fillRect(0, 0, width, height);
+        }
+    }
+
     ///METODOS GET\\\
     public String getNombre() {
         return jTextFieldNombre.getText();
@@ -82,8 +106,13 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         return jTextFieldDNI.getText();
     }
 
-    public Date getFechaNacimiento() {
-        return ParseFecha(jTextFieldFechaNacimiento.getText());//LLamar al metodo para converir String en Date
+    public Date getFechaNacimiento() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date fecha = null;
+
+        fecha = sdf.parse(jTextFieldFechaNacimiento.getText());//LLamar al metodo para converir String en Date
+
+        return fecha;
     }
 
     public String getContrasenna() {
@@ -94,19 +123,11 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         this.i = i;
     }
 
-    //CONVERTIR STRING EN DATE
-    public static Date ParseFecha(String fecha) {
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date fechaDate = null;
-        try {
-            fechaDate = formato.parse(fecha);
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(null, "Introduzca un formato de fecha correcto",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        return fechaDate;
+    public void setAdministrador(Administrador a) {
+        this.a = a;
     }
 
+    //CONVERTIR STRING EN DATE
     //COMPROVAR SI LAS CONTRASEÑAS SON IGUALES
     public boolean ContrasennaValida() {
 
@@ -126,14 +147,17 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         buttonGroupTipoUsuario = new javax.swing.ButtonGroup();
         buttonGroupVerAnno = new javax.swing.ButtonGroup();
         buttonGroupVerAsignaturas = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
+        jCalendarTheme1 = new com.toedter.plaf.JCalendarTheme();
+        jPanel1 = new jPanelGardient();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanelTipoUsuario = new javax.swing.JPanel();
         jRadioButtonProfesor = new javax.swing.JRadioButton();
         jRadioButtonAlumno = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
-        jPanelDatos = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jPanelDatos = new jPanelGardient();
         jPanelDatosCoumnes = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -183,9 +207,9 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jButtonInscribir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(204, 103, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -193,9 +217,10 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Añadir Usuarios");
 
-        jPanelTipoUsuario.setBackground(new java.awt.Color(204, 204, 255));
+        jPanelTipoUsuario.setBackground(new java.awt.Color(0, 0, 0));
 
         buttonGroupTipoUsuario.add(jRadioButtonProfesor);
+        jRadioButtonProfesor.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButtonProfesor.setText("Profesor");
         jRadioButtonProfesor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,6 +229,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         });
 
         buttonGroupTipoUsuario.add(jRadioButtonAlumno);
+        jRadioButtonAlumno.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButtonAlumno.setText("Alumno");
         jRadioButtonAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,8 +237,8 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Elija el tipo de usuario:");
 
         javax.swing.GroupLayout jPanelTipoUsuarioLayout = new javax.swing.GroupLayout(jPanelTipoUsuario);
@@ -220,13 +246,13 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelTipoUsuarioLayout.setHorizontalGroup(
             jPanelTipoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelTipoUsuarioLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(26, 26, 26)
                 .addComponent(jLabel2)
-                .addGap(79, 79, 79)
+                .addGap(40, 40, 40)
                 .addComponent(jRadioButtonProfesor)
-                .addGap(90, 90, 90)
+                .addGap(53, 53, 53)
                 .addComponent(jRadioButtonAlumno)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         jPanelTipoUsuarioLayout.setVerticalGroup(
             jPanelTipoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,42 +265,76 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Liberation Sans", 0, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("X");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel6MousePressed(evt);
+            }
+        });
+
+        jLabel16.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Volver");
+        jLabel16.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel16MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jPanelTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanelTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(190, 190, 190)
-                        .addComponent(jLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(99, 99, 99)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6))
+                        .addGap(0, 8, Short.MAX_VALUE))
+                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addComponent(jPanelTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 510, -1));
-
         jPanelDatos.setBackground(new java.awt.Color(204, 204, 255));
 
+        jPanelDatosCoumnes.setBackground(new java.awt.Color(0, 0, 0));
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Nombre: ");
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("DNI:");
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Fecha Nacimiento:");
 
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Contraseña:");
 
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Repita la contraseña:");
 
         jTextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -289,7 +349,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             }
         });
 
-        jTextFieldFechaNacimiento.setText("dia/mes/año");
+        jTextFieldFechaNacimiento.setText("yyyy-MM-dd");
         jTextFieldFechaNacimiento.setToolTipText("");
 
         javax.swing.GroupLayout jPanelDatosCoumnesLayout = new javax.swing.GroupLayout(jPanelDatosCoumnes);
@@ -346,9 +406,13 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanelProfesor.setBackground(new java.awt.Color(0, 0, 0));
+
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("¿Qué asignaturas desea ver?");
 
         buttonGroupVerAsignaturas.add(jRadioButtonTodasAsig);
+        jRadioButtonTodasAsig.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButtonTodasAsig.setText("Todas");
         jRadioButtonTodasAsig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -357,6 +421,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         });
 
         buttonGroupVerAsignaturas.add(jRadioButtonCicloAsig);
+        jRadioButtonCicloAsig.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButtonCicloAsig.setText("De un ciclo concreto");
         jRadioButtonCicloAsig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -364,9 +429,16 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             }
         });
 
+        jPanelSeleccion.setBackground(new java.awt.Color(0, 0, 0));
+        jPanelSeleccion.setForeground(new java.awt.Color(0, 0, 0));
+
+        jPanelSeleccionCiclo.setBackground(new java.awt.Color(0, 0, 0));
+
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("¿Qué ciclos desa ver?");
 
         buttonGroupVerAnno.add(jRadioButtonVerTodosP);
+        jRadioButtonVerTodosP.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButtonVerTodosP.setText("Todos");
         jRadioButtonVerTodosP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -375,12 +447,15 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         });
 
         buttonGroupVerAnno.add(jRadioButtonVerA1P);
+        jRadioButtonVerA1P.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButtonVerA1P.setText("Sólo primer año");
         jRadioButtonVerA1P.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonVerA1PActionPerformed(evt);
             }
         });
+
+        jPanel4.setBackground(new java.awt.Color(0, 0, 0));
 
         jTableVerCicloP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -396,15 +471,14 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
         );
 
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Seleccione en la tabla el curso del que desee ver sus asignaturas");
 
         jButtonBuscarAsig.setText("BUSCAR");
@@ -421,14 +495,14 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonBuscarAsig, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()
+                        .addComponent(jLabel13))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel13)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonBuscarAsig, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE))))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,6 +517,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         );
 
         buttonGroupVerAnno.add(jRadioButtonVerA2P);
+        jRadioButtonVerA2P.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButtonVerA2P.setText("Sólo segundo año");
         jRadioButtonVerA2P.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -456,7 +531,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             jPanelSeleccionCicloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSeleccionCicloLayout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 22, Short.MAX_VALUE))
+                .addGap(0, 38, Short.MAX_VALUE))
             .addGroup(jPanelSeleccionCicloLayout.createSequentialGroup()
                 .addGroup(jPanelSeleccionCicloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelSeleccionCicloLayout.createSequentialGroup()
@@ -467,7 +542,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(jRadioButtonVerA2P))
                     .addGroup(jPanelSeleccionCicloLayout.createSequentialGroup()
-                        .addGap(155, 155, 155)
+                        .addGap(122, 122, 122)
                         .addComponent(jLabel12)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -485,6 +560,8 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanelMostrarAsig.setBackground(new java.awt.Color(0, 0, 0));
+
         jTableElegirAsignaturas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -500,6 +577,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         });
         jScrollPane3.setViewportView(jTableElegirAsignaturas);
 
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Seleccione la asignatura que desee añadir:");
 
         jTableAsignaturasElegidas.setModel(new javax.swing.table.DefaultTableModel(
@@ -517,6 +595,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         });
         jScrollPane4.setViewportView(jTableAsignaturasElegidas);
 
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Asignaturas añadidas:");
 
         jButtonAceptar.setText("Aceptar");
@@ -567,7 +646,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jPanelMostrarAsigLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAceptar)
                     .addComponent(jButton3)))
@@ -600,21 +679,21 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelProfesor.setLayout(jPanelProfesorLayout);
         jPanelProfesorLayout.setHorizontalGroup(
             jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelProfesorLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jPanelSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelProfesorLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelProfesorLayout.createSequentialGroup()
                         .addComponent(jRadioButtonTodasAsig)
-                        .addGap(101, 101, 101)
+                        .addGap(69, 69, 69)
                         .addComponent(jRadioButtonCicloAsig)
                         .addGap(105, 105, 105))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelProfesorLayout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addGap(174, 174, 174))))
+            .addGroup(jPanelProfesorLayout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addComponent(jPanelSeleccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanelProfesorLayout.setVerticalGroup(
             jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -625,14 +704,18 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 .addGroup(jPanelProfesorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButtonTodasAsig)
                     .addComponent(jRadioButtonCicloAsig))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelSeleccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanelAlumno.setBackground(new java.awt.Color(0, 0, 0));
+
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("¿Qué cursos desa ver?");
 
         buttonGroupVerAnno.add(jRadioButtonVerTodosA);
+        jRadioButtonVerTodosA.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButtonVerTodosA.setText("Todos");
         jRadioButtonVerTodosA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -641,6 +724,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         });
 
         buttonGroupVerAnno.add(jRadioButtonVerA1A);
+        jRadioButtonVerA1A.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButtonVerA1A.setText("Sólo primer año");
         jRadioButtonVerA1A.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -649,12 +733,15 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         });
 
         buttonGroupVerAnno.add(jRadioButtonVerA2A);
+        jRadioButtonVerA2A.setForeground(new java.awt.Color(255, 255, 255));
         jRadioButtonVerA2A.setText("Sólo segundo año");
         jRadioButtonVerA2A.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonVerA2AActionPerformed(evt);
             }
         });
+
+        jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
         jTableVerCicloA.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -672,13 +759,14 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
         );
 
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Seleccione en la tabla el curso al que se va ha inscribir");
 
         jButtonInscribir.setText("INSCRIBIR");
@@ -758,26 +846,40 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jPanelDatosLayout.setHorizontalGroup(
             jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDatosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanelDatosCoumnes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanelDatosCoumnes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelProfesor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelAlumno, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanelDatosLayout.setVerticalGroup(
             jPanelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelDatosLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
+                .addGap(13, 13, 13)
                 .addComponent(jPanelDatosCoumnes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanelDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 540, 1100));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -797,6 +899,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     //BOTON AÑADIR modulos selecconados
@@ -836,10 +939,16 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 ContrasennaValida();
                 if (ContrasennaValida() == true) {
                     if (i.getNAlumnosCurso(nombreC) < i.getCicloNombre(nombreC, annoC).getPlazas()) {
-                        annadir = new Alumno(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
-                        DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
-                        JOptionPane.showMessageDialog(null, "Inscrito con exito");
-                        datosVacios();
+                        try {
+                            annadir = new Alumno(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
+                            i.annadirUsuario(annadir);
+                            DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
+                            JOptionPane.showMessageDialog(null, "Inscrito con exito");
+                            datosVacios();
+                        } catch (ParseException ex) {
+                            JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
+                                    "Error", JOptionPane.ERROR_MESSAGE);
+                        }
                     } else {
 
                         JOptionPane.showMessageDialog(getContentPane(), "El curso esta completo",
@@ -862,10 +971,15 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 ContrasennaValida();
                 if (ContrasennaValida() == true) {
                     if (i.getNAlumnosCurso(nombreC) < i.getCicloNombre(nombreC, annoC).getPlazas()) {
-                        annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
-                        //DAOInstituto2.instancia().modificarAlumno(i.getNombre(), annadir);
-                        JOptionPane.showMessageDialog(getContentPane(), "El usuario ha sido creado con exito",
-                                "Error", JOptionPane.OK_OPTION);
+                        try {
+                            annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
+                            //DAOInstituto2.instancia().modificarAlumno(i.getNombre(), annadir);
+                            JOptionPane.showMessageDialog(getContentPane(), "El usuario ha sido creado con exito",
+                                    "Error", JOptionPane.OK_OPTION);
+                        } catch (ParseException ex) {
+                            JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
+                                    "Error", JOptionPane.ERROR_MESSAGE);
+                        }
                     } else {
 
                         JOptionPane.showMessageDialog(getContentPane(), "El curso esta completo",
@@ -956,23 +1070,28 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         if (modificando == false) {
 
             if (ContrasennaValida() == true) {
-                annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento());
+                try {
+                    annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento());
 
-                DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
+                    DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
 
-                for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
+                    for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
 
-                    String nombreCurso = jTableAsignaturasElegidas.getModel().getValueAt(j, 2) + "";
-                    int anoCurso = Integer.parseInt(jTableAsignaturasElegidas.getModel().getValueAt(j, 3) + "");
-                    Curso c = i.buscarCurso(nombreCurso, anoCurso);
-                    
-                    annadir.annadirModulo(c.getModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));                 
-                    
-                    DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.getModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
+                        String nombreCurso = jTableAsignaturasElegidas.getModel().getValueAt(j, 2) + "";
+                        int anoCurso = Integer.parseInt(jTableAsignaturasElegidas.getModel().getValueAt(j, 3) + "");
+                        Curso c = i.buscarCurso(nombreCurso, anoCurso);
 
+                        annadir.annadirModulo(c.getModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
+
+                        DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.getModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
+
+                    }
+                    i.annadirUsuario(annadir);
+                    datosVacios();
+                } catch (ParseException ex) {
+                    JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
+                            "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                i.annadirUsuario(annadir);
-                datosVacios();
             } else {
                 JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
                         "Error", JOptionPane.ERROR_MESSAGE);
@@ -980,16 +1099,21 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         } else {
 
             if (ContrasennaValida() == true) {
-                annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento());
+                try {
+                    annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento());
+                } catch (ParseException ex) {
+                    JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 i.eliminarUsuario(annadir.getNombre());
                 i.annadirUsuario(annadir);
 
                 for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
-                    
-                     Curso c = i.buscarCurso(jTableAsignaturasElegidas.getValueAt(jTableAsignaturasElegidas.getSelectedRow(), 3) + "", Integer.parseInt(jTableAsignaturasElegidas.getValueAt(jTableAsignaturasElegidas.getSelectedRow(), 4) + ""));
+
+                    Curso c = i.buscarCurso(jTableAsignaturasElegidas.getValueAt(jTableAsignaturasElegidas.getSelectedRow(), 3) + "", Integer.parseInt(jTableAsignaturasElegidas.getValueAt(jTableAsignaturasElegidas.getSelectedRow(), 4) + ""));
 
                     annadir.annadirModulo(c.getModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
-                   
+
                     DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.getModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
 
                 }
@@ -1172,6 +1296,19 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         this.setSize(567, 400);
     }//GEN-LAST:event_jRadioButtonProfesorActionPerformed
 
+    private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
+        System.exit(0);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel6MousePressed
+
+    private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
+        // TODO add your handling code here:
+        jManejarUsuarios m = new jManejarUsuarios(this.i, this.a);
+        this.setVisible(false);
+        m.setVisible(true);
+    }//GEN-LAST:event_jLabel16MouseClicked
+
     //METODO MAIN
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1289,11 +1426,11 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
 
         jTextFieldNombre.setText("");
         jTextFieldDNI.setText("");
-        jTextFieldFechaNacimiento.setText("dia/mes/año");
+        jTextFieldFechaNacimiento.setText("yyyy-MM-dd");
         jPasswordFieldContra.setText("");
         jPasswordFieldRepetirContra.setText("");
 
-        jPanelDatosCoumnes.setVisible(true);
+        jPanelDatosCoumnes.setVisible(false);
         jPanelProfesor.setVisible(false);
         jPanelAlumno.setVisible(false);
 
@@ -1311,6 +1448,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     private javax.swing.JButton jButtonAceptar;
     private javax.swing.JButton jButtonBuscarAsig;
     private javax.swing.JButton jButtonInscribir;
+    private com.toedter.plaf.JCalendarTheme jCalendarTheme1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1318,10 +1456,12 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

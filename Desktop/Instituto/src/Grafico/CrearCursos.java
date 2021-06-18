@@ -11,6 +11,7 @@ import BaseDatos.DaoInstituto;
 import ClasesBase.Curso;
 import ClasesBase.Instituto;
 import ClasesBase.Modulo;
+import Usuarios.Administrador;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -29,12 +30,20 @@ public class CrearCursos extends javax.swing.JFrame {
 
     //atributos
     Instituto i;
+    Administrador admin;
 
     public CrearCursos() {
         initComponents();
         jPanelCrearModulos.setVisible(false);
     }
 
+    public CrearCursos(Instituto i, Administrador admin) {
+        initComponents();
+        jPanelCrearModulos.setVisible(false);
+        this.i = i;
+        this.admin = admin;
+    }
+    
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         int width = getWidth();
@@ -68,6 +77,7 @@ public class CrearCursos extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -98,21 +108,36 @@ public class CrearCursos extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Crear Cursos");
 
+        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Volver");
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(325, 325, 325)
+                .addContainerGap()
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(234, 234, 234)
                 .addComponent(jLabel1)
-                .addContainerGap(329, Short.MAX_VALUE))
+                .addContainerGap(340, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabel1)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 4, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, -1));
@@ -262,7 +287,7 @@ public class CrearCursos extends javax.swing.JFrame {
             //hacemos visible la creacion de moulos
             jPanelCrearModulos.setVisible(true);
             try {
-                DaoInstituto.instancia().annadirCurso(i, cursos);
+                DAOInstituto2.instancia().annadirCurso(i, cursos);
             } catch (SQLException ex) {
                 Logger.getLogger(CrearCursos.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -287,7 +312,7 @@ public class CrearCursos extends javax.swing.JFrame {
             if(c.ContarHoras(Integer.parseInt(jHorasSemana.getText()))){
                 c.anadirModulo(modulos);
             try {
-                DaoInstituto.instancia().annadirModulo(i, modulos, c);
+                DAOInstituto2.instancia().annadirModulo(i, modulos, c);
                 JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
             } catch (SQLException ex) {
                 Logger.getLogger(CrearCursos.class.getName()).log(Level.SEVERE, null, ex);
@@ -301,6 +326,13 @@ public class CrearCursos extends javax.swing.JFrame {
         }
     
     }//GEN-LAST:event_jAnnadirModuloActionPerformed
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        // TODO add your handling code here:
+        AdministradorGrafico a = new AdministradorGrafico(this.admin,this.i);
+        this.setVisible(false);
+        a.setVisible(true);
+    }//GEN-LAST:event_jLabel11MouseClicked
 
     /**
      * @param args the command line arguments
@@ -346,6 +378,7 @@ public class CrearCursos extends javax.swing.JFrame {
     private javax.swing.JTextField jHorasSemana;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
