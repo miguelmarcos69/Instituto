@@ -330,7 +330,7 @@ public class InicioSesion extends javax.swing.JFrame {
                     try{
                     Alumno alum = (Alumno) i.buscarUsuario(nombre);//DAOInstituto2.instancia().obtenerAlumno(nombre, nombreInsti);
                         if (alum.getContrasenna().equals(contra)) {
-                            AlumnoGrafico alG = new AlumnoGrafico(null, true, alum);
+                            AlumnoGrafico alG = new AlumnoGrafico(null, true, alum,i);
                             this.setVisible(false);
                             alG.mostrar(nombre);
                             alG.setVisible(true);

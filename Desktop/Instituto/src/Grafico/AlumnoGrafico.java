@@ -5,6 +5,7 @@
  */
 package Grafico;
 
+import ClasesBase.Instituto;
 import Usuarios.*;
 import java.awt.Color;
 import java.awt.GradientPaint;
@@ -12,11 +13,12 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import static java.lang.String.format;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,16 +29,18 @@ import javax.swing.table.DefaultTableModel;
 public class AlumnoGrafico extends javax.swing.JFrame {
 
     Alumno alumno;
+    Instituto ins;
     String[] cabecera = {"Modulo", "Primera", "Segunda", "Tercera", "Final"};
 
     /**
      * Creates new form Alumno
      */
-    public AlumnoGrafico(java.awt.Frame parent, boolean modal, Alumno al) {
+    public AlumnoGrafico(java.awt.Frame parent, boolean modal, Alumno al, Instituto ins) {
         initComponents();
         this.setBackground(Color.black);
         this.setForeground(Color.white);
         this.alumno = al;
+        this.ins = ins;
         this.tabla_notas.setVisible(false);
 
     }
@@ -284,21 +288,34 @@ public class AlumnoGrafico extends javax.swing.JFrame {
 
     private void imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirActionPerformed
         // TODO add your handling code here:
-
+        DateFormat dateFormat = new SimpleDateFormat("YYYY");
+        Date date = new Date(); // hora actual del equipo
+        System.out.println("Instituto: " + ins.getNombre());
         try {
             String f2 = "notas" + alumno.getNombre() + ".txt";
-            FileWriter f = new FileWriter("notas" + alumno.getNombre() + ".txt");
             try (BufferedWriter bfw = new BufferedWriter(new FileWriter(f2))) {
+                bfw.write("Instuto: " + ins.getNombre() + " Dirección: " + ins.getDireccion() + " Teléfono: " + ins.getTelefono());
+                bfw.newLine();
+                bfw.write("Alumno: " + alumno.getNombre() + "  Año: " + dateFormat.format(date));
+                bfw.newLine();
+                bfw.write("Ciclo cursado: " + alumno.getCiclo().getNombre() + alumno.getCiclo().getAnno());
+                //bfw.write();
+                bfw.newLine();
+                bfw.newLine();
+                bfw.write("----------------------------------------");
+                bfw.newLine();
                 for (int i = 0; i < tabla_notas.getRowCount(); i++) {//realiza un barrido por filas.
-                    System.out.println(tabla_notas.getRowCount());
+                    System.out.println("Filas: " + tabla_notas.getRowCount());
                     for (int j = 0; j < tabla_notas.getColumnCount(); j++) { //realiza un barrido por columnas.
-                        System.out.println(tabla_notas.getColumnCount());
+                        System.out.println("columnas: " + tabla_notas.getColumnCount());
                         bfw.write((String) (tabla_notas.getValueAt(i, j)));
                         if (j < tabla_notas.getColumnCount() - 1) { //agrega separador "," si no es el ultimo elemento de la fila.
-                            bfw.write(",");
+                            bfw.write(" | ");
                         }
                     }
                     bfw.newLine(); //inserta nueva linea.
+                    bfw.write("----------------------------------------");
+                    bfw.newLine();
                 }
                 //cierra archivo!
             }
@@ -306,20 +323,6 @@ public class AlumnoGrafico extends javax.swing.JFrame {
         } catch (IOException e) {
             System.out.println("ERROR: Ocurrio un problema al salvar el archivo!" + e.getMessage());
         }
-//            for (int i = 0; i < alumno.getNotas().size(); i++) {
-//                System.out.println(alumno.getNotas().get(i).getModulo());
-//                System.out.println(alumno.getNotas().get(i).getNota());
-//                
-//            }
-//            f.write(alumno.getNombre());
-//            f.write(alumno.getCiclo().getNombre());
-//            //f.write(alumno.getNotasModulos());
-//            f.close();
-//
-//        } catch (IOException ex) {
-//            Logger.getLogger(AlumnoGrafico.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
 
     }//GEN-LAST:event_imprimirActionPerformed
 
