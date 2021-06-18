@@ -40,16 +40,16 @@ public class Alumno extends Usuario {
         String[][] modulosNotas = new String[curso.getSizeModulos()][10];
 
         for (int i = 0; i < curso.getSizeModulos(); i++) {
-            
-            modulosNotas[i][0]=curso.getArrayListModulos().get(i).getNombre();
-            
-            int numeroNota=1;
-            
-            for (int j=0;j<notas.size();j++){               
-            
-                if(notas.get(j).getModulo().equals(curso.getArrayListModulos().get(i).getNombre())){
-                
-                    modulosNotas[i][numeroNota++]=notas.get(j).getNota()+"";
+
+            modulosNotas[i][0] = curso.getArrayListModulos().get(i).getNombre();
+
+            int numeroNota = 1;
+
+            for (int j = 0; j < notas.size(); j++) {
+
+                if (notas.get(j).getModulo().equals(curso.getArrayListModulos().get(i).getNombre())) {
+
+                    modulosNotas[i][numeroNota++] = notas.get(j).getNota() + "";
                 }
             }
             
@@ -57,10 +57,10 @@ public class Alumno extends Usuario {
             
                 modulosNotas[i][4]=this.notaFinal(curso.getArrayListModulos().get(i).getNombre())+"";
             }
-            
-            if(numeroNota==4){
-            
-                modulosNotas[i][4]=this.notaFinal(curso.getArrayListModulos().get(i).getNombre())+"";
+
+            if (numeroNota == 4) {
+
+                modulosNotas[i][4] = this.notaFinal(curso.getArrayListModulos().get(i).getNombre()) + "";
             }
         }
 
@@ -151,8 +151,6 @@ public class Alumno extends Usuario {
     }
 
     public ArrayList<Nota> getNotasModulo(String modulo) {
-        System.out.println(modulo);
-
         ArrayList<Nota> notas = new ArrayList();
 
         for (int i = 0; i < notas.size(); i++) {
@@ -178,15 +176,14 @@ public class Alumno extends Usuario {
 
                 nota = notas.get(i).getNota() + nota;
                 contador++;
+                if (contador == 3) {
+
+                    nota = nota / 3;
+                    todas = true;
+                }
             }
 
-            if (contador == 3) {
-
-                nota = nota / 3;
-                todas = true;
-            }
         }
-
         if (todas == false) {
 
             nota = -1;
