@@ -40,24 +40,22 @@ public class Alumno extends Usuario {
         String[][] modulosNotas = new String[curso.getSizeModulos()][5];
 
         for (int i = 0; i < curso.getSizeModulos(); i++) {
-
-            modulosNotas[i][0] = curso.getArrayListModulos().get(i).getNombre();
-
-            int nNotasModulo = 0;
-            int notaFinal = 0;
-
-            for (int j = 0; j < notas.size(); j++) {
-
-                if (notas.get(j).getModulo().equals(curso.getArrayListModulos().get(i).getNombre())) {
-
-                    modulosNotas[i][j + 1] = notas.get(j).getNota() + "";
-                    notaFinal = notaFinal + notas.get(j).getNota();
-
-                    if (nNotasModulo == 3) {
-
-                        modulosNotas[i][4] = (notaFinal / 3) + "";
-                    }
+            
+            modulosNotas[i][0]=curso.getArrayListModulos().get(i).getNombre();
+            
+            int numeroNota=1;
+            
+            for (int j=0;j<notas.size();j++){               
+            
+                if(notas.get(j).getModulo().equals(curso.getArrayListModulos().get(i).getNombre())){
+                
+                    modulosNotas[i][numeroNota++]=notas.get(j).getNota()+"";
                 }
+            }
+            
+            if(numeroNota==4){
+            
+                modulosNotas[i][4]=this.notaFinal(curso.getArrayListModulos().get(i).getNombre())+"";
             }
         }
 

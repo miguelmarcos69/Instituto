@@ -107,13 +107,7 @@ public class DAOInstituto2 {
                 
                 ciclo = i.buscarCurso(nombreCiclo, anno);
 
-                rs = ConexionDefault.instancia().getStatement().executeQuery("select * from modulo where ciclo  = '" + nombreCiclo + "'");
-
-                while (rs.next()) {
-
-                    ciclo.anadirModulo(ciclo.getModulo(rs.getString("nombre")));
-                }
-
+                
                 a.setCiclo(ciclo);
             }
 
