@@ -10,6 +10,13 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
 public class AlumnoGrafico extends javax.swing.JFrame {
 
     Alumno alumno;
-    String [] cabecera = {"Modulo","Primera","Segunda","Tercera","Final"};
+    String[] cabecera = {"Modulo", "Primera", "Segunda", "Tercera", "Final"};
 
     /**
      * Creates new form Alumno
@@ -31,17 +38,17 @@ public class AlumnoGrafico extends javax.swing.JFrame {
         this.setForeground(Color.white);
         this.alumno = al;
         this.tabla_notas.setVisible(false);
-        
+
     }
 
     private AlumnoGrafico() {
         initComponents();
         this.tabla_notas.setVisible(false);
-        
+
     }
-    
-    public void tablaInvisisble(){
-    
+
+    public void tablaInvisisble() {
+
         this.tabla_notas.setVisible(false);
     }
 
@@ -57,10 +64,11 @@ public class AlumnoGrafico extends javax.swing.JFrame {
             GradientPaint gp = new GradientPaint(0, 0, color1, 180, height, color2);
             g2d.setPaint(gp);
             g2d.fillRect(0, 0, width, height);
-            
+
         }
     }
-       public void mostrar(String nom) {
+
+    public void mostrar(String nom) {
         this.nombre.setText(nom);
         this.tabla_notas.setEnabled(false);
     }
@@ -86,6 +94,7 @@ public class AlumnoGrafico extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla_notas = new javax.swing.JTable();
         BotonAtras = new javax.swing.JButton();
+        imprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -177,6 +186,13 @@ public class AlumnoGrafico extends javax.swing.JFrame {
             }
         });
 
+        imprimir.setText("Imprimir notas");
+        imprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imprimirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -201,7 +217,9 @@ public class AlumnoGrafico extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(BotonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(imprimir)
+                .addGap(127, 127, 127))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +236,9 @@ public class AlumnoGrafico extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(BotonAtras)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BotonAtras)
+                    .addComponent(imprimir))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -245,22 +265,49 @@ public class AlumnoGrafico extends javax.swing.JFrame {
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // TODO add your handling code here:
         this.tabla_notas.setVisible(true);
-        tabla_notas.setModel(new DefaultTableModel(alumno.getNotasModulos(),cabecera));
+        tabla_notas.setModel(new DefaultTableModel(alumno.getNotasModulos(), cabecera));
     }//GEN-LAST:event_jLabel3MousePressed
 
     private void BotonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAtrasActionPerformed
-        
+
         InicioSesion a = new InicioSesion();
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_BotonAtrasActionPerformed
+
+    private void imprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirActionPerformed
+        // TODO add your handling code here:
+
+        try {
+            String f2 = "notas" + alumno.getNombre() + ".txt";
+            FileWriter f = new FileWriter("notas" + alumno.getNombre() + ".txt");
+            try (BufferedWriter bfw = new BufferedWriter(new FileWriter(f2))) {
+                for (int i = 0; i < tabla_notas.getRowCount(); i++) {//realiza un barrido por filas.
+                    System.out.println(tabla_notas.getRowCount());
+                    for (int j = 0; j < tabla_notas.getColumnCount(); j++) { //realiza un barrido por columnas.
+                        System.out.println(tabla_notas.getColumnCount());
+                        bfw.write((String) (tabla_notas.getValueAt(i, j)));
+                        if (j < tabla_notas.getColumnCount() - 1) { //agrega separador "," si no es el ultimo elemento de la fila.
+                            bfw.write(",");
+                        }
+                    }
+                    bfw.newLine(); //inserta nueva linea.
+                }
+                //cierra archivo!
+            }
+            System.out.println("El archivo fue salvado correctamente!");
+        } catch (IOException e) {
+            System.out.println("ERROR: Ocurrio un problema al salvar el archivo!" + e.getMessage());
+        }
+
+    }//GEN-LAST:event_imprimirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,13 +340,14 @@ public class AlumnoGrafico extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AlumnoGrafico().setVisible(true);
-                
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonAtras;
+    private javax.swing.JButton imprimir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
