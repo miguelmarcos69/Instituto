@@ -57,6 +57,11 @@ public class Alumno extends Usuario {
             
                 modulosNotas[i][4]=this.notaFinal(curso.getArrayListModulos().get(i).getNombre())+"";
             }
+            
+            if(numeroNota==4){
+            
+                modulosNotas[i][4]=this.notaFinal(curso.getArrayListModulos().get(i).getNombre())+"";
+            }
         }
 
         return modulosNotas;

@@ -306,6 +306,20 @@ public class AlumnoGrafico extends javax.swing.JFrame {
         } catch (IOException e) {
             System.out.println("ERROR: Ocurrio un problema al salvar el archivo!" + e.getMessage());
         }
+//            for (int i = 0; i < alumno.getNotas().size(); i++) {
+//                System.out.println(alumno.getNotas().get(i).getModulo());
+//                System.out.println(alumno.getNotas().get(i).getNota());
+//                
+//            }
+//            f.write(alumno.getNombre());
+//            f.write(alumno.getCiclo().getNombre());
+//            //f.write(alumno.getNotasModulos());
+//            f.close();
+//
+//        } catch (IOException ex) {
+//            Logger.getLogger(AlumnoGrafico.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
 
     }//GEN-LAST:event_imprimirActionPerformed
 

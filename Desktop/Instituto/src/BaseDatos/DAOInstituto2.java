@@ -70,7 +70,7 @@ public class DAOInstituto2 {
         return tipo;
     }
 
-    public Alumno obtenerAlumno(String nombre, String nombreInstituto, Instituto i) {
+    public Alumno obtenerAlumno(String nombre, String nombreInstituto,Instituto i) {
 
         Alumno a = null;
         String nombreCiclo;
@@ -84,7 +84,7 @@ public class DAOInstituto2 {
 
             if (rs.next()) {
                 a = new Alumno(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
-                a = getDatosAlumno(a, rs.getString(6), rs.getInt(7), i);
+                a = getDatosAlumno(a, rs.getString(6), rs.getInt(7),i);
 
             } else {
 
@@ -97,15 +97,17 @@ public class DAOInstituto2 {
         return a;
     }
 
-    public Alumno getDatosAlumno(Alumno a, String nombreCiclo, int anno, Instituto i) {
+    public Alumno getDatosAlumno(Alumno a, String nombreCiclo, int anno,Instituto i) {
         Curso ciclo = null;
 
         try {
             ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select * from ciclo where nombre  = '" + nombreCiclo + "' AND anno ='" + anno + "'");
             if (rs.next()) {
-
+                
+                
                 ciclo = i.buscarCurso(nombreCiclo, anno);
 
+                
                 a.setCiclo(ciclo);
             }
 
@@ -124,7 +126,7 @@ public class DAOInstituto2 {
         return a;
     }
 
-    public Profesor obtenerProfesor(String nombre, String nombreInstituto, Instituto i) {
+    public Profesor obtenerProfesor(String nombre, String nombreInstituto,Instituto i) {
 
         Profesor p = null;
         try {
@@ -135,7 +137,7 @@ public class DAOInstituto2 {
 
             if (rs.next()) {
                 p = new Profesor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4));
-                p = getDatosProfesor(p, i);
+                p = getDatosProfesor(p,i);
 
             } else {
 
@@ -156,9 +158,11 @@ public class DAOInstituto2 {
             ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select * from modulo where profesor  = '" + p.getNombre() + "'");
 
             while (rs.next()) {
-
+                
                 p.annadirModulo(i.buscarCurso(rs.getString("ciclo"), rs.getInt("anno")).getModulo(rs.getString("nombre")));
             }
+
+
 
         } catch (SQLException sqle) {
             sqle.printStackTrace();
@@ -271,13 +275,13 @@ public class DAOInstituto2 {
 
                     if (listaUsuario.get(j) instanceof Alumno) {
                         Alumno a = (Alumno) listaUsuario.get(j);
-                        a = getDatosAlumno(a, ciclosAlumnos[j], annoCiclo[j], i);
+                        a = getDatosAlumno(a, ciclosAlumnos[j], annoCiclo[j],i);
 
                         i.annadirUsuario(a);
                     } else if (listaUsuario.get(j) instanceof Profesor) {
 
                         Profesor p = (Profesor) listaUsuario.get(j);
-                        p = getDatosProfesor(p, i);
+                        p = getDatosProfesor(p,i);
                         i.annadirUsuario(p);
 
                     } else {
@@ -394,14 +398,6 @@ public class DAOInstituto2 {
 
     }
 
-    public void annadirCurso(Instituto i, Curso c) throws SQLException {
-        //para saber si esta añadido o no
-        boolean annadido = false;
-        ConexionDefault.instancia().getStatement().execute("INSERT INTO ciclo VALUES ('"
-                + c.getNombre() + "', '" + c.getPlazas() + "', '" + c.getAnno() + "');");
-
-    }
-
     public void modificarprofesorModulo(String nombreProfesor, Modulo m, Curso c, String nombreInstituto) {
 
         try {
@@ -411,23 +407,12 @@ public class DAOInstituto2 {
         }
     }
 
-    public ArrayList<Curso> getCiclosdeProfesor(String nombreProfesor, Instituto instituto) {
+  
+    public void annadirCurso(Instituto i, Curso c) throws SQLException {
 
-        ArrayList<Curso> cursos = new ArrayList();
+        ConexionDefault.instancia().getStatement().execute("INSERT INTO ciclo VALUES ('"
+                + c.getNombre() + "', '" + c.getPlazas() + "', '" + c.getAnno() + "', '" + i.getNombre() + "');");
 
-        try {
-            ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select ciclo,anno from modulo where profesor= '" + nombreProfesor + "' AND instituto ='" + instituto.getNombre() + "'");
-
-            while (rs.next()) {
-
-                cursos.add(instituto.buscarCurso(rs.getString(1), rs.getInt(2)));
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return cursos;
     }
 
     public void annadirModulo(Instituto i, Modulo m, Curso c) throws SQLException {
@@ -447,38 +432,38 @@ public class DAOInstituto2 {
             Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public int getNeventosProfesor(String nombreProfe) {
-
-        int nEventos = 0;
+    
+    public int getNeventosProfesor(String nombreProfe){
+    
+        int nEventos=0;
         try {
-            ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select count(*) from modulo m, Eventos e where m.nombre=e.Modulo AND m.ciclo=e.Ciclo AND m.anno= e.Anno AND m.profesor='" + nombreProfe + "'");
-            if (rs.next()) {
-
-                nEventos = rs.getInt(1);
+            ResultSet rs=ConexionDefault.instancia().getStatement().executeQuery("select count(*) from modulo m, Eventos e where m.nombre=e.Modulo AND m.ciclo=e.Ciclo AND m.anno= e.Anno AND m.profesor='"+nombreProfe+"'");
+            if(rs.next()){
+            
+                nEventos=rs.getInt(1);
             }
-
+        
         } catch (SQLException ex) {
             Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return nEventos;
+        return nEventos;        
     }
-
-    public int getEventosCurso(Curso c) {
-
-        int nEventos = 0;
-
+    
+    public int getEventosCurso (Curso c){
+    
+        int nEventos=0;
+        
         try {
-            ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery("select count(*) from Eventos e where Ciclo='" + c.getNombre() + "' AND Anno ='" + c.getAnno() + "'");
-
-            if (rs.next()) {
-
-                nEventos = rs.getInt(1);
+            ResultSet rs= ConexionDefault.instancia().getStatement().executeQuery("select count(*) from Eventos e where Ciclo='"+c.getNombre()+"' AND Anno ='"+c.getAnno()+"'");
+        
+            if(rs.next()){
+            
+                nEventos=rs.getInt(1);
             }
         } catch (SQLException ex) {
             Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         return nEventos;
     }
 
