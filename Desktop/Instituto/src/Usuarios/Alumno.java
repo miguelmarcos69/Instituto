@@ -37,7 +37,7 @@ public class Alumno extends Usuario {
 
     public String[][] getNotasModulos() {
 
-        String[][] modulosNotas = new String[curso.getSizeModulos()][5];
+        String[][] modulosNotas = new String[curso.getSizeModulos()][10];
 
         for (int i = 0; i < curso.getSizeModulos(); i++) {
 
@@ -111,6 +111,21 @@ public class Alumno extends Usuario {
         return retorno;
     }
 
+    public ArrayList<Nota> getNotasArray(String nombreMod) {
+        System.out.println("nombre modulo: " + nombreMod);
+        ArrayList<Nota> a = new ArrayList();
+        for (int i = 0; i < notas.size(); i++) {
+            if (notas.get(i).getModulo().equals(nombreMod)) {
+                System.out.println("notas: " + notas.get(i));
+                a.add(notas.get(i));
+
+            }
+
+        }
+
+        return a;
+    }
+
     public boolean tieneModulo(String nombreAsignatura) {
 
         boolean resultado = curso.existeModulo(nombreAsignatura);
@@ -131,63 +146,64 @@ public class Alumno extends Usuario {
     public String toString() {
         return nombre;
     }
-    
-    public ArrayList<Nota> getNotasModulo (String modulo){
-    
+
+    public ArrayList<Nota> getNotasModulo(String modulo) {
+        System.out.println(modulo);
+
         ArrayList<Nota> notas = new ArrayList();
-        
-        for (int i=0;i<notas.size();i++){
-        
-            if (notas.get(i).getModulo().equals(modulo)){
-            
+
+        for (int i = 0; i < notas.size(); i++) {
+
+            if (notas.get(i).getModulo().equals(modulo)) {
+
                 notas.add(notas.get(i));
             }
         }
-        
+
         return notas;
     }
-    
-    public int notaFinal(String modulo){
-    
-        int nota=0;
-        int contador=0;
-        boolean todas=false;
-        
-        for (int i=0;i<notas.size();i++){
-        
-            if(notas.get(i).getModulo().equals(modulo)){
-            
-                nota=notas.get(i).getNota()+nota;
+
+    public int notaFinal(String modulo) {
+
+        int nota = 0;
+        int contador = 0;
+        boolean todas = false;
+
+        for (int i = 0; i < notas.size(); i++) {
+
+            if (notas.get(i).getModulo().equals(modulo)) {
+
+                nota = notas.get(i).getNota() + nota;
                 contador++;
             }
-            
-            if(contador==3){
-            
-                nota=nota/3;
-                todas=true;
+
+            if (contador == 3) {
+
+                nota = nota / 3;
+                todas = true;
             }
         }
-        
-        if(todas==false){
-        
-            nota=-1;
+
+        if (todas == false) {
+
+            nota = -1;
         }
-        
+
         return nota;
     }
-    
-    public boolean aprobado (){
-    
-        boolean aprobado =true;
-        
-        for (int i=0;i<curso.getSizeModulos();i++){
-        
-            if(notaFinal(curso.getArrayListModulos().get(i).getNombre())<5){
-            
-                aprobado=false;
+
+    public boolean aprobado() {
+
+        boolean aprobado = true;
+
+        for (int i = 0; i < curso.getSizeModulos(); i++) {
+
+            if (notaFinal(curso.getArrayListModulos().get(i).getNombre()) < 5) {
+
+                aprobado = false;
             }
         }
-        
+
         return aprobado;
     }
 

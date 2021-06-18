@@ -381,9 +381,9 @@ public class ModificarNotas extends javax.swing.JFrame {
 
             nomA.setText(nombreAlumno);
 
-            jLabelN1.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotas().get(0).getNota()));
-            jLabelN2.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotas().get(1).getNota()));
-            jLabelN3.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotas().get(2).getNota()));
+            jLabelN1.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotasArray(itemSeleccionado).get(0)));
+            jLabelN2.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotasArray(itemSeleccionado).get(1)));
+            jLabelN3.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotasArray(itemSeleccionado).get(2)));
             jLabelFinal.setText(String.valueOf(i.calcularNotaFinal(nombreAlumno, itemSeleccionado)));
 
         } catch (NullPointerException a) {
@@ -391,6 +391,10 @@ public class ModificarNotas extends javax.swing.JFrame {
 
             //Esta null pointer no la tratamos ya que puede dar si un usuario no tiene todas las notas
         } catch (IndexOutOfBoundsException e) {
+            jLabelN1.setText(String.valueOf(0));
+            jLabelN2.setText(String.valueOf(0));
+            jLabelN3.setText(String.valueOf(0));
+            jLabelFinal.setText(String.valueOf(0));
             System.out.println(e);
             System.out.println("Falta Alguna nota");
 
@@ -408,7 +412,7 @@ public class ModificarNotas extends javax.swing.JFrame {
         int alumnoSeleccionado = tablaAlumnos.getSelectedRow();
         String nombreAlumno = i.getMombreAlumnosAsignatura(itemSeleccionado, alumnoSeleccionado);
 
-        DAOInstituto2.instancia().borrarNotas(nombreAlumno);
+        DAOInstituto2.instancia().borrarNotas(nombreAlumno, itemSeleccionado);
         i.borrarNotas(nombreAlumno, itemSeleccionado);
 
         try {
@@ -448,10 +452,9 @@ public class ModificarNotas extends javax.swing.JFrame {
             nota2.setText(String.valueOf(0));
             nota3.setText(String.valueOf(0));
 
-            nota1.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotas().get(0).getNota()));
-            nota2.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotas().get(1).getNota()));
-            nota3.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotas().get(2).getNota()));
-
+            jLabelN1.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotasArray(itemSeleccionado).get(0)));
+            jLabelN2.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotasArray(itemSeleccionado).get(1)));
+            jLabelN3.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotasArray(itemSeleccionado).get(2)));
         } catch (NullPointerException a) {
 
             //Esta null pointer no la tratamos ya que puede dar si un usuario no tiene todas las notas

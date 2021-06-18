@@ -71,8 +71,6 @@ public class Instituto {
         return cursos.size();
     }
 
-
-
     public String[][] getAlumnosAsignatura(String nombreAsignatura) {
 
         String[][] alumn = new String[10][2];
@@ -94,19 +92,19 @@ public class Instituto {
 
         return alumn;
     }
-    
-    public Modulo getModuloNombre (Curso c, String nombre){
-    
+
+    public Modulo getModuloNombre(Curso c, String nombre) {
+
         Modulo buscado = null;
-        
-        for (int i=0;i<cursos.size();i++){
-        
-            if (cursos.get(i).getNombre().equals(c.getNombre())&& cursos.get(i).getAnno()==c.getAnno()){
-            
+
+        for (int i = 0; i < cursos.size(); i++) {
+
+            if (cursos.get(i).getNombre().equals(c.getNombre()) && cursos.get(i).getAnno() == c.getAnno()) {
+
                 buscado = cursos.get(i).getModulo(nombre);
             }
         }
-        
+
         return buscado;
     }
 
@@ -158,13 +156,13 @@ public class Instituto {
                 if (usuario.getNombre().equals(nombreAl)) {
                     System.out.println("Usuario enconrado");
                     Alumno a = (Alumno) usuario;// convertir el suauario en alumno
-                    for (int i = 0; i <= a.getNotas().size(); i++) {
-                        if (a.getNotas().get(i).getModulo().equals(mod)) {
+                    for (int i = 0; i <= a.getNotasArray(mod).size(); i++) {
+                        if (a.getNotasArray(mod).get(i).getModulo().equals(mod)) {
 
-                            int num1 = a.getNotas().get(0).getNota();
-                            int num2 = a.getNotas().get(1).getNota();
-                            int num3 = a.getNotas().get(2).getNota();
-                            int media = a.getNotas().size();
+                            int num1 = a.getNotasArray(mod).get(0).getNota();
+                            int num2 = a.getNotasArray(mod).get(1).getNota();
+                            int num3 = a.getNotasArray(mod).get(2).getNota();
+                            int media = a.getNotasArray(mod).size();
                             int suma = num1 + num2 + num3;
                             if (num1 >= 1 && num2 >= 1 && num3 >= 1) {
                                 System.out.println("a");
@@ -184,7 +182,7 @@ public class Instituto {
             }
 
         }
-        System.out.println(fin);
+        System.out.println("Media: " + fin);
         return fin;
 
     }
@@ -196,8 +194,8 @@ public class Instituto {
                     if (usuario.getNombre().equals(nombre)) {
                         System.out.println("Usuario enconrado");
                         Alumno a = (Alumno) usuario;// convertir el suauario en alumno
-                        for (int i = 0; i <= a.getNotas().size(); i++) {
-                            if (a.getNotas().get(i).getModulo().equals(nombreModulo)) {
+                        for (int i = 0; i <= a.getNotasArray(nombreModulo).size(); i++) {
+                            if (a.getNotasArray(nombreModulo).get(i).getModulo().equals(nombreModulo)) {
 
                                 a.getNotas().remove(i);
                                 i = i - 1;
@@ -442,9 +440,8 @@ public class Instituto {
     }
 
     public Alumno buscarAlumno(String nombre) {
-
+        System.out.println(nombre);
         Alumno a = null;
-
         for (int i = 0; i < usuarios.size(); i++) {
 
             if (usuarios.get(i).getNombre().equals(nombre)) {
@@ -452,9 +449,10 @@ public class Instituto {
                 a = (Alumno) usuarios.get(i);
                 i = usuarios.size();
             }
-        }
 
+        }
         return a;
+
     }
 
     public int getNAlumnosCurso(String modulo) {
