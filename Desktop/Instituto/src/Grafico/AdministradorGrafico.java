@@ -19,6 +19,8 @@ public class AdministradorGrafico extends javax.swing.JFrame {
     //Crear un usuario Admin
     Administrador admin;
     Instituto i;
+    int xMouse;
+    int yMouse;
 
     /**
      * Creates new form Administrador
@@ -90,6 +92,16 @@ public class AdministradorGrafico extends javax.swing.JFrame {
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(204, 103, 255));
+        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel1MouseDragged(evt);
+            }
+        });
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
@@ -230,6 +242,21 @@ public class AdministradorGrafico extends javax.swing.JFrame {
         i.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_atrasjLabelMousePressed
+
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+
+        this.setLocation(x - xMouse, y - yMouse);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1MouseDragged
+
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+        xMouse = evt.getX();
+        yMouse = evt.getY();        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1MousePressed
 
     /**
      * @param args the command line arguments

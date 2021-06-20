@@ -29,6 +29,8 @@ import javax.swing.JPanel;
  */
 public class CrearCursos extends javax.swing.JFrame {
 
+    int xMouse;
+    int yMouse;
     //atributos
     Instituto i;
     Administrador admin;
@@ -44,8 +46,7 @@ public class CrearCursos extends javax.swing.JFrame {
         this.i = i;
         this.admin = admin;
     }
-    
-   
+
     class jPanelGardient extends JPanel {
 
         protected void paintComponent(Graphics g) {
@@ -60,7 +61,6 @@ public class CrearCursos extends javax.swing.JFrame {
             g2d.fillRect(0, 0, width, height);
         }
     }
-
 
     public CrearCursos(Instituto i) {
         this.i = i;
@@ -106,6 +106,16 @@ public class CrearCursos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
+        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel1MouseDragged(evt);
+            }
+        });
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
@@ -330,30 +340,43 @@ public class CrearCursos extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(null, "Este modulo ya exixtse");
         } else {
-            if(c.ContarHoras(Integer.parseInt(jHorasSemana.getText()))){
+            if (c.ContarHoras(Integer.parseInt(jHorasSemana.getText()))) {
                 c.anadirModulo(modulos);
-            try {
-                DAOInstituto2.instancia().annadirModulo(i, modulos, c);
-                JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
-            } catch (SQLException ex) {
-                Logger.getLogger(CrearCursos.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            JNombreModulo.setText("");
-            jCodigoAula.setText("");
-            jHorasSemana.setText("");
-        }else {
+                try {
+                    DAOInstituto2.instancia().annadirModulo(i, modulos, c);
+                    JOptionPane.showMessageDialog(null, "Operación realizada correctamente");
+                } catch (SQLException ex) {
+                    Logger.getLogger(CrearCursos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                JNombreModulo.setText("");
+                jCodigoAula.setText("");
+                jHorasSemana.setText("");
+            } else {
                 JOptionPane.showMessageDialog(null, "La suma de las horas es mayor a 30");
             }
         }
-    
+
     }//GEN-LAST:event_jAnnadirModuloActionPerformed
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         // TODO add your handling code here:
-        AdministradorGrafico a = new AdministradorGrafico(this.admin,this.i);
+        AdministradorGrafico a = new AdministradorGrafico(this.admin, this.i);
         this.setVisible(false);
         a.setVisible(true);
     }//GEN-LAST:event_jLabel11MouseClicked
+
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+
+        this.setLocation(x - xMouse, y - yMouse);        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1MouseDragged
+
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+        xMouse = evt.getX();
+        yMouse = evt.getY();        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1MousePressed
 
     /**
      * @param args the command line arguments

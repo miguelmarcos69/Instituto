@@ -26,6 +26,8 @@ import javax.swing.table.TableModel;
 
 public class AnnadirUsuario extends javax.swing.JDialog {
 
+    int xMouse;
+    int yMouse;
     Instituto i;
     Administrador a;
     boolean modificando = false;
@@ -211,6 +213,16 @@ public class AnnadirUsuario extends javax.swing.JDialog {
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(204, 103, 255));
+        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel1MouseDragged(evt);
+            }
+        });
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -1083,12 +1095,12 @@ public class AnnadirUsuario extends javax.swing.JDialog {
                         Curso c = i.buscarCurso(nombreCurso, anoCurso);
 
                         annadir.annadirModulo(c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
-                        try{
-                        DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
-                        }catch(SQLException e){
-                        
+                        try {
+                            DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
+                        } catch (SQLException e) {
+
                             JOptionPane.showMessageDialog(getContentPane(), "Error al modificar el profesor",
-                            "Error", JOptionPane.ERROR_MESSAGE);
+                                    "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     }
                     i.annadirUsuario(annadir);
@@ -1326,6 +1338,21 @@ public class AnnadirUsuario extends javax.swing.JDialog {
         this.setVisible(false);
         m.setVisible(true);
     }//GEN-LAST:event_jLabel16MouseClicked
+
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        
+        
+        this.setLocation(x - xMouse , y - yMouse);        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1MouseDragged
+
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+       
+         xMouse = evt.getX();
+         yMouse = evt.getY();
+    }//GEN-LAST:event_jPanel1MousePressed
 
     //METODO MAIN
     public static void main(String args[]) {

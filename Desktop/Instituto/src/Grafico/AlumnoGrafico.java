@@ -28,6 +28,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AlumnoGrafico extends javax.swing.JFrame {
 
+    int xMouse;
+    int yMouse;
     Alumno alumno;
     Instituto ins;
     String[] cabeceraNotas = {"Modulo", "Primera", "Segunda", "Tercera", "Final"};
@@ -103,6 +105,17 @@ public class AlumnoGrafico extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+
+        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel1MouseDragged(evt);
+            }
+        });
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -350,6 +363,20 @@ public class AlumnoGrafico extends javax.swing.JFrame {
         this.setVisible(false);
         a.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel7MousePressed
+
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+
+        this.setLocation(x - xMouse, y - yMouse);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1MouseDragged
+
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+        xMouse = evt.getX();
+        yMouse = evt.getY();          // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1MousePressed
 
     /**
      * @param args the command line arguments

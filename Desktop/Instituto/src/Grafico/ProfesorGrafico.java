@@ -22,21 +22,21 @@ import javax.swing.JPanel;
  */
 public class ProfesorGrafico extends javax.swing.JFrame {
 
+    int xMouse;
+    int yMouse;
     Profesor prof;
     Instituto insti;
 
     /**
      * Creates new form Alumno
      */
-    
-    public ProfesorGrafico(Profesor prof,Instituto insti) {
+    public ProfesorGrafico(Profesor prof, Instituto insti) {
         initComponents();
         this.prof = prof;
         this.setBackground(Color.black);
         this.setForeground(Color.white);
-        this.insti=insti;
+        this.insti = insti;
     }
-    
 
     class jPanelGardient extends JPanel {
 
@@ -52,7 +52,8 @@ public class ProfesorGrafico extends javax.swing.JFrame {
             g2d.fillRect(0, 0, width, height);
         }
     }
-       public void mostrar(String nom) {
+
+    public void mostrar(String nom) {
         this.nombre.setText(nom);
     }
 
@@ -121,6 +122,16 @@ public class ProfesorGrafico extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
+        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel1MouseDragged(evt);
+            }
+        });
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
@@ -232,7 +243,7 @@ public class ProfesorGrafico extends javax.swing.JFrame {
 
     private void jModificarNotasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jModificarNotasMouseClicked
         // TODO add your handling code here
-        ModificarNotas mod = new ModificarNotas(null, true, prof,insti);
+        ModificarNotas mod = new ModificarNotas(null, true, prof, insti);
         mod.setVisible(true);
         this.setVisible(false);
 
@@ -240,13 +251,13 @@ public class ProfesorGrafico extends javax.swing.JFrame {
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
-        
-           System.exit(0);
-        
+
+        System.exit(0);
+
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        CalendarioProfesor a = new CalendarioProfesor(prof,insti);
+        CalendarioProfesor a = new CalendarioProfesor(prof, insti);
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel5MouseClicked
@@ -257,6 +268,19 @@ public class ProfesorGrafico extends javax.swing.JFrame {
         InicioSesion i = new InicioSesion();
         i.setVisible(true);
     }//GEN-LAST:event_jLabel10MousePressed
+
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+
+        this.setLocation(x - xMouse, y - yMouse);        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1MouseDragged
+
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+        xMouse = evt.getX();
+        yMouse = evt.getY();        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1MousePressed
 
     /**
      * @param args the command line arguments
