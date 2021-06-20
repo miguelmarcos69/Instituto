@@ -923,11 +923,12 @@ public class AnnadirUsuario extends javax.swing.JDialog {
 
     //BOTON INSCRIBIR (da de alta un alumno)
     private void jButtonInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInscribirActionPerformed
+
         Alumno annadir = null;
 
         if (modificando == false) {
 
-            if (!(jTextFieldDNI.getText().length()==0)) {
+            if (!(jTextFieldDNI.getText().length() == 0)) {
 
                 if (jTableVerCicloA.getSelectedRow() != -1) {
 
@@ -942,6 +943,11 @@ public class AnnadirUsuario extends javax.swing.JDialog {
 
                                 annadir = new Alumno(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
                                 i.annadirUsuario(annadir);
+
+                                AnnadirUsuario an = new AnnadirUsuario(null, true, i, a);
+                                this.setVisible(false);
+                                an.setVisible(true);
+
                                 DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
                                 JOptionPane.showMessageDialog(null, "Inscrito con exito");
                                 datosVacios();
@@ -979,12 +985,13 @@ public class AnnadirUsuario extends javax.swing.JDialog {
                 int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
                 ContrasennaValida();
                 if (ContrasennaValida() == true) {
-                    if (!(jTextFieldDNI.getText().length()==0)) {
+                    if (!(jTextFieldDNI.getText().length() == 0)) {
                         if (i.getNAlumnosCurso(nombreC) < i.getCicloNombre(nombreC, annoC).getPlazas()) {
                             try {
                                 annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
                                 //DAOInstituto2.instancia().modificarAlumno(i.getNombre(), annadir);
                                 JOptionPane.showMessageDialog(null, "Inscrito con exito");
+                                this.setSize(567, 300);
                                 JOptionPane.showMessageDialog(getContentPane(), "El usuario ha sido creado con exito",
                                         "Error", JOptionPane.OK_OPTION);
                             } catch (ParseException ex) {
@@ -1087,7 +1094,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
 
             if (ContrasennaValida() == true) {
 
-                if (!(jTextFieldDNI.getText().length()==0)) {
+                if (!(jTextFieldDNI.getText().length() == 0)) {
                     try {
                         annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento());
 
@@ -1101,8 +1108,14 @@ public class AnnadirUsuario extends javax.swing.JDialog {
 
                             annadir.annadirModulo(c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
                             try {
+
                                 DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
                                 JOptionPane.showMessageDialog(null, "Inscrito con exito");
+
+                                AnnadirUsuario an = new AnnadirUsuario(null, true, i, a);
+                                this.setVisible(false);
+                                an.setVisible(true);
+
                             } catch (SQLException e) {
 
                                 JOptionPane.showMessageDialog(getContentPane(), "Error al modificar el profesor",
@@ -1126,7 +1139,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
             }
         } else {
 
-            if (!(jTextFieldDNI.getText().length()==0)) {
+            if (!(jTextFieldDNI.getText().length() == 0)) {
 
                 if (ContrasennaValida() == true) {
                     try {
