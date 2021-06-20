@@ -28,13 +28,6 @@ public class ProfesorGrafico extends javax.swing.JFrame {
     /**
      * Creates new form Alumno
      */
-    public ProfesorGrafico(java.awt.Frame parent, boolean modal, Profesor prof,Instituto insti) {
-        initComponents();
-        this.prof = prof;
-        this.setBackground(Color.black);
-        this.setForeground(Color.white);
-        this.insti=insti;
-    }
     
     public ProfesorGrafico(Profesor prof,Instituto insti) {
         initComponents();
@@ -253,7 +246,7 @@ public class ProfesorGrafico extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        jCalendarioProfesor a = new jCalendarioProfesor(prof,insti);
+        CalendarioProfesor a = new CalendarioProfesor(prof,insti);
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel5MouseClicked

@@ -11,8 +11,12 @@ import ClasesBase.Evento;
 import ClasesBase.Instituto;
 import ClasesBase.Modulo;
 import Usuarios.Profesor;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
@@ -20,7 +24,7 @@ import javax.swing.table.TableColumnModel;
  *
  * @author abilius
  */
-public class jCalendarioProfesor extends javax.swing.JFrame {
+public class CalendarioProfesor extends javax.swing.JFrame {
 
     /**
      * Creates new form jCalendario
@@ -29,7 +33,7 @@ public class jCalendarioProfesor extends javax.swing.JFrame {
     Profesor p;
     String[] cabecera = new String[5];
 
-    public jCalendarioProfesor(Profesor p, Instituto i) {
+    public CalendarioProfesor(Profesor p, Instituto i) {
         initComponents();
         this.i = i;
         this.p = p;
@@ -39,13 +43,18 @@ public class jCalendarioProfesor extends javax.swing.JFrame {
         cabecera[3] = "Fecha";
         cabecera[4] = "Mensaje";
         jTable1.setModel(new DefaultTableModel(obtenerEventos(), cabecera));
-        for (int j=0;j<p.getModulosDados().size();j++) {
-            
-            Modulo m = p.getModulosDados().get(j);
-            
-            ArrayList<Curso> cursos = DAOInstituto2.instancia().getCursosdeProfesor(p.getNombre(), i);
-            
-            jComboBoxModulos.addItem(m.toString()+" "+cursos.get(j).getNombre()+" "+cursos.get(j).getAnno());
+        for (int j = 0; j < p.getArrayListModulosImpartidos().size(); j++) {
+
+            Modulo m = p.getArrayListModulosImpartidos().get(j);
+
+            ArrayList<Curso> cursos;
+            try {
+                cursos = DAOInstituto2.instancia().getCursosdeProfesor(p.getNombre(), i);
+
+                jComboBoxModulos.addItem(m.toString() + " " + cursos.get(j).getNombre() + " " + cursos.get(j).getAnno());
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Error con la base de datos", "Inicio", JOptionPane.WARNING_MESSAGE);
+            }
 
         }
 
@@ -57,12 +66,10 @@ public class jCalendarioProfesor extends javax.swing.JFrame {
         modelo.getColumn(3).setWidth(100);
         modelo.getColumn(4).setWidth(170);
         jTable1.setColumnModel(modelo);
-        */
-        
-
+         */
     }
 
-    public jCalendarioProfesor() {
+    public CalendarioProfesor() {
         initComponents();
     }
 
@@ -156,28 +163,36 @@ public class jCalendarioProfesor extends javax.swing.JFrame {
 
     private void jButtonNuevoEventoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevoEventoActionPerformed
 
-        Date fecha = jCalendar.getDate();//Obtenemos la fecha seleccionada por el usuario
-        String mensaje = jTextFieldMensaje.getText();//Obtenemos tambien el mensaje
-        Evento e = new Evento(mensaje, fecha);//Creamos el nuevo evento
-        //Los cursos estan ordenados en las mismas posiciones que los modulos por lo tanto un curso corresponde a un Modulo
-        ArrayList<Curso> cursos = DAOInstituto2.instancia().getCursosdeProfesor(p.getNombre(), i);//Obtenemos los cursos de los modulos que tiene asignados un profesor
-        Modulo m = i.getModuloNombre(cursos.get(jComboBoxModulos.getSelectedIndex()), p.getModulosDados().get(jComboBoxModulos.getSelectedIndex()).getNombre());//Obtenemos el modulo seleeccionado por el combo box y este lo relacionamos con su curso
-        m.annnadirEvento(e);//Creamos el modulo al que annadir el evento
-        DAOInstituto2.instancia().anadirEvento(e, p.getModulosDados().get(jComboBoxModulos.getSelectedIndex()).getNombre(), cursos.get(jComboBoxModulos.getSelectedIndex()), i.getNombre());
-        //anadimos a la tabla eventos el vevento creado con su modulo, ciclo,fechay mensaje
+        try {
 
-        //Como mostrar los datos en la tabla
-        jTable1.setModel(new DefaultTableModel(obtenerEventos(), cabecera));
+            Date fecha = jCalendar.getDate();//Obtenemos la fecha seleccionada por el usuario
+            String mensaje = jTextFieldMensaje.getText();//Obtenemos tambien el mensaje
+            Evento e = new Evento(mensaje, fecha);//Creamos el nuevo evento
+            //Los cursos estan ordenados en las mismas posiciones que los modulos por lo tanto un curso corresponde a un Modulo
+            ArrayList<Curso> cursos = DAOInstituto2.instancia().getCursosdeProfesor(p.getNombre(), i);//Obtenemos los cursos de los modulos que tiene asignados un profesor
+            Modulo m = i.getModuloNombre(cursos.get(jComboBoxModulos.getSelectedIndex()), p.getArrayListModulosImpartidos().get(jComboBoxModulos.getSelectedIndex()).getNombre());//Obtenemos el modulo seleeccionado por el combo box y este lo relacionamos con su curso
+            m.annnadirEvento(e);//Creamos el modulo al que annadir el evento
+
+            DAOInstituto2.instancia().anadirEvento(e, p.getArrayListModulosImpartidos().get(jComboBoxModulos.getSelectedIndex()).getNombre(), cursos.get(jComboBoxModulos.getSelectedIndex()), i.getNombre());
+            //anadimos a la tabla eventos el vevento creado con su modulo, ciclo,fechay mensaje
+
+            //Como mostrar los datos en la tabla
+            jTable1.setModel(new DefaultTableModel(obtenerEventos(), cabecera));
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error con la base de datos", "Inicio", JOptionPane.WARNING_MESSAGE);
+
+        }
 
     }//GEN-LAST:event_jButtonNuevoEventoActionPerformed
 
     private void jLabel10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MousePressed
         // TODO add your handling code here:
         this.setVisible(false);
-        ProfesorGrafico pr = new ProfesorGrafico(this.p,this.i);
+        ProfesorGrafico pr = new ProfesorGrafico(this.p, this.i);
         pr.mostrar(this.p.getNombre());
         pr.setVisible(true);
-        
+
     }//GEN-LAST:event_jLabel10MousePressed
 
     /**
@@ -197,37 +212,41 @@ public class jCalendarioProfesor extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jCalendarioProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CalendarioProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jCalendarioProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CalendarioProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jCalendarioProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CalendarioProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jCalendarioProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CalendarioProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jCalendarioProfesor().setVisible(true);
+                new CalendarioProfesor().setVisible(true);
             }
         });
     }
 
     public String[][] obtenerEventos() {
 
-        
-        
-        
         String eventos[][] = new String[100][5];
         int contador = 0;
-        ArrayList<Curso> cursos = DAOInstituto2.instancia().getCursosdeProfesor(p.getNombre(), i);//Obtenemos los cursos de los modulos que tiene asignados un profesor
+        ArrayList<Curso> cursos = null;
+        try {
+            cursos = DAOInstituto2.instancia().getCursosdeProfesor(p.getNombre(), i);//Obtenemos los cursos de los modulos que tiene asignados un profesor
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error con la base de datos", "Inicio", JOptionPane.WARNING_MESSAGE);
+        }
 
-        for (int i = 0; i < p.getModulosDados().size(); i++) {
+        for (int i = 0; i < p.getArrayListModulosImpartidos().size(); i++) {
 
-            Modulo a = p.getModulosDados().get(i);
+            Modulo a = p.getArrayListModulosImpartidos().get(i);
 
             for (int j = 0; j < a.getCalendario().size(); j++) {
 

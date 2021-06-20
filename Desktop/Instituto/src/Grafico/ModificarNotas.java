@@ -17,12 +17,17 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -53,7 +58,7 @@ public class ModificarNotas extends javax.swing.JFrame {
 
     private void llenar() {
 
-        for (Modulo m : prof.getModulosDados()) {
+        for (Modulo m : prof.getArrayListModulosImpartidos()) {
             modulos.addItem(m.toString());
 
         }
@@ -102,7 +107,7 @@ public class ModificarNotas extends javax.swing.JFrame {
         cancelar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        imprimierNotas = new javax.swing.JButton();
+        jLabelSalir = new javax.swing.JLabel();
         panelNotas = new javax.swing.JPanel();
         jLabelN1 = new javax.swing.JLabel();
         jLabelN2 = new javax.swing.JLabel();
@@ -139,14 +144,14 @@ public class ModificarNotas extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaAlumnos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 380, 133));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 380, 133));
 
         modulos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modulosActionPerformed(evt);
             }
         });
-        jPanel1.add(modulos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 120, -1));
+        jPanel1.add(modulos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 150, -1));
 
         nota1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,7 +222,7 @@ public class ModificarNotas extends javax.swing.JFrame {
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 280, 280, 140));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 280, 290, 140));
 
         jPanel3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -226,27 +231,36 @@ public class ModificarNotas extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Modificar Notas");
 
+        jLabelSalir.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelSalir.setText("Atras");
+        jLabelSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabelSalirMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(213, 213, 213)
-                .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabelSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(215, 215, 215)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(478, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(41, 41, 41))
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 1308, -1));
-
-        imprimierNotas.setText("Imprimir notas");
-        jPanel1.add(imprimierNotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 380, -1, -1));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 90));
 
         jLabelN1.setText("0");
 
@@ -311,7 +325,7 @@ public class ModificarNotas extends javax.swing.JFrame {
                     .addGroup(panelNotasLayout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabelFinal)))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNotasLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(modificarNota)
@@ -341,14 +355,14 @@ public class ModificarNotas extends javax.swing.JFrame {
                 .addGap(16, 16, 16))
         );
 
-        jPanel1.add(panelNotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 90, 370, 180));
+        jPanel1.add(panelNotas, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, 420, 180));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -370,7 +384,7 @@ public class ModificarNotas extends javax.swing.JFrame {
 
         String itemSeleccionado = modulos.getSelectedItem().toString();
         int alumnoSeleccionado = tablaAlumnos.getSelectedRow();
-        String nombreAlumno = i.getMombreAlumnosAsignatura(itemSeleccionado, alumnoSeleccionado);
+        String nombreAlumno = i.getNombreAlumnosAsignatura(itemSeleccionado, alumnoSeleccionado);
         //System.out.println(nombreAlumno);
         panelNotas.setVisible(true);
         try {
@@ -410,9 +424,14 @@ public class ModificarNotas extends javax.swing.JFrame {
         // TODO add your handling code here:
         String itemSeleccionado = modulos.getSelectedItem().toString();
         int alumnoSeleccionado = tablaAlumnos.getSelectedRow();
-        String nombreAlumno = i.getMombreAlumnosAsignatura(itemSeleccionado, alumnoSeleccionado);
+        String nombreAlumno = i.getNombreAlumnosAsignatura(itemSeleccionado, alumnoSeleccionado);
 
-        DAOInstituto2.instancia().borrarNotas(nombreAlumno,itemSeleccionado);
+        try {
+            DAOInstituto2.instancia().borrarNotas(nombreAlumno, itemSeleccionado);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error con la base de datos", "Inicio", JOptionPane.WARNING_MESSAGE);
+        }
+
         i.borrarNotas(nombreAlumno, itemSeleccionado);
 
         try {
@@ -443,7 +462,7 @@ public class ModificarNotas extends javax.swing.JFrame {
         // TODO add your handling code here:
         String itemSeleccionado = modulos.getSelectedItem().toString();
         int alumnoSeleccionado = tablaAlumnos.getSelectedRow();
-        String nombreAlumno = i.getMombreAlumnosAsignatura(itemSeleccionado, alumnoSeleccionado);
+        String nombreAlumno = i.getNombreAlumnosAsignatura(itemSeleccionado, alumnoSeleccionado);
         //System.out.println(nombreAlumno);
         notaAlum.setText(nombreAlumno);
 
@@ -474,6 +493,13 @@ public class ModificarNotas extends javax.swing.JFrame {
         nota2.setText(String.valueOf(0));
         nota3.setText(String.valueOf(0));
     }//GEN-LAST:event_cancelarActionPerformed
+
+    private void jLabelSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSalirMousePressed
+        // TODO add your handling code here:    
+        ProfesorGrafico a = new ProfesorGrafico(this.prof, this.i);
+        a.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jLabelSalirMousePressed
 
     /**
      * @param args the command line arguments
@@ -512,7 +538,6 @@ public class ModificarNotas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelar;
-    private javax.swing.JButton imprimierNotas;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -525,6 +550,7 @@ public class ModificarNotas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelN1;
     private javax.swing.JLabel jLabelN2;
     private javax.swing.JLabel jLabelN3;
+    private javax.swing.JLabel jLabelSalir;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

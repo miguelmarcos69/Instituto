@@ -35,7 +35,7 @@ public class AdministradorGrafico extends javax.swing.JFrame {
         this.admin = ad;
         this.i = i;
         nombre.setText(ad.getNombre());
-        
+
     }
 
     //colorines
@@ -77,7 +77,7 @@ public class AdministradorGrafico extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         nombre = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        atrasjLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -112,11 +112,11 @@ public class AdministradorGrafico extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Atras");
-        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+        atrasjLabel.setForeground(new java.awt.Color(255, 255, 255));
+        atrasjLabel.setText("Atras");
+        atrasjLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel10MousePressed(evt);
+                atrasjLabelMousePressed(evt);
             }
         });
 
@@ -126,7 +126,7 @@ public class AdministradorGrafico extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(atrasjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
                 .addComponent(jLabel1)
                 .addGap(33, 33, 33)
@@ -150,7 +150,7 @@ public class AdministradorGrafico extends javax.swing.JFrame {
                             .addComponent(jLabel5)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(atrasjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -204,7 +204,7 @@ public class AdministradorGrafico extends javax.swing.JFrame {
 
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // TODO add your handling code here:
-        jManejarUsuarios in = new jManejarUsuarios(this.i,this.admin);
+        jManejarUsuarios in = new jManejarUsuarios(this.i, this.admin);
         in.setVisible(true);
         this.setVisible(false);
 
@@ -220,19 +220,20 @@ public class AdministradorGrafico extends javax.swing.JFrame {
 
     private void jCrearCursosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jCrearCursosMousePressed
         //llamamos al grafico de crear cursos y le pasamos el instituto
-        CrearCursos Cr = new CrearCursos(this.i,this.admin);
+        CrearCursos Cr = new CrearCursos(this.i, this.admin);
         Cr.setVisible(true);
         this.setVisible(false);
 
 
     }//GEN-LAST:event_jCrearCursosMousePressed
 
-    private void jLabel10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MousePressed
+    private void atrasjLabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atrasjLabelMousePressed
         // TODO add your handling code here:
-        this.setVisible(false);
+
         InicioSesion i = new InicioSesion();
         i.setVisible(true);
-    }//GEN-LAST:event_jLabel10MousePressed
+        this.setVisible(false);
+    }//GEN-LAST:event_atrasjLabelMousePressed
 
     /**
      * @param args the command line arguments
@@ -270,9 +271,9 @@ public class AdministradorGrafico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel atrasjLabel;
     private javax.swing.JLabel jCrearCursos;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

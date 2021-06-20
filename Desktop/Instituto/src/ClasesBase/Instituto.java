@@ -101,7 +101,7 @@ public class Instituto {
 
             if (cursos.get(i).getNombre().equals(c.getNombre()) && cursos.get(i).getAnno() == c.getAnno()) {
 
-                buscado = cursos.get(i).getModulo(nombre);
+                buscado = cursos.get(i).buscarModulo(nombre);
             }
         }
 
@@ -125,7 +125,7 @@ public class Instituto {
         return alum;
     }
 
-    public String getMombreAlumnosAsignatura(String nom, int n) {
+    public String getNombreAlumnosAsignatura(String nom, int n) {
 
         String al = null;
         int contador = 0;

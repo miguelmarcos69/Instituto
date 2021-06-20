@@ -13,6 +13,9 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -297,66 +300,71 @@ public class InicioSesion extends javax.swing.JFrame {
      */
     private void acceder() {
 
-        String nombreInsti = jTNombreInstituto.getText();
-        String nombre = jTUsuario.getText();
-        String contra = jPConstrasena.getText();
-        ConexionDefault.crearConexion();
-        int tipo = DAOInstituto2.instancia().obtenerTipoUsuario(nombre, nombreInsti);
+        try {
+            String nombreInsti = jTNombreInstituto.getText();
+            String nombre = jTUsuario.getText();
+            String contra = jPConstrasena.getText();
+            ConexionDefault.crearConexion();
+            int tipo = DAOInstituto2.instancia().obtenerTipoUsuario(nombre, nombreInsti);
 
-        i = DAOInstituto2.instancia().obtenerInstituto(nombreInsti);
+            i = DAOInstituto2.instancia().obtenerInstituto(nombreInsti);
 
-        if (i != null) {
+            if (i != null) {
 
-            switch (tipo) {
+                switch (tipo) {
 
-                case 0:
-                    Administrador admin = (Administrador) i.buscarUsuario(nombre);//DAOInstituto2.instancia().obtenerAdministrador(nombre, nombreInsti);
+                    case 0:
+                        Administrador admin = (Administrador) i.buscarUsuario(nombre);//DAOInstituto2.instancia().obtenerAdministrador(nombre, nombreInsti);
 
-                    if (admin != null) {
-                        if (admin.getContrasenna().equals(contra)) {
-                            AdministradorGrafico adm = new AdministradorGrafico(admin, i);//Modificar
-                            this.setVisible(false);
-                            adm.mostrar(nombre);
-                            adm.setVisible(true);
+                        if (admin != null) {
+                            if (admin.getContrasenna().equals(contra)) {
+                                AdministradorGrafico adm = new AdministradorGrafico(admin, i);//Modificar
+                                this.setVisible(false);
+                                adm.mostrar(nombre);
+                                adm.setVisible(true);
+                            } else {
+                                JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
+                            }
                         } else {
-                            JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
-                        }
-                    } else {
 
-                        JOptionPane.showMessageDialog(rootPane, "El usuario no existe", "Inicio", JOptionPane.WARNING_MESSAGE);
-                    }
-                    break;
-                case 1:
-                    try{
-                    Alumno alum = (Alumno) i.buscarUsuario(nombre);//DAOInstituto2.instancia().obtenerAlumno(nombre, nombreInsti);
+                            JOptionPane.showMessageDialog(rootPane, "El usuario no existe", "Inicio", JOptionPane.WARNING_MESSAGE);
+                        }
+                        break;
+                    case 1:
+                        try {
+                        Alumno alum = (Alumno) i.buscarUsuario(nombre);//DAOInstituto2.instancia().obtenerAlumno(nombre, nombreInsti);
                         if (alum.getContrasenna().equals(contra)) {
-                            AlumnoGrafico alG = new AlumnoGrafico(null, true, alum,i);
+                            AlumnoGrafico alG = new AlumnoGrafico(null, true, alum, i);
                             this.setVisible(false);
                             alG.mostrar(nombre);
                             alG.setVisible(true);
                         } else {
                             JOptionPane.showMessageDialog(rootPane, "Contraseña incorrecta", "Inicio", JOptionPane.WARNING_MESSAGE);
                         }
-                    }catch(NullPointerException e){
-                    
+                    } catch (NullPointerException e) {
+
                         JOptionPane.showMessageDialog(rootPane, "El usuario no existe", "Inicio", JOptionPane.WARNING_MESSAGE);
                     }
-                    
-                    break;
-                case 2:
-                    Profesor prof = (Profesor) i.buscarUsuario(nombre);//DAOInstituto2.instancia().obtenerProfesor(nombre, nombreInsti);
-                    if (prof.getContrasenna().equals(contra)) {
-                        ProfesorGrafico pr = new ProfesorGrafico(null, true, prof, i);
-                        this.setVisible(false);
-                        pr.mostrar(nombre);
-                        pr.setVisible(true);
-                    }
 
                     break;
+                    case 2:
+                        Profesor prof = (Profesor) i.buscarUsuario(nombre);//DAOInstituto2.instancia().obtenerProfesor(nombre, nombreInsti);
+                        if (prof.getContrasenna().equals(contra)) {
+                            ProfesorGrafico pr = new ProfesorGrafico(prof, i);
+                            this.setVisible(false);
+                            pr.mostrar(nombre);
+                            pr.setVisible(true);
+                        }
+
+                        break;
+                }
+            } else {
+
+                JOptionPane.showMessageDialog(rootPane, "El instituto no existe", "Inicio", JOptionPane.WARNING_MESSAGE);
             }
-        } else {
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Error con la base de datos", "Inicio", JOptionPane.WARNING_MESSAGE);
 
-            JOptionPane.showMessageDialog(rootPane, "El instituto no existe", "Inicio", JOptionPane.WARNING_MESSAGE);
         }
 
     }

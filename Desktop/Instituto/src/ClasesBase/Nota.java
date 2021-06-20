@@ -24,11 +24,6 @@ public class Nota {
         this.nota = nota;
 
     }
-
-    public boolean tieneNotas(String n) {
-        return true;
-    }
-
     //Metodos get
 
 

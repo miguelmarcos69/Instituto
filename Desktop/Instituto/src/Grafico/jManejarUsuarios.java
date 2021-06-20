@@ -18,6 +18,7 @@ import java.awt.Component;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -72,10 +73,10 @@ public class jManejarUsuarios extends javax.swing.JFrame {
          */
     }
 
-    public jManejarUsuarios(Instituto i,Administrador admin) {
+    public jManejarUsuarios(Instituto i, Administrador admin) {
         initComponents();
         this.i = i;
-        this.admin=admin;
+        this.admin = admin;
         tabla = new DefaultTableModel(i.mostrarUsuarios(), cabeceraTodos);
         tablaUsuarios.setModel(tabla);
         //this.adm=adm;
@@ -145,7 +146,6 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         jModificar = new javax.swing.JButton();
         jEliminar = new javax.swing.JButton();
         jAnnadir = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -314,14 +314,6 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         });
         jPanel1.add(jAnnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 550, 110, -1));
 
-        jButton1.setText("Salir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, -1, -1));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -352,7 +344,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
             Usuario usuario = i.buscarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
 
-            jAnnadirUsuario a = new jAnnadirUsuario(this, true);
+            AnnadirUsuario a = new AnnadirUsuario(this, true);
             a.setInstituto(i);
             a.setModificando();
 
@@ -401,7 +393,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
     private void jAnnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAnnadirActionPerformed
         // TODO add your handling code here:
-        jAnnadirUsuario a = new jAnnadirUsuario(this, true);
+        AnnadirUsuario a = new AnnadirUsuario(this, true);
         a.setInstituto(i);
         a.setAdministrador(admin);
         this.setVisible(false);
@@ -420,8 +412,13 @@ public class jManejarUsuarios extends javax.swing.JFrame {
             if (tablaUsuarios.getSelectedRow() != -1) {
                 i.eliminarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
 
-                DAOInstituto2.instancia().eliminarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString(), i.getNombre());
+                try {
 
+                    DAOInstituto2.instancia().eliminarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString(), i.getNombre());
+                } catch (SQLException e) {
+
+                    JOptionPane.showMessageDialog(rootPane, "Error al borrar usuario", "Inicio", JOptionPane.WARNING_MESSAGE);
+                }
                 if (jButtonTodos.isSelected()) {
 
                     tabla = new DefaultTableModel(i.mostrarUsuarios(), cabeceraTodos);
@@ -442,20 +439,12 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jEliminarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        AdministradorGrafico a = new AdministradorGrafico(this.admin,this.i);
-        this.setVisible(false);
-        a.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
-        
+
         this.setVisible(false);
-        AdministradorGrafico a = new AdministradorGrafico(this.admin,this.i);
+        AdministradorGrafico a = new AdministradorGrafico(this.admin, this.i);
         a.setVisible(true);
     }//GEN-LAST:event_jLabel3MousePressed
-
 
     /**
      * @param args the command line arguments
@@ -498,7 +487,6 @@ public class jManejarUsuarios extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jAnnadir;
-    private javax.swing.JButton jButton1;
     private javax.swing.JRadioButton jButtonAlumnos;
     private javax.swing.JRadioButton jButtonProfesores;
     private javax.swing.JRadioButton jButtonTodos;

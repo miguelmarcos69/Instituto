@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-public class jAnnadirUsuario extends javax.swing.JDialog {
+public class AnnadirUsuario extends javax.swing.JDialog {
 
     Instituto i;
     Administrador a;
@@ -33,7 +34,7 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
     DefaultTableModel tabla;
 
     //CONSTRUCTOR (GENERACION AL INICIO)
-    public jAnnadirUsuario(java.awt.Frame parent, boolean modal) {
+    public AnnadirUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
@@ -1081,10 +1082,14 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                         int anoCurso = Integer.parseInt(jTableAsignaturasElegidas.getModel().getValueAt(j, 3) + "");
                         Curso c = i.buscarCurso(nombreCurso, anoCurso);
 
-                        annadir.annadirModulo(c.getModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
-
-                        DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.getModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
-
+                        annadir.annadirModulo(c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
+                        try{
+                        DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
+                        }catch(SQLException e){
+                        
+                            JOptionPane.showMessageDialog(getContentPane(), "Error al modificar el profesor",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                     i.annadirUsuario(annadir);
                     datosVacios();
@@ -1108,19 +1113,32 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 i.eliminarUsuario(annadir.getNombre());
                 i.annadirUsuario(annadir);
 
-                for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
+                try {
 
-                    Curso c = i.buscarCurso(jTableAsignaturasElegidas.getValueAt(jTableAsignaturasElegidas.getSelectedRow(), 3) + "", Integer.parseInt(jTableAsignaturasElegidas.getValueAt(jTableAsignaturasElegidas.getSelectedRow(), 4) + ""));
+                    DAOInstituto2.instancia().eliminarModulosProfesores(jTextFieldNombre.getText(), i.getNombre());
 
-                    annadir.annadirModulo(c.getModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
+                    for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
 
-                    DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.getModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
+                        String nombreCurso = jTableAsignaturasElegidas.getValueAt(j, 2) + "";
 
+                        int anno = Integer.parseInt(jTableAsignaturasElegidas.getValueAt(j, 3) + "");
+
+                        Curso c = i.buscarCurso(nombreCurso, anno);
+
+                        annadir.annadirModulo(c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
+
+                        DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
+
+                    }
+                    i.eliminarUsuario(annadir.getNombre());
+                    i.annadirUsuario(annadir);
+
+                    datosVacios();
+                } catch (SQLException e) {
+
+                    JOptionPane.showMessageDialog(getContentPane(), "Error al realizar la operacion ",
+                            "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                i.eliminarUsuario(annadir.getNombre());
-                i.annadirUsuario(annadir);
-
-                datosVacios();
             } else {
                 JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
                         "Error", JOptionPane.ERROR_MESSAGE);
@@ -1324,20 +1342,21 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jAnnadirUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AnnadirUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jAnnadirUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AnnadirUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jAnnadirUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AnnadirUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jAnnadirUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AnnadirUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                jAnnadirUsuario dialog = new jAnnadirUsuario(new javax.swing.JFrame(), true);
+                AnnadirUsuario dialog = new AnnadirUsuario(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -1377,6 +1396,13 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jRadioButtonVerA1A.setVisible(false);
         jRadioButtonVerA2A.setVisible(false);
 
+        jPanelDatosCoumnes.setVisible(true);
+        jPanelAlumno.setVisible(true);
+
+        jRadioButtonAlumno.setEnabled(false);
+        jRadioButtonProfesor.setEnabled(false);
+        this.setSize(567, 550);
+
         try {
 
             if (a.aprobado()) {
@@ -1411,12 +1437,20 @@ public class jAnnadirUsuario extends javax.swing.JDialog {
         jTextFieldFechaNacimiento.setText(p.getFecha_nacimiento());
         jTextFieldFechaNacimiento.setEditable(false);
 
+        jRadioButtonAlumno.setEnabled(false);
+        jRadioButtonProfesor.setEnabled(false);
+
+        jPanelDatosCoumnes.setVisible(true);
+        jPanelProfesor.setVisible(true);
+
         jRadioButtonAlumno.setSelected(false);
         jRadioButtonProfesor.setSelected(true);
 
         jPanelProfesor.setVisible(true);
         jPanelAlumno.setVisible(false);
         jRadioButtonTodasAsig.setSelected(true);
+
+        this.setSize(567, 400);
 
         jTableAsignaturasElegidas.setModel(new DefaultTableModel(p.getModulosInpartidos(i), cabeceraModulo));
 

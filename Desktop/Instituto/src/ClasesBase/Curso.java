@@ -7,7 +7,10 @@ package ClasesBase;
 
 import BaseDatos.DAOInstituto2;
 import Usuarios.Profesor;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -85,7 +88,7 @@ public class Curso {
         return resultado;
     }
 
-    public Modulo getModulo(String nombreModulo) {
+    public Modulo buscarModulo(String nombreModulo) {
         Modulo m = null;
 
         for (int i = 0; i < modulos.size(); i++) {
@@ -166,20 +169,26 @@ public class Curso {
     
     public String [][] obtenerEventos (){
         
+        String [][]eventos = null;
         
-        
-        String eventos [][] = new String  [DAOInstituto2.instancia().getEventosCurso(this)][3];
-        int contador =0;
-        
-        for (int i=0;i<this.modulos.size();i++){
-        
-            for (int j=0;j<modulos.get(i).getCalendario().size();j++){
+        try {
+            eventos = new String  [DAOInstituto2.instancia().getEventosCurso(this)][3];
+            int contador =0;
             
-               eventos[contador][0]=modulos.get(i).getNombre();
-               eventos[contador][1]=modulos.get(i).getCalendario().get(j).getFecha()+"";
-               eventos[contador][2]=modulos.get(i).getCalendario().get(j).getMensaje();
-               
+            for (int i=0;i<this.modulos.size();i++){
+                
+                for (int j=0;j<modulos.get(i).getCalendario().size();j++){
+                    
+                    eventos[contador][0]=modulos.get(i).getNombre();
+                    eventos[contador][1]=modulos.get(i).getCalendario().get(j).getFecha()+"";
+                    eventos[contador][2]=modulos.get(i).getCalendario().get(j).getMensaje();
+                    
+                }
             }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Curso.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return eventos;
