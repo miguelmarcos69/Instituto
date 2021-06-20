@@ -1,0 +1,8 @@
+Instuto: camino Dirección: Calle miranda 29 Teléfono: 979745672
+Alumno: Dani  Año: 2021
+Ciclo cursado: DAW1
+
+----------------------------------------
+Entornos | 1 | 2 | 1 | 1
+----------------------------------------
+FOL | 

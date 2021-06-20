@@ -137,6 +137,7 @@ public class ModificarNotas extends javax.swing.JFrame {
             }
         ));
         tablaAlumnos.setGridColor(new java.awt.Color(0, 0, 0));
+        tablaAlumnos.setSelectionBackground(new java.awt.Color(204, 102, 0));
         tablaAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablaAlumnosMouseClicked(evt);
@@ -153,6 +154,8 @@ public class ModificarNotas extends javax.swing.JFrame {
         });
         jPanel1.add(modulos, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 120, 150, -1));
 
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+
         nota1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nota1ActionPerformed(evt);
@@ -166,8 +169,11 @@ public class ModificarNotas extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Cambiar notas a: ");
 
+        notaAlum.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 12)); // NOI18N
         notaAlum.setText("jLabel2");
 
         cancelar.setText("Cancelar");
@@ -219,7 +225,7 @@ public class ModificarNotas extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(cancelar))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 280, 290, 140));
@@ -232,7 +238,7 @@ public class ModificarNotas extends javax.swing.JFrame {
         jLabel2.setText("Modificar Notas");
 
         jLabelSalir.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelSalir.setText("Atras");
+        jLabelSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_undo_50px_1.png"))); // NOI18N
         jLabelSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabelSalirMousePressed(evt);
@@ -246,14 +252,14 @@ public class ModificarNotas extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(215, 215, 215)
+                .addGap(316, 316, 316)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(478, Short.MAX_VALUE))
+                .addContainerGap(383, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -262,10 +268,15 @@ public class ModificarNotas extends javax.swing.JFrame {
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 90));
 
+        panelNotas.setBackground(new java.awt.Color(0, 0, 0));
+
+        jLabelN1.setForeground(new java.awt.Color(255, 255, 255));
         jLabelN1.setText("0");
 
+        jLabelN2.setForeground(new java.awt.Color(255, 255, 255));
         jLabelN2.setText("0");
 
+        jLabelN3.setForeground(new java.awt.Color(255, 255, 255));
         jLabelN3.setText("0");
 
         modificarNota.setText("Modificar Nota");
@@ -275,18 +286,29 @@ public class ModificarNotas extends javax.swing.JFrame {
             }
         });
 
+        nomA.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
         nomA.setText("nombre");
 
+        jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Alumno: ");
 
+        jLabelFinal.setForeground(new java.awt.Color(255, 255, 255));
         jLabelFinal.setText("0");
 
+        jLabel4.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Segundo trimestre");
 
+        jLabel5.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Tercer trimestre");
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Primer trimestre");
 
+        jLabel7.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Final");
 
         javax.swing.GroupLayout panelNotasLayout = new javax.swing.GroupLayout(panelNotas);
@@ -334,7 +356,7 @@ public class ModificarNotas extends javax.swing.JFrame {
         panelNotasLayout.setVerticalGroup(
             panelNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNotasLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE)
                 .addGroup(panelNotasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(nomA))

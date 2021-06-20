@@ -168,7 +168,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("volver");
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_undo_50px_1.png"))); // NOI18N
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jLabel3MousePressed(evt);
@@ -306,13 +306,16 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         });
         jPanel1.add(jEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 550, -1, -1));
 
+        jAnnadir.setBackground(new java.awt.Color(0, 0, 0));
+        jAnnadir.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 18)); // NOI18N
+        jAnnadir.setForeground(new java.awt.Color(255, 255, 255));
         jAnnadir.setText("Añadir");
         jAnnadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jAnnadirActionPerformed(evt);
             }
         });
-        jPanel1.add(jAnnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 550, 110, -1));
+        jPanel1.add(jAnnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 550, 110, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
