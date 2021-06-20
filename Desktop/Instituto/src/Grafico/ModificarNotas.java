@@ -482,28 +482,33 @@ public class ModificarNotas extends javax.swing.JFrame {
 
     private void modificarNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarNotaActionPerformed
         // TODO add your handling code here:
-        String itemSeleccionado = modulos.getSelectedItem().toString();
-        int alumnoSeleccionado = tablaAlumnos.getSelectedRow();
-        String nombreAlumno = i.getNombreAlumnosAsignatura(itemSeleccionado, alumnoSeleccionado);
-        //System.out.println(nombreAlumno);
-        notaAlum.setText(nombreAlumno);
+        if (!(prof.getArrayListModulosImpartidos().equals(null))) {
+            String itemSeleccionado = modulos.getSelectedItem().toString();
+            int alumnoSeleccionado = tablaAlumnos.getSelectedRow();
+            String nombreAlumno = i.getNombreAlumnosAsignatura(itemSeleccionado, alumnoSeleccionado);
+            //System.out.println(nombreAlumno);
+            notaAlum.setText(nombreAlumno);
 
-        try {
-            nota1.setText(String.valueOf(0));
-            nota2.setText(String.valueOf(0));
-            nota3.setText(String.valueOf(0));
+            try {
+                nota1.setText(String.valueOf(0));
+                nota2.setText(String.valueOf(0));
+                nota3.setText(String.valueOf(0));
 
-            nota1.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotas().get(0).getNota()));
-            nota2.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotas().get(1).getNota()));
-            nota3.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotas().get(2).getNota()));
+                nota1.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotas().get(0).getNota()));
+                nota2.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotas().get(1).getNota()));
+                nota3.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotas().get(2).getNota()));
 
-        } catch (NullPointerException a) {
+            } catch (NullPointerException a) {
 
-            //Esta null pointer no la tratamos ya que puede dar si un usuario no tiene todas las notas
-        } catch (IndexOutOfBoundsException e) {
+                //Esta null pointer no la tratamos ya que puede dar si un usuario no tiene todas las notas
+            } catch (IndexOutOfBoundsException e) {
 
+            }
+            jPanel2.setVisible(true);
+        }else{
+        
+            JOptionPane.showMessageDialog(this, "El profesor no tiene alumnos", "Inicio", JOptionPane.WARNING_MESSAGE);
         }
-        jPanel2.setVisible(true);
 
 
     }//GEN-LAST:event_modificarNotaActionPerformed
