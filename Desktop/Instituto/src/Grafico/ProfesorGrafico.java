@@ -14,6 +14,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -116,7 +117,7 @@ public class ProfesorGrafico extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jModificarNotas = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jModificarCalendario = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -213,13 +214,13 @@ public class ProfesorGrafico extends javax.swing.JFrame {
         jLabel4.setText("Modificar Notas");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_calendar_50px_2.png"))); // NOI18N
-        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+        jModificarCalendario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_calendar_50px_2.png"))); // NOI18N
+        jModificarCalendario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel5MouseClicked(evt);
+                jModificarCalendarioMouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, -1, -1));
+        jPanel1.add(jModificarCalendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 180, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -243,9 +244,15 @@ public class ProfesorGrafico extends javax.swing.JFrame {
 
     private void jModificarNotasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jModificarNotasMouseClicked
         // TODO add your handling code here
-        ModificarNotas mod = new ModificarNotas(null, true, prof, insti);
-        mod.setVisible(true);
-        this.setVisible(false);
+
+        if (prof.getArrayListModulosImpartidos().size() != 0) {
+            ModificarNotas mod = new ModificarNotas(null, true, prof, insti);
+            mod.setVisible(true);
+            this.setVisible(false);
+        } else {
+
+            JOptionPane.showMessageDialog(this, "El profesor no tiene modulos", "Inicio", JOptionPane.WARNING_MESSAGE);
+        }
 
     }//GEN-LAST:event_jModificarNotasMouseClicked
 
@@ -256,11 +263,16 @@ public class ProfesorGrafico extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jLabel6MouseClicked
 
-    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        CalendarioProfesor a = new CalendarioProfesor(prof, insti);
-        a.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jLabel5MouseClicked
+    private void jModificarCalendarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jModificarCalendarioMouseClicked
+        if (prof.getArrayListModulosImpartidos().size() != 0) {
+            CalendarioProfesor a = new CalendarioProfesor(prof, insti);
+            a.setVisible(true);
+            this.setVisible(false);
+        } else {
+
+            JOptionPane.showMessageDialog(this, "El profesor no tiene modulos", "Inicio", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jModificarCalendarioMouseClicked
 
     private void jLabel10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MousePressed
         // TODO add your handling code here:
@@ -323,8 +335,8 @@ public class ProfesorGrafico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jModificarCalendario;
     private javax.swing.JLabel jModificarNotas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

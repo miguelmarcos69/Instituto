@@ -359,7 +359,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
             Usuario usuario = i.buscarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
 
-            AnnadirUsuario a = new AnnadirUsuario(this, true);
+            AnnadirUsuario a = new AnnadirUsuario(this, true,i,admin);
             a.setInstituto(i);
             a.setModificando();
 
@@ -408,9 +408,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
     private void jAnnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAnnadirActionPerformed
         // TODO add your handling code here:
-        AnnadirUsuario a = new AnnadirUsuario(this, true);
-        a.setInstituto(i);
-        a.setAdministrador(admin);
+        AnnadirUsuario a = new AnnadirUsuario(this, true,i,admin);
         this.setVisible(false);
         a.setVisible(true);
 

@@ -44,40 +44,20 @@ public class AnnadirUsuario extends javax.swing.JDialog {
         jPanelProfesor.setVisible(false);
         jPanelAlumno.setVisible(false);
         this.setSize(567, 300);
-        /*
-        //Araylist para guardar asignaturas de forma local
-        ArrayList<Modulo> modAnn = new ArrayList<>();
 
-        ArrayList<Usuario> al = new ArrayList<>();
-        ArrayList<Curso> c = new ArrayList<>();
-        ArrayList<Modulo> mod = new ArrayList();
-        ArrayList<Modulo> mod2 = new ArrayList();
+    }
 
-        Curso primero = new Curso(mod, "DAW", 1, 1);
-        Curso segundo = new Curso(mod2, "DAW", 2, 2);
+    public AnnadirUsuario(java.awt.Frame parent, boolean modal, Instituto i, Administrador a) {
+        super(parent, modal);
+        initComponents();
+        this.a = a;
+        this.i = i;
 
-        Modulo programacion = new Modulo("Programacion", "12", 2);
-        Modulo entornos = new Modulo("entornos", "12", 2);
-        Modulo fol = new Modulo("fol", "12", 2);
-        mod.add(programacion);
-        mod.add(entornos);
-        mod2.add(fol);
+        jPanelDatosCoumnes.setVisible(true);
+        jPanelProfesor.setVisible(false);
+        jPanelAlumno.setVisible(false);
+        this.setSize(567, 300);
 
-        c.add(primero);
-        c.add(segundo);
-
-        Alumno lola = new Alumno("Lola", "lola", "1254", new Date(), primero);
-        Alumno miguel = new Alumno("miguel", "miguel", "1254", new Date(), primero);
-        Alumno pepe = new Alumno("pepe", "pepe", "1254", new Date(), primero);
-        Alumno juan = new Alumno("juan", "juan", "1254", new Date(), segundo);
-
-        al.add(lola);
-        al.add(miguel);
-        al.add(pepe);
-        al.add(juan);
-
-        this.i = new Instituto(al, c, "camino", "la que sea", "69633245");
-         */
     }
 
     class jPanelGardient extends JPanel {
@@ -324,7 +304,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel6))
-                        .addGap(0, 8, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanelTipoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -946,34 +926,50 @@ public class AnnadirUsuario extends javax.swing.JDialog {
         Alumno annadir = null;
 
         if (modificando == false) {
-            if (jTableVerCicloA.getSelectedRow() != -1) {
-                String nombreC = jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 0).toString();
-                int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
-                ContrasennaValida();
-                if (ContrasennaValida() == true) {
-                    if (i.getNAlumnosCurso(nombreC) < i.getCicloNombre(nombreC, annoC).getPlazas()) {
-                        try {
-                            annadir = new Alumno(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
-                            i.annadirUsuario(annadir);
-                            DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
-                            JOptionPane.showMessageDialog(null, "Inscrito con exito");
-                            datosVacios();
-                        } catch (ParseException ex) {
-                            JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
+
+            if (!(jTextFieldDNI.getText().length()==0)) {
+
+                if (jTableVerCicloA.getSelectedRow() != -1) {
+
+                    String nombreC = jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 0).toString();
+                    int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
+                    ContrasennaValida();
+
+                    if (ContrasennaValida() == true) {
+
+                        if (i.getNAlumnosCurso(nombreC) < i.getCicloNombre(nombreC, annoC).getPlazas()) {
+                            try {
+
+                                annadir = new Alumno(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
+                                i.annadirUsuario(annadir);
+                                DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
+                                JOptionPane.showMessageDialog(null, "Inscrito con exito");
+                                datosVacios();
+
+                            } catch (ParseException ex) {
+
+                                JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
+                                        "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                        } else {
+
+                            JOptionPane.showMessageDialog(getContentPane(), "El curso esta completo",
                                     "Error", JOptionPane.ERROR_MESSAGE);
                         }
+
                     } else {
 
-                        JOptionPane.showMessageDialog(getContentPane(), "El curso esta completo",
+                        JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
                                 "Error", JOptionPane.ERROR_MESSAGE);
                     }
-
                 } else {
-                    JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
+
+                    JOptionPane.showMessageDialog(getContentPane(), "Debe seleccionar una fila de la tabla",
                             "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
-                JOptionPane.showMessageDialog(getContentPane(), "Debe seleccionar una fila de la tabla",
+
+                JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce un DNI",
                         "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
@@ -983,20 +979,27 @@ public class AnnadirUsuario extends javax.swing.JDialog {
                 int annoC = Integer.parseInt(jTableVerCicloA.getValueAt(jTableVerCicloA.getSelectedRow(), 1).toString());
                 ContrasennaValida();
                 if (ContrasennaValida() == true) {
-                    if (i.getNAlumnosCurso(nombreC) < i.getCicloNombre(nombreC, annoC).getPlazas()) {
-                        try {
-                            annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
-                            //DAOInstituto2.instancia().modificarAlumno(i.getNombre(), annadir);
-                            JOptionPane.showMessageDialog(getContentPane(), "El usuario ha sido creado con exito",
-                                    "Error", JOptionPane.OK_OPTION);
-                        } catch (ParseException ex) {
-                            JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
-                                    "Error", JOptionPane.ERROR_MESSAGE);
+                    if (!(jTextFieldDNI.getText().length()==0)) {
+                        if (i.getNAlumnosCurso(nombreC) < i.getCicloNombre(nombreC, annoC).getPlazas()) {
+                            try {
+                                annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
+                                //DAOInstituto2.instancia().modificarAlumno(i.getNombre(), annadir);
+                                JOptionPane.showMessageDialog(null, "Inscrito con exito");
+                                JOptionPane.showMessageDialog(getContentPane(), "El usuario ha sido creado con exito",
+                                        "Error", JOptionPane.OK_OPTION);
+                            } catch (ParseException ex) {
+                                JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
+                                        "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                        } else {
+
+                            JOptionPane.showMessageDialog(getContentPane(), "El curso esta completo",
+                                    "correcto", JOptionPane.ERROR_MESSAGE);
                         }
                     } else {
 
-                        JOptionPane.showMessageDialog(getContentPane(), "El curso esta completo",
-                                "correcto", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce un DNI",
+                                "Error", JOptionPane.ERROR_MESSAGE);
                     }
 
                 } else {
@@ -1084,7 +1087,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
 
             if (ContrasennaValida() == true) {
 
-                if (jTextFieldDNI.getText().equals("")) {
+                if (!(jTextFieldDNI.getText().length()==0)) {
                     try {
                         annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento());
 
@@ -1099,6 +1102,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
                             annadir.annadirModulo(c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
                             try {
                                 DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
+                                JOptionPane.showMessageDialog(null, "Inscrito con exito");
                             } catch (SQLException e) {
 
                                 JOptionPane.showMessageDialog(getContentPane(), "Error al modificar el profesor",
@@ -1111,10 +1115,10 @@ public class AnnadirUsuario extends javax.swing.JDialog {
                         JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
                                 "Error", JOptionPane.ERROR_MESSAGE);
                     }
-                }else{
-                
+                } else {
+
                     JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce DNI",
-                                "Error", JOptionPane.ERROR_MESSAGE);
+                            "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
                 JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
@@ -1122,44 +1126,50 @@ public class AnnadirUsuario extends javax.swing.JDialog {
             }
         } else {
 
-            if (ContrasennaValida() == true) {
-                try {
-                    annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento());
-                } catch (ParseException ex) {
-                    JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
-                            "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                i.eliminarUsuario(annadir.getNombre());
-                i.annadirUsuario(annadir);
+            if (!(jTextFieldDNI.getText().length()==0)) {
 
-                try {
-
-                    DAOInstituto2.instancia().eliminarModulosProfesores(jTextFieldNombre.getText(), i.getNombre());
-
-                    for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
-
-                        String nombreCurso = jTableAsignaturasElegidas.getValueAt(j, 2) + "";
-
-                        int anno = Integer.parseInt(jTableAsignaturasElegidas.getValueAt(j, 3) + "");
-
-                        Curso c = i.buscarCurso(nombreCurso, anno);
-
-                        annadir.annadirModulo(c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
-
-                        DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
-
+                if (ContrasennaValida() == true) {
+                    try {
+                        annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento());
+                    } catch (ParseException ex) {
+                        JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
+                                "Error", JOptionPane.ERROR_MESSAGE);
                     }
                     i.eliminarUsuario(annadir.getNombre());
                     i.annadirUsuario(annadir);
 
-                    datosVacios();
-                } catch (SQLException e) {
+                    try {
 
-                    JOptionPane.showMessageDialog(getContentPane(), "Error al realizar la operacion ",
+                        DAOInstituto2.instancia().eliminarModulosProfesores(jTextFieldNombre.getText(), i.getNombre());
+
+                        for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
+
+                            String nombreCurso = jTableAsignaturasElegidas.getValueAt(j, 2) + "";
+
+                            int anno = Integer.parseInt(jTableAsignaturasElegidas.getValueAt(j, 3) + "");
+
+                            Curso c = i.buscarCurso(nombreCurso, anno);
+
+                            annadir.annadirModulo(c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
+
+                            DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
+                            JOptionPane.showMessageDialog(null, "Inscrito con exito");
+                        }
+
+                        datosVacios();
+                    } catch (SQLException e) {
+
+                        JOptionPane.showMessageDialog(getContentPane(), "Error al realizar la operacion ",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
                             "Error", JOptionPane.ERROR_MESSAGE);
                 }
+
             } else {
-                JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
+
+                JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce un DNI",
                         "Error", JOptionPane.ERROR_MESSAGE);
             }
 
@@ -1350,15 +1360,14 @@ public class AnnadirUsuario extends javax.swing.JDialog {
 
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
-        
-        
-        this.setLocation(x - xMouse , y - yMouse);        // TODO add your handling code here:
+
+        this.setLocation(x - xMouse, y - yMouse);        // TODO add your handling code here:
     }//GEN-LAST:event_jPanel1MouseDragged
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
-       
-         xMouse = evt.getX();
-         yMouse = evt.getY();
+
+        xMouse = evt.getX();
+        yMouse = evt.getY();
     }//GEN-LAST:event_jPanel1MousePressed
 
     //METODO MAIN
