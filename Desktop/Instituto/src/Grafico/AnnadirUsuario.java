@@ -1083,31 +1083,38 @@ public class AnnadirUsuario extends javax.swing.JDialog {
         if (modificando == false) {
 
             if (ContrasennaValida() == true) {
-                try {
-                    annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento());
 
-                    DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
+                if (jTextFieldDNI.getText().equals("")) {
+                    try {
+                        annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento());
 
-                    for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
+                        DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
 
-                        String nombreCurso = jTableAsignaturasElegidas.getModel().getValueAt(j, 2) + "";
-                        int anoCurso = Integer.parseInt(jTableAsignaturasElegidas.getModel().getValueAt(j, 3) + "");
-                        Curso c = i.buscarCurso(nombreCurso, anoCurso);
+                        for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
 
-                        annadir.annadirModulo(c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
-                        try {
-                            DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
-                        } catch (SQLException e) {
+                            String nombreCurso = jTableAsignaturasElegidas.getModel().getValueAt(j, 2) + "";
+                            int anoCurso = Integer.parseInt(jTableAsignaturasElegidas.getModel().getValueAt(j, 3) + "");
+                            Curso c = i.buscarCurso(nombreCurso, anoCurso);
 
-                            JOptionPane.showMessageDialog(getContentPane(), "Error al modificar el profesor",
-                                    "Error", JOptionPane.ERROR_MESSAGE);
+                            annadir.annadirModulo(c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
+                            try {
+                                DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
+                            } catch (SQLException e) {
+
+                                JOptionPane.showMessageDialog(getContentPane(), "Error al modificar el profesor",
+                                        "Error", JOptionPane.ERROR_MESSAGE);
+                            }
                         }
+                        i.annadirUsuario(annadir);
+                        datosVacios();
+                    } catch (ParseException ex) {
+                        JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
+                                "Error", JOptionPane.ERROR_MESSAGE);
                     }
-                    i.annadirUsuario(annadir);
-                    datosVacios();
-                } catch (ParseException ex) {
-                    JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
-                            "Error", JOptionPane.ERROR_MESSAGE);
+                }else{
+                
+                    JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce DNI",
+                                "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
                 JOptionPane.showMessageDialog(getContentPane(), "Las contraseñas no coinciden",
