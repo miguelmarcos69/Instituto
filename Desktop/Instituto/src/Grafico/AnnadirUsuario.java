@@ -13,6 +13,7 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -940,21 +941,27 @@ public class AnnadirUsuario extends javax.swing.JDialog {
 
                         if (insti.getNAlumnosCurso(nombreC) < insti.getCicloNombre(nombreC, annoC).getPlazas()) {
                             try {
-
                                 annadir = new Alumno(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento(), insti.getCicloNombre(nombreC, annoC));
+                                DAOInstituto2.instancia().annadirUsuario(insti.getNombre(), annadir);
+
                                 insti.annadirUsuario(annadir);
+                                JOptionPane.showMessageDialog(null, "Inscrito con exito");
 
                                 AnnadirUsuario an = new AnnadirUsuario(null, true, insti, admin);
                                 this.setVisible(false);
                                 an.setVisible(true);
 
-                                DAOInstituto2.instancia().annadirUsuario(insti.getNombre(), annadir);
-                                JOptionPane.showMessageDialog(null, "Inscrito con exito");
-                                datosVacios();
-
                             } catch (ParseException ex) {
 
                                 JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
+                                        "Error", JOptionPane.ERROR_MESSAGE);
+                            } catch (SQLIntegrityConstraintViolationException s) {
+
+                                JOptionPane.showMessageDialog(getContentPane(), "El usuario con nombre  " + annadir.getNombre() + " ya existe",
+                                        "Error", JOptionPane.ERROR_MESSAGE);
+                            } catch (SQLException e) {
+
+                                JOptionPane.showMessageDialog(getContentPane(), "Error con la base de datos",
                                         "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         } else {
@@ -990,9 +997,13 @@ public class AnnadirUsuario extends javax.swing.JDialog {
                             try {
                                 annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), insti.getCicloNombre(nombreC, annoC));
                                 DAOInstituto2.instancia().modificarAlumno(insti.getNombre(), annadir);
-                                JOptionPane.showMessageDialog(null, "Inscrito con exito");
                                 this.setSize(567, 300);
-                                JOptionPane.showMessageDialog(this,"Modificacion realizada con exito");
+                                JOptionPane.showMessageDialog(this, "Modificacion realizada con exito");
+
+                                jManejarUsuarios an = new jManejarUsuarios(insti, admin);
+                                this.setVisible(false);
+                                an.setVisible(true);
+
                             } catch (ParseException ex) {
                                 JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
                                         "Error", JOptionPane.ERROR_MESSAGE);
@@ -1110,7 +1121,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
 
                                 DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, insti.getNombre());
                                 JOptionPane.showMessageDialog(null, "Inscrito con exito");
-                                jManejarUsuarios a = new jManejarUsuarios(this.insti, this.admin);
+                                AnnadirUsuario a = new AnnadirUsuario(null, true, this.insti, this.admin);
                                 this.setVisible(false);
                                 a.setVisible(true);
 
@@ -1124,6 +1135,14 @@ public class AnnadirUsuario extends javax.swing.JDialog {
                         datosVacios();
                     } catch (ParseException ex) {
                         JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    } catch (SQLIntegrityConstraintViolationException s) {
+
+                        JOptionPane.showMessageDialog(getContentPane(), "El usuario con nombre  " + annadir.getNombre() + " ya existe",
+                                "Error", JOptionPane.ERROR_MESSAGE);
+                    } catch (SQLException e) {
+
+                        JOptionPane.showMessageDialog(getContentPane(), "Error con la base de datos",
                                 "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
@@ -1164,11 +1183,13 @@ public class AnnadirUsuario extends javax.swing.JDialog {
                             annadir.annadirModulo(c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
 
                             DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, insti.getNombre());
-                            JOptionPane.showMessageDialog(this,"Modificacion realizada con exito");
-                            AnnadirUsuario an = new AnnadirUsuario(null, true, insti, admin);
-                            this.setVisible(false);
-                            an.setVisible(true);
+
                         }
+
+                        JOptionPane.showMessageDialog(this, "Modificacion realizada con exito");
+                        jManejarUsuarios an = new jManejarUsuarios(insti, admin);
+                        this.setVisible(false);
+                        an.setVisible(true);
 
                         datosVacios();
                     } catch (SQLException e) {

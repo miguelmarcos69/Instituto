@@ -501,11 +501,12 @@ public class ModificarNotas extends javax.swing.JFrame {
             Nota n1 = new Nota(itemSeleccionado, Integer.parseInt(nota1.getText()));
             Nota n2 = new Nota(itemSeleccionado, Integer.parseInt(nota2.getText()));
             Nota n3 = new Nota(itemSeleccionado, Integer.parseInt(nota3.getText()));
-
-            System.out.println(n1);
-            System.out.println(n2);
-            System.out.println(n3);
             insti.modificarNotas(itemSeleccionado, nombreAlumno, n1, n2, n3);
+
+            jLabelN1.setText(String.valueOf(insti.buscarAlumno(nombreAlumno).getNotas().get(0).getNota()));
+            jLabelN2.setText(String.valueOf(insti.buscarAlumno(nombreAlumno).getNotas().get(1).getNota()));
+            jLabelN3.setText(String.valueOf(insti.buscarAlumno(nombreAlumno).getNotas().get(2).getNota()));
+            jLabelFinal.setText(insti.buscarAlumno(nombreAlumno).notaFinal(itemSeleccionado)+"");
 
         } catch (SQLException ex) {
 
@@ -542,8 +543,8 @@ public class ModificarNotas extends javax.swing.JFrame {
 
             }
             jPanel2.setVisible(true);
-        }else{
-        
+        } else {
+
             JOptionPane.showMessageDialog(this, "El profesor no tiene alumnos", "Inicio", JOptionPane.WARNING_MESSAGE);
         }
 

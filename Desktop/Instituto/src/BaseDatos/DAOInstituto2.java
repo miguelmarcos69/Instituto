@@ -67,7 +67,6 @@ public class DAOInstituto2 {
 
         Alumno a = null;
 
-
         ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery(
                 "select nombre, contra, DNI, fechaNac,nombreInsti,ciclo,ano from usuario where nombre= '" + nombre + "' and nombreInsti='" + nombreInstituto + "'"
         );
@@ -253,40 +252,26 @@ public class DAOInstituto2 {
         return i;
     }
 
-    public void annadirUsuario(String i, Usuario u) {
+    public void annadirUsuario(String i, Usuario u) throws SQLException {
         //boolean annadido = false;
         ConexionDefault.crearConexion();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        try {
-            if (u instanceof Alumno) {
-                try {
+        if (u instanceof Alumno) {
 
-                    ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('"
-                            + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + sdf.format(u.getFecha_nacimientoNumerico())
-                            + "', 'alu', '" + ((Alumno) u).getCiclo().getNombre() + "', '" + ((Alumno) u).getCiclo().getAnno() + "', '" + i + "')");
+            ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('"
+                    + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + sdf.format(u.getFecha_nacimientoNumerico())
+                    + "', 'alu', '" + ((Alumno) u).getCiclo().getNombre() + "', '" + ((Alumno) u).getCiclo().getAnno() + "', '" + i + "')");
 
-                } catch (SQLIntegrityConstraintViolationException s) {
-                    JOptionPane.showMessageDialog(null, "Ya existe un usuario en el instituto con este nombre");
-                }
+        } else if (u instanceof Profesor) {
 
-            } else if (u instanceof Profesor) {
+            Profesor p = (Profesor) u;
 
-                try {
-                    Profesor p = (Profesor) u;
+            ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('"
+                    + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + sdf.format(u.getFecha_nacimientoNumerico()) + "', 'prof', '', " + 0 + ",'" + i + "');");
 
-                    ConexionDefault.instancia().getStatement().execute("INSERT INTO usuario VALUES ('"
-                            + u.getNombre() + "', '" + u.getContra() + "', '" + u.getDNI() + "', '" + sdf.format(u.getFecha_nacimientoNumerico()) + "', 'prof', '', " + 0 + ",'" + i + "');");
-
-                } catch (SQLIntegrityConstraintViolationException s) {
-                    JOptionPane.showMessageDialog(null, "Ya existe un usuario en el instituto con este nombre");
-
-                }
-
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error en la base de datos");
         }
+
     }
 
     public ArrayList<Curso> getCursosdeProfesor(String nombreProfesor, Instituto instituto) throws SQLException {
@@ -390,13 +375,13 @@ public class DAOInstituto2 {
         ConexionDefault.instancia().getStatement().execute("update modulo set profesor='' where profesor='" + profesor + "' AND instituto='" + instituto + "'");
 
     }
-    
-    public void modificarAlumno (String instituto, Alumno a){
-    
+
+    public void modificarAlumno(String instituto, Alumno a) {
+
         try {
             this.eliminarUsuario(a.getNombre(), instituto);
             this.annadirUsuario(instituto, a);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
         }
