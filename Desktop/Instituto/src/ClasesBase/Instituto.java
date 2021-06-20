@@ -84,9 +84,10 @@ public class Instituto {
 
                     alumn[contador][0] = a.getNombre();
                     alumn[contador][1] = a.getDNI();
+                    contador++;
 
                 }
-                contador++;
+                
             }
         }
 

@@ -19,6 +19,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -312,7 +313,6 @@ public class AlumnoGrafico extends javax.swing.JFrame {
         // TODO add your handling code here:
         DateFormat dateFormat = new SimpleDateFormat("YYYY");
         Date date = new Date(); // hora actual del equipo
-        System.out.println("Instituto: " + ins.getNombre());
         try {
             String f2 = "notas" + alumno.getNombre() + ".txt";
             try (BufferedWriter bfw = new BufferedWriter(new FileWriter(f2))) {
@@ -329,7 +329,6 @@ public class AlumnoGrafico extends javax.swing.JFrame {
                 for (int i = 0; i < tabla_notas.getRowCount(); i++) {//realiza un barrido por filas.
                     System.out.println("Filas: " + tabla_notas.getRowCount());
                     for (int j = 0; j < tabla_notas.getColumnCount(); j++) { //realiza un barrido por columnas.
-                        System.out.println("columnas: " + tabla_notas.getColumnCount());
                         bfw.write((String) (tabla_notas.getValueAt(i, j)));
                         if (j < tabla_notas.getColumnCount() - 1) { //agrega separador "," si no es el ultimo elemento de la fila.
                             bfw.write(" | ");
@@ -344,6 +343,10 @@ public class AlumnoGrafico extends javax.swing.JFrame {
             System.out.println("El archivo fue salvado correctamente!");
         } catch (IOException e) {
             System.out.println("ERROR: Ocurrio un problema al salvar el archivo!" + e.getMessage());
+        } catch(NullPointerException e){
+        
+               JOptionPane.showMessageDialog(getContentPane(), "Necesitas tener todas las notas de todos los modulos para imprimirlas",
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_imprimirActionPerformed
