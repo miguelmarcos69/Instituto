@@ -45,10 +45,8 @@ public class DAOInstituto2 {
 
         int tipo = 0;
         ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery(
-                //"select * from instituto"
                 "select tipo,nombre, contra, DNI, fechaNac,nombreInsti from usuario where nombre= '" + nombre + "' and nombreInsti='" + nombreInstituto + "'"
         );
-//            System.out.println(rs.getString(1));
         if (rs.next()) {
             if (rs.getString(1).equals("adm")) {
                 System.out.println("Es un Administrador");
@@ -60,7 +58,6 @@ public class DAOInstituto2 {
                 System.out.println("Es un profesor");
                 tipo = 2;
             }
-            System.out.println("******************");
         }
 
         return tipo;
@@ -72,7 +69,6 @@ public class DAOInstituto2 {
 
 
         ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery(
-                //"select * from instituto"
                 "select nombre, contra, DNI, fechaNac,nombreInsti,ciclo,ano from usuario where nombre= '" + nombre + "' and nombreInsti='" + nombreInstituto + "'"
         );
 
@@ -112,7 +108,6 @@ public class DAOInstituto2 {
 
         Profesor p = null;
         ResultSet rs = ConexionDefault.instancia().getStatement().executeQuery(
-                //"select * from instituto"
                 "select nombre, contra, DNI, fechaNac,nombreInsti,ciclo from usuario where nombre= '" + nombre + "' and nombreInsti='" + nombreInstituto + "'"
         );
 
@@ -290,8 +285,7 @@ public class DAOInstituto2 {
 
             }
         } catch (SQLException ex) {
-            Logger.getLogger(DAOInstituto2.class
-                    .getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error en la base de datos");
         }
     }
 
@@ -395,6 +389,17 @@ public class DAOInstituto2 {
 
         ConexionDefault.instancia().getStatement().execute("update modulo set profesor='' where profesor='" + profesor + "' AND instituto='" + instituto + "'");
 
+    }
+    
+    public void modificarAlumno (String instituto, Alumno a){
+    
+        try {
+            this.eliminarUsuario(a.getNombre(), instituto);
+            this.annadirUsuario(instituto, a);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOInstituto2.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

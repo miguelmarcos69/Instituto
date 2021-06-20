@@ -37,75 +37,27 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
     int xMouse;
     int yMouse;
-    Instituto i;
+    Instituto insti;
     Administrador admin;
-    //Administrador adm;
 
     //tablas
     String cabeceraTodos[] = {"tipo", "Nombre", "Dni", "fecha nacimiento"};
     String cabeceraAlumnos[] = {"Nombre", "dni", "fecha nacimiento"};
     String cabeceraProfesores[] = {"Nombre", "dni", "fecha nacimiento"};
 
-    DefaultTableModel tabla;
-
     public jManejarUsuarios() {
 
         initComponents();
-        /*
-        ArrayList<Alumno> alumnos = new ArrayList();
-        ArrayList<Ciclo> ciclos = new ArrayList();
-        ArrayList<Modulo> modulos = new ArrayList();
-        ArrayList<Usuario> usuarios = new ArrayList();
 
-        m = new Modulo("programacion", "1Daw", 3);
-        modulos.add(m);
-
-        c = new Ciclo(modulos, "DAW1", 1, 76);
-        ciclos.add(c);
-
-        u = new Alumno("daniel", "contra", "71177171E", new Date(), c);
-        usuarios.add(u);
-        alumnos.add(u);
-
-        p = new Profesor("gero", "estilton", "101010F", new Date(), modulos, ciclos);
-        profesores.add(p);
-        usuarios.add(p);
-
-        i = new Instituto(usuarios, ciclos, "camino", "plaza", "777777");
-         */
     }
 
     public jManejarUsuarios(Instituto i, Administrador admin) {
         initComponents();
-        this.i = i;
+        this.insti = i;
         this.admin = admin;
-        tabla = new DefaultTableModel(i.mostrarUsuarios(), cabeceraTodos);
-        tablaUsuarios.setModel(tabla);
-        //this.adm=adm;
 
-        /*
-        ArrayList<Profesor> profesores = new ArrayList();
-        ArrayList<Alumno> alumnos = new ArrayList();
-        ArrayList<Ciclo> ciclos = new ArrayList();
-        ArrayList<Modulo> modulos = new ArrayList();
-        ArrayList<Usuario> usuarios = new ArrayList();
-
-        m = new Modulo("programacion", "1Daw", 3);
-        modulos.add(m);
-
-        c = new Ciclo(modulos, "DAW1", 1, 76);
-        ciclos.add(c);
-
-        u = new Alumno("daniel", "contra", "71177171E", new Date(), c);
-        usuarios.add(u);
-        alumnos.add(u);
-
-        p = new Profesor("gero", "estilton", "101010F", new Date(), modulos, ciclos);
-        profesores.add(p);
-        usuarios.add(p);
-
-        i = new Instituto(usuarios, ciclos, "camino", "plaza", "777777");
-         */
+        tablaUsuarios.setModel(new DefaultTableModel(i.mostrarUsuarios(), cabeceraTodos));
+        
     }
 
     class jPanelGardient extends JPanel {
@@ -345,10 +297,8 @@ public class jManejarUsuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTodosActionPerformed
-        // TODO add your handling code here:
 
-        tabla = new DefaultTableModel(i.mostrarUsuarios(), cabeceraTodos);
-        tablaUsuarios.setModel(tabla);
+        tablaUsuarios.setModel(new DefaultTableModel(insti.mostrarUsuarios(), cabeceraTodos));
 
 
     }//GEN-LAST:event_jButtonTodosActionPerformed
@@ -357,10 +307,10 @@ public class jManejarUsuarios extends javax.swing.JFrame {
 
         if (tablaUsuarios.getSelectedRow() != -1) {
 
-            Usuario usuario = i.buscarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
+            Usuario usuario = insti.buscarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
 
-            AnnadirUsuario a = new AnnadirUsuario(this, true,i,admin);
-            a.setInstituto(i);
+            AnnadirUsuario a = new AnnadirUsuario(this, true, insti, admin);
+            a.setInstituto(insti);
             a.setModificando();
 
             if (usuario instanceof Alumno) {
@@ -380,35 +330,30 @@ public class jManejarUsuarios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Por favor selecciona un usuario", "Inicio", JOptionPane.WARNING_MESSAGE);
         }
 
-        // TODO add your handling code here:
     }//GEN-LAST:event_jModificarActionPerformed
 
     private void jButtonAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlumnosActionPerformed
 
-        tabla = new DefaultTableModel(i.mostrarAlumnos(), cabeceraAlumnos);
-        tablaUsuarios.setModel(tabla);
+        tablaUsuarios.setModel(new DefaultTableModel(insti.mostrarAlumnos(), cabeceraAlumnos));
 
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonAlumnosActionPerformed
 
     private void jButtonProfesoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProfesoresActionPerformed
 
-        tabla = new DefaultTableModel(i.mostrarProfesores(), cabeceraProfesores);
-        tablaUsuarios.setModel(tabla);
+        tablaUsuarios.setModel(new DefaultTableModel(insti.mostrarProfesores(), cabeceraProfesores));
 
-        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonProfesoresActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
 
         System.exit(0);
 
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jAnnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAnnadirActionPerformed
-        // TODO add your handling code here:
-        AnnadirUsuario a = new AnnadirUsuario(this, true,i,admin);
+
+        AnnadirUsuario a = new AnnadirUsuario(this, true, insti, admin);
         this.setVisible(false);
         a.setVisible(true);
 
@@ -423,27 +368,26 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         if (result == JOptionPane.YES_OPTION) {
 
             if (tablaUsuarios.getSelectedRow() != -1) {
-                i.eliminarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
+                insti.eliminarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString());
 
                 try {
 
-                    DAOInstituto2.instancia().eliminarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString(), i.getNombre());
+                    DAOInstituto2.instancia().eliminarUsuario(tablaUsuarios.getValueAt(tablaUsuarios.getSelectedRow(), 1).toString(), insti.getNombre());
                 } catch (SQLException e) {
 
                     JOptionPane.showMessageDialog(rootPane, "Error al borrar usuario", "Inicio", JOptionPane.WARNING_MESSAGE);
                 }
                 if (jButtonTodos.isSelected()) {
 
-                    tabla = new DefaultTableModel(i.mostrarUsuarios(), cabeceraTodos);
-                    tablaUsuarios.setModel(tabla);
+                    
+                    tablaUsuarios.setModel(new DefaultTableModel(insti.mostrarUsuarios(), cabeceraTodos));
                 } else if (jButtonAlumnos.isSelected()) {
 
-                    tabla = new DefaultTableModel(i.mostrarAlumnos(), cabeceraAlumnos);
-                    tablaUsuarios.setModel(tabla);
+                    
+                    tablaUsuarios.setModel(new DefaultTableModel(insti.mostrarAlumnos(), cabeceraAlumnos));
                 } else {
 
-                    tabla = new DefaultTableModel(i.mostrarProfesores(), cabeceraProfesores);
-                    tablaUsuarios.setModel(tabla);
+                    tablaUsuarios.setModel(new DefaultTableModel(insti.mostrarProfesores(), cabeceraProfesores));
                 }
             } else {
 
@@ -455,7 +399,7 @@ public class jManejarUsuarios extends javax.swing.JFrame {
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
 
         this.setVisible(false);
-        AdministradorGrafico a = new AdministradorGrafico(this.admin, this.i);
+        AdministradorGrafico a = new AdministradorGrafico(this.admin, this.insti);
         a.setVisible(true);
     }//GEN-LAST:event_jLabel3MousePressed
 
@@ -463,12 +407,12 @@ public class jManejarUsuarios extends javax.swing.JFrame {
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
 
-        this.setLocation(x - xMouse, y - yMouse);        // TODO add your handling code here:
+        this.setLocation(x - xMouse, y - yMouse);    
     }//GEN-LAST:event_jPanel1MouseDragged
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         xMouse = evt.getX();
-        yMouse = evt.getY();        // TODO add your handling code here:
+        yMouse = evt.getY();       
     }//GEN-LAST:event_jPanel1MousePressed
 
     /**

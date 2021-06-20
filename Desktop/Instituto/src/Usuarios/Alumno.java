@@ -115,11 +115,11 @@ public class Alumno extends Usuario {
     }
 
     public ArrayList<Nota> getNotasArray(String nombreMod) {
-        System.out.println("nombre modulo: " + nombreMod);
+
         ArrayList<Nota> a = new ArrayList();
         for (int i = 0; i < notas.size(); i++) {
             if (notas.get(i).getModulo().equals(nombreMod)) {
-                System.out.println("notas: " + notas.get(i));
+
                 a.add(notas.get(i));
 
             }

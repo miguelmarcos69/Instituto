@@ -28,8 +28,8 @@ public class AnnadirUsuario extends javax.swing.JDialog {
 
     int xMouse;
     int yMouse;
-    Instituto i;
-    Administrador a;
+    Instituto insti;
+    Administrador admin;
     boolean modificando = false;
     String cabecera[] = {"Nombre", "Curso"};
     String cabeceraModulo[] = {"Nombre", "Horas semanales", "Ciclo", "Año"};
@@ -50,8 +50,8 @@ public class AnnadirUsuario extends javax.swing.JDialog {
     public AnnadirUsuario(java.awt.Frame parent, boolean modal, Instituto i, Administrador a) {
         super(parent, modal);
         initComponents();
-        this.a = a;
-        this.i = i;
+        this.admin = a;
+        this.insti = i;
 
         jPanelDatosCoumnes.setVisible(true);
         jPanelProfesor.setVisible(false);
@@ -103,11 +103,11 @@ public class AnnadirUsuario extends javax.swing.JDialog {
     }
 
     public void setInstituto(Instituto i) {
-        this.i = i;
+        this.insti = i;
     }
 
     public void setAdministrador(Administrador a) {
-        this.a = a;
+        this.admin = a;
     }
 
     //CONVERTIR STRING EN DATE
@@ -938,17 +938,17 @@ public class AnnadirUsuario extends javax.swing.JDialog {
 
                     if (ContrasennaValida() == true) {
 
-                        if (i.getNAlumnosCurso(nombreC) < i.getCicloNombre(nombreC, annoC).getPlazas()) {
+                        if (insti.getNAlumnosCurso(nombreC) < insti.getCicloNombre(nombreC, annoC).getPlazas()) {
                             try {
 
-                                annadir = new Alumno(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
-                                i.annadirUsuario(annadir);
+                                annadir = new Alumno(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento(), insti.getCicloNombre(nombreC, annoC));
+                                insti.annadirUsuario(annadir);
 
-                                AnnadirUsuario an = new AnnadirUsuario(null, true, i, a);
+                                AnnadirUsuario an = new AnnadirUsuario(null, true, insti, admin);
                                 this.setVisible(false);
                                 an.setVisible(true);
 
-                                DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
+                                DAOInstituto2.instancia().annadirUsuario(insti.getNombre(), annadir);
                                 JOptionPane.showMessageDialog(null, "Inscrito con exito");
                                 datosVacios();
 
@@ -986,14 +986,13 @@ public class AnnadirUsuario extends javax.swing.JDialog {
                 ContrasennaValida();
                 if (ContrasennaValida() == true) {
                     if (!(jTextFieldDNI.getText().length() == 0)) {
-                        if (i.getNAlumnosCurso(nombreC) < i.getCicloNombre(nombreC, annoC).getPlazas()) {
+                        if (insti.getNAlumnosCurso(nombreC) < insti.getCicloNombre(nombreC, annoC).getPlazas()) {
                             try {
-                                annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), i.getCicloNombre(nombreC, annoC));
-                                //DAOInstituto2.instancia().modificarAlumno(i.getNombre(), annadir);
+                                annadir = new Alumno(getNombre(), getDNI(), getContrasenna(), getFechaNacimiento(), insti.getCicloNombre(nombreC, annoC));
+                                DAOInstituto2.instancia().modificarAlumno(insti.getNombre(), annadir);
                                 JOptionPane.showMessageDialog(null, "Inscrito con exito");
                                 this.setSize(567, 300);
-                                JOptionPane.showMessageDialog(getContentPane(), "El usuario ha sido creado con exito",
-                                        "Error", JOptionPane.OK_OPTION);
+                                JOptionPane.showMessageDialog(this,"Modificacion realizada con exito");
                             } catch (ParseException ex) {
                                 JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
                                         "Error", JOptionPane.ERROR_MESSAGE);
@@ -1027,7 +1026,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
 
         int an = 2;
         try {
-            tabla = new DefaultTableModel(i.getCicloTot(an), cabecera);
+            tabla = new DefaultTableModel(insti.getCicloTot(an), cabecera);
             jTableVerCicloA.setModel(tabla);
 
         } catch (Exception e) {
@@ -1041,7 +1040,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
 
         int an = 1;
         try {
-            tabla = new DefaultTableModel(i.getCicloTot(an), cabecera);
+            tabla = new DefaultTableModel(insti.getCicloTot(an), cabecera);
             jTableVerCicloA.setModel(tabla);
 
         } catch (Exception e) {
@@ -1055,7 +1054,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
     private void jRadioButtonVerTodosAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerTodosAActionPerformed
 
         try {
-            tabla = new DefaultTableModel(i.getCicloTot(), cabecera);
+            tabla = new DefaultTableModel(insti.getCicloTot(), cabecera);
             jTableVerCicloA.setModel(tabla);
 
         } catch (Exception e) {
@@ -1098,23 +1097,22 @@ public class AnnadirUsuario extends javax.swing.JDialog {
                     try {
                         annadir = new Profesor(getNombre(), getContrasenna(), getDNI(), getFechaNacimiento());
 
-                        DAOInstituto2.instancia().annadirUsuario(i.getNombre(), annadir);
+                        DAOInstituto2.instancia().annadirUsuario(insti.getNombre(), annadir);
 
                         for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
 
                             String nombreCurso = jTableAsignaturasElegidas.getModel().getValueAt(j, 2) + "";
                             int anoCurso = Integer.parseInt(jTableAsignaturasElegidas.getModel().getValueAt(j, 3) + "");
-                            Curso c = i.buscarCurso(nombreCurso, anoCurso);
+                            Curso c = insti.buscarCurso(nombreCurso, anoCurso);
 
                             annadir.annadirModulo(c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
                             try {
 
-                                DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
+                                DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, insti.getNombre());
                                 JOptionPane.showMessageDialog(null, "Inscrito con exito");
-
-                                AnnadirUsuario an = new AnnadirUsuario(null, true, i, a);
+                                jManejarUsuarios a = new jManejarUsuarios(this.insti, this.admin);
                                 this.setVisible(false);
-                                an.setVisible(true);
+                                a.setVisible(true);
 
                             } catch (SQLException e) {
 
@@ -1122,7 +1120,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
                                         "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         }
-                        i.annadirUsuario(annadir);
+                        insti.annadirUsuario(annadir);
                         datosVacios();
                     } catch (ParseException ex) {
                         JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
@@ -1148,12 +1146,12 @@ public class AnnadirUsuario extends javax.swing.JDialog {
                         JOptionPane.showMessageDialog(getContentPane(), "Porfavor introduce una fecha con el formato especificado yyyy-MM-dd",
                                 "Error", JOptionPane.ERROR_MESSAGE);
                     }
-                    i.eliminarUsuario(annadir.getNombre());
-                    i.annadirUsuario(annadir);
+                    insti.eliminarUsuario(annadir.getNombre());
+                    insti.annadirUsuario(annadir);
 
                     try {
 
-                        DAOInstituto2.instancia().eliminarModulosProfesores(jTextFieldNombre.getText(), i.getNombre());
+                        DAOInstituto2.instancia().eliminarModulosProfesores(jTextFieldNombre.getText(), insti.getNombre());
 
                         for (int j = 0; j < jTableAsignaturasElegidas.getModel().getRowCount(); j++) {
 
@@ -1161,12 +1159,15 @@ public class AnnadirUsuario extends javax.swing.JDialog {
 
                             int anno = Integer.parseInt(jTableAsignaturasElegidas.getValueAt(j, 3) + "");
 
-                            Curso c = i.buscarCurso(nombreCurso, anno);
+                            Curso c = insti.buscarCurso(nombreCurso, anno);
 
                             annadir.annadirModulo(c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""));
 
-                            DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, i.getNombre());
-                            JOptionPane.showMessageDialog(null, "Inscrito con exito");
+                            DAOInstituto2.instancia().modificarprofesorModulo(annadir.getNombre(), c.buscarModulo(jTableAsignaturasElegidas.getModel().getValueAt(j, 0) + ""), c, insti.getNombre());
+                            JOptionPane.showMessageDialog(this,"Modificacion realizada con exito");
+                            AnnadirUsuario an = new AnnadirUsuario(null, true, insti, admin);
+                            this.setVisible(false);
+                            an.setVisible(true);
                         }
 
                         datosVacios();
@@ -1241,7 +1242,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
     private void jRadioButtonVerA2PActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerA2PActionPerformed
         int an = 2;
         try {
-            tabla = new DefaultTableModel(i.getCicloTot(an), cabecera);
+            tabla = new DefaultTableModel(insti.getCicloTot(an), cabecera);
             jTableVerCicloP.setModel(tabla);
 
         } catch (Exception e) {
@@ -1257,7 +1258,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
             if (jTableVerCicloP.getSelectedRow() != -1) {
                 String nombreC = jTableVerCicloP.getValueAt(jTableVerCicloP.getSelectedRow(), 0).toString();
                 int annoC = Integer.parseInt(jTableVerCicloP.getValueAt(jTableVerCicloP.getSelectedRow(), 1).toString());
-                tabla = new DefaultTableModel(i.getModulosCic(nombreC, annoC), cabeceraModulo);
+                tabla = new DefaultTableModel(insti.getModulosCic(nombreC, annoC), cabeceraModulo);
                 jTableElegirAsignaturas.setModel(tabla);
 
                 jPanelMostrarAsig.setVisible(true);
@@ -1277,7 +1278,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
 
         int an = 1;
         try {
-            tabla = new DefaultTableModel(i.getCicloTot(an), cabecera);
+            tabla = new DefaultTableModel(insti.getCicloTot(an), cabecera);
             jTableVerCicloP.setModel(tabla);
 
         } catch (Exception e) {
@@ -1291,7 +1292,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
     private void jRadioButtonVerTodosPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonVerTodosPActionPerformed
 
         try {
-            tabla = new DefaultTableModel(i.getCicloTot(), cabecera);
+            tabla = new DefaultTableModel(insti.getCicloTot(), cabecera);
             jTableVerCicloP.setModel(tabla);
 
         } catch (Exception e) {
@@ -1306,7 +1307,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
 
         jPanelSeleccionCiclo.setVisible(true);
         jPanelMostrarAsig.setVisible(false);
-        tabla = new DefaultTableModel(i.getCicloTot(), cabecera);
+        tabla = new DefaultTableModel(insti.getCicloTot(), cabecera);
         jTableVerCicloP.setModel(tabla);
         jRadioButtonVerTodosP.setSelected(true);
         this.setSize(567, 650);
@@ -1315,7 +1316,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
     //Todas
     private void jRadioButtonTodasAsigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonTodasAsigActionPerformed
 
-        tabla = new DefaultTableModel(i.getModulosTot(), cabeceraModulo);
+        tabla = new DefaultTableModel(insti.getModulosTot(), cabeceraModulo);
         jTableElegirAsignaturas.setModel(tabla);
         jPanelMostrarAsig.setVisible(true);
         jPanelSeleccionCiclo.setVisible(false);
@@ -1336,7 +1337,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
         jPanelDatosCoumnes.setVisible(true);
         jPanelProfesor.setVisible(false);
         jPanelAlumno.setVisible(true);
-        jTableVerCicloA.setModel(new DefaultTableModel(i.getCicloTot(), cabecera));
+        jTableVerCicloA.setModel(new DefaultTableModel(insti.getCicloTot(), cabecera));
 
         jRadioButtonVerTodosA.setVisible(false);
         jRadioButtonVerA1A.setVisible(false);
@@ -1364,7 +1365,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
 
     private void jLabel16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel16MouseClicked
         // TODO add your handling code here:
-        jManejarUsuarios m = new jManejarUsuarios(this.i, this.a);
+        jManejarUsuarios m = new jManejarUsuarios(this.insti, this.admin);
         this.setVisible(false);
         m.setVisible(true);
     }//GEN-LAST:event_jLabel16MouseClicked
@@ -1446,7 +1447,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
         jPanelDatosCoumnes.setVisible(true);
         jPanelProfesor.setVisible(false);
         jPanelAlumno.setVisible(true);
-        jTableVerCicloA.setModel(new DefaultTableModel(i.getCicloTot(), cabecera));
+        jTableVerCicloA.setModel(new DefaultTableModel(insti.getCicloTot(), cabecera));
 
         jRadioButtonVerTodosA.setVisible(false);
         jRadioButtonVerA1A.setVisible(false);
@@ -1463,14 +1464,14 @@ public class AnnadirUsuario extends javax.swing.JDialog {
 
             if (a.aprobado()) {
 
-                tabla = new DefaultTableModel(i.getCicloTot(1), cabecera);
+                tabla = new DefaultTableModel(insti.getCicloTot(1), cabecera);
                 String[] segundo = new String[2];
                 segundo[0] = a.getCiclo().getNombre();
                 segundo[1] = a.getCiclo().getAnno() + "";
                 tabla.addRow(segundo);
                 jTableVerCicloA.setModel(tabla);
             } else {
-                jTableVerCicloA.setModel(new DefaultTableModel(i.getCicloTot(1), cabecera));
+                jTableVerCicloA.setModel(new DefaultTableModel(insti.getCicloTot(1), cabecera));
             }
 
         } catch (Exception e) {
@@ -1508,7 +1509,7 @@ public class AnnadirUsuario extends javax.swing.JDialog {
 
         this.setSize(567, 400);
 
-        jTableAsignaturasElegidas.setModel(new DefaultTableModel(p.getModulosInpartidos(i), cabeceraModulo));
+        jTableAsignaturasElegidas.setModel(new DefaultTableModel(p.getModulosInpartidos(insti), cabeceraModulo));
 
     }
 

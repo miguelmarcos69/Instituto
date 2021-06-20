@@ -36,14 +36,14 @@ public class CalendarioProfesor extends javax.swing.JFrame {
      */
     int xMouse;
     int yMouse;
-    Instituto i;
-    Profesor p;
+    Instituto insti;
+    Profesor profe;
     String[] cabecera = new String[5];
 
     public CalendarioProfesor(Profesor p, Instituto i) {
         initComponents();
-        this.i = i;
-        this.p = p;
+        this.insti = i;
+        this.profe = p;
         cabecera[0] = "Modulo";
         cabecera[1] = "Curso";
         cabecera[2] = "Ano";//Que alguien cambie la n que no tengo la que va antes de la o XD
@@ -65,15 +65,6 @@ public class CalendarioProfesor extends javax.swing.JFrame {
 
         }
 
-        /*
-        TableColumnModel modelo = (TableColumnModel) jTable1.getColorModel();
-        modelo.getColumn(0).setWidth(100);
-        modelo.getColumn(1).setWidth(100);
-        modelo.getColumn(2).setWidth(30);
-        modelo.getColumn(3).setWidth(100);
-        modelo.getColumn(4).setWidth(170);
-        jTable1.setColumnModel(modelo);
-         */
     }
 
     class jPanelGardient extends JPanel {
@@ -238,11 +229,11 @@ public class CalendarioProfesor extends javax.swing.JFrame {
             String mensaje = jTextFieldMensaje.getText();//Obtenemos tambien el mensaje
             Evento e = new Evento(mensaje, fecha);//Creamos el nuevo evento
             //Los cursos estan ordenados en las mismas posiciones que los modulos por lo tanto un curso corresponde a un Modulo
-            ArrayList<Curso> cursos = DAOInstituto2.instancia().getCursosdeProfesor(p.getNombre(), i);//Obtenemos los cursos de los modulos que tiene asignados un profesor
-            Modulo m = i.getModuloNombre(cursos.get(jComboBoxModulos.getSelectedIndex()), p.getArrayListModulosImpartidos().get(jComboBoxModulos.getSelectedIndex()).getNombre());//Obtenemos el modulo seleeccionado por el combo box y este lo relacionamos con su curso
+            ArrayList<Curso> cursos = DAOInstituto2.instancia().getCursosdeProfesor(profe.getNombre(), insti);//Obtenemos los cursos de los modulos que tiene asignados un profesor
+            Modulo m = insti.getModuloNombre(cursos.get(jComboBoxModulos.getSelectedIndex()), profe.getArrayListModulosImpartidos().get(jComboBoxModulos.getSelectedIndex()).getNombre());//Obtenemos el modulo seleeccionado por el combo box y este lo relacionamos con su curso
             m.annnadirEvento(e);//Creamos el modulo al que annadir el evento
 
-            DAOInstituto2.instancia().anadirEvento(e, p.getArrayListModulosImpartidos().get(jComboBoxModulos.getSelectedIndex()).getNombre(), cursos.get(jComboBoxModulos.getSelectedIndex()), i.getNombre());
+            DAOInstituto2.instancia().anadirEvento(e, profe.getArrayListModulosImpartidos().get(jComboBoxModulos.getSelectedIndex()).getNombre(), cursos.get(jComboBoxModulos.getSelectedIndex()), insti.getNombre());
             //anadimos a la tabla eventos el vevento creado con su modulo, ciclo,fechay mensaje
 
             //Como mostrar los datos en la tabla
@@ -258,14 +249,14 @@ public class CalendarioProfesor extends javax.swing.JFrame {
     private void jLabel10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MousePressed
         // TODO add your handling code here:
         this.setVisible(false);
-        ProfesorGrafico pr = new ProfesorGrafico(this.p, this.i);
-        pr.mostrar(this.p.getNombre());
+        ProfesorGrafico pr = new ProfesorGrafico(this.profe, this.insti);
+        pr.mostrar(this.profe.getNombre());
         pr.setVisible(true);
 
     }//GEN-LAST:event_jLabel10MousePressed
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
-        System.exit(0);        // TODO add your handling code here:
+        System.exit(0);        
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
@@ -273,46 +264,21 @@ public class CalendarioProfesor extends javax.swing.JFrame {
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
 
-        this.setLocation(x - xMouse, y - yMouse);        // TODO add your handling code here:
+        this.setLocation(x - xMouse, y - yMouse);      
     }//GEN-LAST:event_jPanel1MouseDragged
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
 
         xMouse = evt.getX();
-        yMouse = evt.getY();        // TODO add your handling code here:
+        yMouse = evt.getY();
     }//GEN-LAST:event_jPanel1MousePressed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CalendarioProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CalendarioProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CalendarioProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CalendarioProfesor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CalendarioProfesor().setVisible(true);
@@ -326,14 +292,14 @@ public class CalendarioProfesor extends javax.swing.JFrame {
         int contador = 0;
         ArrayList<Curso> cursos = null;
         try {
-            cursos = DAOInstituto2.instancia().getCursosdeProfesor(p.getNombre(), i);//Obtenemos los cursos de los modulos que tiene asignados un profesor
+            cursos = DAOInstituto2.instancia().getCursosdeProfesor(profe.getNombre(), insti);//Obtenemos los cursos de los modulos que tiene asignados un profesor
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Error con la base de datos", "Inicio", JOptionPane.WARNING_MESSAGE);
         }
 
-        for (int i = 0; i < p.getArrayListModulosImpartidos().size(); i++) {
+        for (int i = 0; i < profe.getArrayListModulosImpartidos().size(); i++) {
 
-            Modulo a = p.getArrayListModulosImpartidos().get(i);
+            Modulo a = profe.getArrayListModulosImpartidos().get(i);
 
             for (int j = 0; j < a.getCalendario().size(); j++) {
 

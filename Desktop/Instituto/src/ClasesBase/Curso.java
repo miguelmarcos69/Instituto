@@ -79,7 +79,6 @@ public class Curso {
 
             if (modulos.get(i).getNombre().equals(nombre)) {
 
-                //System.out.println(modulos.get(i).getNombre());
 
                 resultado = true;
             }

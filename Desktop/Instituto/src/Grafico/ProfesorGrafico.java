@@ -60,47 +60,6 @@ public class ProfesorGrafico extends javax.swing.JFrame {
 
     private ProfesorGrafico() {
         initComponents();
-        ArrayList<Alumno> al = new ArrayList<>();
-        ArrayList<Curso> c = new ArrayList<>();
-        ArrayList<Modulo> mod = new ArrayList<>();
-        ArrayList<Modulo> mod2 = new ArrayList<>();
-        ArrayList<Nota> notas1 = new ArrayList<>();
-
-        Modulo programacion = new Modulo("Programacion", "12", 2);
-        Modulo entornos = new Modulo("entornos", "12", 2);
-        Modulo fol = new Modulo("fol", "12", 2);
-
-        Curso primero = new Curso(mod, "DAW", 2, 1);
-        Curso segundo = new Curso(mod2, "DAW", 2, 2);
-
-        mod.add(programacion);
-        mod.add(entornos);
-        mod2.add(fol);
-
-        c.add(primero);
-        c.add(segundo);
-        Nota n1 = new Nota(entornos.getNombre(), 10);
-        Nota n2 = new Nota(programacion.getNombre(), 2);
-        Nota n3 = new Nota(entornos.getNombre(), 5);
-        Nota n4 = new Nota(programacion.getNombre(), 8);
-        Nota n5 = new Nota(entornos.getNombre(), 3);
-
-        Alumno lola = new Alumno("Lola", "lola", "1254", new Date(), primero);
-        Alumno miguel = new Alumno("miguel", "miguel", "1254", new Date(), primero);
-        Alumno pepe = new Alumno("pepe", "pepe", "1254", new Date(), primero);
-        Alumno juan = new Alumno("juan", "juan", "1254", new Date(), segundo);
-
-        al.add(lola);
-        al.add(miguel);
-        al.add(pepe);
-        al.add(juan);
-
-//        pepe.annadirNotas(n1);
-//        pepe.annadirNotas(n2);
-//        miguel.annadirNotas(n3);
-//        pepe.annadirNotas(n4);
-//        pepe.annadirNotas(n5);
-        this.prof = new Profesor("miguel", "miguel", "71972414D", new Date(), mod);
 
     }
 
@@ -286,12 +245,12 @@ public class ProfesorGrafico extends javax.swing.JFrame {
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
 
-        this.setLocation(x - xMouse, y - yMouse);        // TODO add your handling code here:
+        this.setLocation(x - xMouse, y - yMouse);        
     }//GEN-LAST:event_jPanel1MouseDragged
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         xMouse = evt.getX();
-        yMouse = evt.getY();        // TODO add your handling code here:
+        yMouse = evt.getY();        
     }//GEN-LAST:event_jPanel1MousePressed
 
     /**

@@ -41,7 +41,7 @@ public class ModificarNotas extends javax.swing.JFrame {
     int yMouse;
 
     Profesor prof;
-    Instituto i;
+    Instituto insti;
     DefaultTableModel tabla;
     String cabecera[] = {"Alumnos", "DNI"};
     String cabeceranNotas[] = {"Primera", "Segunda", "Tercera", "Final"};
@@ -52,7 +52,7 @@ public class ModificarNotas extends javax.swing.JFrame {
     public ModificarNotas(java.awt.Frame parent, boolean modal, Profesor prof, Instituto i) {
         initComponents();
         this.prof = prof;
-        this.i = i;
+        this.insti = i;
         llenar();
         this.setBackground(Color.black);
         this.setForeground(Color.white);
@@ -434,7 +434,7 @@ public class ModificarNotas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     private void modulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modulosActionPerformed
         String itemSeleccionado = modulos.getSelectedItem().toString();//Recogemos el item seleccionado en el desplegable de ordenar
-        tabla = new DefaultTableModel(i.getAlumnosAsignatura(itemSeleccionado), cabecera);
+        tabla = new DefaultTableModel(insti.getAlumnosAsignatura(itemSeleccionado), cabecera);
         tablaAlumnos.setModel(tabla);
         panelNotas.setVisible(false);
     }//GEN-LAST:event_modulosActionPerformed
@@ -444,7 +444,7 @@ public class ModificarNotas extends javax.swing.JFrame {
 
         String itemSeleccionado = modulos.getSelectedItem().toString();
         int alumnoSeleccionado = tablaAlumnos.getSelectedRow();
-        String nombreAlumno = i.getNombreAlumnosAsignatura(itemSeleccionado, alumnoSeleccionado);
+        String nombreAlumno = insti.getNombreAlumnosAsignatura(itemSeleccionado, alumnoSeleccionado);
         //System.out.println(nombreAlumno);
         panelNotas.setVisible(true);
         try {
@@ -455,10 +455,10 @@ public class ModificarNotas extends javax.swing.JFrame {
 
             nomA.setText(nombreAlumno);
 
-            jLabelN1.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotasArray(itemSeleccionado).get(0)));
-            jLabelN2.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotasArray(itemSeleccionado).get(1)));
-            jLabelN3.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotasArray(itemSeleccionado).get(2)));
-            jLabelFinal.setText(String.valueOf(i.calcularNotaFinal(nombreAlumno, itemSeleccionado)));
+            jLabelN1.setText(String.valueOf(insti.buscarAlumno(nombreAlumno).getNotasArray(itemSeleccionado).get(0)));
+            jLabelN2.setText(String.valueOf(insti.buscarAlumno(nombreAlumno).getNotasArray(itemSeleccionado).get(1)));
+            jLabelN3.setText(String.valueOf(insti.buscarAlumno(nombreAlumno).getNotasArray(itemSeleccionado).get(2)));
+            jLabelFinal.setText(String.valueOf(insti.calcularNotaFinal(nombreAlumno, itemSeleccionado)));
 
         } catch (NullPointerException a) {
             System.out.println(a);
@@ -469,7 +469,6 @@ public class ModificarNotas extends javax.swing.JFrame {
             jLabelN2.setText(String.valueOf(0));
             jLabelN3.setText(String.valueOf(0));
             jLabelFinal.setText(String.valueOf(0));
-            System.out.println(e);
             System.out.println("Falta Alguna nota");
 
         }
@@ -481,10 +480,10 @@ public class ModificarNotas extends javax.swing.JFrame {
     }//GEN-LAST:event_nota1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
         String itemSeleccionado = modulos.getSelectedItem().toString();
         int alumnoSeleccionado = tablaAlumnos.getSelectedRow();
-        String nombreAlumno = i.getNombreAlumnosAsignatura(itemSeleccionado, alumnoSeleccionado);
+        String nombreAlumno = insti.getNombreAlumnosAsignatura(itemSeleccionado, alumnoSeleccionado);
 
         try {
             DAOInstituto2.instancia().borrarNotas(nombreAlumno, itemSeleccionado);
@@ -492,12 +491,12 @@ public class ModificarNotas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error con la base de datos", "Inicio", JOptionPane.WARNING_MESSAGE);
         }
 
-        i.borrarNotas(nombreAlumno, itemSeleccionado);
+        insti.borrarNotas(nombreAlumno, itemSeleccionado);
 
         try {
-            DAOInstituto2.instancia().modificarNotas(nombreAlumno, nota1.getText(), itemSeleccionado, i.getNombre());
-            DAOInstituto2.instancia().modificarNotas(nombreAlumno, nota2.getText(), itemSeleccionado, i.getNombre());
-            DAOInstituto2.instancia().modificarNotas(nombreAlumno, nota3.getText(), itemSeleccionado, i.getNombre());
+            DAOInstituto2.instancia().modificarNotas(nombreAlumno, nota1.getText(), itemSeleccionado, insti.getNombre());
+            DAOInstituto2.instancia().modificarNotas(nombreAlumno, nota2.getText(), itemSeleccionado, insti.getNombre());
+            DAOInstituto2.instancia().modificarNotas(nombreAlumno, nota3.getText(), itemSeleccionado, insti.getNombre());
 
             Nota n1 = new Nota(itemSeleccionado, Integer.parseInt(nota1.getText()));
             Nota n2 = new Nota(itemSeleccionado, Integer.parseInt(nota2.getText()));
@@ -506,7 +505,7 @@ public class ModificarNotas extends javax.swing.JFrame {
             System.out.println(n1);
             System.out.println(n2);
             System.out.println(n3);
-            i.modificarNotas(itemSeleccionado, nombreAlumno, n1, n2, n3);
+            insti.modificarNotas(itemSeleccionado, nombreAlumno, n1, n2, n3);
 
         } catch (SQLException ex) {
 
@@ -519,12 +518,12 @@ public class ModificarNotas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void modificarNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarNotaActionPerformed
-        // TODO add your handling code here:
+
         if (!(prof.getArrayListModulosImpartidos().equals(null))) {
             String itemSeleccionado = modulos.getSelectedItem().toString();
             int alumnoSeleccionado = tablaAlumnos.getSelectedRow();
-            String nombreAlumno = i.getNombreAlumnosAsignatura(itemSeleccionado, alumnoSeleccionado);
-            //System.out.println(nombreAlumno);
+            String nombreAlumno = insti.getNombreAlumnosAsignatura(itemSeleccionado, alumnoSeleccionado);
+
             notaAlum.setText(nombreAlumno);
 
             try {
@@ -532,9 +531,9 @@ public class ModificarNotas extends javax.swing.JFrame {
                 nota2.setText(String.valueOf(0));
                 nota3.setText(String.valueOf(0));
 
-                nota1.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotas().get(0).getNota()));
-                nota2.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotas().get(1).getNota()));
-                nota3.setText(String.valueOf(i.buscarAlumno(nombreAlumno).getNotas().get(2).getNota()));
+                nota1.setText(String.valueOf(insti.buscarAlumno(nombreAlumno).getNotas().get(0).getNota()));
+                nota2.setText(String.valueOf(insti.buscarAlumno(nombreAlumno).getNotas().get(1).getNota()));
+                nota3.setText(String.valueOf(insti.buscarAlumno(nombreAlumno).getNotas().get(2).getNota()));
 
             } catch (NullPointerException a) {
 
@@ -561,7 +560,7 @@ public class ModificarNotas extends javax.swing.JFrame {
 
     private void jLabelSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelSalirMousePressed
         // TODO add your handling code here:    
-        ProfesorGrafico a = new ProfesorGrafico(this.prof, this.i);
+        ProfesorGrafico a = new ProfesorGrafico(this.prof, this.insti);
         a.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabelSalirMousePressed
