@@ -172,7 +172,7 @@ public class Curso {
         String [][]eventos = null;
         
         try {
-            eventos = new String  [DAOInstituto2.instancia().getEventosCurso(this)][3];
+            eventos = new String [DAOInstituto2.instancia().getEventosCurso(this)][3];
             int contador =0;
             
             for (int i=0;i<this.modulos.size();i++){
@@ -182,6 +182,7 @@ public class Curso {
                     eventos[contador][0]=modulos.get(i).getNombre();
                     eventos[contador][1]=modulos.get(i).getCalendario().get(j).getFecha()+"";
                     eventos[contador][2]=modulos.get(i).getCalendario().get(j).getMensaje();
+                    contador++;
                     
                 }
             }

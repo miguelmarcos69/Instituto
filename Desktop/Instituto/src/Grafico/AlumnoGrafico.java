@@ -30,7 +30,8 @@ public class AlumnoGrafico extends javax.swing.JFrame {
 
     Alumno alumno;
     Instituto ins;
-    String[] cabecera = {"Modulo", "Primera", "Segunda", "Tercera", "Final"};
+    String[] cabeceraNotas = {"Modulo", "Primera", "Segunda", "Tercera", "Final"};
+    String[] cabeceraEventos={"Nombre","Fecha","Mensaje"};
 
     /**
      * Creates new form Alumno
@@ -169,6 +170,14 @@ public class AlumnoGrafico extends javax.swing.JFrame {
         jLabel6.setText("Ver Tablón");
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/icons8_clipboard_50px_5.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLabel5MousePressed(evt);
+            }
+        });
 
         tabla_notas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -276,7 +285,7 @@ public class AlumnoGrafico extends javax.swing.JFrame {
     private void jLabel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MousePressed
         // TODO add your handling code here:
         this.tabla_notas.setVisible(true);
-        tabla_notas.setModel(new DefaultTableModel(alumno.getNotasModulos(), cabecera));
+        tabla_notas.setModel(new DefaultTableModel(alumno.getNotasModulos(), cabeceraNotas));
     }//GEN-LAST:event_jLabel3MousePressed
 
     private void BotonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAtrasActionPerformed
@@ -325,6 +334,16 @@ public class AlumnoGrafico extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_imprimirActionPerformed
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MousePressed
+        // TODO add your handling code here:
+        this.tabla_notas.setVisible(true);
+        tabla_notas.setModel(new DefaultTableModel(alumno.getCiclo().obtenerEventos(),cabeceraEventos));
+    }//GEN-LAST:event_jLabel5MousePressed
 
     /**
      * @param args the command line arguments

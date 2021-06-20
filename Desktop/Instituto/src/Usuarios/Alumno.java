@@ -37,7 +37,7 @@ public class Alumno extends Usuario {
 
     public String[][] getNotasModulos() {
 
-        String[][] modulosNotas = new String[curso.getSizeModulos()][10];
+        String[][] modulosNotas = new String[curso.getSizeModulos()][5];
 
         for (int i = 0; i < curso.getSizeModulos(); i++) {
 
